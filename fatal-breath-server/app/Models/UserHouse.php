@@ -10,4 +10,9 @@ class UserHouse extends Model
     use HasFactory;
 
     protected $table = 'users_houses';
+
+    protected $fillable = [
+        'user_id',
+        'house_id',
+    ];
 }

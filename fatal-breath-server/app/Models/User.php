@@ -14,10 +14,14 @@ class User extends Authenticatable
     protected $table = 'users';
 
     protected $fillable = [
-        'name',
-        'email',
+        'username',
         'password',
+        'email',
+        'role',
+        'name',
+        'profile_image',
     ];
+
 
     protected $hidden = [
         'password',
@@ -28,4 +32,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function ownedHouses()
+    {
+        return $this->hasMany(House::class, 'owner_id');
+    }
+
+    public function houses()
+    {
+        return $this->belongsToMany(House::class, 'users_houses');
+    }
+
+    public function chatMessages()
+    {
+        return $this->hasMany(ChatMessage::class);
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
 }
