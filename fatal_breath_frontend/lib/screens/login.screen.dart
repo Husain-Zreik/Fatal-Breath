@@ -2,6 +2,7 @@ import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/widgets/button.global.dart';
 import 'package:fatal_breath_frontend/widgets/text.form.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -74,10 +75,44 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              const ButtonGlobal(),
+              const ButtonGlobal(text: 'Sign In', color: '091479'),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Or',
+                style: GoogleFonts.poppins(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.grey[600],
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const ButtonGlobal(text: 'Sign In With Google', color: '0047FF'),
             ],
           ),
         )),
+      ),
+      bottomNavigationBar: Container(
+        alignment: Alignment.center,
+        height: 50,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Don\’t have an Account?',
+              style: GoogleFonts.poppins(
+                  color: Colors.black, fontWeight: FontWeight.w400),
+            ),
+            InkWell(
+                child: Text(
+              ' Sign Up',
+              style: GoogleFonts.poppins(color: HexColor('#0047FF')),
+            )),
+          ],
+        ),
       ),
     );
   }

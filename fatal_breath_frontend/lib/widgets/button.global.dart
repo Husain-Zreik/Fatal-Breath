@@ -1,22 +1,26 @@
-import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class ButtonGlobal extends StatelessWidget {
-  const ButtonGlobal({Key? key}) : super(key: key);
+  const ButtonGlobal({Key? key, required this.text, required this.color})
+      : super(key: key);
+
+  final String text;
+  final String color;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        // ignore: avoid_print
         print('logIn');
       },
       child: Container(
         alignment: Alignment.center,
         height: 55,
         decoration: BoxDecoration(
-            color: HexColor('#091479'),
+            color: HexColor('#$color'),
             borderRadius: BorderRadius.circular(40),
             boxShadow: [
               BoxShadow(
@@ -25,7 +29,7 @@ class ButtonGlobal extends StatelessWidget {
               ),
             ]),
         child: Text(
-          'Sign In',
+          text,
           style: GoogleFonts.poppins(
             color: Colors.white,
             fontWeight: FontWeight.w600,
