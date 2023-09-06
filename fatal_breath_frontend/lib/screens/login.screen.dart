@@ -1,4 +1,5 @@
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
+import 'package:fatal_breath_frontend/widgets/button.global.dart';
 import 'package:fatal_breath_frontend/widgets/text.form.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -20,7 +21,7 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             children: [
               Image.asset(
-                'assets/light_icon.png',
+                'assets/images/light_icon.png',
                 scale: 6,
               ),
               const SizedBox(
@@ -69,7 +70,11 @@ class LoginScreen extends StatelessWidget {
                 textInputType: TextInputType.text,
                 obscure: true,
                 label: 'Password',
-              )
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              const ButtonGlobal(),
             ],
           ),
         )),
