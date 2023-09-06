@@ -10,19 +10,32 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Timer(const Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 3), () {
       Get.to(const LoginScreen());
     });
     return Scaffold(
       backgroundColor: GlobalColors.mainColor,
-      body: const Center(
-        child: Text(
-          'FATAL BREATH',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-          ),
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'FATAL ',
+              style: TextStyle(
+                color: Colors.grey[50],
+                fontSize: 40,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+            Text(
+              'BREATH',
+              style: TextStyle(
+                color: Colors.red[600],
+                fontSize: 40,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
         ),
       ),
     );

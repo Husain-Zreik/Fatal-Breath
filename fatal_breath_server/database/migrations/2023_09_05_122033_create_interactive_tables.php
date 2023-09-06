@@ -13,7 +13,7 @@ return new class extends Migration
             $table->unsignedBigInteger('room_id');
             $table->unsignedBigInteger('user_id');
             $table->text('message');
-            $table->timestamp('timestamp')->useCurrent();
+            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('room_id')->references('id')->on('rooms')->cascadeOnDelete();
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->enum('type', ['CO2 Alert', 'Chat Message']);
             $table->text('message');
             $table->enum('status', ['Read', 'Unread']);
-            $table->timestamp('timestamp')->useCurrent();
+            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('room_id')->references('id')->on('rooms')->cascadeOnDelete();

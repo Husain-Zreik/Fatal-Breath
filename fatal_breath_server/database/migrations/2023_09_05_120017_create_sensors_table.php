@@ -13,7 +13,7 @@ return new class extends Migration
             $table->unsignedBigInteger('room_id');
             $table->foreign('room_id')->references('id')->on('rooms')->cascadeOnDelete();
             $table->decimal('co2_level', 8, 2);
-            $table->timestamp('timestamp')->useCurrent();
+            $table->timestamps();
         });
     }
 
