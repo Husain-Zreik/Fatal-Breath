@@ -47,8 +47,8 @@ class TextForm extends StatelessWidget {
               ]),
           child: TextFormField(
             controller: controller,
-            keyboardType: TextInputType.emailAddress,
-            obscureText: false,
+            keyboardType: textInputType,
+            obscureText: obscure,
             decoration: InputDecoration(
                 hintText: text,
                 border: InputBorder.none,

@@ -6,6 +6,7 @@ import 'package:hexcolor/hexcolor.dart';
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,6 @@ class LoginScreen extends StatelessWidget {
                       'BREATH',
                       style: TextStyle(
                         color: HexColor('#1424B9'),
-                        // color: Colors.blue[600],
                         fontSize: 40,
                         fontWeight: FontWeight.w400,
                       ),
@@ -50,12 +50,25 @@ class LoginScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 40,
+              ),
               TextForm(
                 controller: emailController,
                 text: 'Email',
                 textInputType: TextInputType.emailAddress,
                 obscure: false,
                 label: 'Email',
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              TextForm(
+                controller: passwordController,
+                text: 'Password',
+                textInputType: TextInputType.text,
+                obscure: true,
+                label: 'Password',
               )
             ],
           ),
