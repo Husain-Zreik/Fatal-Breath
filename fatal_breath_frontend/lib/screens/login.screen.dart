@@ -1,7 +1,9 @@
+import 'package:fatal_breath_frontend/screens/signup.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/widgets/button.global.dart';
 import 'package:fatal_breath_frontend/widgets/text.form.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -107,10 +109,14 @@ class LoginScreen extends StatelessWidget {
                   color: Colors.black, fontWeight: FontWeight.w400),
             ),
             InkWell(
-                child: Text(
-              ' Sign Up',
-              style: GoogleFonts.poppins(color: HexColor('#0047FF')),
-            )),
+              child: Text(
+                ' Sign Up',
+                style: GoogleFonts.poppins(color: HexColor('#0047FF')),
+              ),
+              onTap: () {
+                Get.to(SignUpScreen());
+              },
+            ),
           ],
         ),
       ),

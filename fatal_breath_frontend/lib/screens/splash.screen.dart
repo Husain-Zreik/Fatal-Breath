@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:fatal_breath_frontend/screens/login.screen.dart';
+import 'package:fatal_breath_frontend/screens/signup.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 3), () {
-      Get.to(LoginScreen());
+      Get.to(SignUpScreen());
     });
     return Scaffold(
       backgroundColor: GlobalColors.mainColor,
