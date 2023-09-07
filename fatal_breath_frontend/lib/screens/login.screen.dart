@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:fatal_breath_frontend/providers/auth.provider.dart';
 import 'package:fatal_breath_frontend/screens/signup.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/widgets/button.global.dart';
@@ -6,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -24,9 +28,29 @@ class _LoginScreenState extends State<LoginScreen> {
   //Inputs validation
   void validate() => _form.currentState?.validate();
 
-  loginPressed() {
-    // ignore: avoid_print
-    print('login');
+  Future loginPressed(email, password, context) async {
+    try {
+      setState(() {
+        err = "";
+      });
+      validate();
+      //Try logging in
+      await Provider.of<Auth>(context, listen: false)
+          .login(email, password, context);
+      String? userId = Provider.of<Auth>(context, listen: false).getUserId;
+
+      // Navigate if log in is successful
+      if (userId != null) {
+        Get.to(const SignUpScreen());
+        // await Provider.of<User>(context, listen: false)
+        //     .getUser(userId, context);
+      }
+    } on HttpException catch (error) {
+      setState(() {
+        err = error.message;
+        successful = true;
+      });
+    }
   }
 
   emailvalidator(value) {
@@ -119,14 +143,30 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                   )),
-
               const SizedBox(
-                height: 40,
+                height: 20,
+              ),
+              Text(
+                err,
+                style: TextStyle(
+                  color: GlobalColors.errColor,
+                  fontSize: 25,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
               ),
               ButtonGlobal(
                 text: 'Sign In',
                 color: '091479',
-                onBtnPressed: () => loginPressed(),
+                onBtnPressed: () {
+                  setState(() {
+                    successful = false;
+                  });
+                  loginPressed(
+                      emailController.text, passwordController.text, context);
+                },
               ),
               // const SizedBox(
               //   height: 20,
