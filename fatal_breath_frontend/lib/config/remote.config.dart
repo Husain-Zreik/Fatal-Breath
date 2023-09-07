@@ -4,7 +4,7 @@ import 'package:fatal_breath_frontend/enums/local.types.dart';
 import 'package:dio/dio.dart';
 
 final options = BaseOptions(
-  baseUrl: "http://192.168.0.103:8000",
+  baseUrl: "http://192.168.1.5:8000",
   contentType: Headers.jsonContentType,
 );
 

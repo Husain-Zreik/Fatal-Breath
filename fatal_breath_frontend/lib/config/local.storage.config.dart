@@ -1,7 +1,9 @@
+// ignore_for_file: invalid_use_of_visible_for_testing_member
+
 import "package:fatal_breath_frontend/enums/local.types.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
-Future<void> localSave({
+Future<void> setlocal({
   required LocalTypes type,
   required String key,
   required dynamic value,
@@ -25,7 +27,6 @@ dynamic getLocal({
   required LocalTypes type,
   required String key,
 }) async {
-  // SharedPreferences.setMockInitialValues({});
   SharedPreferences.setMockInitialValues({});
 
   final SharedPreferences prefs = await SharedPreferences.getInstance();
