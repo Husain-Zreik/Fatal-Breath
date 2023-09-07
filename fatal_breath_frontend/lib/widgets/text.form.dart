@@ -12,9 +12,9 @@ class TextForm extends StatelessWidget {
       : super(key: key);
 
   final TextEditingController controller;
+  final TextInputType textInputType;
   final String text;
   final String label;
-  final TextInputType textInputType;
   final bool obscure;
 
   @override
@@ -49,6 +49,7 @@ class TextForm extends StatelessWidget {
             controller: controller,
             keyboardType: textInputType,
             obscureText: obscure,
+            onChanged: (value) {},
             decoration: InputDecoration(
                 hintText: text,
                 border: InputBorder.none,

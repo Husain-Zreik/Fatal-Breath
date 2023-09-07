@@ -7,10 +7,21 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  loginPressed() {
+    // ignore: avoid_print
+    print('login');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +76,7 @@ class LoginScreen extends StatelessWidget {
                 label: 'Email',
               ),
               const SizedBox(
-                height: 40,
+                height: 10,
               ),
               TextForm(
                 controller: passwordController,
@@ -75,9 +86,13 @@ class LoginScreen extends StatelessWidget {
                 label: 'Password',
               ),
               const SizedBox(
-                height: 50,
+                height: 40,
               ),
-              const ButtonGlobal(text: 'Sign In', color: '091479'),
+              ButtonGlobal(
+                text: 'Sign In',
+                color: '091479',
+                onBtnPressed: () => loginPressed(),
+              ),
               const SizedBox(
                 height: 20,
               ),
@@ -92,7 +107,11 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const ButtonGlobal(text: 'Sign In With Google', color: '0047FF'),
+              ButtonGlobal(
+                text: 'Sign In With Google',
+                color: '0047FF',
+                onBtnPressed: () => loginPressed(),
+              ),
             ],
           ),
         )),
@@ -104,7 +123,7 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Don\’t have an Account?',
+              'Don’t have an Account?',
               style: GoogleFonts.poppins(
                   color: Colors.black, fontWeight: FontWeight.w400),
             ),
@@ -114,7 +133,7 @@ class LoginScreen extends StatelessWidget {
                 style: GoogleFonts.poppins(color: HexColor('#0047FF')),
               ),
               onTap: () {
-                Get.to(SignUpScreen());
+                Get.to(const SignUpScreen());
               },
             ),
           ],

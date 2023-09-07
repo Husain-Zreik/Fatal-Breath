@@ -3,18 +3,22 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class ButtonGlobal extends StatelessWidget {
-  const ButtonGlobal({Key? key, required this.text, required this.color})
+  const ButtonGlobal(
+      {Key? key,
+      required this.text,
+      required this.color,
+      required this.onBtnPressed})
       : super(key: key);
 
   final String text;
   final String color;
+  final Function onBtnPressed;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // ignore: avoid_print
-        print('logIn');
+        onBtnPressed();
       },
       child: Container(
         alignment: Alignment.center,

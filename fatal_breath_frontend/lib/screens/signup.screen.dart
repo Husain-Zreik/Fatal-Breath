@@ -27,6 +27,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController usernameController = TextEditingController();
 
   String groupValue = '1';
+  loginPressed() {
+    // ignore: avoid_print
+    print('login');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               TextForm(
                 controller: emailController,
-                text: 'Email',
+                text: 'Enter your Email',
                 textInputType: TextInputType.emailAddress,
                 obscure: false,
                 label: 'Email',
@@ -105,7 +109,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               TextForm(
                 controller: passwordController,
-                text: 'Password',
+                text: 'Enter your Password',
                 textInputType: TextInputType.text,
                 obscure: true,
                 label: 'Password',
@@ -175,10 +179,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ],
                 ),
               ),
-              const ButtonGlobal(text: 'Sign Un', color: '091479'),
-              const SizedBox(
-                height: 10,
+              ButtonGlobal(
+                text: 'Sign Un',
+                color: '091479',
+                onBtnPressed: () => loginPressed(),
               ),
+              // const SizedBox(
+              //   height: 10,
+              // ),
               // Row(
               //   mainAxisAlignment: MainAxisAlignment.center,
               //   children: [
@@ -222,7 +230,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 style: GoogleFonts.poppins(color: HexColor('#0047FF')),
               ),
               onTap: () {
-                Get.to(LoginScreen());
+                Get.to(const LoginScreen());
               },
             ),
           ],
