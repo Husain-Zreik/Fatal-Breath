@@ -5,17 +5,19 @@ class TextForm extends StatelessWidget {
   const TextForm(
       {Key? key,
       required this.controller,
-      required this.text,
+      required this.hintText,
       required this.textInputType,
-      required this.obscure,
-      required this.label})
+      required this.isPass,
+      required this.label,
+      required this.validator})
       : super(key: key);
 
   final TextEditingController controller;
   final TextInputType textInputType;
-  final String text;
+  final Function validator;
+  final String hintText;
   final String label;
-  final bool obscure;
+  final bool isPass;
 
   @override
   Widget build(BuildContext context) {
@@ -48,15 +50,18 @@ class TextForm extends StatelessWidget {
           child: TextFormField(
             controller: controller,
             keyboardType: textInputType,
-            obscureText: obscure,
-            onChanged: (value) {},
+            obscureText: isPass,
             decoration: InputDecoration(
-                hintText: text,
+                hintText: hintText,
                 border: InputBorder.none,
                 contentPadding: const EdgeInsets.all(0),
                 hintStyle: const TextStyle(
                   height: 1,
                 )),
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: (value) {
+              return validator(value);
+            },
           ),
         ),
       ],

@@ -29,7 +29,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String groupValue = '1';
   loginPressed() {
     // ignore: avoid_print
-    print('login');
+    print(emailController.text);
+  }
+
+  emailvalidator(value) {
+    if (value!.isEmpty) {
+      return "Please enter password";
+    }
+    if (value.length < 10) {
+      return "Should be minimum 10 characters";
+    }
+    return null;
   }
 
   @override
@@ -79,50 +89,55 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               TextForm(
                 controller: nameController,
-                text: 'Enter your Full Name',
+                hintText: 'Enter your Full Name',
                 textInputType: TextInputType.emailAddress,
-                obscure: false,
+                isPass: false,
                 label: 'Full Name',
+                validator: emailvalidator,
               ),
               const SizedBox(
                 height: 10,
               ),
               TextForm(
                 controller: usernameController,
-                text: 'Enter your Username',
+                hintText: 'Enter your Username',
                 textInputType: TextInputType.emailAddress,
-                obscure: false,
+                isPass: false,
                 label: 'Username',
+                validator: emailvalidator,
               ),
               const SizedBox(
                 height: 10,
               ),
               TextForm(
                 controller: emailController,
-                text: 'Enter your Email',
+                hintText: 'Enter your Email',
                 textInputType: TextInputType.emailAddress,
-                obscure: false,
+                isPass: false,
                 label: 'Email',
+                validator: emailvalidator,
               ),
               const SizedBox(
                 height: 10,
               ),
               TextForm(
                 controller: passwordController,
-                text: 'Enter your Password',
+                hintText: 'Enter your Password',
                 textInputType: TextInputType.text,
-                obscure: true,
+                isPass: true,
                 label: 'Password',
+                validator: emailvalidator,
               ),
               const SizedBox(
                 height: 10,
               ),
               TextForm(
                 controller: verifypasswordController,
-                text: 'Re-enter the Password',
+                hintText: 'Re-enter the Password',
                 textInputType: TextInputType.text,
-                obscure: true,
+                isPass: true,
                 label: 'Verify Password',
+                validator: emailvalidator,
               ),
               Padding(
                 padding:
@@ -184,31 +199,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 color: '091479',
                 onBtnPressed: () => loginPressed(),
               ),
-              // const SizedBox(
-              //   height: 10,
-              // ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     Text(
-              //       'Already have an Account?',
-              //       style: GoogleFonts.poppins(
-              //           color: Colors.black, fontWeight: FontWeight.w400),
-              //     ),
-              //     InkWell(
-              //       child: Text(
-              //         ' Sign In',
-              //         style: GoogleFonts.poppins(color: HexColor('#0047FF')),
-              //       ),
-              //       onTap: () {
-              //         Get.to(LoginScreen());
-              //       },
-              //     ),
-              //   ],
-              // ),
-              // const SizedBox(
-              //   height: 10,
-              // ),
             ],
           ),
         )),

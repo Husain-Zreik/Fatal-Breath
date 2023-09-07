@@ -17,10 +17,36 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final _form = GlobalKey<FormState>();
+  String err = "";
+  bool successful = true;
+
+  //Inputs validation
+  void validate() => _form.currentState?.validate();
 
   loginPressed() {
     // ignore: avoid_print
     print('login');
+  }
+
+  emailvalidator(value) {
+    if (value!.isEmpty) {
+      return "Please enter the email";
+    }
+    if (!value.contains("@")) {
+      return "Please enter a valid email";
+    }
+    return null;
+  }
+
+  passwordvalidator(value) {
+    if (value!.isEmpty) {
+      return "Please enter password";
+    }
+    if (value.length < 6) {
+      return "Should be minimum 10 characters";
+    }
+    return null;
   }
 
   @override
@@ -68,23 +94,32 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 40,
               ),
-              TextForm(
-                controller: emailController,
-                text: 'Email',
-                textInputType: TextInputType.emailAddress,
-                obscure: false,
-                label: 'Email',
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextForm(
-                controller: passwordController,
-                text: 'Password',
-                textInputType: TextInputType.text,
-                obscure: true,
-                label: 'Password',
-              ),
+              Form(
+                  key: _form,
+                  child: Column(
+                    children: [
+                      TextForm(
+                        textInputType: TextInputType.emailAddress,
+                        controller: emailController,
+                        label: 'Email',
+                        hintText: 'Enter your Email',
+                        isPass: false,
+                        validator: emailvalidator,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextForm(
+                        controller: passwordController,
+                        hintText: 'Password',
+                        textInputType: TextInputType.text,
+                        isPass: true,
+                        label: 'Enter your Password',
+                        validator: passwordvalidator,
+                      ),
+                    ],
+                  )),
+
               const SizedBox(
                 height: 40,
               ),
@@ -93,25 +128,25 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: '091479',
                 onBtnPressed: () => loginPressed(),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                'Or',
-                style: GoogleFonts.poppins(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.grey[600],
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ButtonGlobal(
-                text: 'Sign In With Google',
-                color: '0047FF',
-                onBtnPressed: () => loginPressed(),
-              ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
+              // Text(
+              //   'Or',
+              //   style: GoogleFonts.poppins(
+              //     fontSize: 24,
+              //     fontWeight: FontWeight.w400,
+              //     color: Colors.grey[600],
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
+              // ButtonGlobal(
+              //   text: 'Sign In With Google',
+              //   color: '0047FF',
+              //   onBtnPressed: () => loginPressed(),
+              // ),
             ],
           ),
         )),
