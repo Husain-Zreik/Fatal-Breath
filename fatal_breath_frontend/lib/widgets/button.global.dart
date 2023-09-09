@@ -22,7 +22,7 @@ class ButtonGlobal extends StatelessWidget {
       },
       child: Container(
         alignment: Alignment.center,
-        height: 55,
+        height: 50,
         decoration: BoxDecoration(
             color: HexColor('#$color'),
             borderRadius: BorderRadius.circular(40),
@@ -37,7 +37,7 @@ class ButtonGlobal extends StatelessWidget {
           style: GoogleFonts.poppins(
             color: Colors.white,
             fontWeight: FontWeight.w600,
-            fontSize: 20,
+            fontSize: 17,
           ),
         ),
       ),
