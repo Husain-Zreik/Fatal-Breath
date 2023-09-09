@@ -1,4 +1,10 @@
+// ignore_for_file: avoid_print
+
+import 'dart:io';
+
+import 'package:fatal_breath_frontend/providers/auth.provider.dart';
 import 'package:fatal_breath_frontend/screens/login.screen.dart';
+import 'package:fatal_breath_frontend/screens/splash.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/widgets/button.global.dart';
 import 'package:fatal_breath_frontend/widgets/text.form.dart';
@@ -6,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -22,13 +29,41 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController nameController = TextEditingController();
 
   final _form = GlobalKey<FormState>();
-  String err = "";
   bool successful = true;
   String groupValue = '1';
+  String err = "";
+  bool validated() {
+    return _form.currentState!.validate();
+  }
 
-  loginPressed() {
-    // ignore: avoid_print
-    print(emailController.text);
+  Future signupPressed(name, username, email, password, role, context) async {
+    print(name);
+    print(username);
+    print(email);
+    print(password);
+    print(role);
+    try {
+      setState(() {
+        err = "";
+      });
+
+      if (!validated()) {
+        return err = "Fill the inputs correctly";
+      }
+      //Try signing up
+      await Provider.of<AuthProviders>(context, listen: false)
+          .signUp(name, username, email, password, role, context);
+
+      print('before err');
+      //Navigation
+      Get.to(const SplashScreen());
+    } on HttpException catch (error) {
+      print('after err');
+      setState(() {
+        err = error.message;
+        successful = true;
+      });
+    }
   }
 
   namevalidator(value) {
@@ -243,7 +278,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ButtonGlobal(
                 text: 'Sign Up',
                 color: '091479',
-                onBtnPressed: () => loginPressed(),
+                onBtnPressed: () => signupPressed(
+                    nameController.text,
+                    usernameController.text,
+                    emailController.text,
+                    passwordController.text,
+                    groupValue,
+                    context),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Text(
+                err,
+                style: GoogleFonts.poppins(
+                  color: GlobalColors.errColor,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
               ),
             ],
           ),
@@ -266,7 +321,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 style: GoogleFonts.poppins(color: HexColor('#0047FF')),
               ),
               onTap: () {
-                Get.to(const LoginScreen());
+                Get.to(() => const LoginScreen());
               },
             ),
           ],
