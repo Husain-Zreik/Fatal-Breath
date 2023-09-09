@@ -24,29 +24,24 @@ class _LoginScreenState extends State<LoginScreen> {
   final _form = GlobalKey<FormState>();
   String err = "";
   bool successful = true;
-
-  //Inputs validation
-  void validate() => _form.currentState?.validate();
+  bool validated() {
+    return _form.currentState!.validate();
+  }
 
   Future loginPressed(email, password, context) async {
     try {
       setState(() {
         err = "";
       });
-      validate();
 
-      if (_form.currentState?.validate() == false) {
+      if (!validated()) {
         return err = "Fill the inputs correctly";
       }
 
       await Provider.of<AuthProviders>(context, listen: false)
           .login(email, password, context);
-      String? userId =
-          Provider.of<AuthProviders>(context, listen: false).getUserId;
 
-      if (userId != null) {
-        Get.to(const SignUpScreen());
-      }
+      Get.to(const SignUpScreen());
     } on HttpException catch (error) {
       setState(() {
         err = error.message;
@@ -191,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: GoogleFonts.poppins(color: HexColor('#0047FF')),
               ),
               onTap: () {
-                Get.to(const SignUpScreen());
+                Get.to(() => const SignUpScreen());
               },
             ),
           ],
