@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:fatal_breath_frontend/config/remote.config.dart';
@@ -72,7 +74,7 @@ class AuthProviders with ChangeNotifier {
     try {
       final response = await sendRequest(
         method: RequestMethods.POST,
-        route: "/api/auth/signup",
+        route: "/api/auth/register",
         load: {
           "name": name,
           "username": username,
@@ -82,11 +84,7 @@ class AuthProviders with ChangeNotifier {
         },
       );
 
-      // print(response);
-
-      if (response["message"] != null) {
-        throw HttpException(response["message"]);
-      }
+      print(response);
 
       //Save user id and token
       final prefs = await SharedPreferences.getInstance();
@@ -95,9 +93,25 @@ class AuthProviders with ChangeNotifier {
 
       userId = response['user']['id'].toString();
       token = response['user']['token'];
+
       notifyListeners();
     } catch (e) {
-      rethrow;
+      if (e is DioException) {
+        if (e.response?.data['errors'] != null) {
+          if (e.response?.data['errors']['username'] != null) {
+            final usererr =
+                e.response?.data['errors']['username'][0].toString();
+            throw HttpException(usererr!);
+          } else if (e.response?.data['errors']['email'] != null) {
+            final emailerr = e.response?.data['errors']['email'][0].toString();
+            throw HttpException(emailerr!);
+          }
+        } else {
+          throw const HttpException("An unexpected error occurred.");
+        }
+      } else {
+        throw HttpException('$e');
+      }
     }
   }
 
