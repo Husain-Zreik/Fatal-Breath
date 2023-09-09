@@ -34,16 +34,13 @@ class _LoginScreenState extends State<LoginScreen> {
         err = "";
       });
       validate();
-      //Try logging in
-      await Provider.of<Auth>(context, listen: false)
+      await Provider.of<AuthProviders>(context, listen: false)
           .login(email, password, context);
-      String? userId = Provider.of<Auth>(context, listen: false).getUserId;
+      String? userId =
+          Provider.of<AuthProviders>(context, listen: false).getUserId;
 
-      // Navigate if log in is successful
       if (userId != null) {
         Get.to(const SignUpScreen());
-        // await Provider.of<User>(context, listen: false)
-        //     .getUser(userId, context);
       }
     } on HttpException catch (error) {
       setState(() {
@@ -68,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
       return "Please enter password";
     }
     if (value.length < 6) {
-      return "Should be minimum 10 characters";
+      return "Should be minimum 6 characters";
     }
     return null;
   }
@@ -84,36 +81,36 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: const EdgeInsets.all(15.0),
           child: Column(
             children: [
+              const SizedBox(
+                height: 30,
+              ),
               Image.asset(
                 'assets/images/light_icon.png',
-                scale: 6,
+                scale: 8,
               ),
               const SizedBox(
                 height: 10,
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'FATAL ',
-                      style: TextStyle(
-                        color: GlobalColors.textColor,
-                        fontSize: 40,
-                        fontWeight: FontWeight.w900,
-                      ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'FATAL',
+                    style: TextStyle(
+                      color: GlobalColors.textColor,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w900,
                     ),
-                    Text(
-                      'BREATH',
-                      style: TextStyle(
-                        color: HexColor('#1424B9'),
-                        fontSize: 40,
-                        fontWeight: FontWeight.w400,
-                      ),
+                  ),
+                  Text(
+                    'BREATH',
+                    style: TextStyle(
+                      color: HexColor('#1424B9'),
+                      fontSize: 30,
+                      fontWeight: FontWeight.w400,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 40,
@@ -134,17 +131,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 10,
                       ),
                       TextForm(
-                        controller: passwordController,
-                        hintText: 'Password',
                         textInputType: TextInputType.text,
+                        controller: passwordController,
+                        label: 'Password',
+                        hintText: 'Enter your Password',
                         isPass: true,
-                        label: 'Enter your Password',
                         validator: passwordvalidator,
                       ),
                     ],
                   )),
               const SizedBox(
-                height: 20,
+                height: 15,
               ),
               Text(
                 err,
@@ -155,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 15,
               ),
               ButtonGlobal(
                 text: 'Sign In',
