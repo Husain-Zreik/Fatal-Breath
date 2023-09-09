@@ -60,7 +60,6 @@ class AuthProviders with ChangeNotifier {
             throw const HttpException(
                 "The resource you are looking for does not exist.");
           default:
-            // log(e.toString());
             throw const HttpException("An unexpected error occurred.");
         }
       } else {

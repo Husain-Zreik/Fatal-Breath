@@ -1,5 +1,6 @@
 import 'package:fatal_breath_frontend/providers/auth.provider.dart';
 import 'package:fatal_breath_frontend/providers/user.provider.dart';
+import 'package:fatal_breath_frontend/screens/home.screen.dart';
 import 'package:fatal_breath_frontend/screens/login.screen.dart';
 import 'package:fatal_breath_frontend/screens/signup.screen.dart';
 import 'package:fatal_breath_frontend/screens/splash.screen.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
           GetPage(name: '/splash', page: () => const SplashScreen()),
           GetPage(name: '/login', page: () => const LoginScreen()),
           GetPage(name: '/signup', page: () => const SignUpScreen()),
+          GetPage(name: '/home', page: () => const HomeScreen()),
         ],
       ),
     );

@@ -3,8 +3,8 @@
 import 'dart:io';
 
 import 'package:fatal_breath_frontend/providers/auth.provider.dart';
+import 'package:fatal_breath_frontend/screens/home.screen.dart';
 import 'package:fatal_breath_frontend/screens/login.screen.dart';
-import 'package:fatal_breath_frontend/screens/splash.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/widgets/button.global.dart';
 import 'package:fatal_breath_frontend/widgets/text.form.dart';
@@ -56,7 +56,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
       print('before err');
       //Navigation
-      Get.to(const SplashScreen());
+      Get.to(() => const HomeScreen());
     } on HttpException catch (error) {
       print('after err');
       setState(() {
