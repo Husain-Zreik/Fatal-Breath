@@ -37,28 +37,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Future signupPressed(name, username, email, password, role, context) async {
-    print(name);
-    print(username);
-    print(email);
-    print(password);
-    print(role);
     try {
       setState(() {
         err = "";
       });
 
       if (!validated()) {
+        successful = true;
         return err = "Fill the inputs correctly";
       }
       //Try signing up
       await Provider.of<AuthProviders>(context, listen: false)
           .signUp(name, username, email, password, role, context);
 
-      print('before err');
       //Navigation
       Get.to(() => const HomeScreen());
     } on HttpException catch (error) {
-      print('after err');
       setState(() {
         err = error.message;
         successful = true;
@@ -158,134 +152,145 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(
                 height: 40,
               ),
-              Form(
-                key: _form,
-                child: Column(
-                  children: [
-                    TextForm(
-                      controller: nameController,
-                      hintText: 'Enter your Full Name',
-                      textInputType: TextInputType.emailAddress,
-                      isPass: false,
-                      label: 'Full Name',
-                      validator: namevalidator,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    TextForm(
-                      controller: usernameController,
-                      hintText: 'Enter your Username',
-                      textInputType: TextInputType.emailAddress,
-                      isPass: false,
-                      label: 'Username',
-                      validator: usernamevalidator,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    TextForm(
-                      controller: emailController,
-                      hintText: 'Enter your Email',
-                      textInputType: TextInputType.emailAddress,
-                      isPass: false,
-                      label: 'Email',
-                      validator: emailvalidator,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    TextForm(
-                      controller: passwordController,
-                      hintText: 'Enter your Password',
-                      textInputType: TextInputType.text,
-                      isPass: true,
-                      label: 'Password',
-                      validator: passwordvalidator,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    TextForm(
-                      textInputType: TextInputType.text,
-                      controller: verifypassController,
-                      label: 'Verify Password',
-                      hintText: 'Re-enter the Password',
-                      isPass: true,
-                      validator: verifypasswordvalidator,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 5),
-                      child: Row(
+              successful
+                  ? Form(
+                      key: _form,
+                      child: Column(
                         children: [
-                          Text(
-                            'Type :',
-                            style: GoogleFonts.poppins(
-                              color: Colors.black,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                            ),
+                          TextForm(
+                            controller: nameController,
+                            hintText: 'Enter your Full Name',
+                            textInputType: TextInputType.emailAddress,
+                            isPass: false,
+                            label: 'Full Name',
+                            validator: namevalidator,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          TextForm(
+                            controller: usernameController,
+                            hintText: 'Enter your Username',
+                            textInputType: TextInputType.emailAddress,
+                            isPass: false,
+                            label: 'Username',
+                            validator: usernamevalidator,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          TextForm(
+                            controller: emailController,
+                            hintText: 'Enter your Email',
+                            textInputType: TextInputType.emailAddress,
+                            isPass: false,
+                            label: 'Email',
+                            validator: emailvalidator,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          TextForm(
+                            controller: passwordController,
+                            hintText: 'Enter your Password',
+                            textInputType: TextInputType.text,
+                            isPass: true,
+                            label: 'Password',
+                            validator: passwordvalidator,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          TextForm(
+                            textInputType: TextInputType.text,
+                            controller: verifypassController,
+                            label: 'Verify Password',
+                            hintText: 'Re-enter the Password',
+                            isPass: true,
+                            validator: verifypasswordvalidator,
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 10),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
                             child: Row(
                               children: [
-                                Radio(
-                                    value: '1',
-                                    groupValue: groupValue,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        groupValue = value!;
-                                      });
-                                    }),
                                 Text(
-                                  'User',
+                                  'Type :',
                                   style: GoogleFonts.poppins(
                                     color: Colors.black,
-                                    fontSize: 14,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                                Radio(
-                                    value: '0',
-                                    groupValue: groupValue,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        groupValue = value!;
-                                      });
-                                    }),
-                                Text(
-                                  'Admin',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Row(
+                                    children: [
+                                      Radio(
+                                          value: '1',
+                                          groupValue: groupValue,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              groupValue = value!;
+                                            });
+                                          }),
+                                      Text(
+                                        'User',
+                                        style: GoogleFonts.poppins(
+                                          color: Colors.black,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      Radio(
+                                          value: '0',
+                                          groupValue: groupValue,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              groupValue = value!;
+                                            });
+                                          }),
+                                      Text(
+                                        'Admin',
+                                        style: GoogleFonts.poppins(
+                                          color: Colors.black,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
+                                )
                               ],
                             ),
-                          )
+                          ),
                         ],
                       ),
+                    )
+                  : SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.6,
+                      child: const Center(
+                        child: CircularProgressIndicator(),
+                      ),
                     ),
-                  ],
-                ),
-              ),
               const SizedBox(
                 height: 30,
               ),
               ButtonGlobal(
-                text: 'Sign Up',
-                color: '091479',
-                onBtnPressed: () => signupPressed(
-                    nameController.text,
-                    usernameController.text,
-                    emailController.text,
-                    passwordController.text,
-                    groupValue,
-                    context),
-              ),
+                  text: 'Sign Up',
+                  color: '091479',
+                  onBtnPressed: () {
+                    setState(() {
+                      successful = false;
+                    });
+                    signupPressed(
+                        nameController.text,
+                        usernameController.text,
+                        emailController.text,
+                        passwordController.text,
+                        groupValue,
+                        context);
+                  }),
               const SizedBox(
                 height: 30,
               ),

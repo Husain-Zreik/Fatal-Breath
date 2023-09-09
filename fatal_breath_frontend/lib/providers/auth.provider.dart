@@ -83,8 +83,6 @@ class AuthProviders with ChangeNotifier {
         },
       );
 
-      print(response);
-
       //Save user id and token
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("user_id", response['user']['id'].toString());

@@ -36,6 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
       });
 
       if (!validated()) {
+        successful = true;
         return err = "Fill the inputs correctly";
       }
 
@@ -116,31 +117,38 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 40,
               ),
-              Form(
-                  key: _form,
-                  child: Column(
-                    children: [
-                      TextForm(
-                        textInputType: TextInputType.emailAddress,
-                        controller: emailController,
-                        label: 'Email',
-                        hintText: 'Enter your Email',
-                        isPass: false,
-                        validator: emailvalidator,
+              successful
+                  ? Form(
+                      key: _form,
+                      child: Column(
+                        children: [
+                          TextForm(
+                            textInputType: TextInputType.emailAddress,
+                            controller: emailController,
+                            label: 'Email',
+                            hintText: 'Enter your Email',
+                            isPass: false,
+                            validator: emailvalidator,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          TextForm(
+                            textInputType: TextInputType.text,
+                            controller: passwordController,
+                            label: 'Password',
+                            hintText: 'Enter your Password',
+                            isPass: true,
+                            validator: passwordvalidator,
+                          ),
+                        ],
+                      ))
+                  : SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.6,
+                      child: const Center(
+                        child: CircularProgressIndicator(),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TextForm(
-                        textInputType: TextInputType.text,
-                        controller: passwordController,
-                        label: 'Password',
-                        hintText: 'Enter your Password',
-                        isPass: true,
-                        validator: passwordvalidator,
-                      ),
-                    ],
-                  )),
+                    ),
               const SizedBox(
                 height: 30,
               ),
