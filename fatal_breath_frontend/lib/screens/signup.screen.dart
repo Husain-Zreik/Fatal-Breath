@@ -3,7 +3,6 @@
 import 'dart:io';
 
 import 'package:fatal_breath_frontend/providers/auth.provider.dart';
-import 'package:fatal_breath_frontend/screens/home.screen.dart';
 import 'package:fatal_breath_frontend/screens/login.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/widgets/button.global.dart';
@@ -51,7 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           .signUp(name, username, email, password, role, context);
 
       //Navigation
-      Get.to(() => const HomeScreen());
+      Get.to(() => const LoginScreen());
     } on HttpException catch (error) {
       setState(() {
         err = error.message;
