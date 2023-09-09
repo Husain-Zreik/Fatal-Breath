@@ -34,6 +34,11 @@ class _LoginScreenState extends State<LoginScreen> {
         err = "";
       });
       validate();
+
+      if (_form.currentState?.validate() == false) {
+        return err = "Fill the inputs correctly";
+      }
+
       await Provider.of<AuthProviders>(context, listen: false)
           .login(email, password, context);
       String? userId =
@@ -141,18 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   )),
               const SizedBox(
-                height: 15,
-              ),
-              Text(
-                err,
-                style: TextStyle(
-                  color: GlobalColors.errColor,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              const SizedBox(
-                height: 15,
+                height: 30,
               ),
               ButtonGlobal(
                 text: 'Sign In',
@@ -165,25 +159,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       emailController.text, passwordController.text, context);
                 },
               ),
-              // const SizedBox(
-              //   height: 20,
-              // ),
-              // Text(
-              //   'Or',
-              //   style: GoogleFonts.poppins(
-              //     fontSize: 24,
-              //     fontWeight: FontWeight.w400,
-              //     color: Colors.grey[600],
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 20,
-              // ),
-              // ButtonGlobal(
-              //   text: 'Sign In With Google',
-              //   color: '0047FF',
-              //   onBtnPressed: () => loginPressed(),
-              // ),
+              const SizedBox(
+                height: 30,
+              ),
+              Text(
+                err,
+                style: GoogleFonts.poppins(
+                  color: GlobalColors.errColor,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ],
           ),
         )),

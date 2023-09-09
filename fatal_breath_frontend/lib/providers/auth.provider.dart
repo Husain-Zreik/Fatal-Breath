@@ -1,10 +1,11 @@
 import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:fatal_breath_frontend/config/remote.config.dart';
 import 'package:fatal_breath_frontend/enums/request.methods.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Auth with ChangeNotifier {
+class AuthProviders with ChangeNotifier {
   String? userId;
   String? token;
 
@@ -35,40 +36,53 @@ class Auth with ChangeNotifier {
             "password": password,
           });
 
-      // print(response.data);
-
-      final userData = response.data['user'];
-
-      // if (message != null) {
-      //   throw HttpException(message);
-      // }
-
       // Save user id and token with the correct types
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString("user_id", userData['id'].toString());
-      await prefs.setString("token", userData['token']);
+      await prefs.setString("user_id", response['user']['id'].toString());
+      await prefs.setString("token", response['user']['token']);
 
-      // final message = response.data['status'];
-      userId = userData['id'].toString();
-      token = userData['token'];
+      userId = response['user']['id'].toString();
+      token = response['user']['token'];
+
       notifyListeners();
     } catch (e) {
-      rethrow;
+      if (e is DioException) {
+        switch (e.response?.statusCode) {
+          case 401:
+            throw const HttpException(
+                "Invalid credentials. Please check your email and password.");
+          case 403:
+            throw const HttpException(
+                "You do not have permission to access this resource.");
+          case 404:
+            throw const HttpException(
+                "The resource you are looking for does not exist.");
+          default:
+            // log(e.toString());
+            throw const HttpException("An unexpected error occurred.");
+        }
+      } else {
+        throw HttpException('$e');
+      }
     }
   }
 
   //Sign up
-  Future signUp(email, password, userType, context) async {
+  Future signUp(name, username, email, password, role, context) async {
     try {
       final response = await sendRequest(
         method: RequestMethods.POST,
-        route: "/auth/signup",
+        route: "/api/auth/signup",
         load: {
+          "name": name,
+          "username": username,
           "email": email,
           "password": password,
-          "user_type": userType,
+          "role": role,
         },
       );
+
+      // print(response);
 
       if (response["message"] != null) {
         throw HttpException(response["message"]);
@@ -76,11 +90,11 @@ class Auth with ChangeNotifier {
 
       //Save user id and token
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString("user_id", response["user_id"]);
-      await prefs.setString("token", response["token"]);
+      await prefs.setString("user_id", response['user']['id'].toString());
+      await prefs.setString("token", response['user']['token']);
 
-      userId = response["user_id"];
-      token = response["token"];
+      userId = response['user']['id'].toString();
+      token = response['user']['token'];
       notifyListeners();
     } catch (e) {
       rethrow;
