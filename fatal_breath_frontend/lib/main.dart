@@ -8,22 +8,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(
-    MultiProvider(
-      providers: [
-        // ChangeNotifierProvider<Auth>(
-        //   create: (context) => Auth(),
-        // ),
-        ChangeNotifierProvider.value(
-          value: Auth(),
-        ),
-        ChangeNotifierProvider<User>(
-          create: (context) => User(),
-        ),
-      ],
-      child: const MyApp(), // Your MaterialApp widget
-    ),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -31,14 +16,32 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/splash',
-      getPages: [
-        GetPage(name: '/splash', page: () => const SplashScreen()),
-        GetPage(name: '/login', page: () => const LoginScreen()),
-        GetPage(name: '/signup', page: () => const SignUpScreen()),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AuthProviders>(
+          create: (context) => AuthProviders(),
+        ),
+        ChangeNotifierProvider.value(
+          value: AuthProviders(),
+        ),
+        ChangeNotifierProvider<User>(
+          create: (context) => User(),
+        ),
       ],
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/splash',
+        routes: {
+          "/splash": (context) => const SplashScreen(),
+          "/login": (context) => const LoginScreen(),
+          "/signup": (context) => const SignUpScreen(),
+        },
+        getPages: [
+          GetPage(name: '/splash', page: () => const SplashScreen()),
+          GetPage(name: '/login', page: () => const LoginScreen()),
+          GetPage(name: '/signup', page: () => const SignUpScreen()),
+        ],
+      ),
     );
   }
 }
