@@ -30,7 +30,7 @@ class TextForm extends StatelessWidget {
             label,
             style: GoogleFonts.poppins(
               color: Colors.black,
-              fontSize: 20,
+              fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -57,6 +57,7 @@ class TextForm extends StatelessWidget {
                 contentPadding: const EdgeInsets.all(0),
                 hintStyle: const TextStyle(
                   height: 1,
+                  fontSize: 14,
                 )),
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (value) {
