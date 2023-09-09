@@ -26,16 +26,20 @@ Future sendRequest(
 
   if (method == RequestMethods.GET) {
     final response = await dioClient.get(route, data: load);
-    return response;
+    final data = response.data;
+    return data;
   } else if (method == RequestMethods.POST) {
     final response = await dioClient.post(route, data: load);
-    return response;
+    final data = response.data;
+    return data;
   } else if (method == RequestMethods.DELETE) {
     final response = await dioClient.delete(route, data: load);
-    return response;
+    final data = response.data;
+    return data;
   } else if (method == RequestMethods.PUT) {
     final response = await dioClient.put(route, data: load);
-    return response;
+    final data = response.data;
+    return data;
   }
 
   return Future(() {
