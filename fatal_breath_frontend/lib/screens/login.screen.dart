@@ -154,7 +154,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               ButtonGlobal(
                 text: 'Sign In',
-                color: '091479',
+                bgColor: GlobalColors.mainColor,
+                textColor: Colors.white,
                 onBtnPressed: () {
                   setState(() {
                     successful = false;

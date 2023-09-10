@@ -277,7 +277,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               ButtonGlobal(
                   text: 'Sign Up',
-                  color: '091479',
+                  bgColor: GlobalColors.mainColor,
+                  textColor: Colors.white,
                   onBtnPressed: () {
                     setState(() {
                       successful = false;
