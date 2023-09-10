@@ -15,7 +15,6 @@ Future sendRequest(
     RequestMethods method = RequestMethods.GET,
     Map? load}) async {
   final String? token = await getLocal(type: LocalTypes.String, key: "token");
-  print(token);
 
   if (token != null) {
     final BaseOptions authorizeOptions =

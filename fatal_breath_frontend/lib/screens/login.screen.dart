@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:fatal_breath_frontend/providers/auth.provider.dart';
+import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/screens/main.screen.dart';
 import 'package:fatal_breath_frontend/screens/signup.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
@@ -42,6 +43,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
       await Provider.of<AuthProviders>(context, listen: false)
           .login(email, password, context);
+
+      await Provider.of<User>(context, listen: false).getUser(context);
 
       Get.to(() => const MainScreen());
     } on HttpException catch (error) {

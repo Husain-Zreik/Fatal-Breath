@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:fatal_breath_frontend/providers/auth.provider.dart';
+import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/screens/login.screen.dart';
 import 'package:fatal_breath_frontend/screens/settings/change.password.screen.dart';
 import 'package:fatal_breath_frontend/screens/settings/edit.profile.screen.dart';
@@ -38,8 +39,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   height: 20,
                 ),
                 Text(
-                  // value.name,
-                  "username",
+                  '${context.watch<User>().getUsername}',
                   style: GoogleFonts.poppins(
                     color: Colors.black,
                     fontSize: 16,
@@ -50,8 +50,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   height: 10,
                 ),
                 Text(
-                  // value.email,
-                  "email",
+                  '${context.watch<User>().getEmail}',
                   style: GoogleFonts.poppins(
                     color: Colors.black,
                     fontSize: 16,
