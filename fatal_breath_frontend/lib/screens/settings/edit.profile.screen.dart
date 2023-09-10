@@ -65,7 +65,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(50, 40, 50, 0),
+            padding: const EdgeInsets.fromLTRB(50, 20, 50, 0),
             child: Column(
               children: [
                 Stack(children: [
@@ -124,7 +124,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         validator: emailvalidator,
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 30,
                       ),
                       ButtonGlobal(
                           text: 'Save',
