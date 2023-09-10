@@ -6,14 +6,14 @@ class TextForm extends StatelessWidget {
       {Key? key,
       required this.controller,
       required this.hintText,
-      required this.textInputType,
+      this.textInputType,
       required this.isPass,
       required this.label,
       required this.validator})
       : super(key: key);
 
   final TextEditingController controller;
-  final TextInputType textInputType;
+  final TextInputType? textInputType;
   final Function validator;
   final String hintText;
   final String label;
