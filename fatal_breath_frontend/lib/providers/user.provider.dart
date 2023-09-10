@@ -4,39 +4,45 @@ import 'package:fatal_breath_frontend/config/remote.config.dart';
 import 'package:flutter/cupertino.dart';
 
 class User with ChangeNotifier {
+  String? name;
+  String? username;
   String? email;
   String? userType;
-  String? currentSystemId;
 
-  String? get getCurrentSystemId {
-    return currentSystemId;
+  String? get getName {
+    return name;
+  }
+
+  String? get getUsername {
+    return username;
   }
 
   String? get getEmail {
     return email;
   }
 
-  //Setting current system
-  void setCurrentSystemId(String systemId) {
-    currentSystemId = systemId;
-    notifyListeners();
+  String? get getUserType {
+    return userType;
   }
 
   //Get user data
-  Future getUser(String id, context) async {
+  Future getUser(context) async {
     try {
-      final response = await sendRequest(route: "/read/$id");
+      final response = await sendRequest(route: "/api/user/info");
 
-      if (response["message"] != null) {
-        throw HttpException(response["message"]);
+      name = response['user']["name"];
+      username = response['user']["username"];
+      email = response['user']["email"];
+
+      if (response['user']["role"] == 1) {
+        userType = "Admin";
+      } else {
+        userType = "User";
       }
-
-      email = response["email"];
-      userType = response["user_type"];
 
       notifyListeners();
     } catch (e) {
-      rethrow;
+      throw HttpException('$e');
     }
   }
 }
