@@ -24,9 +24,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
-  File? image;
   String encodedImage = "";
   Uint8List? decoded;
+  File? selectedImage;
 
   final _form = GlobalKey<FormState>();
   bool successful = true;
@@ -42,13 +42,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
       setState(() {
         decoded = imageInfo["decoded"];
+        selectedImage = imageInfo["selectedImage"];
       });
     } on HttpException catch (e) {
       print(e);
     }
   }
 
-  Future updateProfile(name, username, email, context) async {
+  Future updateProfile(name, username, email, encodedImage, context) async {
     try {
       setState(() {
         err = "";
@@ -114,12 +115,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             child: Column(
               children: [
                 Stack(children: [
-                  ProfileCircle(size: 140),
+                  ProfileCircle(
+                    size: 140,
+                    image: selectedImage != null ? selectedImage! : null,
+                  ),
                   Positioned(
                       bottom: 0,
                       right: 0,
                       child: InkWell(
-                        onTap: inputImage,
+                        onTap: () {
+                          inputImage();
+                        },
                         child: Container(
                           width: 45,
                           height: 45,
@@ -183,6 +189,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 nameController.text,
                                 usernameController.text,
                                 emailController.text,
+                                encodedImage,
                                 context);
                           }),
                       const SizedBox(

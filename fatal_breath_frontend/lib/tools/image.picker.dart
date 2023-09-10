@@ -13,8 +13,10 @@ Future imagePicker() async {
     Uint8List imageBytes = await inputImage.readAsBytes();
     String encoded = base64Url.encode(imageBytes);
     Uint8List decoded = base64.decode(encoded);
+    File selectedImage = File(inputImage.path);
 
     Map imageInfo = {
+      "selectedImage": selectedImage,
       "inputImage": inputImage,
       "imageBytes": imageBytes,
       "encoded": encoded,

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class ProfileCircle extends StatefulWidget {
@@ -5,7 +7,7 @@ class ProfileCircle extends StatefulWidget {
       : super(key: key);
 
   final double size;
-  final Widget? image;
+  final File? image;
 
   @override
   State<ProfileCircle> createState() => _ProfileCircleState();
@@ -23,21 +25,19 @@ class _ProfileCircleState extends State<ProfileCircle> {
             shape: BoxShape.circle,
             color: Colors.white,
           ),
-          child:
-              // value?.image != null && value.image.isNotEmpty
-              //     ? Image.memory(
-              //         base64Decode(value.image),
-              //         fit: BoxFit.cover,
-              //         width: widget.size,
-              //         height: widget.size,
-              //       ):
-              widget.image ??
-                  Image.asset(
-                    "assets/images/account_circle.png",
-                    fit: BoxFit.cover,
-                    width: widget.size,
-                    height: widget.size,
-                  )),
+          child: widget.image != null
+              ? Image.file(
+                  widget.image!,
+                  fit: BoxFit.cover,
+                  width: widget.size,
+                  height: widget.size,
+                )
+              : Image.asset(
+                  "assets/images/account_circle.png",
+                  fit: BoxFit.cover,
+                  width: widget.size,
+                  height: widget.size,
+                )),
     );
   }
 }
