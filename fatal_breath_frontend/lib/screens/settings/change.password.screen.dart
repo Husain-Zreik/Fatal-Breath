@@ -1,9 +1,14 @@
+import 'dart:io';
+
+import 'package:fatal_breath_frontend/providers/auth.provider.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/widgets/button.global.dart';
 import 'package:fatal_breath_frontend/widgets/secondary.appbar.dart';
 import 'package:fatal_breath_frontend/widgets/text.form.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({Key? key}) : super(key: key);
@@ -16,12 +21,49 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final TextEditingController verifypassController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController oldpasswordController = TextEditingController();
-
   final _form = GlobalKey<FormState>();
+
   bool successful = true;
   String err = "";
   bool validated() {
     return _form.currentState!.validate();
+  }
+
+  Future updatePassword(password, context) async {
+    try {
+      setState(() {
+        err = "";
+      });
+
+      if (!validated()) {
+        successful = true;
+        return err = "Fill the inputs correctly";
+      }
+      //Try signing up
+      // await Provider.of<AuthProviders>(context, listen: false)
+      //     .signUp(name, username, email, context);
+
+      //Navigation
+      Get.back();
+    } on HttpException catch (error) {
+      setState(() {
+        err = error.message;
+        successful = true;
+      });
+    }
+  }
+
+  oldpasswordvalidator(value) {
+    final oldPassword =
+        Provider.of<AuthProviders>(context, listen: false).getPassword;
+
+    if (value!.isEmpty) {
+      return "Please enter the old password";
+    }
+    if (value != oldPassword) {
+      return "Doesn't match the old password";
+    }
+    return null;
   }
 
   passwordvalidator(value) {
@@ -69,7 +111,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     label: 'Old Password',
                     hintText: 'Enter old Password',
                     isPass: true,
-                    validator: passwordvalidator,
+                    validator: oldpasswordvalidator,
                   ),
                   const SizedBox(
                     height: 10,
@@ -100,7 +142,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       text: 'Save',
                       bgColor: GlobalColors.mainColor,
                       textColor: Colors.white,
-                      onBtnPressed: () {}),
+                      onBtnPressed: () {
+                        updatePassword(passwordController.text, context);
+                      }),
                   const SizedBox(
                     height: 30,
                   ),
