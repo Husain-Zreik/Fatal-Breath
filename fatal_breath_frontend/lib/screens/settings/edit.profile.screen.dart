@@ -9,8 +9,10 @@ import 'package:fatal_breath_frontend/widgets/secondary.appbar.dart';
 import 'package:fatal_breath_frontend/widgets/text.form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
@@ -41,6 +43,30 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       setState(() => this.image = imageTemporary);
     } on PlatformException catch (e) {
       print("Failed to pick image : $e");
+    }
+  }
+
+  Future updateProfile(name, username, email, context) async {
+    try {
+      setState(() {
+        err = "";
+      });
+
+      if (!validated()) {
+        successful = true;
+        return err = "Fill the inputs correctly";
+      }
+      //Try signing up
+      // await Provider.of<AuthProviders>(context, listen: false)
+      //     .signUp(name, username, email, context);
+
+      //Navigation
+      Get.back();
+    } on HttpException catch (error) {
+      setState(() {
+        err = error.message;
+        successful = true;
+      });
     }
   }
 
@@ -147,7 +173,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           text: 'Save',
                           bgColor: GlobalColors.mainColor,
                           textColor: Colors.white,
-                          onBtnPressed: () {}),
+                          onBtnPressed: () {
+                            setState(() {
+                              successful = false;
+                            });
+                            updateProfile(
+                                nameController.text,
+                                usernameController.text,
+                                emailController.text,
+                                context);
+                          }),
                       const SizedBox(
                         height: 30,
                       ),
