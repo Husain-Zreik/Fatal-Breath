@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthProviders with ChangeNotifier {
   String? userId;
   String? token;
+  String? password;
 
   String? get getUserId {
     if (userId != null) {
@@ -27,15 +28,23 @@ class AuthProviders with ChangeNotifier {
     return null;
   }
 
+  String? get getPassword {
+    if (password != null) {
+      return password;
+    }
+
+    return null;
+  }
+
   //Login
-  Future login(email, password, context) async {
+  Future login(email, password1, context) async {
     try {
       final response = await sendRequest(
           route: "/api/auth/login",
           method: RequestMethods.POST,
           load: {
             "email": email,
-            "password": password,
+            "password": password1,
           });
 
       // Save user id and token with the correct types
@@ -45,6 +54,7 @@ class AuthProviders with ChangeNotifier {
 
       userId = response['user']['id'].toString();
       token = response['user']['token'];
+      password = password1;
 
       notifyListeners();
     } catch (e) {
