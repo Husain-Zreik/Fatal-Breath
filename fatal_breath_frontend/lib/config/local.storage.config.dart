@@ -8,7 +8,7 @@ Future<void> setlocal({
   required String key,
   required dynamic value,
 }) async {
-  SharedPreferences.setMockInitialValues({});
+  // SharedPreferences.setMockInitialValues({key: value});
 
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -27,7 +27,7 @@ dynamic getLocal({
   required LocalTypes type,
   required String key,
 }) async {
-  SharedPreferences.setMockInitialValues({});
+  // SharedPreferences.setMockInitialValues({});
 
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
