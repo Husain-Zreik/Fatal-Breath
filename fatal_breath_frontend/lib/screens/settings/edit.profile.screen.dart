@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'dart:io';
 
+import 'package:fatal_breath_frontend/tools/image.picker.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/widgets/button.global.dart';
 import 'package:fatal_breath_frontend/widgets/profile.circle.dart';
@@ -11,8 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
@@ -26,6 +25,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   File? image;
+  String encodedImage = "";
+  Uint8List? decoded;
 
   final _form = GlobalKey<FormState>();
   bool successful = true;
@@ -34,15 +35,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return _form.currentState!.validate();
   }
 
-  Future pickImage() async {
+  Future inputImage() async {
     try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (image == null) return;
+      final imageInfo = await imagePicker();
+      encodedImage = imageInfo["encoded"];
 
-      final imageTemporary = File(image.path);
-      setState(() => this.image = imageTemporary);
-    } on PlatformException catch (e) {
-      print("Failed to pick image : $e");
+      setState(() {
+        decoded = imageInfo["decoded"];
+      });
+    } on HttpException catch (e) {
+      print(e);
     }
   }
 
@@ -117,7 +119,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       bottom: 0,
                       right: 0,
                       child: InkWell(
-                        onTap: () {},
+                        onTap: inputImage,
                         child: Container(
                           width: 45,
                           height: 45,
