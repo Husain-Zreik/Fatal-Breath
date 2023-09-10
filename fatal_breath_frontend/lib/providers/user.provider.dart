@@ -45,4 +45,6 @@ class User with ChangeNotifier {
       throw HttpException('$e');
     }
   }
+
+  Future updateProfile() async {}
 }

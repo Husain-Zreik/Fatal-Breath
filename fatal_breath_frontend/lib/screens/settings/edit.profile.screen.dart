@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/tools/image.picker.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/widgets/button.global.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
@@ -21,9 +23,11 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
+  final TextEditingController usernameController =
+      TextEditingController(text: "");
+  final TextEditingController emailController = TextEditingController(text: "");
+  final TextEditingController nameController = TextEditingController(text: "");
+
   String encodedImage = "";
   Uint8List? decoded;
   File? selectedImage;
@@ -102,6 +106,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    nameController.text = context.watch<User>().getName!;
+    usernameController.text = context.watch<User>().getUsername!;
+    emailController.text = context.watch<User>().getEmail!;
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(80),
@@ -149,7 +157,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                       TextForm(
                         controller: nameController,
-                        hintText: "name",
+                        hintText: context.watch<User>().getName!,
                         isPass: false,
                         label: 'Name',
                         validator: namevalidator,
@@ -159,7 +167,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                       TextForm(
                         controller: usernameController,
-                        hintText: "username",
+                        hintText: context.watch<User>().getUsername!,
                         isPass: false,
                         label: 'Username',
                         validator: usernamevalidator,
@@ -169,7 +177,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                       TextForm(
                         controller: emailController,
-                        hintText: "email",
+                        hintText: context.watch<User>().getEmail!,
                         isPass: false,
                         label: 'Email',
                         validator: emailvalidator,
