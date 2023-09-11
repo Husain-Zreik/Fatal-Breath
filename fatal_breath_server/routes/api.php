@@ -22,6 +22,8 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
 
     Route::get("/info", [UserController::class, "getUser"]);
     Route::post("/info/update", [UserController::class, "updateProfile"]);
+    Route::post('/info/change-password', [UserController::class, 'changePassword']);
+
 
     Route::post("logout", [AuthController::class, "logout"]);
     Route::post("refresh", [AuthController::class, "refresh"]);
