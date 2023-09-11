@@ -3,8 +3,10 @@ import 'package:fatal_breath_frontend/enums/request.methods.dart';
 import 'package:fatal_breath_frontend/enums/local.types.dart';
 import 'package:dio/dio.dart';
 
+const String baseUrl = "http://192.168.1.5:8000";
+
 final options = BaseOptions(
-  baseUrl: "http://192.168.1.5:8000",
+  baseUrl: baseUrl,
   contentType: Headers.jsonContentType,
 );
 
