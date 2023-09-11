@@ -3,19 +3,24 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 
-Future imagePicker() async {
+Future<Map<String, dynamic>> imagePicker() async {
   try {
     final XFile? inputImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
 
-    if (inputImage == null) return;
+    if (inputImage == null) {
+      throw const HttpException("Image selection canceled");
+    }
 
-    Uint8List imageBytes = await inputImage.readAsBytes();
-    String encoded = base64Url.encode(imageBytes);
-    Uint8List decoded = base64.decode(encoded);
+    // Uint8List imageBytes = await inputImage.readAsBytes();
     File selectedImage = File(inputImage.path);
+    Uint8List imageBytes = selectedImage.readAsBytesSync();
+    String encoded = base64Encode(imageBytes);
+    Uint8List decoded = base64Decode(encoded);
 
-    Map imageInfo = {
+    // debugPrint("encoded  $encoded");
+
+    Map<String, dynamic> imageInfo = {
       "selectedImage": selectedImage,
       "inputImage": inputImage,
       "imageBytes": imageBytes,
@@ -25,6 +30,6 @@ Future imagePicker() async {
 
     return imageInfo;
   } catch (e) {
-    throw HttpException(e.toString());
+    throw HttpException('Image selection failed: $e');
   }
 }
