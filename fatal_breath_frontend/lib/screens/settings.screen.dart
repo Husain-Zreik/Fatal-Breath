@@ -20,6 +20,14 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  late String? image;
+
+  @override
+  void initState() {
+    super.initState();
+    image = Provider.of<User>(context, listen: false).getImage;
+  }
+
   void signUserout() {
     Provider.of<AuthProviders>(context, listen: false).logout();
     Get.to(() => const LoginScreen());
@@ -27,19 +35,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
+    return Consumer<User>(
       builder: (context, value, child) => SafeArea(
         child: Center(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(50, 20, 50, 0),
             child: Column(
               children: [
-                const ProfileCircle(size: 140),
+                ProfileCircle(
+                  size: 140,
+                  imageLink: value.image == 'null' ? null : image,
+                ),
                 const SizedBox(
                   height: 20,
                 ),
                 Text(
-                  '${context.watch<User>().getUsername}',
+                  value.username!,
                   style: GoogleFonts.poppins(
                     color: Colors.black,
                     fontSize: 16,
@@ -50,7 +61,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   height: 10,
                 ),
                 Text(
-                  '${context.watch<User>().getEmail}',
+                  value.email!,
                   style: GoogleFonts.poppins(
                     color: Colors.black,
                     fontSize: 16,
