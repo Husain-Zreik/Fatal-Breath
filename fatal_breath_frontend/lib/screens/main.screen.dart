@@ -66,7 +66,7 @@ class _MainScreenState extends State<MainScreen> {
                             : "Settings",
             style: GoogleFonts.poppins(
               color: GlobalColors.mainColor,
-              fontSize: 32,
+              fontSize: 26,
               fontWeight: FontWeight.w600,
             ),
           ),
