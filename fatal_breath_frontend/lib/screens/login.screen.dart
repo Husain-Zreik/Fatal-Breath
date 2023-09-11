@@ -121,63 +121,68 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 40,
               ),
               successful
-                  ? Form(
-                      key: _form,
-                      child: Column(
-                        children: [
-                          TextForm(
-                            textInputType: TextInputType.emailAddress,
-                            controller: emailController,
-                            label: 'Email',
-                            hintText: 'Enter your Email',
-                            isPass: false,
-                            validator: emailvalidator,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextForm(
-                            textInputType: TextInputType.text,
-                            controller: passwordController,
-                            label: 'Password',
-                            hintText: 'Enter your Password',
-                            isPass: true,
-                            validator: passwordvalidator,
-                          ),
-                        ],
-                      ))
+                  ? Center(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
+                        child: Form(
+                            key: _form,
+                            child: Column(
+                              children: [
+                                TextForm(
+                                  textInputType: TextInputType.emailAddress,
+                                  controller: emailController,
+                                  label: 'Email',
+                                  hintText: 'Enter your Email',
+                                  isPass: false,
+                                  validator: emailvalidator,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                TextForm(
+                                  textInputType: TextInputType.text,
+                                  controller: passwordController,
+                                  label: 'Password',
+                                  hintText: 'Enter your Password',
+                                  isPass: true,
+                                  validator: passwordvalidator,
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                ButtonGlobal(
+                                  text: 'Sign In',
+                                  bgColor: GlobalColors.mainColor,
+                                  textColor: Colors.white,
+                                  onBtnPressed: () {
+                                    setState(() {
+                                      successful = false;
+                                    });
+                                    loginPressed(emailController.text,
+                                        passwordController.text, context);
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                Text(
+                                  err,
+                                  style: GoogleFonts.poppins(
+                                    color: GlobalColors.errColor,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            )),
+                      ),
+                    )
                   : SizedBox(
                       height: MediaQuery.of(context).size.height * 0.6,
                       child: const Center(
                         child: CircularProgressIndicator(),
                       ),
                     ),
-              const SizedBox(
-                height: 30,
-              ),
-              ButtonGlobal(
-                text: 'Sign In',
-                bgColor: GlobalColors.mainColor,
-                textColor: Colors.white,
-                onBtnPressed: () {
-                  setState(() {
-                    successful = false;
-                  });
-                  loginPressed(
-                      emailController.text, passwordController.text, context);
-                },
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Text(
-                err,
-                style: GoogleFonts.poppins(
-                  color: GlobalColors.errColor,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
             ],
           ),
         )),

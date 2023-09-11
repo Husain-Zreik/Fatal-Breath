@@ -152,118 +152,156 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 height: 40,
               ),
               successful
-                  ? Form(
-                      key: _form,
-                      child: Column(
-                        children: [
-                          TextForm(
-                            controller: nameController,
-                            hintText: 'Enter your Full Name',
-                            textInputType: TextInputType.emailAddress,
-                            isPass: false,
-                            label: 'Full Name',
-                            validator: namevalidator,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextForm(
-                            controller: usernameController,
-                            hintText: 'Enter your Username',
-                            textInputType: TextInputType.emailAddress,
-                            isPass: false,
-                            label: 'Username',
-                            validator: usernamevalidator,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextForm(
-                            controller: emailController,
-                            hintText: 'Enter your Email',
-                            textInputType: TextInputType.emailAddress,
-                            isPass: false,
-                            label: 'Email',
-                            validator: emailvalidator,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextForm(
-                            controller: passwordController,
-                            hintText: 'Enter your Password',
-                            textInputType: TextInputType.text,
-                            isPass: true,
-                            label: 'Password',
-                            validator: passwordvalidator,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextForm(
-                            textInputType: TextInputType.text,
-                            controller: verifypassController,
-                            label: 'Verify Password',
-                            hintText: 'Re-enter the Password',
-                            isPass: true,
-                            validator: verifypasswordvalidator,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 5),
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Type :',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.black,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                  ? Center(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
+                        child: Form(
+                          key: _form,
+                          child: Column(
+                            children: [
+                              TextForm(
+                                controller: nameController,
+                                hintText: 'Enter your Full Name',
+                                textInputType: TextInputType.emailAddress,
+                                isPass: false,
+                                label: 'Full Name',
+                                validator: namevalidator,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              TextForm(
+                                controller: usernameController,
+                                hintText: 'Enter your Username',
+                                textInputType: TextInputType.emailAddress,
+                                isPass: false,
+                                label: 'Username',
+                                validator: usernamevalidator,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              TextForm(
+                                controller: emailController,
+                                hintText: 'Enter your Email',
+                                textInputType: TextInputType.emailAddress,
+                                isPass: false,
+                                label: 'Email',
+                                validator: emailvalidator,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              TextForm(
+                                controller: passwordController,
+                                hintText: 'Enter your Password',
+                                textInputType: TextInputType.text,
+                                isPass: true,
+                                label: 'Password',
+                                validator: passwordvalidator,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              TextForm(
+                                textInputType: TextInputType.text,
+                                controller: verifypassController,
+                                label: 'Verify Password',
+                                hintText: 'Re-enter the Password',
+                                isPass: true,
+                                validator: verifypasswordvalidator,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 5),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      'Type :',
+                                      style: GoogleFonts.poppins(
+                                        color: Colors.black,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Row(
+                                        children: [
+                                          Radio(
+                                              value: '1',
+                                              groupValue: groupValue,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  groupValue = value!;
+                                                });
+                                              }),
+                                          Text(
+                                            'User',
+                                            style: GoogleFonts.poppins(
+                                              color: Colors.black,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                          Radio(
+                                              value: '0',
+                                              groupValue: groupValue,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  groupValue = value!;
+                                                });
+                                              }),
+                                          Text(
+                                            'Admin',
+                                            style: GoogleFonts.poppins(
+                                              color: Colors.black,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: Row(
-                                    children: [
-                                      Radio(
-                                          value: '1',
-                                          groupValue: groupValue,
-                                          onChanged: (value) {
-                                            setState(() {
-                                              groupValue = value!;
-                                            });
-                                          }),
-                                      Text(
-                                        'User',
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.black,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                      Radio(
-                                          value: '0',
-                                          groupValue: groupValue,
-                                          onChanged: (value) {
-                                            setState(() {
-                                              groupValue = value!;
-                                            });
-                                          }),
-                                      Text(
-                                        'Admin',
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.black,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              ButtonGlobal(
+                                  text: 'Sign Up',
+                                  bgColor: GlobalColors.mainColor,
+                                  textColor: Colors.white,
+                                  onBtnPressed: () {
+                                    setState(() {
+                                      successful = false;
+                                    });
+                                    signupPressed(
+                                        nameController.text,
+                                        usernameController.text,
+                                        emailController.text,
+                                        passwordController.text,
+                                        groupValue,
+                                        context);
+                                  }),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              Text(
+                                err,
+                                style: GoogleFonts.poppins(
+                                  color: GlobalColors.errColor,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                     )
                   : SizedBox(
@@ -272,39 +310,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: CircularProgressIndicator(),
                       ),
                     ),
-              const SizedBox(
-                height: 30,
-              ),
-              ButtonGlobal(
-                  text: 'Sign Up',
-                  bgColor: GlobalColors.mainColor,
-                  textColor: Colors.white,
-                  onBtnPressed: () {
-                    setState(() {
-                      successful = false;
-                    });
-                    signupPressed(
-                        nameController.text,
-                        usernameController.text,
-                        emailController.text,
-                        passwordController.text,
-                        groupValue,
-                        context);
-                  }),
-              const SizedBox(
-                height: 30,
-              ),
-              Text(
-                err,
-                style: GoogleFonts.poppins(
-                  color: GlobalColors.errColor,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
             ],
           ),
         )),
