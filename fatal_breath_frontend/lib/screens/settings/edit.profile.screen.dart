@@ -27,6 +27,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       TextEditingController(text: "");
   final TextEditingController emailController = TextEditingController(text: "");
   final TextEditingController nameController = TextEditingController(text: "");
+  String currentImageLink = "null";
 
   String encodedImage = "";
   Uint8List? decoded;
@@ -53,7 +54,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
   }
 
-  Future updateProfile(name, username, email, encodedImage, context) async {
+  Future saveProfile(name, username, email, profileImage, context) async {
     try {
       setState(() {
         err = "";
@@ -63,9 +64,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         successful = true;
         return err = "Fill the inputs correctly";
       }
+      print("before");
       //Try signing up
-      // await Provider.of<AuthProviders>(context, listen: false)
-      //     .signUp(name, username, email, context);
+      await Provider.of<User>(context, listen: false).updateProfile(
+        name,
+        username,
+        email,
+        profileImage,
+        context,
+      );
+      print("after");
 
       //Navigation
       Get.back();
@@ -105,11 +113,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    nameController.text = context.watch<User>().getName!;
-    usernameController.text = context.watch<User>().getUsername!;
-    emailController.text = context.watch<User>().getEmail!;
+  void initState() {
+    super.initState();
 
+    currentImageLink = context.read<User>().getImage!;
+    debugPrint(currentImageLink);
+    nameController.text = context.read<User>().getName!;
+    usernameController.text = context.read<User>().getUsername!;
+    emailController.text = context.read<User>().getEmail!;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(80),
@@ -125,7 +140,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 Stack(children: [
                   ProfileCircle(
                     size: 140,
-                    image: selectedImage != null ? selectedImage! : null,
+                    decoded: decoded != null ? decoded! : null,
+                    imageLink:
+                        currentImageLink == 'null' ? null : currentImageLink,
+                    // image: selectedImage != null ? selectedImage! : null,
                   ),
                   Positioned(
                       bottom: 0,
@@ -193,7 +211,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             setState(() {
                               successful = false;
                             });
-                            updateProfile(
+                            saveProfile(
                                 nameController.text,
                                 usernameController.text,
                                 emailController.text,
