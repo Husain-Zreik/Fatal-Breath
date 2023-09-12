@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:fatal_breath_frontend/config/remote.config.dart';
 import 'package:fatal_breath_frontend/enums/request.methods.dart';
 import 'package:flutter/cupertino.dart';
@@ -90,6 +91,34 @@ class User with ChangeNotifier {
       notifyListeners();
     } catch (error) {
       throw HttpException('$error');
+    }
+  }
+
+  Future changePassword(currentPassword, newPassword, context) async {
+    try {
+      // ignore: unused_local_variable
+      final response = await sendRequest(
+        route: "/api/user/info/change-password",
+        method: RequestMethods.POST,
+        load: {
+          "current_password": currentPassword,
+          "new_password": newPassword,
+          "new_password_confirmation": newPassword,
+        },
+      );
+
+      notifyListeners();
+    } catch (e) {
+      if (e is DioException) {
+        if (e.response?.statusCode == 401) {
+          throw const HttpException(
+              "Unauthorized. Please log in and try again.");
+        } else {
+          throw const HttpException("An unexpected error occurred.");
+        }
+      } else {
+        throw HttpException('$e');
+      }
     }
   }
 }
