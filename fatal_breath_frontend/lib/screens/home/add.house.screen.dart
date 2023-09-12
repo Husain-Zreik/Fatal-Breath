@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:fatal_breath_frontend/models/country.modal.dart';
 import 'package:fatal_breath_frontend/providers/house.provider.dart';
+import 'package:fatal_breath_frontend/screens/home.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/utils/text.error.dart';
 import 'package:fatal_breath_frontend/widgets/button.global.dart';
@@ -49,8 +50,11 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
       await Provider.of<HouseProvider>(context, listen: false)
           .createHouse(name, country, city, context);
 
+      await Provider.of<HouseProvider>(context, listen: false).getHouses();
+
       //Navigation
-      Get.back();
+      Get.to(() => const HomeScreen());
+      // Get.back();
     } on HttpException catch (error) {
       setState(() {
         err = error.message;
@@ -119,7 +123,8 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
                     value: _selectedCity,
                     items: _selectedCountry != null
                         ? citiesByCountry[_selectedCountry!]
-                                ?.map((String city) {
+                                ?.toSet()
+                                .map((String city) {
                               return DropdownMenuItem<String>(
                                 value: city,
                                 child: Text(city),
