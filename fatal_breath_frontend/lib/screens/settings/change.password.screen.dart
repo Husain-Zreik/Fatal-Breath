@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:fatal_breath_frontend/providers/auth.provider.dart';
+import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/widgets/button.global.dart';
 import 'package:fatal_breath_frontend/widgets/secondary.appbar.dart';
@@ -29,7 +30,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     return _form.currentState!.validate();
   }
 
-  Future updatePassword(password, context) async {
+  Future updatePassword(currentPassword, newPassword, context) async {
     try {
       setState(() {
         err = "";
@@ -39,9 +40,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         successful = true;
         return err = "Fill the inputs correctly";
       }
-      //Try signing up
-      // await Provider.of<AuthProviders>(context, listen: false)
-      //     .signUp(name, username, email, context);
+
+      await Provider.of<User>(context, listen: false)
+          .changePassword(currentPassword, newPassword, context);
+
+      Provider.of<AuthProviders>(context, listen: false)
+          .updatePassword(newPassword);
 
       //Navigation
       Get.back();
@@ -59,8 +63,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
     if (value!.isEmpty) {
       return "Please enter the old password";
-    }
-    if (value != oldPassword) {
+    } else if (value != oldPassword) {
       return "Doesn't match the old password";
     }
     return null;
@@ -69,9 +72,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   passwordvalidator(value) {
     if (value!.isEmpty) {
       return "Please enter password";
-    }
-    if (value.length < 6) {
+    } else if (value.length < 6) {
       return "Should be minimum 6 characters";
+    } else if (value == oldpasswordController.text) {
+      return "Password in use ";
     }
     return null;
   }
@@ -79,8 +83,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   verifypasswordvalidator(value) {
     if (value!.isEmpty) {
       return "Please re-enter your password";
-    }
-    if (value != passwordController.text) {
+    } else if (value != passwordController.text) {
       return "Passwords doesn't match";
     }
     return null;
@@ -143,7 +146,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       bgColor: GlobalColors.mainColor,
                       textColor: Colors.white,
                       onBtnPressed: () {
-                        updatePassword(passwordController.text, context);
+                        updatePassword(oldpasswordController.text,
+                            passwordController.text, context);
                       }),
                   const SizedBox(
                     height: 30,
