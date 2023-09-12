@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:fatal_breath_frontend/providers/auth.provider.dart';
+import 'package:fatal_breath_frontend/providers/house.provider.dart';
 import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/screens/main.screen.dart';
 import 'package:fatal_breath_frontend/screens/signup.screen.dart';
@@ -45,6 +46,8 @@ class _LoginScreenState extends State<LoginScreen> {
           .login(email, password, context);
 
       await Provider.of<UserProvider>(context, listen: false).getUser(context);
+
+      await Provider.of<HouseProvider>(context, listen: false).getHouses();
 
       Get.to(() => const MainScreen());
     } on HttpException catch (error) {
