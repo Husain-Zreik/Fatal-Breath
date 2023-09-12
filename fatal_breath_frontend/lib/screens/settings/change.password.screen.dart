@@ -39,10 +39,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         return err = "Fill the inputs correctly";
       }
 
-      await Provider.of<User>(context, listen: false)
+      await Provider.of<UserProvider>(context, listen: false)
           .changePassword(currentPassword, newPassword, context);
 
-      Provider.of<AuthProviders>(context, listen: false)
+      Provider.of<AuthProvider>(context, listen: false)
           .updatePassword(newPassword);
 
       //Navigation
@@ -56,7 +56,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   oldpasswordvalidator(value) {
     final oldPassword =
-        Provider.of<AuthProviders>(context, listen: false).getPassword;
+        Provider.of<AuthProvider>(context, listen: false).getPassword;
 
     if (value!.isEmpty) {
       return "Please enter the old password";

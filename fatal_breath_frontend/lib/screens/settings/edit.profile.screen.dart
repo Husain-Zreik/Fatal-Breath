@@ -66,7 +66,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       }
       print("before");
       //Try signing up
-      await Provider.of<User>(context, listen: false).updateProfile(
+      await Provider.of<UserProvider>(context, listen: false).updateProfile(
         name,
         username,
         email,
@@ -116,11 +116,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   void initState() {
     super.initState();
 
-    currentImageLink = context.read<User>().getImage!;
+    currentImageLink = context.read<UserProvider>().getImage!;
     debugPrint(currentImageLink);
-    nameController.text = context.read<User>().getName!;
-    usernameController.text = context.read<User>().getUsername!;
-    emailController.text = context.read<User>().getEmail!;
+    nameController.text = context.read<UserProvider>().getName!;
+    usernameController.text = context.read<UserProvider>().getUsername!;
+    emailController.text = context.read<UserProvider>().getEmail!;
   }
 
   @override
@@ -175,7 +175,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                       TextForm(
                         controller: nameController,
-                        hintText: context.watch<User>().getName!,
+                        hintText: context.watch<UserProvider>().getName!,
                         isPass: false,
                         label: 'Name',
                         validator: namevalidator,
@@ -185,7 +185,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                       TextForm(
                         controller: usernameController,
-                        hintText: context.watch<User>().getUsername!,
+                        hintText: context.watch<UserProvider>().getUsername!,
                         isPass: false,
                         label: 'Username',
                         validator: usernamevalidator,
@@ -195,7 +195,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                       TextForm(
                         controller: emailController,
-                        hintText: context.watch<User>().getEmail!,
+                        hintText: context.watch<UserProvider>().getEmail!,
                         isPass: false,
                         label: 'Email',
                         validator: emailvalidator,

@@ -7,7 +7,7 @@ import 'package:fatal_breath_frontend/enums/request.methods.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AuthProviders with ChangeNotifier {
+class AuthProvider with ChangeNotifier {
   String? userId;
   String? token;
   String? password;

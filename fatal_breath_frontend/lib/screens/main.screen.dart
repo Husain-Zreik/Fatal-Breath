@@ -36,15 +36,15 @@ class _MainScreenState extends State<MainScreen> {
         elevation: 0,
         centerTitle: true,
         leadingWidth: 65,
-        flexibleSpace: _selectedindex == 4
-            ? null
-            : Container(
-                margin: EdgeInsets.fromLTRB(280, 43, 0, 0),
-                // color: GlobalColors.mainColor,
-                child: Icon(
-                  Icons.account_circle,
-                  size: 55,
-                )),
+        // flexibleSpace: _selectedindex == 4
+        //     ? null
+        //     : Container(
+        //         margin: EdgeInsets.fromLTRB(280, 43, 0, 0),
+        //         // color: GlobalColors.mainColor,
+        //         child: Icon(
+        //           Icons.account_circle,
+        //           size: 55,
+        //         )),
         toolbarHeight: 80,
         leading: Padding(
           padding: const EdgeInsets.only(left: 10),

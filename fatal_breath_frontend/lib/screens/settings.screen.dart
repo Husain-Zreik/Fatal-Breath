@@ -25,17 +25,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     super.initState();
-    image = Provider.of<User>(context, listen: false).getImage;
+    image = Provider.of<UserProvider>(context, listen: false).getImage;
   }
 
   void signUserout() {
-    Provider.of<AuthProviders>(context, listen: false).logout();
+    Provider.of<AuthProvider>(context, listen: false).logout();
     Get.to(() => const LoginScreen());
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<User>(
+    return Consumer<UserProvider>(
       builder: (context, value, child) => SafeArea(
         child: Center(
           child: Padding(
@@ -44,9 +44,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               children: [
                 ProfileCircle(
                   size: 140,
-                  imageLink: context.watch<User>().getImage == 'null'
+                  imageLink: context.watch<UserProvider>().getImage == 'null'
                       ? null
-                      : context.watch<User>().getImage,
+                      : context.watch<UserProvider>().getImage,
                 ),
                 const SizedBox(
                   height: 20,

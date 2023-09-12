@@ -46,7 +46,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         return err = "Fill the inputs correctly";
       }
       //Try signing up
-      await Provider.of<AuthProviders>(context, listen: false)
+      await Provider.of<AuthProvider>(context, listen: false)
           .signUp(name, username, email, password, role, context);
 
       //Navigation

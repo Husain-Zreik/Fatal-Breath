@@ -41,10 +41,10 @@ class _LoginScreenState extends State<LoginScreen> {
         return err = "Fill the inputs correctly";
       }
 
-      await Provider.of<AuthProviders>(context, listen: false)
+      await Provider.of<AuthProvider>(context, listen: false)
           .login(email, password, context);
 
-      await Provider.of<User>(context, listen: false).getUser(context);
+      await Provider.of<UserProvider>(context, listen: false).getUser(context);
 
       Get.to(() => const MainScreen());
     } on HttpException catch (error) {

@@ -7,7 +7,7 @@ import 'package:fatal_breath_frontend/config/remote.config.dart';
 import 'package:fatal_breath_frontend/enums/request.methods.dart';
 import 'package:flutter/cupertino.dart';
 
-class User with ChangeNotifier {
+class UserProvider with ChangeNotifier {
   String? name;
   String? username;
   String? email;
