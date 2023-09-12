@@ -4,14 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 class ButtonGlobal extends StatelessWidget {
   const ButtonGlobal({
     Key? key,
-    required this.text,
+    this.text,
     required this.bgColor,
     required this.onBtnPressed,
     required this.textColor,
     this.icon,
   }) : super(key: key);
 
-  final String text;
+  final String? text;
   final IconData? icon;
   final Color bgColor;
   final Color textColor;
@@ -35,31 +35,34 @@ class ButtonGlobal extends StatelessWidget {
                 blurRadius: 10,
               ),
             ]),
-        child: Row(
-          mainAxisAlignment:
-              icon != null ? MainAxisAlignment.start : MainAxisAlignment.center,
-          children: [
-            if (icon != null)
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: Icon(
-                  icon,
-                  color: textColor,
-                  size: 26,
-                ),
+        child: icon == null && text == null
+            ? null
+            : Row(
+                mainAxisAlignment: icon != null && text != null
+                    ? MainAxisAlignment.start
+                    : MainAxisAlignment.center,
+                children: [
+                  if (icon != null)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Icon(
+                        icon,
+                        color: textColor,
+                        size: 26,
+                      ),
+                    ),
+                  if (icon != null) const SizedBox(width: 15),
+                  if (text != null)
+                    Text(
+                      text!,
+                      style: GoogleFonts.poppins(
+                        color: textColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 17,
+                      ),
+                    ),
+                ],
               ),
-            if (icon != null) const SizedBox(width: 15),
-            // if (icon != null) const SizedBox(width: 45),
-            Text(
-              text,
-              style: GoogleFonts.poppins(
-                color: textColor,
-                fontWeight: FontWeight.w600,
-                fontSize: 17,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
