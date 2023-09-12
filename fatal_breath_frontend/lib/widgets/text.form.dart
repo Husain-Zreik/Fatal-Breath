@@ -9,12 +9,12 @@ class TextForm extends StatelessWidget {
       this.textInputType,
       required this.isPass,
       required this.label,
-      required this.validator})
+      this.validator})
       : super(key: key);
 
   final TextEditingController controller;
   final TextInputType? textInputType;
-  final Function validator;
+  final Function? validator;
   final String hintText;
   final String label;
   final bool isPass;
@@ -60,9 +60,11 @@ class TextForm extends StatelessWidget {
                   fontSize: 14,
                 )),
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (value) {
-              return validator(value);
-            },
+            validator: validator == null
+                ? null
+                : (value) {
+                    return validator!(value);
+                  },
           ),
         ),
       ],
