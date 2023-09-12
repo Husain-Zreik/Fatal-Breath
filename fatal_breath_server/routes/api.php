@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HouseController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,7 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
 
     Route::group(['prefix' => 'admin',  'middleware' => 'auth.admin'], function () {
+        Route::post("/add-house", [HouseController::class, "createHouse"]);
     });
 
     Route::group(['prefix' => 'member',  'middleware' => 'auth.member'], function () {
