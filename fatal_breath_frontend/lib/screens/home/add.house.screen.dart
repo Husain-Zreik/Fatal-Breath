@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:fatal_breath_frontend/models/country.modal.dart';
+import 'package:fatal_breath_frontend/providers/house.provider.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/utils/text.error.dart';
 import 'package:fatal_breath_frontend/widgets/button.global.dart';
@@ -5,6 +9,8 @@ import 'package:fatal_breath_frontend/widgets/drop.down.dart';
 import 'package:fatal_breath_frontend/widgets/secondary.appbar.dart';
 import 'package:fatal_breath_frontend/widgets/text.form.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class AddHouseScreen extends StatefulWidget {
   const AddHouseScreen({Key? key}) : super(key: key);
@@ -22,76 +28,34 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
   String? _selectedCountry;
   String? _selectedCity;
 
-  List<String> countries = [
-    'US',
-    'CA',
-    'LB',
-    'FR',
-    'DE'
-  ]; // Add more countries as needed
-
-  Map<String, List<String>> citiesByCountry = {
-    'US': ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Miami'],
-    'CA': ['Toronto', 'Vancouver', 'Montreal', 'Calgary', 'Ottawa'],
-    'LB': [
-      'Beirut',
-      'Tripoli',
-      'Sidon',
-      'Tyre',
-      'Zahle',
-      'Jounieh',
-      'Batroun',
-      'Byblos',
-      'Nabatieh',
-      'Baalbek',
-      'Jbeil',
-      'Bekaa Valley',
-      'Zahlé',
-      'Jounieh',
-      'Bint Jbeil',
-      'Chouf',
-      'Marjayoun',
-      'Aley',
-      'Rashaya',
-      'Saida',
-      'Zahle',
-      'Baalbek',
-      'Taanayel',
-      'Riyak',
-      'Jiyeh',
-      'Sour',
-      'Ehdin',
-      'Hermel',
-      'Saghbine',
-      'Hasbaya',
-      'Bhamdoun',
-      'Mazraat Yachouh',
-      'Ras el-Matn',
-      'Broummana',
-      'Aley',
-      'Bteghrine',
-      'Hosh Hala',
-      'Deir el Qamar',
-      'Zgharta',
-      'Kousba',
-      'Miziara',
-      'Qoubaiyat',
-      'Bechare',
-      'Mansoura',
-      'Babda',
-      'Naccache',
-      'Sin el Fil',
-      'Horsh Tabet',
-      'Baabda',
-      'Fanar'
-    ],
-    'FR': ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice'],
-    'DE': ['Berlin', 'Hamburg', 'Munich', 'Cologne', 'Frankfurt'],
-  };
+  List<String> countries = CountryData.countries;
+  Map<String, List<String>> citiesByCountry = CountryData.citiesByCountry;
 
   String err = "";
   bool validated() {
     return _form.currentState!.validate();
+  }
+
+  Future createPressed(name, country, city, context) async {
+    try {
+      setState(() {
+        err = "";
+      });
+
+      if (!validated()) {
+        return err = "Fill the inputs correctly";
+      }
+      //Try signing up
+      await Provider.of<HouseProvider>(context, listen: false)
+          .createHouse(name, country, city, context);
+
+      //Navigation
+      Get.back();
+    } on HttpException catch (error) {
+      setState(() {
+        err = error.message;
+      });
+    }
   }
 
   inputvalidator(value) {
@@ -154,13 +118,14 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
                     label: 'Select City',
                     value: _selectedCity,
                     items: _selectedCountry != null
-                        ? citiesByCountry[_selectedCountry!]!
-                            .map((String city) {
-                            return DropdownMenuItem<String>(
-                              value: city,
-                              child: Text(city),
-                            );
-                          }).toList()
+                        ? citiesByCountry[_selectedCountry!]
+                                ?.map((String city) {
+                              return DropdownMenuItem<String>(
+                                value: city,
+                                child: Text(city),
+                              );
+                            }).toList() ??
+                            []
                         : [],
                     onChanged: (String? newValue) {
                       setState(() {
@@ -172,10 +137,13 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
                     height: 30,
                   ),
                   ButtonGlobal(
-                      text: 'Save',
+                      text: 'Create',
                       bgColor: GlobalColors.mainColor,
                       textColor: Colors.white,
-                      onBtnPressed: () {}),
+                      onBtnPressed: () {
+                        createPressed(nameController.text, _selectedCountry,
+                            _selectedCity, context);
+                      }),
                   const SizedBox(
                     height: 30,
                   ),
