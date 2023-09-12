@@ -31,47 +31,49 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: GlobalColors.bgColor,
-        elevation: 0,
-        centerTitle: true,
-        leadingWidth: 65,
-        // flexibleSpace: _selectedindex == 4
-        //     ? null
-        //     : Container(
-        //         margin: EdgeInsets.fromLTRB(280, 43, 0, 0),
-        //         // color: GlobalColors.mainColor,
-        //         child: Icon(
-        //           Icons.account_circle,
-        //           size: 55,
-        //         )),
-        toolbarHeight: 80,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: Image.asset(
-            'assets/images/light_icon.png',
-          ),
-        ),
-        title: Padding(
-          padding: const EdgeInsets.only(top: 10),
-          child: Text(
-            _selectedindex == 0
-                ? "Home"
-                : _selectedindex == 1
-                    ? "Chats"
-                    : _selectedindex == 2
-                        ? "Members"
-                        : _selectedindex == 3
-                            ? "Breathy"
-                            : "Settings",
-            style: GoogleFonts.poppins(
-              color: GlobalColors.mainColor,
-              fontSize: 26,
-              fontWeight: FontWeight.w600,
+      appBar: _selectedindex == 0 || _selectedindex == 2
+          ? null
+          : AppBar(
+              backgroundColor: GlobalColors.bgColor,
+              elevation: 0,
+              centerTitle: true,
+              leadingWidth: 65,
+              // flexibleSpace: _selectedindex == 4
+              //     ? null
+              //     : Container(
+              //         margin: EdgeInsets.fromLTRB(280, 43, 0, 0),
+              //         // color: GlobalColors.mainColor,
+              //         child: Icon(
+              //           Icons.account_circle,
+              //           size: 55,
+              //         )),
+              toolbarHeight: 80,
+              leading: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Image.asset(
+                  'assets/images/light_icon.png',
+                ),
+              ),
+              title: Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Text(
+                  _selectedindex == 0
+                      ? "Home"
+                      : _selectedindex == 1
+                          ? "Chats"
+                          : _selectedindex == 2
+                              ? "Members"
+                              : _selectedindex == 3
+                                  ? "Breathy"
+                                  : "Settings",
+                  style: GoogleFonts.poppins(
+                    color: GlobalColors.mainColor,
+                    fontSize: 26,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
-      ),
       body: pages[_selectedindex],
       backgroundColor: GlobalColors.bgColor,
       bottomNavigationBar: BottomNavigationBar(
