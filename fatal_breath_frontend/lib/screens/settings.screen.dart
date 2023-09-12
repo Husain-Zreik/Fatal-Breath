@@ -44,7 +44,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               children: [
                 ProfileCircle(
                   size: 140,
-                  imageLink: value.image == 'null' ? null : image,
+                  imageLink: context.watch<User>().getImage == 'null'
+                      ? null
+                      : context.watch<User>().getImage,
                 ),
                 const SizedBox(
                   height: 20,
