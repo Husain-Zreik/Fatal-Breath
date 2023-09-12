@@ -1,4 +1,5 @@
 import 'package:fatal_breath_frontend/providers/auth.provider.dart';
+import 'package:fatal_breath_frontend/providers/house.provider.dart';
 import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/screens/home.screen.dart';
 import 'package:fatal_breath_frontend/screens/login.screen.dart';
@@ -23,11 +24,14 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<AuthProvider>(
           create: (context) => AuthProvider(),
         ),
-        ChangeNotifierProvider.value(
-          value: AuthProvider(),
-        ),
+        // ChangeNotifierProvider.value(
+        //   value: AuthProvider(),
+        // ),
         ChangeNotifierProvider<UserProvider>(
           create: (context) => UserProvider(),
+        ),
+        ChangeNotifierProvider<HouseProvider>(
+          create: (context) => HouseProvider(),
         ),
       ],
       child: GetMaterialApp(
