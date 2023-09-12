@@ -128,6 +128,12 @@ class AuthProviders with ChangeNotifier {
     prefs.clear();
     userId = null;
     token = null;
+    password = null;
+    notifyListeners();
+  }
+
+  void updatePassword(String newPassword) {
+    password = newPassword;
     notifyListeners();
   }
 }
