@@ -24,7 +24,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final TextEditingController oldpasswordController = TextEditingController();
   final _form = GlobalKey<FormState>();
 
-  bool successful = true;
   String err = "";
   bool validated() {
     return _form.currentState!.validate();
@@ -37,7 +36,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       });
 
       if (!validated()) {
-        successful = true;
         return err = "Fill the inputs correctly";
       }
 
@@ -52,7 +50,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     } on HttpException catch (error) {
       setState(() {
         err = error.message;
-        successful = true;
       });
     }
   }
@@ -100,7 +97,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(50, 60, 50, 0),
+            padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
             child: Form(
               key: _form,
               child: Column(
