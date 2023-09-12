@@ -40,4 +40,17 @@ class HouseController extends Controller
             ], 422);
         }
     }
+
+    public function getHouses()
+    {
+        $user = Auth::user();
+
+        $houses = House::where('owner_id', $user->id)->get();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Houses retrieved successfully',
+            'houses' => $houses,
+        ]);
+    }
 }
