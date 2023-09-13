@@ -102,7 +102,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                             },
                           )
-                        : const HouseEmptyStateScreen(),
+                        : HouseEmptyStateScreen(
+                            houseId: house.id,
+                          ),
                   Center(
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
