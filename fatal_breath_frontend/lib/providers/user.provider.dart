@@ -51,7 +51,7 @@ class UserProvider with ChangeNotifier {
       image = response['user']["profile_image"];
 
       if (response['user']["role"] == 1) {
-        userType = "Admin";
+        userType = "Manager";
       } else {
         userType = "User";
       }
