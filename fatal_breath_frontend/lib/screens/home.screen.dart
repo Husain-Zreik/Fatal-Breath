@@ -1,5 +1,6 @@
 import 'package:fatal_breath_frontend/providers/house.provider.dart';
 import 'package:fatal_breath_frontend/screens/empty/home.empty.state.screen.dart';
+import 'package:fatal_breath_frontend/screens/empty/house.empty.state.screen.dart';
 import 'package:fatal_breath_frontend/screens/home/add.house.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/utils/text.title.dart';
@@ -91,9 +92,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 physics: const BouncingScrollPhysics(),
                 children: [
                   for (final house in houses!)
-                    Center(
-                      child: Text('Content for ${house.name} Goes Here'),
-                    ),
+                    house.rooms != null && house.rooms!.isNotEmpty
+                        ? ListView.builder(
+                            itemCount: house.rooms!.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final room = house.rooms![index];
+                              return ListTile(
+                                title: Text(room.name),
+                              );
+                            },
+                          )
+                        : const HouseEmptyStateScreen(),
                   Center(
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
