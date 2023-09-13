@@ -35,7 +35,6 @@ return new class extends Migration
             $table->foreign('house_id')->references('id')->on('houses')->cascadeOnDelete();
             $table->enum('type', ['kitchen', 'bedroom', 'livingroom', 'bathroom']);
             $table->string('name');
-            $table->string('size');
             $table->timestamps();
         });
     }
