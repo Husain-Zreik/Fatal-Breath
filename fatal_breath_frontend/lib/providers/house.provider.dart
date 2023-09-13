@@ -8,12 +8,7 @@ import 'package:fatal_breath_frontend/models/house.model.dart';
 import 'package:flutter/material.dart';
 
 class HouseProvider with ChangeNotifier {
-  String? houseName;
   List? adminHouses;
-
-  String? get getHouseName {
-    return houseName;
-  }
 
   List? get getHouses {
     return adminHouses;
@@ -33,7 +28,6 @@ class HouseProvider with ChangeNotifier {
 
       print(response);
       await getAdminHouses();
-      houseName = response['house']['name'];
 
       notifyListeners();
     } catch (e) {
