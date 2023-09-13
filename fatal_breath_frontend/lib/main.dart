@@ -1,6 +1,7 @@
 import 'package:fatal_breath_frontend/providers/auth.provider.dart';
 import 'package:fatal_breath_frontend/providers/house.provider.dart';
 import 'package:fatal_breath_frontend/providers/user.provider.dart';
+import 'package:fatal_breath_frontend/screens/empty/home.empty.state.screen.dart';
 import 'package:fatal_breath_frontend/screens/home.screen.dart';
 import 'package:fatal_breath_frontend/screens/login.screen.dart';
 import 'package:fatal_breath_frontend/screens/main.screen.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
           "/splash": (context) => const SplashScreen(),
           "/login": (context) => const LoginScreen(),
           "/signup": (context) => const SignUpScreen(),
+          "/home_emptyState": (context) => const HomeEmptyStateScreen(),
         },
         getPages: [
           GetPage(name: '/splash', page: () => const SplashScreen()),
@@ -48,6 +50,9 @@ class MyApp extends StatelessWidget {
           GetPage(name: '/signup', page: () => const SignUpScreen()),
           GetPage(name: '/main', page: () => const MainScreen()),
           GetPage(name: '/home', page: () => const HomeScreen()),
+          GetPage(
+              name: '/home_emptyState',
+              page: () => const HomeEmptyStateScreen()),
         ],
       ),
     );
