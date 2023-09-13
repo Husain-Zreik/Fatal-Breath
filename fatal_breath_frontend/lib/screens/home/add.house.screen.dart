@@ -1,8 +1,7 @@
 import 'dart:io';
 
-import 'package:fatal_breath_frontend/models/country.modal.dart';
+import 'package:fatal_breath_frontend/models/country.model.dart';
 import 'package:fatal_breath_frontend/providers/house.provider.dart';
-import 'package:fatal_breath_frontend/screens/home.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/utils/text.error.dart';
 import 'package:fatal_breath_frontend/widgets/button.global.dart';
@@ -53,8 +52,7 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
       await Provider.of<HouseProvider>(context, listen: false).getAdminHouses();
 
       //Navigation
-      Get.to(() => const HomeScreen());
-      // Get.back();
+      Get.back();
     } on HttpException catch (error) {
       setState(() {
         err = error.message;

@@ -67,7 +67,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         successful = true;
         return err = "Fill the inputs correctly";
       }
-      print("before");
       //Try signing up
       await Provider.of<UserProvider>(context, listen: false).updateProfile(
         name,
@@ -76,7 +75,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         profileImage,
         context,
       );
-      print("after");
 
       //Navigation
       Get.back();
