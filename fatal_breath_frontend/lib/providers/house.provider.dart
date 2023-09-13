@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:fatal_breath_frontend/config/remote.config.dart';
 import 'package:fatal_breath_frontend/enums/request.methods.dart';
+import 'package:fatal_breath_frontend/models/house.model.dart';
 import 'package:flutter/material.dart';
 
 class HouseProvider with ChangeNotifier {
@@ -27,7 +28,10 @@ class HouseProvider with ChangeNotifier {
           route: "/api/user/admin/add-house",
           method: RequestMethods.POST,
           load: body);
-      houseName = response['house']["name"];
+
+      print(response);
+      await getAdminHouses();
+      houseName = response['house']['name'];
 
       notifyListeners();
     } catch (e) {
@@ -43,16 +47,15 @@ class HouseProvider with ChangeNotifier {
       );
 
       final List<dynamic> houseList = response['houses'];
-      List<Map<String, dynamic>> houses = [];
+      List<House> houses = [];
 
       for (var houseData in houseList) {
-        Map<String, dynamic> house = {
-          'name': houseData['name'],
-          'city': houseData['city'],
-          'country': houseData['country'],
-        };
+        House house = House.fromJson(houseData);
         houses.add(house);
       }
+
+      print(response);
+      print('houses before: ${houses.toString()}');
 
       adminHouses = houses;
 
