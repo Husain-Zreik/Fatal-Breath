@@ -18,14 +18,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-
-    houses = Provider.of<HouseProvider>(context, listen: false).getHouses!;
+    Provider.of<HouseProvider>(context, listen: false).getAdminHouses();
   }
 
   @override
   Widget build(BuildContext context) {
+    houses = Provider.of<HouseProvider>(context).getHouses ?? [];
     return DefaultTabController(
-      length: houses == null ? 0 : houses!.length,
+      length: houses!.isEmpty ? 0 : houses!.length,
       child: Scaffold(
         backgroundColor: GlobalColors.bgColor,
         appBar: AppBar(
@@ -51,25 +51,25 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          bottom: houses == null
+          bottom: houses!.isEmpty
               ? null
               : TabBar(
                   isScrollable: true,
                   labelColor: Colors.black,
                   unselectedLabelColor: Colors.grey,
                   tabs: [
-                    for (final house in houses!) Tab(text: house['name']),
+                    for (final house in houses!) Tab(text: house.name),
                   ],
                 ),
         ),
-        body: houses == null
+        body: houses!.isEmpty
             ? const HomeEmptyStateScreen()
             : TabBarView(
                 physics: const BouncingScrollPhysics(),
                 children: [
                   for (final house in houses!)
                     Center(
-                      child: Text('Content for ${house['name']} Goes Here'),
+                      child: Text('Content for ${house.name} Goes Here'),
                     ),
                 ],
               ),
