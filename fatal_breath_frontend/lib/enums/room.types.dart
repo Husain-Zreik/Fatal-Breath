@@ -1,3 +1,8 @@
-// ignore_for_file: constant_identifier_names
-
-enum RoomTypes { Kitchen, Bedroom, Livingroom, Bathroom }
+class RoomTypes {
+  static final List<String> roomTypes = [
+    'Kitchen',
+    'Bedroom',
+    'Livingroom',
+    'Bathroom',
+  ];
+}
