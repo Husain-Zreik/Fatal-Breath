@@ -1,5 +1,6 @@
 import 'package:fatal_breath_frontend/providers/auth.provider.dart';
 import 'package:fatal_breath_frontend/providers/house.provider.dart';
+import 'package:fatal_breath_frontend/providers/room.provider.dart';
 import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/screens/empty/home.empty.state.screen.dart';
 import 'package:fatal_breath_frontend/screens/home.screen.dart';
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<HouseProvider>(
           create: (context) => HouseProvider(),
+        ),
+        ChangeNotifierProvider<RoomProvider>(
+          create: (context) => RoomProvider(),
         ),
       ],
       child: GetMaterialApp(
