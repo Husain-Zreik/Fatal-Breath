@@ -2,6 +2,7 @@ import 'package:fatal_breath_frontend/providers/house.provider.dart';
 import 'package:fatal_breath_frontend/screens/empty/home.empty.state.screen.dart';
 import 'package:fatal_breath_frontend/screens/empty/house.empty.state.screen.dart';
 import 'package:fatal_breath_frontend/screens/home/add.house.screen.dart';
+import 'package:fatal_breath_frontend/screens/home/add.room.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/utils/text.title.dart';
 import 'package:fatal_breath_frontend/widgets/button.global.dart';
@@ -72,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       indicatorColor: Colors.transparent,
                       physics: const BouncingScrollPhysics(),
                       labelColor: Colors.white,
-                      unselectedLabelColor: Colors.grey[400],
+                      unselectedLabelColor: Colors.grey[500],
                       tabs: [
                         for (final house in houses!)
                           Tab(
@@ -93,23 +94,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   for (final house in houses!)
                     house.rooms != null && house.rooms!.isNotEmpty
-                        ?
-                        // ListView.builder(
-                        //     itemCount: house.rooms!.length,
-                        //     itemBuilder: (BuildContext context, int index) {
-                        //       final room = house.rooms![index];
-                        //       return ListTile(
-                        //         title: Text(room.name),
-                        //       );
-                        //     },
-                        //   )
-                        SingleChildScrollView(
+                        ? SingleChildScrollView(
                             child: Column(children: [
                             for (final room in house.rooms!)
                               Container(
-                                margin: const EdgeInsets.symmetric(
-                                    vertical: 20, horizontal: 30),
-                                height: 100,
+                                margin:
+                                    const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                                height: 80,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: Colors.white,
@@ -122,28 +113,106 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ],
                                 ),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Image.asset(
-                                        'assets/images/' + room.type + '.png',
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 60,
+                                            child: Image.asset(
+                                              // ignore: prefer_interpolation_to_compose_strings
+                                              'assets/images/' +
+                                                  room.type +
+                                                  '.png',
+                                              scale: 1.2,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(10),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(room.name,
+                                                    style: GoogleFonts.poppins(
+                                                      color: Colors.black,
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    )),
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Text("Oxygen : 30%",
+                                                    style: GoogleFonts.poppins(
+                                                      color: Colors.black,
+                                                      fontSize: 10,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ))
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(10),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(room.name),
+                                      Container(
+                                        height: 25,
+                                        width: 70,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(40),
+                                          color: room.type == 'Kitchen'
+                                              ? Colors.red
+                                              : room.type == 'Bedroom'
+                                                  ? Colors.orange
+                                                  : Colors.green,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              spreadRadius: 2,
+                                              blurRadius: 5,
+                                              offset: const Offset(0, 3),
+                                            ),
                                           ],
                                         ),
-                                      ),
-                                    ),
-                                  ],
+                                        child: Center(
+                                          child: Text(
+                                              room.type == 'Kitchen'
+                                                  ? "Dangerous"
+                                                  : room.type == 'Bedroom'
+                                                      ? "Sensetive"
+                                                      : "Normal",
+                                              style: GoogleFonts.poppins(
+                                                color: Colors.white,
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w500,
+                                              )),
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              )
+                              ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 40, vertical: 20),
+                              child: ButtonGlobal(
+                                  icon: Icons.add,
+                                  bgColor: GlobalColors.mainColor,
+                                  textColor: Colors.white,
+                                  onBtnPressed: () {
+                                    Get.to(
+                                        () => AddRoomScreen(houseId: house.id));
+                                  }),
+                            ),
                           ]))
                         : HouseEmptyStateScreen(
                             houseId: house.id,
