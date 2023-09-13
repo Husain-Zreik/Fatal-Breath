@@ -7,6 +7,7 @@ import 'package:fatal_breath_frontend/screens/settings.screen.dart';
 import 'package:fatal_breath_frontend/screens/users.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttericon/fontelico_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -92,11 +93,18 @@ class _MainScreenState extends State<MainScreen> {
         },
         items: [
           BottomNavigationBarItem(
-              icon: Icon(
-                _selectedindex == 0 ? Icons.home : Icons.home,
-                color: Colors.white,
-                size: 30,
-              ),
+              icon: _selectedindex == 0
+                  ? Icon(
+                      Icons.home,
+                      color: Colors.white,
+                      size: 30,
+                    )
+                  : SvgPicture.asset(
+                      "assets/images/home_icon.svg",
+                      height: 30,
+                      width: 30,
+                      color: Colors.white,
+                    ),
               label: ''),
           BottomNavigationBarItem(
               icon: Icon(
