@@ -6,8 +6,8 @@ import 'package:fatal_breath_frontend/config/remote.config.dart';
 import 'package:fatal_breath_frontend/enums/request.methods.dart';
 import 'package:flutter/material.dart';
 
-class HouseProvider with ChangeNotifier {
-  Future createHouse(name, type, house, context) async {
+class RoomProvider with ChangeNotifier {
+  Future createRoom(name, type, house, context) async {
     try {
       final body = {
         'name': name,
