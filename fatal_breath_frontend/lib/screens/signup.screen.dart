@@ -29,7 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final _form = GlobalKey<FormState>();
   bool successful = true;
-  String groupValue = '1';
+  String groupValue = '0';
   String err = "";
   bool validated() {
     return _form.currentState!.validate();
@@ -229,7 +229,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       child: Row(
                                         children: [
                                           Radio(
-                                              value: '1',
+                                              value: '0',
                                               groupValue: groupValue,
                                               onChanged: (value) {
                                                 setState(() {
@@ -245,7 +245,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             ),
                                           ),
                                           Radio(
-                                              value: '0',
+                                              value: '1',
                                               groupValue: groupValue,
                                               onChanged: (value) {
                                                 setState(() {
@@ -253,7 +253,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                 });
                                               }),
                                           Text(
-                                            'Admin',
+                                            'Manager',
                                             style: GoogleFonts.poppins(
                                               color: Colors.black,
                                               fontSize: 14,
