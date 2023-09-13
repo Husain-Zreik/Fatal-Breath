@@ -42,7 +42,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function houses()
     {
-        return $this->belongsToMany(House::class, 'users_houses');
+        return $this->belongsToMany(House::class, 'users_houses', 'user_id', 'house_id');
     }
 
     public function chatMessages()

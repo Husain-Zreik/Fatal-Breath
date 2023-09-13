@@ -30,8 +30,9 @@ class House extends Model
 
     public function members()
     {
-        return $this->belongsToMany(User::class, 'users_houses');
+        return $this->belongsToMany(User::class, 'users_houses', 'house_id', 'user_id');
     }
+
 
     public function membershipRequests()
     {
