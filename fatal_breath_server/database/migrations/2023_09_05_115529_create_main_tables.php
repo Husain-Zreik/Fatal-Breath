@@ -33,7 +33,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('house_id');
             $table->foreign('house_id')->references('id')->on('houses')->cascadeOnDelete();
-            $table->enum('type', ['kitchen', 'bedroom', 'livingroom', 'bathroom']);
+            $table->enum('type', ['Kitchen', 'Bedroom', 'Livingroom', 'Bathroom']);
             $table->string('name');
             $table->timestamps();
         });
