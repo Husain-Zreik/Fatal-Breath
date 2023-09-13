@@ -62,7 +62,7 @@ class UserController extends Controller
             $user->username = $request->input('username');
             $user->email = $request->input('email');
 
-            if ($request->has('profile_image')) {
+            if ($request->has('profile_image') && $request->input('profile_image') != null) {
 
                 $encodedImage = $request->input('profile_image');
 
