@@ -16,6 +16,7 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
 
     Route::group(['prefix' => 'admin',  'middleware' => 'auth.admin'], function () {
+        Route::post("/add-room", [HouseController::class, "createRoom"]);
         Route::post("/add-house", [HouseController::class, "createHouse"]);
         Route::get("/get-houses", [HouseController::class, "getHouses"]);
     });
