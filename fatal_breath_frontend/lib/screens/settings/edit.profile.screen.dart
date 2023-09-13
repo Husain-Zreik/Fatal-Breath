@@ -29,7 +29,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final TextEditingController nameController = TextEditingController(text: "");
   String currentImageLink = "null";
 
-  String encodedImage = "";
+  String? encodedImage;
   Uint8List? decoded;
   File? selectedImage;
 
@@ -43,6 +43,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Future inputImage() async {
     try {
       final imageInfo = await imagePicker();
+      if (imageInfo == null) {
+        return null;
+      }
       encodedImage = imageInfo["encoded"];
 
       setState(() {
