@@ -1,5 +1,5 @@
 import 'package:fatal_breath_frontend/providers/house.provider.dart';
-import 'package:fatal_breath_frontend/screens/empty/home.empty.state.scree.dart';
+import 'package:fatal_breath_frontend/screens/empty/home.empty.state.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
         ),
         body: houses == null
-            ? const HomeEmptyStateScree()
+            ? const HomeEmptyStateScreen()
             : TabBarView(
                 physics: const BouncingScrollPhysics(),
                 children: [

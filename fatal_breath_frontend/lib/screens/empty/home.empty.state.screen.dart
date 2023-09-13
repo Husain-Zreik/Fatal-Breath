@@ -6,8 +6,8 @@ import 'package:fatal_breath_frontend/widgets/button.global.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeEmptyStateScree extends StatelessWidget {
-  const HomeEmptyStateScree({Key? key}) : super(key: key);
+class HomeEmptyStateScreen extends StatelessWidget {
+  const HomeEmptyStateScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
