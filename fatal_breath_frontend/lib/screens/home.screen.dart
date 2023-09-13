@@ -19,13 +19,13 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
 
-    houses = Provider.of<HouseProvider>(context, listen: false).getAdminHouses!;
+    houses = Provider.of<HouseProvider>(context, listen: false).getHouses!;
   }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 5,
+      length: houses == null ? 0 : houses!.length,
       child: Scaffold(
         backgroundColor: GlobalColors.bgColor,
         appBar: AppBar(
@@ -53,35 +53,24 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           bottom: houses == null
               ? null
-              : const TabBar(
+              : TabBar(
+                  isScrollable: true,
+                  labelColor: Colors.black,
+                  unselectedLabelColor: Colors.grey,
                   tabs: [
-                    Tab(text: 'Created Houses'),
-                    Tab(text: 'Other Tab'),
-                    Tab(text: 'Other Tab'),
-                    Tab(text: 'Other Tab'),
-                    Tab(text: 'Other Tab'),
+                    for (final house in houses!) Tab(text: house['name']),
                   ],
                 ),
         ),
         body: houses == null
             ? const HomeEmptyStateScree()
-            : const TabBarView(
+            : TabBarView(
+                physics: const BouncingScrollPhysics(),
                 children: [
-                  Center(
-                    child: Text('List of Created Houses Goes Here'),
-                  ),
-                  Center(
-                    child: Text('Other tabs Go Here'),
-                  ),
-                  Center(
-                    child: Text('Other tabs Go Here'),
-                  ),
-                  Center(
-                    child: Text('Other tabs Go Here'),
-                  ),
-                  Center(
-                    child: Text('Other tabs Go Here'),
-                  ),
+                  for (final house in houses!)
+                    Center(
+                      child: Text('Content for ${house['name']} Goes Here'),
+                    ),
                 ],
               ),
       ),

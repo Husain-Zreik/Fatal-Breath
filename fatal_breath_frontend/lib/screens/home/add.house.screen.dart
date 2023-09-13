@@ -50,7 +50,7 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
       await Provider.of<HouseProvider>(context, listen: false)
           .createHouse(name, country, city, context);
 
-      await Provider.of<HouseProvider>(context, listen: false).getHouses();
+      await Provider.of<HouseProvider>(context, listen: false).getAdminHouses();
 
       //Navigation
       Get.to(() => const HomeScreen());

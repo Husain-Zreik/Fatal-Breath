@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       await Provider.of<UserProvider>(context, listen: false).getUser(context);
 
-      await Provider.of<HouseProvider>(context, listen: false).getHouses();
+      await Provider.of<HouseProvider>(context, listen: false).getAdminHouses();
 
       Get.to(() => const MainScreen());
     } on HttpException catch (error) {
