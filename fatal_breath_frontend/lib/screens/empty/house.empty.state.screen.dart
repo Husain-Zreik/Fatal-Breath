@@ -7,7 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HouseEmptyStateScreen extends StatelessWidget {
-  const HouseEmptyStateScreen({Key? key}) : super(key: key);
+  const HouseEmptyStateScreen({Key? key, required this.houseId})
+      : super(key: key);
+
+  final int houseId;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,9 @@ class HouseEmptyStateScreen extends StatelessWidget {
               textColor: Colors.white,
               icon: Icons.add,
               onBtnPressed: () {
-                Get.to(() => const AddRoomScreen());
+                Get.to(() => AddRoomScreen(
+                      houseId: houseId,
+                    ));
               },
             )
           ],
