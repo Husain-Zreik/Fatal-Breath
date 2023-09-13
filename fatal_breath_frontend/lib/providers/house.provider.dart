@@ -51,7 +51,6 @@ class HouseProvider with ChangeNotifier {
       }
 
       print(response);
-      print('houses before: ${houses.toString()}');
 
       adminHouses = houses;
 
