@@ -1,7 +1,11 @@
 import 'package:fatal_breath_frontend/providers/house.provider.dart';
 import 'package:fatal_breath_frontend/screens/empty/home.empty.state.screen.dart';
+import 'package:fatal_breath_frontend/screens/home/add.house.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
+import 'package:fatal_breath_frontend/utils/text.title.dart';
+import 'package:fatal_breath_frontend/widgets/button.global.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     houses = Provider.of<HouseProvider>(context).getHouses ?? [];
     return DefaultTabController(
-      length: houses!.isEmpty ? 0 : houses!.length,
+      length: houses!.isEmpty ? 0 : houses!.length + 1,
       child: Scaffold(
         backgroundColor: GlobalColors.bgColor,
         appBar: AppBar(
@@ -56,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
               : PreferredSize(
                   preferredSize: const Size.fromHeight(70),
                   child: Container(
-                    margin: const EdgeInsets.only(left: 20, right: 20),
+                    margin: const EdgeInsets.only(left: 10, right: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: GlobalColors.mainColor,
@@ -73,6 +77,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           Tab(
                             text: house.name,
                           ),
+                        const Tab(
+                          icon: Icon(Icons.add),
+                        )
                       ],
                     ),
                   ),
@@ -87,6 +94,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     Center(
                       child: Text('Content for ${house.name} Goes Here'),
                     ),
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const TextTitle(text: "Add House"),
+                          const SizedBox(height: 20),
+                          ButtonGlobal(
+                            bgColor: GlobalColors.mainColor,
+                            textColor: Colors.white,
+                            icon: Icons.add,
+                            onBtnPressed: () {
+                              Get.to(() => const AddHouseScreen());
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               ),
       ),
