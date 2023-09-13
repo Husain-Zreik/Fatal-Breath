@@ -21,13 +21,19 @@ class House {
   });
 
   factory House.fromJson(Map<String, dynamic> json) {
-    List<Room> rooms = (json['rooms'] as List<dynamic>)
-        .map((roomJson) => Room.fromJson(roomJson))
-        .toList();
+    List<Room>? rooms;
+    if (json['rooms'] != null && json['rooms'].isNotEmpty) {
+      rooms = (json['rooms'] as List<dynamic>)
+          .map((roomJson) => Room.fromJson(roomJson))
+          .toList();
+    }
 
-    List<User> members = (json['members'] as List<dynamic>)
-        .map((memberJson) => User.fromJson(memberJson))
-        .toList();
+    List<User>? members;
+    if (json['members'] != null && json['members'].isNotEmpty) {
+      members = (json['members'] as List<dynamic>)
+          .map((memberJson) => User.fromJson(memberJson))
+          .toList();
+    }
 
     return House(
       id: json['id'],
