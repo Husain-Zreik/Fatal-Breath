@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MembershipRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -136,6 +137,17 @@ class UserController extends Controller
             ], 422);
         }
     }
+
+
+    public function getRequests($houseId)
+    {
+        $pendingRequests = MembershipRequest::where('house_id', $houseId)
+            ->where('status', 'Pending')
+            ->get();
+
+        return response()->json(['pending_requests' => $pendingRequests]);
+    }
+
 
     public function searchUsers(Request $request)
     {
