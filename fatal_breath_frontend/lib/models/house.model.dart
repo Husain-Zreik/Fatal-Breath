@@ -9,6 +9,7 @@ class House {
   final String country;
   final List<Room>? rooms;
   final List<User>? members;
+  final List<User>? requests;
 
   House({
     required this.id,
@@ -18,6 +19,7 @@ class House {
     required this.country,
     this.rooms,
     this.members,
+    this.requests,
   });
 
   factory House.fromJson(Map<String, dynamic> json) {
@@ -35,6 +37,15 @@ class House {
           .toList();
     }
 
+    List<User>? requests;
+    if (json['requests'] != null && json['requests'].isNotEmpty) {
+      requests = (json['requests'] as List<dynamic>).map((requestJson) {
+        final userJson = requestJson['user'];
+        final user = User.fromJson(userJson);
+        return user;
+      }).toList();
+    }
+
     return House(
       id: json['id'],
       name: json['name'],
@@ -43,6 +54,7 @@ class House {
       country: json['country'],
       rooms: rooms,
       members: members,
+      requests: requests,
     );
   }
 }
