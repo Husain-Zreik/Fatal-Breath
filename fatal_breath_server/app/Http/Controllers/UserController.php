@@ -140,13 +140,18 @@ class UserController extends Controller
     }
 
 
-    public function getRequests($houseId)
+    public function getRequestsAndMembers($houseId)
     {
         $pendingRequests = MembershipRequest::where('house_id', $houseId)
             ->where('status', 'Pending')
             ->get();
 
-        return response()->json(['pending_requests' => $pendingRequests]);
+        $houseMembers = UserHouse::where('house_id', $houseId)->get();
+
+        return response()->json([
+            'pending_requests' => $pendingRequests,
+            'house_members' => $houseMembers
+        ]);
     }
 
     public function processRequest(Request $request)
