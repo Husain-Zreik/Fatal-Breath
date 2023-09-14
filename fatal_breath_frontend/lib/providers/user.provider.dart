@@ -15,6 +15,7 @@ class UserProvider with ChangeNotifier {
   String? email;
   String? image;
   String? userType;
+  List<User> searchList = [];
 
   String? get getName {
     return name;
@@ -146,7 +147,9 @@ class UserProvider with ChangeNotifier {
           users.add(user);
         }
 
-        return users;
+        searchList = users;
+        print(users);
+        notifyListeners();
       } else {
         return [];
       }
@@ -162,6 +165,11 @@ class UserProvider with ChangeNotifier {
         throw HttpException('$e');
       }
     }
+  }
+
+  void clearSearchList() {
+    searchList.clear();
+    notifyListeners();
   }
 
   Future getUsers(houseId, context) async {
