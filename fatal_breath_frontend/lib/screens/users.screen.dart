@@ -1,16 +1,8 @@
 import 'package:fatal_breath_frontend/providers/house.provider.dart';
-import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/screens/empty/home.empty.state.screen.dart';
-import 'package:fatal_breath_frontend/screens/empty/house.empty.state.screen.dart';
-import 'package:fatal_breath_frontend/screens/home/add.house.screen.dart';
-import 'package:fatal_breath_frontend/screens/home/add.room.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/utils/text.note.dart';
-import 'package:fatal_breath_frontend/utils/text.title.dart';
-import 'package:fatal_breath_frontend/widgets/button.global.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
