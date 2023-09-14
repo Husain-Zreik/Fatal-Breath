@@ -136,4 +136,23 @@ class UserController extends Controller
             ], 422);
         }
     }
+
+    public function searchUsers(Request $request)
+    {
+        $houseId = $request->query('house_id');
+        $username = $request->query('username');
+
+        $nonHouseMembers = User::whereDoesntHave('houses', function ($query) use ($houseId) {
+            $query->where('house_id', $houseId);
+        })->where('username', 'LIKE', '%' . $username . '%')->get();
+
+        $joinRequests = User::whereHas('joinRequests', function ($query) use ($houseId) {
+            $query->where('house_id', $houseId);
+        })->where('username', 'LIKE', '%' . $username . '%')->get();
+
+        return response()->json([
+            'non_house_members' => $nonHouseMembers,
+            'join_requests' => $joinRequests,
+        ]);
+    }
 }
