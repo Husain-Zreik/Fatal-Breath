@@ -200,30 +200,33 @@ class _UsersScreenState extends State<UsersScreen> {
                                             ),
                                           ],
                                         ),
-                                        Container(
-                                          height: 25,
-                                          width: 70,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(40),
-                                            color: Colors.red,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.5),
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                                offset: const Offset(0, 3),
-                                              ),
-                                            ],
-                                          ),
-                                          child: Center(
-                                            child: Text("Delete",
-                                                style: GoogleFonts.poppins(
-                                                  color: Colors.white,
-                                                  fontSize: 10,
-                                                  fontWeight: FontWeight.w500,
-                                                )),
+                                        InkWell(
+                                          onTap: () {},
+                                          child: Container(
+                                            height: 25,
+                                            width: 70,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(40),
+                                              color: Colors.red,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: const Offset(0, 3),
+                                                ),
+                                              ],
+                                            ),
+                                            child: Center(
+                                              child: Text("Remove",
+                                                  style: GoogleFonts.poppins(
+                                                    color: Colors.white,
+                                                    fontSize: 10,
+                                                    fontWeight: FontWeight.w500,
+                                                  )),
+                                            ),
                                           ),
                                         )
                                       ],
@@ -314,31 +317,78 @@ class _UsersScreenState extends State<UsersScreen> {
                                             ),
                                           ],
                                         ),
-                                        Container(
-                                          height: 25,
-                                          width: 70,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(40),
-                                            color: Colors.red,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.5),
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                                offset: const Offset(0, 3),
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            InkWell(
+                                              onTap: () {},
+                                              child: Container(
+                                                height: 25,
+                                                width: 70,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(40),
+                                                  color: Colors.blue,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.grey
+                                                          .withOpacity(0.5),
+                                                      spreadRadius: 2,
+                                                      blurRadius: 5,
+                                                      offset:
+                                                          const Offset(0, 3),
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: Center(
+                                                  child: Text("Accept",
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        color: Colors.white,
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      )),
+                                                ),
                                               ),
-                                            ],
-                                          ),
-                                          child: Center(
-                                            child: Text("Delete",
-                                                style: GoogleFonts.poppins(
-                                                  color: Colors.white,
-                                                  fontSize: 10,
-                                                  fontWeight: FontWeight.w500,
-                                                )),
-                                          ),
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            InkWell(
+                                              onTap: () {},
+                                              child: Container(
+                                                height: 25,
+                                                width: 70,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(40),
+                                                  color: Colors.red,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.grey
+                                                          .withOpacity(0.5),
+                                                      spreadRadius: 2,
+                                                      blurRadius: 5,
+                                                      offset:
+                                                          const Offset(0, 3),
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: Center(
+                                                  child: Text("Decline",
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        color: Colors.white,
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      )),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         )
                                       ],
                                     ),
@@ -347,7 +397,13 @@ class _UsersScreenState extends State<UsersScreen> {
                             ],
                           )
                         else
-                          const TextNote(text: "No members in this house !")
+                          const Padding(
+                            padding:
+                                EdgeInsets.only(top: 20, right: 20, left: 23),
+                            child: TextNote(
+                                text:
+                                    "No requests or members in this house !\nSearch for members and invite them by typing the username of them in the search bar."),
+                          )
                       ]),
                     ))
                 ],
