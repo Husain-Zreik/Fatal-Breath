@@ -19,6 +19,7 @@ class _UsersScreenState extends State<UsersScreen> {
   Map<int, TextEditingController> searchControllers = {};
   Map<int, List> searchLists = {};
 
+  String? image;
   List? houses;
   List? searchList = [];
 
@@ -31,6 +32,7 @@ class _UsersScreenState extends State<UsersScreen> {
   @override
   Widget build(BuildContext context) {
     houses = Provider.of<HouseProvider>(context).getHouses ?? [];
+    image = Provider.of<UserProvider>(context, listen: false).getImage;
     for (final house in houses!) {
       searchControllers[house.id] = TextEditingController();
     }
@@ -61,6 +63,31 @@ class _UsersScreenState extends State<UsersScreen> {
               ),
             ),
           ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(top: 15, bottom: 5, right: 10),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: Container(
+                  width: 60,
+                  // height: 15,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
+                  child: image == null
+                      ? Image.asset(
+                          'assets/images/account_circle.png',
+                          fit: BoxFit.cover,
+                        )
+                      : Image.network(
+                          image!,
+                          fit: BoxFit.cover,
+                        ),
+                ),
+              ),
+            ),
+          ],
           bottom: houses!.isEmpty
               ? null
               : PreferredSize(
