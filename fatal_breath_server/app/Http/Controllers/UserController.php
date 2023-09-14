@@ -144,9 +144,12 @@ class UserController extends Controller
     {
         $pendingRequests = MembershipRequest::where('house_id', $houseId)
             ->where('status', 'Pending')
+            ->with('user')
             ->get();
 
-        $houseMembers = UserHouse::where('house_id', $houseId)->get();
+        $houseMembers = UserHouse::where('house_id', $houseId)
+            ->with('user')
+            ->get();
 
         return response()->json([
             'pending_requests' => $pendingRequests,
