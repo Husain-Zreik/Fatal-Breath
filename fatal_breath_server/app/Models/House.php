@@ -33,9 +33,8 @@ class House extends Model
         return $this->belongsToMany(User::class, 'users_houses', 'house_id', 'user_id');
     }
 
-
-    public function membershipRequests()
+    public function joinRequests()
     {
-        return $this->hasMany(MembershipRequest::class);
+        return $this->hasMany(MembershipRequest::class, 'user_id');
     }
 }
