@@ -69,7 +69,7 @@ class _MainScreenState extends State<MainScreen> {
                                   : "Settings",
                   style: GoogleFonts.poppins(
                     color: GlobalColors.mainColor,
-                    fontSize: 26,
+                    fontSize: 22,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -103,6 +103,7 @@ class _MainScreenState extends State<MainScreen> {
                       "assets/images/home_icon.svg",
                       height: 30,
                       width: 30,
+                      // ignore: deprecated_member_use
                       color: Colors.white,
                     ),
               label: ''),

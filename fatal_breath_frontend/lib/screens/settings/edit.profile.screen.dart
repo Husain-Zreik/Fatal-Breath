@@ -135,7 +135,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(50, 20, 50, 0),
+            padding: const EdgeInsets.fromLTRB(40, 20, 40, 0),
             child: Column(
               children: [
                 Stack(children: [

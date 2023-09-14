@@ -97,7 +97,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+            padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
             child: Form(
               key: _form,
               child: Column(
@@ -114,7 +114,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     validator: oldpasswordvalidator,
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   TextForm(
                     controller: passwordController,
@@ -125,7 +125,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     validator: passwordvalidator,
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   TextForm(
                     textInputType: TextInputType.text,
@@ -136,7 +136,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     validator: verifypasswordvalidator,
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 40,
                   ),
                   ButtonGlobal(
                       text: 'Save',
