@@ -16,10 +16,11 @@ class UsersScreen extends StatefulWidget {
 }
 
 class _UsersScreenState extends State<UsersScreen> {
-  final TextEditingController searchController = TextEditingController();
+  Map<int, TextEditingController> searchControllers = {};
+  Map<int, List> searchLists = {};
 
   List? houses;
-  List? searchList;
+  List? searchList = [];
 
   @override
   void initState() {
@@ -30,6 +31,9 @@ class _UsersScreenState extends State<UsersScreen> {
   @override
   Widget build(BuildContext context) {
     houses = Provider.of<HouseProvider>(context).getHouses ?? [];
+    for (final house in houses!) {
+      searchControllers[house.id] = TextEditingController();
+    }
     return DefaultTabController(
       length: houses!.isEmpty ? 0 : houses!.length,
       child: Scaffold(
@@ -98,7 +102,8 @@ class _UsersScreenState extends State<UsersScreen> {
                           margin: const EdgeInsets.fromLTRB(20, 20, 20, 5),
                           height: 50,
                           child: TextField(
-                            controller: searchController,
+                            keyboardType: TextInputType.text,
+                            controller: searchControllers[house.id],
                             decoration: InputDecoration(
                               hintText: 'Search users...',
                               prefixIcon: Icon(
@@ -119,13 +124,34 @@ class _UsersScreenState extends State<UsersScreen> {
                               ),
                             ),
                             onChanged: (value) {
-                              String searchTerm = searchController.text;
+                              String searchTerm =
+                                  searchControllers[house.id]!.text;
                               if (searchTerm.isNotEmpty) {
                                 Provider.of<UserProvider>(context,
                                         listen: false)
                                     .usernameSearch(
                                         searchTerm, house.id, context);
+                                searchList = Provider.of<UserProvider>(context,
+                                        listen: false)
+                                    .getSearchList;
                               } else {
+                                Provider.of<UserProvider>(context,
+                                        listen: false)
+                                    .clearSearchList();
+                              }
+                            },
+                            onSubmitted: (value) {
+                              String searchTerm =
+                                  searchControllers[house.id]!.text;
+                              if (searchTerm.isNotEmpty) {
+                                setState(() {
+                                  searchLists[house.id] = searchList!;
+                                });
+                                print(searchList);
+                              } else {
+                                setState(() {
+                                  searchLists[house.id] = [];
+                                });
                                 Provider.of<UserProvider>(context,
                                         listen: false)
                                     .clearSearchList();
@@ -133,7 +159,129 @@ class _UsersScreenState extends State<UsersScreen> {
                             },
                           ),
                         ),
-                        if (house.members != null && house.members!.isNotEmpty)
+                        if (searchLists[house.id] != null &&
+                            searchLists[house.id]!.isNotEmpty)
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 22, top: 5),
+                                child: Text(
+                                  "Results :",
+                                  style: GoogleFonts.poppins(
+                                    color: GlobalColors.mainColor,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                              for (final user in searchLists[house.id]!)
+                                Container(
+                                  margin:
+                                      const EdgeInsets.fromLTRB(20, 5, 20, 0),
+                                  height: 80,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: const Offset(0, 3),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                                width: 60,
+                                                child: ProfileCircle(
+                                                  size: 60,
+                                                  imageLink: user
+                                                              .profileImage !=
+                                                          null
+                                                      ? 'http://192.168.1.5:8000/storage/profile_images/${user.username}.png'
+                                                      : null,
+                                                )),
+                                            Padding(
+                                              padding: const EdgeInsets.all(10),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(user.username,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        color: Colors.black,
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      )),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Text(user.name,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        color: Colors.black,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ))
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        InkWell(
+                                          onTap: () {},
+                                          child: Container(
+                                            height: 25,
+                                            width: 70,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(40),
+                                              color: Colors.blue,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: const Offset(0, 3),
+                                                ),
+                                              ],
+                                            ),
+                                            child: Center(
+                                              child: Text("Invite",
+                                                  style: GoogleFonts.poppins(
+                                                    color: Colors.white,
+                                                    fontSize: 10,
+                                                    fontWeight: FontWeight.w500,
+                                                  )),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                        if (house.members != null &&
+                            house.members!.isNotEmpty &&
+                            searchLists[house.id] == null)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -250,7 +398,8 @@ class _UsersScreenState extends State<UsersScreen> {
                             ],
                           ),
                         if (house.requests != null &&
-                            house.requests!.isNotEmpty)
+                            house.requests!.isNotEmpty &&
+                            searchLists[house.id] == null)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -410,13 +559,21 @@ class _UsersScreenState extends State<UsersScreen> {
                                 ),
                             ],
                           )
-                        else
+                        else if (house.requests == null &&
+                            house.members == null &&
+                            searchLists[house.id] == null)
                           const Padding(
                             padding:
                                 EdgeInsets.only(top: 20, right: 20, left: 23),
                             child: TextNote(
                                 text:
                                     "No requests or members in this house !\nSearch for members and invite them by typing the username of them in the search bar."),
+                          )
+                        else if (searchLists[house.id]!.isEmpty)
+                          const Padding(
+                            padding:
+                                EdgeInsets.only(top: 20, right: 20, left: 23),
+                            child: TextNote(text: "User Not Found."),
                           )
                       ]),
                     ))
