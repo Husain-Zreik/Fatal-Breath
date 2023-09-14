@@ -214,8 +214,6 @@ class UserController extends Controller
         return response()->json(['message' => 'Invitation sent successfully.']);
     }
 
-
-
     public function searchUsers(Request $request)
     {
         $request->validate([
@@ -226,25 +224,20 @@ class UserController extends Controller
         $username = $request->input('username');
         $houseId = $request->input('house_id');
 
-        $usersNotInHouse = User::whereNotIn('id', function ($query) use ($houseId) {
-            $query->select('user_id')
-                ->from('users_houses')
-                ->where('house_id', $houseId);
-        })
+        $adminUserIds = User::where('role', 1)->pluck('id')->toArray();
+
+        $houseMemberIds = UserHouse::where('house_id', $houseId)->pluck('user_id')->toArray();
+
+        $pendingRequestIds = MembershipRequest::where('house_id', $houseId)
+            ->where('status', 'Pending')
+            ->pluck('user_id')->toArray();
+
+        $usersNotInHouse = User::whereNotIn('id', $adminUserIds)
+            ->whereNotIn('id', $houseMemberIds)
+            ->whereNotIn('id', $pendingRequestIds)
             ->where('username', 'LIKE', "%$username%")
             ->get();
 
-        $usersNotPendingRequests = User::whereNotIn('id', function ($query) use ($houseId) {
-            $query->select('user_id')
-                ->from('membership_requests')
-                ->where('house_id', $houseId)
-                ->where('status', 'Pending');
-        })
-            ->where('username', 'LIKE', "%$username%")
-            ->get();
-
-        $searchResults = $usersNotInHouse->merge($usersNotPendingRequests)->unique();
-
-        return response()->json(['users' => $searchResults]);
+        return response()->json(['users' => $usersNotInHouse]);
     }
 }
