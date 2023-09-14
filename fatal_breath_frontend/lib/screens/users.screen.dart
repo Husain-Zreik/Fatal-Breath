@@ -120,103 +120,232 @@ class _UsersScreenState extends State<UsersScreen> {
                           ),
                         ),
                         if (house.members != null && house.members!.isNotEmpty)
-                          for (final member in house.members!)
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                              height: 80,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 2,
-                                    blurRadius: 5,
-                                    offset: const Offset(0, 3),
-                                  ),
-                                ],
-                              ),
-                              child: Padding(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                            width: 60,
-                                            child: ProfileCircle(
-                                              size: 60,
-                                              imageLink:
-                                                  'http://192.168.1.5:8000/storage/profile_images/${member.username}.png',
-                                            )),
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(member.username,
-                                                  style: GoogleFonts.poppins(
-                                                    color: Colors.black,
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.w500,
-                                                  )),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Text(member.name,
-                                                  style: GoogleFonts.poppins(
-                                                    color: Colors.black,
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w400,
-                                                  ))
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Container(
-                                      height: 25,
-                                      width: 70,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(40),
-                                        color: member.username == 'Kitchen'
-                                            ? Colors.red
-                                            : member.username == 'Bedroom'
-                                                ? Colors.orange
-                                                : Colors.green,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: const Offset(0, 3),
-                                          ),
-                                        ],
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                            member.username == 'Kitchen'
-                                                ? "Delete"
-                                                : member.username == 'Bedroom'
-                                                    ? "Sensetive"
-                                                    : "Normal",
-                                            style: GoogleFonts.poppins(
-                                              color: Colors.white,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w500,
-                                            )),
-                                      ),
-                                    )
-                                  ],
+                                    const EdgeInsets.only(left: 22, top: 5),
+                                child: Text(
+                                  "Members :",
+                                  style: GoogleFonts.poppins(
+                                    color: GlobalColors.mainColor,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
                               ),
-                            )
+                              for (final member in house.members!)
+                                Container(
+                                  margin:
+                                      const EdgeInsets.fromLTRB(20, 5, 20, 0),
+                                  height: 80,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: const Offset(0, 3),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                                width: 60,
+                                                child: ProfileCircle(
+                                                  size: 60,
+                                                  imageLink:
+                                                      'http://192.168.1.5:8000/storage/profile_images/${member.username}.png',
+                                                )),
+                                            Padding(
+                                              padding: const EdgeInsets.all(10),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(member.username,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        color: Colors.black,
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      )),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Text(member.name,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        color: Colors.black,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ))
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Container(
+                                          height: 25,
+                                          width: 70,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(40),
+                                            color: Colors.red,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.grey
+                                                    .withOpacity(0.5),
+                                                spreadRadius: 2,
+                                                blurRadius: 5,
+                                                offset: const Offset(0, 3),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Center(
+                                            child: Text("Delete",
+                                                style: GoogleFonts.poppins(
+                                                  color: Colors.white,
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w500,
+                                                )),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                        if (house.requests != null &&
+                            house.requests!.isNotEmpty)
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 22, top: 5),
+                                child: Text(
+                                  "Requests :",
+                                  style: GoogleFonts.poppins(
+                                    color: GlobalColors.mainColor,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                              for (final request in house.requests!)
+                                Container(
+                                  margin:
+                                      const EdgeInsets.fromLTRB(20, 5, 20, 0),
+                                  height: 80,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: const Offset(0, 3),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                                width: 60,
+                                                child: ProfileCircle(
+                                                  size: 60,
+                                                  imageLink:
+                                                      'http://192.168.1.5:8000/storage/profile_images/${request.username}.png',
+                                                )),
+                                            Padding(
+                                              padding: const EdgeInsets.all(10),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(request.username,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        color: Colors.black,
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      )),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Text(request.name,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        color: Colors.black,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ))
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Container(
+                                          height: 25,
+                                          width: 70,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(40),
+                                            color: Colors.red,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.grey
+                                                    .withOpacity(0.5),
+                                                spreadRadius: 2,
+                                                blurRadius: 5,
+                                                offset: const Offset(0, 3),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Center(
+                                            child: Text("Delete",
+                                                style: GoogleFonts.poppins(
+                                                  color: Colors.white,
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w500,
+                                                )),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          )
                         else
                           const TextNote(text: "No members in this house !")
                       ]),
