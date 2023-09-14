@@ -1,4 +1,5 @@
 import 'package:fatal_breath_frontend/providers/house.provider.dart';
+import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/screens/empty/home.empty.state.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/utils/text.note.dart';
@@ -15,7 +16,10 @@ class UsersScreen extends StatefulWidget {
 }
 
 class _UsersScreenState extends State<UsersScreen> {
+  final TextEditingController searchController = TextEditingController();
+
   List? houses;
+  List? searchList;
 
   @override
   void initState() {
@@ -94,6 +98,7 @@ class _UsersScreenState extends State<UsersScreen> {
                           margin: const EdgeInsets.fromLTRB(20, 20, 20, 5),
                           height: 50,
                           child: TextField(
+                            controller: searchController,
                             decoration: InputDecoration(
                               hintText: 'Search users...',
                               prefixIcon: Icon(
@@ -114,8 +119,17 @@ class _UsersScreenState extends State<UsersScreen> {
                               ),
                             ),
                             onChanged: (value) {
-                              // Handle the search logic here based on the input value (value).
-                              // You can filter the list of rooms or perform other search operations.
+                              String searchTerm = searchController.text;
+                              if (searchTerm.isNotEmpty) {
+                                Provider.of<UserProvider>(context,
+                                        listen: false)
+                                    .usernameSearch(
+                                        searchTerm, house.id, context);
+                              } else {
+                                Provider.of<UserProvider>(context,
+                                        listen: false)
+                                    .clearSearchList();
+                              }
                             },
                           ),
                         ),

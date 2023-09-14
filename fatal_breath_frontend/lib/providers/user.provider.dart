@@ -137,6 +137,7 @@ class UserProvider with ChangeNotifier {
         method: RequestMethods.POST,
         load: body,
       );
+      print(response);
 
       if (response.containsKey('users')) {
         final List<dynamic> usersList = response['users'];
@@ -148,7 +149,6 @@ class UserProvider with ChangeNotifier {
         }
 
         searchList = users;
-        print(users);
         notifyListeners();
       } else {
         return [];
