@@ -124,6 +124,46 @@ class UserProvider with ChangeNotifier {
     }
   }
 
+  Future usernameSearch(username, houseId, BuildContext context) async {
+    try {
+      final body = {
+        'house_id': houseId,
+        'username': username,
+      };
+
+      final response = await sendRequest(
+        route: "/api/user/admin/search",
+        method: RequestMethods.POST,
+        load: body,
+      );
+
+      if (response.containsKey('users')) {
+        final List<dynamic> usersList = response['users'];
+        List<User> users = [];
+
+        for (var userData in usersList) {
+          User user = User.fromJson(userData);
+          users.add(user);
+        }
+
+        return users;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      if (e is DioException) {
+        if (e.response?.statusCode == 401) {
+          throw const HttpException(
+              "Unauthorized. Please log in and try again.");
+        } else {
+          throw const HttpException("An unexpected error occurred.");
+        }
+      } else {
+        throw HttpException('$e');
+      }
+    }
+  }
+
   Future getUsers(houseId, context) async {
     try {
       final response = await sendRequest(
