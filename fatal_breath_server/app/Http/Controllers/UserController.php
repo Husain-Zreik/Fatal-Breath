@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MembershipRequest;
 use App\Models\User;
+use App\Models\UserHouse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -146,6 +147,33 @@ class UserController extends Controller
             ->get();
 
         return response()->json(['pending_requests' => $pendingRequests]);
+    }
+
+    public function processRequest(Request $request)
+    {
+        $userId = $request->input('user_id');
+        $houseId = $request->input('house_id');
+        $status = $request->input('status');
+
+        $membershipRequest = MembershipRequest::where('user_id', $userId)
+            ->where('house_id', $houseId)
+            ->where('status', 'Pending')
+            ->first();
+
+        if (!$membershipRequest) {
+            return response()->json(['message' => 'Membership request not found.'], 404);
+        }
+
+        if ($status === 'Accepted') {
+            $userHouse = new UserHouse();
+            $userHouse->user_id = $userId;
+            $userHouse->house_id = $houseId;
+            $userHouse->save();
+        }
+
+        $membershipRequest->delete();
+
+        return response()->json(['message' => 'Membership request processed successfully.']);
     }
 
 
