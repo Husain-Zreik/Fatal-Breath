@@ -1,12 +1,15 @@
 import 'package:fatal_breath_frontend/providers/house.provider.dart';
+import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/screens/empty/home.empty.state.screen.dart';
 import 'package:fatal_breath_frontend/screens/empty/house.empty.state.screen.dart';
 import 'package:fatal_breath_frontend/screens/home/add.house.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
+import 'package:fatal_breath_frontend/utils/text.note.dart';
 import 'package:fatal_breath_frontend/utils/text.title.dart';
 import 'package:fatal_breath_frontend/widgets/button.global.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -19,11 +22,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List? houses;
+  String? name;
 
   @override
   void initState() {
     super.initState();
     Provider.of<HouseProvider>(context, listen: false).getAdminHouses();
+    name = Provider.of<UserProvider>(context, listen: false).getName;
   }
 
   @override
@@ -46,15 +51,58 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           title: Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: Text(
-              "Home",
-              style: GoogleFonts.poppins(
-                color: GlobalColors.mainColor,
-                fontSize: 26,
-                fontWeight: FontWeight.w600,
-              ),
+            padding: const EdgeInsets.only(top: 13),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'FATAL',
+                      style: TextStyle(
+                        color: GlobalColors.textColor,
+                        fontSize: 26,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    Text(
+                      'BREATH',
+                      style: TextStyle(
+                        color: HexColor('#1424B9'),
+                        fontSize: 26,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text("Welcome ",
+                        style: GoogleFonts.poppins(
+                          color: GlobalColors.mainColor,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        )),
+                    Text("${name!} !",
+                        style: GoogleFonts.poppins(
+                          color: GlobalColors.mainColor,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        )),
+                  ],
+                ),
+              ],
             ),
+            // Text(
+            //   "Home",
+            //   style: GoogleFonts.poppins(
+            //     color: GlobalColors.mainColor,
+            //     fontSize: 26,
+            //     fontWeight: FontWeight.w600,
+            //   ),
+            // ),
           ),
           bottom: houses!.isEmpty
               ? null
@@ -123,11 +171,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                       children: [
                                         Row(
                                           children: [
-                                            const SizedBox(
+                                            SizedBox(
                                                 width: 60,
                                                 child: Icon(
                                                   Icons.add_circle_outline,
                                                   size: 40,
+                                                  color: GlobalColors.mainColor,
                                                 )
                                                 // Image.asset(
                                                 //   'assets/images/light_icon.png',
@@ -196,7 +245,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       style:
                                                           GoogleFonts.poppins(
                                                         color: Colors.black,
-                                                        fontSize: 18,
+                                                        fontSize: 17,
                                                         fontWeight:
                                                             FontWeight.w500,
                                                       )),
