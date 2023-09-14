@@ -3,7 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 
-class ProfileCircle extends StatefulWidget {
+class ProfileCircle extends StatelessWidget {
   const ProfileCircle(
       {Key? key, required this.size, this.image, this.decoded, this.imageLink})
       : super(key: key);
@@ -14,47 +14,42 @@ class ProfileCircle extends StatefulWidget {
   final Uint8List? decoded;
 
   @override
-  State<ProfileCircle> createState() => _ProfileCircleState();
-}
-
-class _ProfileCircleState extends State<ProfileCircle> {
-  @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(100),
       child: Container(
-          width: widget.size,
-          height: widget.size,
+          width: size,
+          height: size,
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
             color: Colors.white,
           ),
-          child: widget.decoded != null
+          child: decoded != null
               ? Image.memory(
-                  widget.decoded!,
+                  decoded!,
                   fit: BoxFit.cover,
-                  width: widget.size,
-                  height: widget.size,
+                  width: size,
+                  height: size,
                 )
-              : widget.image != null
+              : image != null
                   ? Image.file(
-                      widget.image!,
+                      image!,
                       fit: BoxFit.cover,
-                      width: widget.size,
-                      height: widget.size,
+                      width: size,
+                      height: size,
                     )
-                  : widget.imageLink != null
+                  : imageLink != null
                       ? Image.network(
-                          widget.imageLink!,
+                          imageLink!,
                           fit: BoxFit.cover,
-                          width: widget.size,
-                          height: widget.size,
+                          width: size,
+                          height: size,
                         )
                       : Image.asset(
                           "assets/images/account_circle.png",
                           fit: BoxFit.cover,
-                          width: widget.size,
-                          height: widget.size,
+                          width: size,
+                          height: size,
                         )),
     );
   }
