@@ -1,10 +1,12 @@
 // ignore_for_file: avoid_print
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:fatal_breath_frontend/config/remote.config.dart';
 import 'package:fatal_breath_frontend/enums/request.methods.dart';
+import 'package:fatal_breath_frontend/models/user.model.dart';
 import 'package:flutter/cupertino.dart';
 
 class UserProvider with ChangeNotifier {
@@ -119,6 +121,33 @@ class UserProvider with ChangeNotifier {
       } else {
         throw HttpException('$e');
       }
+    }
+  }
+
+  Future getUsers(houseId, context) async {
+    try {
+      final response = await sendRequest(
+        route: "/api/user/admin/$houseId/get-requests-members",
+      );
+
+      final data = json.decode(response);
+
+      print(response);
+      final List<User> requests = (data['pending_requests'] as List)
+          .map((json) => User.fromJson(json['user']))
+          .toList();
+
+      print(requests);
+
+      final List<User> members = (data['house_members'] as List)
+          .map((json) => User.fromJson(json['user']))
+          .toList();
+
+      print(members);
+
+      notifyListeners();
+    } catch (e) {
+      throw HttpException('$e');
     }
   }
 }
