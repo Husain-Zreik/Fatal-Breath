@@ -37,4 +37,10 @@ class House extends Model
     {
         return $this->hasMany(MembershipRequest::class, 'user_id');
     }
+
+    public function requests()
+    {
+        return $this->hasMany(MembershipRequest::class, 'house_id')
+            ->where('status', 'Pending');
+    }
 }
