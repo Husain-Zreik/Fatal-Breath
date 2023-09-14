@@ -33,6 +33,10 @@ class UserProvider with ChangeNotifier {
     return userType;
   }
 
+  List? get getSearchList {
+    return searchList;
+  }
+
   String? get getImage {
     if (image != null) {
       debugPrint("$baseUrl/storage/$image");
