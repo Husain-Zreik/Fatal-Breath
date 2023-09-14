@@ -2,6 +2,7 @@ import 'package:fatal_breath_frontend/providers/house.provider.dart';
 import 'package:fatal_breath_frontend/screens/empty/home.empty.state.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/utils/text.note.dart';
+import 'package:fatal_breath_frontend/widgets/profile.circle.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -145,15 +146,12 @@ class _UsersScreenState extends State<UsersScreen> {
                                     Row(
                                       children: [
                                         SizedBox(
-                                          width: 60,
-                                          child: Image.asset(
-                                            // ignore: prefer_interpolation_to_compose_strings
-                                            'assets/images/' +
-                                                member.username +
-                                                '.png',
-                                            scale: 1.2,
-                                          ),
-                                        ),
+                                            width: 60,
+                                            child: ProfileCircle(
+                                              size: 60,
+                                              imageLink:
+                                                  'http://192.168.1.5:8000/storage/profile_images/${member.username}.png',
+                                            )),
                                         Padding(
                                           padding: const EdgeInsets.all(10),
                                           child: Column(
@@ -162,19 +160,19 @@ class _UsersScreenState extends State<UsersScreen> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(member.name,
+                                              Text(member.username,
                                                   style: GoogleFonts.poppins(
                                                     color: Colors.black,
-                                                    fontSize: 17,
+                                                    fontSize: 18,
                                                     fontWeight: FontWeight.w500,
                                                   )),
                                               const SizedBox(
                                                 height: 5,
                                               ),
-                                              Text("Oxygen : 30%",
+                                              Text(member.name,
                                                   style: GoogleFonts.poppins(
                                                     color: Colors.black,
-                                                    fontSize: 10,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.w400,
                                                   ))
                                             ],
@@ -187,9 +185,9 @@ class _UsersScreenState extends State<UsersScreen> {
                                       width: 70,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(40),
-                                        color: member.name == 'Kitchen'
+                                        color: member.username == 'Kitchen'
                                             ? Colors.red
-                                            : member.name == 'Bedroom'
+                                            : member.username == 'Bedroom'
                                                 ? Colors.orange
                                                 : Colors.green,
                                         boxShadow: [
@@ -203,9 +201,9 @@ class _UsersScreenState extends State<UsersScreen> {
                                       ),
                                       child: Center(
                                         child: Text(
-                                            member.name == 'Kitchen'
-                                                ? "Dangerous"
-                                                : member.name == 'Bedroom'
+                                            member.username == 'Kitchen'
+                                                ? "Delete"
+                                                : member.username == 'Bedroom'
                                                     ? "Sensetive"
                                                     : "Normal",
                                             style: GoogleFonts.poppins(
