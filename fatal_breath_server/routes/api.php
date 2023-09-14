@@ -23,6 +23,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
         Route::get("/house/search", [UserController::class, "searchUsers"]);
         Route::get("/house/get-requests-members", [UserController::class, "getRequestsAndMembers"]);
         Route::post('/process-request', [UserController::class, "processRequest"]);
+        Route::post('/send-invitation', [UserController::class, "sendInvitation"]);
     });
 
     Route::group(['prefix' => 'member',  'middleware' => 'auth.member'], function () {
