@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HouseController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -20,11 +21,11 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
         Route::post("/add-room", [RoomController::class, "createRoom"]);
         Route::post("/add-house", [HouseController::class, "createHouse"]);
         Route::get("/get-houses", [HouseController::class, "getHouses"]);
-        Route::post("/search", [UserController::class, "searchUsers"]);
-        Route::post('/process-request', [UserController::class, "processRequest"]);
-        Route::post('/send-invitation', [UserController::class, "sendInvitation"]);
-        Route::delete('/remove-member/{houseId}/{userId}', [HouseController::class, "removeMember"]);
-        Route::get("/{houseId}/get-requests-members", [UserController::class, "getRequestsAndMembers"]);
+        Route::post("/search", [ManagerController::class, "searchUsers"]);
+        Route::post('/process-request', [ManagerController::class, "processRequest"]);
+        Route::post('/send-invitation', [ManagerController::class, "sendInvitation"]);
+        Route::delete('/remove-member/{houseId}/{userId}', [ManagerController::class, "removeMember"]);
+        Route::get("/{houseId}/get-requests-members", [ManagerController::class, "getRequestsAndMembers"]);
     });
 
     Route::group(['prefix' => 'member',  'middleware' => 'auth.member'], function () {
