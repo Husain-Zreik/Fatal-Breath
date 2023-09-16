@@ -24,7 +24,8 @@ class HomeEmptyStateScreen extends StatelessWidget {
             ButtonGlobal(
               bgColor: GlobalColors.mainColor,
               textColor: Colors.white,
-              icon: Icons.add,
+              // icon: Icons.add,
+              text: "Add House",
               onBtnPressed: () {
                 Get.to(() => const AddHouseScreen());
               },
