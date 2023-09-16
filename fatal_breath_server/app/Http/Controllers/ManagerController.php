@@ -101,16 +101,20 @@ class ManagerController extends Controller
 
         $houseMemberIds = UserHouse::where('house_id', $houseId)->pluck('user_id')->toArray();
 
-        $pendingRequestIds = MembershipRequest::where('house_id', $houseId)
-            ->where('status', 'Pending')
-            ->pluck('user_id')->toArray();
-
-        $usersNotInHouse = User::whereNotIn('id', $adminUserIds)
+        $users = User::whereNotIn('id', $adminUserIds)
             ->whereNotIn('id', $houseMemberIds)
-            ->whereNotIn('id', $pendingRequestIds)
             ->where('username', 'LIKE', "%$username%")
             ->get();
 
-        return response()->json(['users' => $usersNotInHouse]);
+        foreach ($users as $user) {
+            $invitationExists = MembershipRequest::where('house_id', $houseId)
+                ->where('user_id', $user->id)
+                ->where('type', 'Invitation')
+                ->where('status', 'Pending')
+                ->exists();
+            $user->isInvited = $invitationExists;
+        }
+
+        return response()->json(['users' => $users]);
     }
 }
