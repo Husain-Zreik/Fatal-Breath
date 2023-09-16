@@ -236,7 +236,7 @@ class _UsersScreenState extends State<UsersScreen> {
                                                   imageLink: user
                                                               .profileImage !=
                                                           null
-                                                      ? 'http://192.168.1.5:8000/storage/profile_images/${user.username}.png'
+                                                      ? 'http://192.168.1.5:8000/storage/profile_images/${user.id}.png'
                                                       : null,
                                                 )),
                                             Padding(
@@ -355,7 +355,7 @@ class _UsersScreenState extends State<UsersScreen> {
                                                 child: ProfileCircle(
                                                   size: 60,
                                                   imageLink:
-                                                      'http://192.168.1.5:8000/storage/profile_images/${member.username}.png',
+                                                      'http://192.168.1.5:8000/storage/profile_images/${member.id}.png',
                                                 )),
                                             Padding(
                                               padding: const EdgeInsets.all(10),
@@ -473,7 +473,7 @@ class _UsersScreenState extends State<UsersScreen> {
                                                 child: ProfileCircle(
                                                   size: 60,
                                                   imageLink:
-                                                      'http://192.168.1.5:8000/storage/profile_images/${request.username}.png',
+                                                      'http://192.168.1.5:8000/storage/profile_images/${request.id}.png',
                                                 )),
                                             Padding(
                                               padding: const EdgeInsets.all(10),
