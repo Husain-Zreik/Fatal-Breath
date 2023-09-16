@@ -75,4 +75,25 @@ class HouseProvider with ChangeNotifier {
       throw HttpException('$e');
     }
   }
+
+  Future handleRequest(houseId, userId, status, context) async {
+    try {
+      final body = {
+        'user_id': userId,
+        'house_id': houseId,
+        'status': status,
+      };
+      final response = await sendRequest(
+          route: "/api/user/admin/process-request",
+          method: RequestMethods.POST,
+          load: body);
+
+      print(response);
+      await getAdminHouses();
+
+      notifyListeners();
+    } catch (e) {
+      throw HttpException('$e');
+    }
+  }
 }
