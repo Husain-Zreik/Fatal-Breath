@@ -55,34 +55,36 @@ class ManagerController extends Controller
         return response()->json(['message' => 'Membership request processed successfully.']);
     }
 
-    public function sendInvitation(Request $request)
+    public function toggleInvitation(Request $request)
     {
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'house_id' => 'required|exists:houses,id',
         ]);
 
-        if (UserHouse::where('user_id', $request->user_id)->where('house_id', $request->house_id)->exists()) {
-            return response()->json(['message' => 'User is already a member of the house.']);
-        }
-
-        if (MembershipRequest::where('user_id', $request->user_id)
+        $existingInvitation = MembershipRequest::where('user_id', $request->user_id)
             ->where('house_id', $request->house_id)
             ->where('type', 'Invitation')
             ->where('status', 'Pending')
-            ->exists()
-        ) {
-            return response()->json(['message' => 'Invitation already sent.']);
+            ->first();
+
+        if ($existingInvitation) {
+            $existingInvitation->delete();
+            return response()->json(['message' => 'Invitation canceled successfully.']);
+        } else {
+            if (UserHouse::where('user_id', $request->user_id)->where('house_id', $request->house_id)->exists()) {
+                return response()->json(['message' => 'User is already a member of the house.']);
+            }
+
+            $invitation = new MembershipRequest();
+            $invitation->user_id = $request->user_id;
+            $invitation->house_id = $request->house_id;
+            $invitation->type = 'Invitation';
+            $invitation->status = 'Pending';
+            $invitation->save();
+
+            return response()->json(['message' => 'Invitation sent successfully.']);
         }
-
-        $invitation = new MembershipRequest();
-        $invitation->user_id = $request->user_id;
-        $invitation->house_id = $request->house_id;
-        $invitation->type = 'Invitation';
-        $invitation->status = 'Pending';
-        $invitation->save();
-
-        return response()->json(['message' => 'Invitation sent successfully.']);
     }
 
     public function searchUsers(Request $request)
