@@ -150,31 +150,23 @@ class _UsersScreenState extends State<UsersScreen> {
                                 ),
                               ),
                             ),
-                            onChanged: (value) {
-                              String searchTerm =
-                                  searchControllers[house.id]!.text;
+                            onSubmitted: (value) async {
+                              String searchTerm = searchControllers[house.id]!
+                                  .text
+                                  .replaceAll(' ', '');
+                              // print("Search Term $searchTerm");
+                              // print("Search list $searchList");
                               if (searchTerm.isNotEmpty) {
-                                Provider.of<UserProvider>(context,
+                                await Provider.of<UserProvider>(context,
                                         listen: false)
                                     .usernameSearch(
                                         searchTerm, house.id, context);
-                                searchList = Provider.of<UserProvider>(context,
-                                        listen: false)
-                                    .getSearchList;
-                              } else {
-                                Provider.of<UserProvider>(context,
-                                        listen: false)
-                                    .clearSearchList();
-                              }
-                            },
-                            onSubmitted: (value) {
-                              String searchTerm =
-                                  searchControllers[house.id]!.text;
-                              if (searchTerm.isNotEmpty) {
                                 setState(() {
-                                  searchLists[house.id] = searchList!;
+                                  searchLists[house.id] =
+                                      Provider.of<UserProvider>(context,
+                                              listen: false)
+                                          .getSearchList!;
                                 });
-                                print(searchList);
                               } else {
                                 setState(() {
                                   searchLists[house.id] = [];
