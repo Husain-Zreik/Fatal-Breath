@@ -24,6 +24,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
         Route::get("/{houseId}/get-requests-members", [UserController::class, "getRequestsAndMembers"]);
         Route::post('/process-request', [UserController::class, "processRequest"]);
         Route::post('/send-invitation', [UserController::class, "sendInvitation"]);
+        Route::delete('/remove-member/{houseId}/{userId}', [HouseController::class, "removeMember"]);
     });
 
     Route::group(['prefix' => 'member',  'middleware' => 'auth.member'], function () {
