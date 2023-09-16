@@ -4,6 +4,7 @@ import 'package:fatal_breath_frontend/screens/empty/home.empty.state.screen.dart
 import 'package:fatal_breath_frontend/screens/empty/house.empty.state.screen.dart';
 import 'package:fatal_breath_frontend/screens/home/add.house.screen.dart';
 import 'package:fatal_breath_frontend/screens/home/add.room.screen.dart';
+import 'package:fatal_breath_frontend/screens/home/room.details.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/utils/text.title.dart';
 import 'package:fatal_breath_frontend/widgets/button.global.dart';
@@ -95,14 +96,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            // Text(
-            //   "Home",
-            //   style: GoogleFonts.poppins(
-            //     color: GlobalColors.mainColor,
-            //     fontSize: 26,
-            //     fontWeight: FontWeight.w600,
-            //   ),
-            // ),
           ),
           bottom: houses!.isEmpty
               ? null
@@ -201,109 +194,115 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               for (final room in house.rooms!)
-                                Container(
-                                  margin:
-                                      const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                                  height: 80,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        spreadRadius: 2,
-                                        blurRadius: 5,
-                                        offset: const Offset(0, 3),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 60,
-                                              child: Image.asset(
-                                                // ignore: prefer_interpolation_to_compose_strings
-                                                'assets/images/' +
-                                                    room.type +
-                                                    '.png',
-                                                scale: 1.2,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.all(10),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(room.name,
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                        color: Colors.black,
-                                                        fontSize: 17,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      )),
-                                                  const SizedBox(
-                                                    height: 5,
-                                                  ),
-                                                  Text("Oxygen : 30%",
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                        color: Colors.black,
-                                                        fontSize: 10,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                      ))
-                                                ],
-                                              ),
-                                            ),
-                                          ],
+                                InkWell(
+                                  onTap: () {
+                                    Get.to(() => const RoomDetailsScreen());
+                                  },
+                                  child: Container(
+                                    margin: const EdgeInsets.fromLTRB(
+                                        20, 20, 20, 0),
+                                    height: 80,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: const Offset(0, 3),
                                         ),
-                                        Container(
-                                          height: 25,
-                                          width: 70,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(40),
-                                            color: room.type == 'Kitchen'
-                                                ? Colors.red
-                                                : room.type == 'Bedroom'
-                                                    ? Colors.orange
-                                                    : Colors.green,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.5),
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                                offset: const Offset(0, 3),
+                                      ],
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 60,
+                                                child: Image.asset(
+                                                  // ignore: prefer_interpolation_to_compose_strings
+                                                  'assets/images/' +
+                                                      room.type +
+                                                      '.png',
+                                                  scale: 1.2,
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(room.name,
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          color: Colors.black,
+                                                          fontSize: 17,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        )),
+                                                    const SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Text("Oxygen : 30%",
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          color: Colors.black,
+                                                          fontSize: 10,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ))
+                                                  ],
+                                                ),
                                               ),
                                             ],
                                           ),
-                                          child: Center(
-                                            child: Text(
-                                                room.type == 'Kitchen'
-                                                    ? "Dangerous"
-                                                    : room.type == 'Bedroom'
-                                                        ? "Sensetive"
-                                                        : "Normal",
-                                                style: GoogleFonts.poppins(
-                                                  color: Colors.white,
-                                                  fontSize: 10,
-                                                  fontWeight: FontWeight.w500,
-                                                )),
-                                          ),
-                                        )
-                                      ],
+                                          Container(
+                                            height: 25,
+                                            width: 70,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(40),
+                                              color: room.type == 'Kitchen'
+                                                  ? Colors.red
+                                                  : room.type == 'Bedroom'
+                                                      ? Colors.orange
+                                                      : Colors.green,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: const Offset(0, 3),
+                                                ),
+                                              ],
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                  room.type == 'Kitchen'
+                                                      ? "Dangerous"
+                                                      : room.type == 'Bedroom'
+                                                          ? "Sensetive"
+                                                          : "Normal",
+                                                  style: GoogleFonts.poppins(
+                                                    color: Colors.white,
+                                                    fontSize: 10,
+                                                    fontWeight: FontWeight.w500,
+                                                  )),
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
