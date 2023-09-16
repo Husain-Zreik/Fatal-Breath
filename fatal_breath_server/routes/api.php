@@ -23,7 +23,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
         Route::get("/get-houses", [HouseController::class, "getHouses"]);
         Route::post("/search", [ManagerController::class, "searchUsers"]);
         Route::post('/process-request', [ManagerController::class, "processRequest"]);
-        Route::post('/send-invitation', [ManagerController::class, "sendInvitation"]);
+        Route::post('/toggle-invitation', [ManagerController::class, "toggleInvitation"]);
         Route::delete('/remove-member/{houseId}/{userId}', [ManagerController::class, "removeMember"]);
         Route::get("/{houseId}/get-requests-members", [ManagerController::class, "getRequestsAndMembers"]);
     });
