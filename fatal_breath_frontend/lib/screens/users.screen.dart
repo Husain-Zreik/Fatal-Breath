@@ -22,7 +22,7 @@ class _UsersScreenState extends State<UsersScreen> {
 
   String? image;
   List? houses;
-  List? searchList = [];
+  // List? searchList = [];
 
   Future removePressed(houseId, userId, context) async {
     await Provider.of<HouseProvider>(context, listen: false)
