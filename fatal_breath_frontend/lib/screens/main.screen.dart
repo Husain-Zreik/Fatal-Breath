@@ -91,7 +91,7 @@ class _MainScreenState extends State<MainScreen> {
                       size: 30,
                     )
                   : SvgPicture.asset(
-                      "assets/images/home_icon.svg",
+                      "assets/icons/home_icon.svg",
                       height: 30,
                       width: 30,
                       // ignore: deprecated_member_use
