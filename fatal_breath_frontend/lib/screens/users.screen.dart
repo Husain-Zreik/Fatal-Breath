@@ -18,6 +18,7 @@ class UsersScreen extends StatefulWidget {
 class _UsersScreenState extends State<UsersScreen> {
   Map<int, TextEditingController> searchControllers = {};
   Map<int, List> searchLists = {};
+  Map<int, String> searchTerms = {};
 
   String? image;
   List? houses;
@@ -33,6 +34,38 @@ class _UsersScreenState extends State<UsersScreen> {
         .processRequest(houseId, userId, status, context);
   }
 
+  Future searchPressed(houseId) async {
+    setState(() {
+      searchTerms[houseId] =
+          searchControllers[houseId]!.text.replaceAll(' ', '');
+    });
+    if (searchTerms[houseId]!.isNotEmpty) {
+      await Provider.of<UserProvider>(context, listen: false)
+          .usernameSearch(searchTerms[houseId], houseId, context);
+      setState(() {
+        searchLists[houseId] =
+            Provider.of<UserProvider>(context, listen: false).getSearchList!;
+      });
+    } else {
+      setState(() {
+        searchLists[houseId] = [];
+      });
+      Provider.of<UserProvider>(context, listen: false).clearSearchList();
+    }
+  }
+
+  Future toggleInvitePressed(houseId, userId, searchTerm, context) async {
+    await Provider.of<HouseProvider>(context, listen: false)
+        .toggleInvite(houseId, userId, context);
+
+    await Provider.of<UserProvider>(context, listen: false)
+        .usernameSearch(searchTerm, houseId, context);
+    setState(() {
+      searchLists[houseId] =
+          Provider.of<UserProvider>(context, listen: false).getSearchList!;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -45,6 +78,7 @@ class _UsersScreenState extends State<UsersScreen> {
     image = Provider.of<UserProvider>(context, listen: false).getImage;
     for (final house in houses!) {
       searchControllers[house.id] = TextEditingController();
+      searchTerms[house.id];
     }
     return DefaultTabController(
       length: houses!.isEmpty ? 0 : houses!.length,
@@ -143,10 +177,6 @@ class _UsersScreenState extends State<UsersScreen> {
                             controller: searchControllers[house.id],
                             decoration: InputDecoration(
                               hintText: 'Search users...',
-                              prefixIcon: Icon(
-                                Icons.search,
-                                color: GlobalColors.mainColor,
-                              ),
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
@@ -159,33 +189,20 @@ class _UsersScreenState extends State<UsersScreen> {
                                   color: Colors.transparent,
                                 ),
                               ),
+                              prefixIcon: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Icon(
+                                  Icons.search,
+                                  color: GlobalColors.mainColor,
+                                ),
+                              ),
+                              suffixIcon: IconButton(
+                                icon: const Icon(Icons.send),
+                                onPressed: () {
+                                  searchPressed(house.id);
+                                },
+                              ),
                             ),
-                            onSubmitted: (value) async {
-                              String searchTerm = searchControllers[house.id]!
-                                  .text
-                                  .replaceAll(' ', '');
-                              // print("Search Term $searchTerm");
-                              // print("Search list $searchList");
-                              if (searchTerm.isNotEmpty) {
-                                await Provider.of<UserProvider>(context,
-                                        listen: false)
-                                    .usernameSearch(
-                                        searchTerm, house.id, context);
-                                setState(() {
-                                  searchLists[house.id] =
-                                      Provider.of<UserProvider>(context,
-                                              listen: false)
-                                          .getSearchList!;
-                                });
-                              } else {
-                                setState(() {
-                                  searchLists[house.id] = [];
-                                });
-                                Provider.of<UserProvider>(context,
-                                        listen: false)
-                                    .clearSearchList();
-                              }
-                            },
                           ),
                         ),
                         if (searchLists[house.id] != null &&
@@ -274,7 +291,13 @@ class _UsersScreenState extends State<UsersScreen> {
                                           ],
                                         ),
                                         InkWell(
-                                          onTap: () {},
+                                          onTap: () {
+                                            toggleInvitePressed(
+                                                house.id,
+                                                user.id,
+                                                searchTerms[house.id],
+                                                context);
+                                          },
                                           child: Container(
                                             height: 25,
                                             width: 70,
@@ -293,7 +316,10 @@ class _UsersScreenState extends State<UsersScreen> {
                                               ],
                                             ),
                                             child: Center(
-                                              child: Text("Invite",
+                                              child: Text(
+                                                  user.isInvited
+                                                      ? "Cancel"
+                                                      : "Invite",
                                                   style: GoogleFonts.poppins(
                                                     color: Colors.white,
                                                     fontSize: 10,
@@ -619,7 +645,8 @@ class _UsersScreenState extends State<UsersScreen> {
                                 text:
                                     "No requests or members in this house !\nSearch for members and invite them by typing the username of them in the search bar."),
                           )
-                        else if (searchLists[house.id]!.isEmpty)
+                        else if (searchLists[house.id] != null &&
+                            searchLists[house.id]!.isEmpty)
                           const Padding(
                             padding:
                                 EdgeInsets.only(top: 20, right: 20, left: 23),
