@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, unused_local_variable
 
 import 'dart:convert';
 import 'dart:io';
@@ -102,7 +102,6 @@ class UserProvider with ChangeNotifier {
 
   Future changePassword(currentPassword, newPassword, context) async {
     try {
-      // ignore: unused_local_variable
       final response = await sendRequest(
         route: "/api/user/info/change-password",
         method: RequestMethods.POST,
@@ -183,18 +182,13 @@ class UserProvider with ChangeNotifier {
 
       final data = json.decode(response);
 
-      print(response);
       final List<User> requests = (data['pending_requests'] as List)
           .map((json) => User.fromJson(json['user']))
           .toList();
 
-      print(requests);
-
       final List<User> members = (data['house_members'] as List)
           .map((json) => User.fromJson(json['user']))
           .toList();
-
-      print(members);
 
       notifyListeners();
     } catch (e) {
