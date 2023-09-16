@@ -159,7 +159,7 @@ class UserController extends Controller
             return response()->json(['message' => 'Membership request not found.'], 404);
         }
 
-        if ($status === 'Accepted') {
+        if ($status === 'Accept') {
             $userHouse = new UserHouse();
             $userHouse->user_id = $userId;
             $userHouse->house_id = $houseId;
