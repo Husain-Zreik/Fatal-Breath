@@ -76,7 +76,7 @@ class HouseProvider with ChangeNotifier {
     }
   }
 
-  Future handleRequest(houseId, userId, status, context) async {
+  Future processRequest(houseId, userId, status, context) async {
     try {
       final body = {
         'user_id': userId,

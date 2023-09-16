@@ -30,7 +30,7 @@ class _UsersScreenState extends State<UsersScreen> {
 
   Future handleRequest(houseId, userId, status, context) async {
     await Provider.of<HouseProvider>(context, listen: false)
-        .handleRequest(houseId, userId, status, context);
+        .processRequest(houseId, userId, status, context);
   }
 
   @override
