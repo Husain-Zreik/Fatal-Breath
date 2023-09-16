@@ -77,7 +77,7 @@ class _AddRoomScreenState extends State<AddRoomScreen> {
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+            padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
             child: Form(
               key: _form,
               child: Column(
