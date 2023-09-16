@@ -1,14 +1,15 @@
+import 'package:fatal_breath_frontend/models/house.model.dart';
 import 'package:fatal_breath_frontend/models/room.model.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/widgets/secondary.appbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class RoomDetailsScreen extends StatelessWidget {
-  const RoomDetailsScreen({super.key, required this.room});
+  const RoomDetailsScreen({super.key, required this.room, required this.house});
 
+  final House house;
   final Room room;
   final int percent = 50;
 

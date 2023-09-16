@@ -198,6 +198,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   onTap: () {
                                     Get.to(() => RoomDetailsScreen(
                                           room: room,
+                                          house: house,
                                         ));
                                   },
                                   child: Container(
