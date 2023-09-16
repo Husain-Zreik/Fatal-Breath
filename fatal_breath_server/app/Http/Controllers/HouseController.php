@@ -46,7 +46,14 @@ class HouseController extends Controller
     {
         $user = Auth::user();
 
-        $houses = House::with(['rooms', 'members', 'requests.user'])->where('owner_id', $user->id)->get();
+        $houses = House::with([
+            'rooms',
+            'members',
+            'requests' => function ($query) {
+                $query->where('type', 'Request');
+            },
+            'requests.user'
+        ])->where('owner_id', $user->id)->get();
 
         return response()->json([
             'status' => 'success',
