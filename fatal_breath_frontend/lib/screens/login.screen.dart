@@ -62,18 +62,12 @@ class _LoginScreenState extends State<LoginScreen> {
     if (value!.isEmpty) {
       return "Please enter the email";
     }
-    if (!value.contains("@")) {
-      return "Please enter a valid email";
-    }
     return null;
   }
 
   passwordvalidator(value) {
     if (value!.isEmpty) {
       return "Please enter password";
-    }
-    if (value.length < 6) {
-      return "Should be minimum 6 characters";
     }
     return null;
   }
