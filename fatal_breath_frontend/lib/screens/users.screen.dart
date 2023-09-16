@@ -23,6 +23,11 @@ class _UsersScreenState extends State<UsersScreen> {
   List? houses;
   List? searchList = [];
 
+  Future removePressed(houseId, userId, context) async {
+    await Provider.of<HouseProvider>(context, listen: false)
+        .removeMember(houseId, userId, context);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -382,7 +387,10 @@ class _UsersScreenState extends State<UsersScreen> {
                                           ],
                                         ),
                                         InkWell(
-                                          onTap: () {},
+                                          onTap: () {
+                                            removePressed(
+                                                house.id, member.id, context);
+                                          },
                                           child: Container(
                                             height: 25,
                                             width: 70,
