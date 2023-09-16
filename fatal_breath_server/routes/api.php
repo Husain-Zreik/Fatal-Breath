@@ -21,10 +21,10 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
         Route::post("/add-house", [HouseController::class, "createHouse"]);
         Route::get("/get-houses", [HouseController::class, "getHouses"]);
         Route::post("/search", [UserController::class, "searchUsers"]);
-        Route::get("/{houseId}/get-requests-members", [UserController::class, "getRequestsAndMembers"]);
         Route::post('/process-request', [UserController::class, "processRequest"]);
         Route::post('/send-invitation', [UserController::class, "sendInvitation"]);
         Route::delete('/remove-member/{houseId}/{userId}', [HouseController::class, "removeMember"]);
+        Route::get("/{houseId}/get-requests-members", [UserController::class, "getRequestsAndMembers"]);
     });
 
     Route::group(['prefix' => 'member',  'middleware' => 'auth.member'], function () {
