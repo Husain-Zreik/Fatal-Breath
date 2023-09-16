@@ -59,4 +59,20 @@ class HouseProvider with ChangeNotifier {
       throw HttpException('$e');
     }
   }
+
+  Future removeMember(houseId, userId, context) async {
+    try {
+      final response = await sendRequest(
+        route: "/api/user/admin/remove-member/$houseId/$userId",
+        method: RequestMethods.DELETE,
+      );
+
+      print(response);
+      await getAdminHouses();
+
+      notifyListeners();
+    } catch (e) {
+      throw HttpException('$e');
+    }
+  }
 }
