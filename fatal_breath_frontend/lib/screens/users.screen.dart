@@ -308,7 +308,7 @@ class _UsersScreenState extends State<UsersScreen> {
                                 padding:
                                     const EdgeInsets.only(left: 22, top: 5),
                                 child: Text(
-                                  "Members :",
+                                  "Members of ${house.name} :",
                                   style: GoogleFonts.poppins(
                                     color: GlobalColors.mainColor,
                                     fontSize: 14,
