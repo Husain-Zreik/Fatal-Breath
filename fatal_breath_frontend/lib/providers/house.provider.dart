@@ -96,4 +96,24 @@ class HouseProvider with ChangeNotifier {
       throw HttpException('$e');
     }
   }
+
+  Future toggleInvite(houseId, userId, context) async {
+    try {
+      final body = {
+        'user_id': userId,
+        'house_id': houseId,
+      };
+      final response = await sendRequest(
+          route: "/api/user/admin/toggle-invitation",
+          method: RequestMethods.POST,
+          load: body);
+
+      print(response);
+      await getAdminHouses();
+
+      notifyListeners();
+    } catch (e) {
+      throw HttpException('$e');
+    }
+  }
 }
