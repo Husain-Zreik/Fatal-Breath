@@ -43,8 +43,8 @@ class UserProvider with ChangeNotifier {
       return "$baseUrl/storage/$image";
     }
 
-    return "null";
-    // return null;
+    // return "null";
+    return null;
   }
 
   //Get user data

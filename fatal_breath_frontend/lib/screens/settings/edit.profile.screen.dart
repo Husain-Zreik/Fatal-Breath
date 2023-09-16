@@ -27,7 +27,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       TextEditingController(text: "");
   final TextEditingController emailController = TextEditingController(text: "");
   final TextEditingController nameController = TextEditingController(text: "");
-  String currentImageLink = "null";
+  String? currentImageLink;
 
   String? encodedImage;
   Uint8List? decoded;
@@ -117,7 +117,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   void initState() {
     super.initState();
 
-    currentImageLink = context.read<UserProvider>().getImage!;
+    currentImageLink = context.read<UserProvider>().getImage;
     debugPrint(currentImageLink);
     nameController.text = context.read<UserProvider>().getName!;
     usernameController.text = context.read<UserProvider>().getUsername!;
@@ -142,9 +142,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ProfileCircle(
                     size: 140,
                     decoded: decoded != null ? decoded! : null,
-                    imageLink:
-                        currentImageLink == 'null' ? null : currentImageLink,
-                    // image: selectedImage != null ? selectedImage! : null,
+                    imageLink: currentImageLink,
+                    // currentImageLink == 'null' ? null : currentImageLink,
                   ),
                   Positioned(
                       bottom: 0,
