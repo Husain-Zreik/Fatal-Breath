@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:fatal_breath_frontend/screens/ai.screen.dart';
+// import 'package:fatal_breath_frontend/screens/ai.screen.dart';
 import 'package:fatal_breath_frontend/screens/chats.screen.dart';
 import 'package:fatal_breath_frontend/screens/home.screen.dart';
 import 'package:fatal_breath_frontend/screens/settings.screen.dart';
@@ -8,7 +8,7 @@ import 'package:fatal_breath_frontend/screens/users.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttericon/fontelico_icons.dart';
+// import 'package:fluttericon/fontelico_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MainScreen extends StatefulWidget {
@@ -25,8 +25,8 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     ChatsScreen(),
     UsersScreen(),
-    AiScreen(),
     SettingsScreen(),
+    // AiScreen(),
   ];
 
   @override
@@ -39,15 +39,6 @@ class _MainScreenState extends State<MainScreen> {
               elevation: 0,
               centerTitle: true,
               leadingWidth: 65,
-              // flexibleSpace: _selectedindex == 4
-              //     ? null
-              //     : Container(
-              //         margin: EdgeInsets.fromLTRB(280, 43, 0, 0),
-              //         // color: GlobalColors.mainColor,
-              //         child: Icon(
-              //           Icons.account_circle,
-              //           size: 55,
-              //         )),
               toolbarHeight: 80,
               leading: Padding(
                 padding: const EdgeInsets.only(left: 10),
@@ -65,8 +56,8 @@ class _MainScreenState extends State<MainScreen> {
                           : _selectedindex == 2
                               ? "Members"
                               : _selectedindex == 3
-                                  ? "Breathy"
-                                  : "Settings",
+                                  ? "Settings"
+                                  : "Breathy",
                   style: GoogleFonts.poppins(
                     color: GlobalColors.mainColor,
                     fontSize: 22,
@@ -125,20 +116,20 @@ class _MainScreenState extends State<MainScreen> {
               label: ''),
           BottomNavigationBarItem(
               icon: Icon(
-                _selectedindex == 3
-                    ? Fontelico.emo_thumbsup
-                    : Fontelico.emo_happy,
-                size: 22,
-                color: Colors.white,
-              ),
-              label: ''),
-          BottomNavigationBarItem(
-              icon: Icon(
-                _selectedindex == 4 ? Icons.settings : Icons.settings_outlined,
+                _selectedindex == 3 ? Icons.settings : Icons.settings_outlined,
                 color: Colors.white,
                 size: 30,
               ),
               label: ''),
+          // BottomNavigationBarItem(
+          //     icon: Icon(
+          //       _selectedindex == 4
+          //           ? Fontelico.emo_thumbsup
+          //           : Fontelico.emo_happy,
+          //       size: 22,
+          //       color: Colors.white,
+          //     ),
+          //     label: ''),
         ],
       ),
     );
