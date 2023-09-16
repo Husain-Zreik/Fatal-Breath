@@ -28,6 +28,11 @@ class _UsersScreenState extends State<UsersScreen> {
         .removeMember(houseId, userId, context);
   }
 
+  Future handleRequest(houseId, userId, status, context) async {
+    await Provider.of<HouseProvider>(context, listen: false)
+        .handleRequest(houseId, userId, status, context);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -351,8 +356,11 @@ class _UsersScreenState extends State<UsersScreen> {
                                                 width: 60,
                                                 child: ProfileCircle(
                                                   size: 60,
-                                                  imageLink:
-                                                      'http://192.168.1.5:8000/storage/profile_images/${member.id}.png',
+                                                  imageLink: member
+                                                              .profileImage !=
+                                                          null
+                                                      ? 'http://192.168.1.5:8000/storage/profile_images/${member.id}.png'
+                                                      : null,
                                                 )),
                                             Padding(
                                               padding: const EdgeInsets.all(10),
@@ -472,8 +480,11 @@ class _UsersScreenState extends State<UsersScreen> {
                                                 width: 60,
                                                 child: ProfileCircle(
                                                   size: 60,
-                                                  imageLink:
-                                                      'http://192.168.1.5:8000/storage/profile_images/${request.id}.png',
+                                                  imageLink: request
+                                                              .profileImage !=
+                                                          null
+                                                      ? 'http://192.168.1.5:8000/storage/profile_images/${request.id}.png'
+                                                      : null,
                                                 )),
                                             Padding(
                                               padding: const EdgeInsets.all(10),
@@ -512,7 +523,13 @@ class _UsersScreenState extends State<UsersScreen> {
                                               MainAxisAlignment.center,
                                           children: [
                                             InkWell(
-                                              onTap: () {},
+                                              onTap: () {
+                                                handleRequest(
+                                                    house.id,
+                                                    request.id,
+                                                    "Accept",
+                                                    context);
+                                              },
                                               child: Container(
                                                 height: 25,
                                                 width: 70,
@@ -547,7 +564,13 @@ class _UsersScreenState extends State<UsersScreen> {
                                               height: 10,
                                             ),
                                             InkWell(
-                                              onTap: () {},
+                                              onTap: () {
+                                                handleRequest(
+                                                    house.id,
+                                                    request.id,
+                                                    "Decline",
+                                                    context);
+                                              },
                                               child: Container(
                                                 height: 25,
                                                 width: 70,
