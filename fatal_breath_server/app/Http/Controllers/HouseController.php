@@ -61,22 +61,4 @@ class HouseController extends Controller
             'houses' => $houses,
         ]);
     }
-
-    public function removeMember($houseId, $userId)
-    {
-        $house = House::find($houseId);
-        $user = User::find($userId);
-
-        if (!$house || !$user) {
-            return response()->json(['message' => 'House or user not found'], 404);
-        }
-
-        if (!$house->members()->where('user_id', $userId)->exists()) {
-            return response()->json(['message' => 'User is not a member of this house'], 400);
-        }
-
-        $house->members()->detach($userId);
-
-        return response()->json(['message' => 'User removed from the house successfully']);
-    }
 }
