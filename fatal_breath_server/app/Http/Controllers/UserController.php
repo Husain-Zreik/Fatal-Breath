@@ -69,27 +69,14 @@ class UserController extends Controller
                 $encodedImage = $request->input('profile_image');
 
                 $imageData = base64_decode($encodedImage);
-                $filename = $username . '.png';
+                $filename = $user->id . '.png';
 
                 $imagePath = 'profile_images/' . $filename;
                 Storage::disk('public')->put('profile_images/' . $filename, $imageData);
 
                 $user->profile_image = $imagePath;
-
-                // $encodedImage = $request->input('profile_image');
-
-                // $imageData = base64_decode($encodedImage);
-                // $filename = $username . '.png';
-                // $storagePath = 'public/profile_images/';
-                // if ($user->profile_image && Storage::exists($user->profile_image)) {
-                //     Storage::delete($user->profile_image);
-                // }
-
-                // Storage::put($storagePath . $filename, $imageData);
-                // $user->profile_image = $storagePath . $filename;
             }
 
-            // $user->save;
             $user->save();
 
             return response()->json([
