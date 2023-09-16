@@ -5,6 +5,7 @@ class User {
   final String name;
   final String email;
   final String? profileImage;
+  final bool? isInvited;
 
   User({
     required this.id,
@@ -13,6 +14,7 @@ class User {
     required this.name,
     required this.email,
     this.profileImage,
+    this.isInvited,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,7 @@ class User {
       name: json['name'],
       email: json['email'],
       profileImage: json['profile_image'],
+      isInvited: json['isInvited'],
     );
   }
 }
