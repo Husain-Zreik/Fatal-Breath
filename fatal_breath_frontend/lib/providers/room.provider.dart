@@ -4,7 +4,6 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'package:dio/dio.dart';
 import 'package:fatal_breath_frontend/config/remote.config.dart';
 import 'package:fatal_breath_frontend/enums/request.methods.dart';
 import 'package:flutter/material.dart';
