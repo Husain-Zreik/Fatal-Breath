@@ -55,15 +55,19 @@ class HouseProvider with ChangeNotifier {
         houses.add(house);
       }
 
-      List<User> allMembers = [];
+      Map<int, User> allMembersMap = {};
 
       if (houses.isNotEmpty) {
         for (var house in houses) {
           if (house.members != null) {
-            allMembers.addAll(house.members!);
+            for (var member in house.members!) {
+              allMembersMap[member.id] = member;
+            }
           }
         }
       }
+
+      List<User> allMembers = allMembersMap.values.toList();
 
       adminHouses = houses;
       members = allMembers;
