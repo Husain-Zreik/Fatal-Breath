@@ -1,5 +1,6 @@
 import 'package:fatal_breath_frontend/providers/house.provider.dart';
 import 'package:fatal_breath_frontend/providers/user.provider.dart';
+import 'package:fatal_breath_frontend/screens/empty/user.empty.state.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/utils/text.note.dart';
 import 'package:fatal_breath_frontend/widgets/contact.box.dart';
@@ -174,6 +175,18 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
               padding: EdgeInsets.only(top: 20, right: 20, left: 23),
               child: TextNote(text: "House Not Found."),
             )
+          else
+            const Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 50,
+                  ),
+                  UserEmptyStateScreen(text: "Search for a house"),
+                ],
+              ),
+            ),
         ]),
       )),
     );
