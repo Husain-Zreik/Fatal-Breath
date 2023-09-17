@@ -2,6 +2,7 @@ import 'package:fatal_breath_frontend/providers/house.provider.dart';
 import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/screens/empty/home.empty.state.screen.dart';
 import 'package:fatal_breath_frontend/screens/chats/messages.screen.dart';
+import 'package:fatal_breath_frontend/screens/empty/user.empty.state.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/utils/text.note.dart';
 import 'package:fatal_breath_frontend/widgets/contact.box.dart';
@@ -22,11 +23,18 @@ class _ChatsScreenState extends State<ChatsScreen> {
   List? houses;
   List? members;
   String? image;
+  String? userType;
 
   @override
   void initState() {
     super.initState();
-    Provider.of<HouseProvider>(context, listen: false).getAdminHouses();
+    userType = Provider.of<UserProvider>(context, listen: false).getUserType;
+
+    if (userType == "Manager") {
+      Provider.of<HouseProvider>(context, listen: false).getAdminHouses();
+    } else {
+      Provider.of<HouseProvider>(context, listen: false).getUserHouses();
+    }
   }
 
   @override
@@ -134,30 +142,32 @@ class _ChatsScreenState extends State<ChatsScreen> {
           ),
         ],
       ),
-      body: houses!.isEmpty
+      body: houses!.isEmpty && userType == "Manager"
           ? const HomeEmptyStateScreen()
-          : members!.isEmpty
-              ? const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [TextNote(text: "No members in your houses")],
-                )
-              : SingleChildScrollView(
-                  child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 20, left: 5, right: 5, bottom: 30),
-                      child: Column(
-                        children: [
-                          for (final user in members!)
-                            InkWell(
-                              onTap: () {
-                                Get.to(() => MessagesScreen(user: user));
-                              },
-                              child: ContactBox(
-                                user: user,
-                              ),
-                            ),
-                        ],
-                      ))),
+          : userType == "User"
+              ? const UserEmptyStateScreen(text: "You are not in any house")
+              : members!.isEmpty
+                  ? const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [TextNote(text: "No members in your houses")],
+                    )
+                  : SingleChildScrollView(
+                      child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 20, left: 5, right: 5, bottom: 30),
+                          child: Column(
+                            children: [
+                              for (final user in members!)
+                                InkWell(
+                                  onTap: () {
+                                    Get.to(() => MessagesScreen(user: user));
+                                  },
+                                  child: ContactBox(
+                                    user: user,
+                                  ),
+                                ),
+                            ],
+                          ))),
     );
   }
 }
