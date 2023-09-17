@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 // import 'package:fatal_breath_frontend/screens/ai.screen.dart';
+import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/screens/chats/chats.screen.dart';
+import 'package:fatal_breath_frontend/screens/find.house.screen.dart';
 import 'package:fatal_breath_frontend/screens/home/home.screen.dart';
 import 'package:fatal_breath_frontend/screens/settings/settings.screen.dart';
 import 'package:fatal_breath_frontend/screens/users.screen.dart';
@@ -10,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:fluttericon/fontelico_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -20,17 +23,23 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   var _selectedindex = 0;
+  String? userType;
 
-  List pages = [
-    HomeScreen(),
-    ChatsScreen(),
-    UsersScreen(),
-    SettingsScreen(),
-    // AiScreen(),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    userType = Provider.of<UserProvider>(context, listen: false).getUserType;
+  }
 
   @override
   Widget build(BuildContext context) {
+    List pages = [
+      HomeScreen(),
+      ChatsScreen(), userType == "Manager" ? UsersScreen() : FindHouseScreen(),
+      SettingsScreen(),
+      // AiScreen(),
+    ];
+
     return Scaffold(
       appBar: _selectedindex == 0 || _selectedindex == 2 || _selectedindex == 1
           ? null
