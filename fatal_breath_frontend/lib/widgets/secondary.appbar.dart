@@ -53,11 +53,11 @@ class _SecondaryAppBarState extends State<SecondaryAppBar> {
       actions: widget.isProfile == true
           ? [
               Padding(
-                padding: const EdgeInsets.only(top: 10, bottom: 10, right: 10),
+                padding: const EdgeInsets.only(top: 15, bottom: 15, right: 10),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(100),
                   child: Container(
-                    width: 60,
+                    width: 50,
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white,
