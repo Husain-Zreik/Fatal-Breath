@@ -145,7 +145,8 @@ class _ChatsScreenState extends State<ChatsScreen> {
       body: houses!.isEmpty && userType == "Manager"
           ? const HomeEmptyStateScreen()
           : userType == "User"
-              ? const UserEmptyStateScreen(text: "You are not in any house")
+              ? const UserEmptyStateScreen(
+                  text: "You are not a member in any house")
               : members!.isEmpty
                   ? const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
