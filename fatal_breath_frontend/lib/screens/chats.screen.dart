@@ -1,8 +1,10 @@
 import 'package:fatal_breath_frontend/providers/house.provider.dart';
 import 'package:fatal_breath_frontend/screens/empty/home.empty.state.screen.dart';
+import 'package:fatal_breath_frontend/screens/messages.screen.dart';
 import 'package:fatal_breath_frontend/utils/text.note.dart';
 import 'package:fatal_breath_frontend/widgets/contact.box.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class ChatsScreen extends StatefulWidget {
@@ -38,12 +40,18 @@ class _ChatsScreenState extends State<ChatsScreen> {
               )
             : SingleChildScrollView(
                 child: Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.only(
+                        top: 20, left: 5, right: 5, bottom: 30),
                     child: Column(
                       children: [
                         for (final user in members!)
-                          ContactBox(
-                            user: user,
+                          InkWell(
+                            onTap: () {
+                              Get.to(() => MessagesScreen(user: user));
+                            },
+                            child: ContactBox(
+                              user: user,
+                            ),
                           ),
                       ],
                     )));
