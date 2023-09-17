@@ -34,6 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (userType == "Manager") {
       Provider.of<HouseProvider>(context, listen: false).getAdminHouses();
+    } else {
+      Provider.of<HouseProvider>(context, listen: false).getUserHouses();
     }
     name = Provider.of<UserProvider>(context, listen: false).getName;
   }
