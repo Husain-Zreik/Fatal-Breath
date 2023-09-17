@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
       await Provider.of<UserProvider>(context, listen: false).getUser(context);
       userType = Provider.of<UserProvider>(context, listen: false).getUserType;
 
-      if (userType == "admin") {
+      if (userType == "Manager") {
         await Provider.of<HouseProvider>(context, listen: false)
             .getAdminHouses();
       }
