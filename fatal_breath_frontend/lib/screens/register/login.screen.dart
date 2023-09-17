@@ -4,7 +4,7 @@ import 'package:fatal_breath_frontend/providers/auth.provider.dart';
 import 'package:fatal_breath_frontend/providers/house.provider.dart';
 import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/screens/main.screen.dart';
-import 'package:fatal_breath_frontend/screens/signup.screen.dart';
+import 'package:fatal_breath_frontend/screens/register/signup.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/widgets/button.global.dart';
 import 'package:fatal_breath_frontend/widgets/text.form.dart';

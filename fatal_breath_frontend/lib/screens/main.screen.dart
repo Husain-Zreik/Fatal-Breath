@@ -2,8 +2,8 @@
 
 // import 'package:fatal_breath_frontend/screens/ai.screen.dart';
 import 'package:fatal_breath_frontend/screens/chats.screen.dart';
-import 'package:fatal_breath_frontend/screens/home.screen.dart';
-import 'package:fatal_breath_frontend/screens/settings.screen.dart';
+import 'package:fatal_breath_frontend/screens/home/home.screen.dart';
+import 'package:fatal_breath_frontend/screens/settings/settings.screen.dart';
 import 'package:fatal_breath_frontend/screens/users.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:flutter/material.dart';

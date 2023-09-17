@@ -3,7 +3,7 @@
 import 'dart:io';
 
 import 'package:fatal_breath_frontend/providers/auth.provider.dart';
-import 'package:fatal_breath_frontend/screens/login.screen.dart';
+import 'package:fatal_breath_frontend/screens/register/login.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/widgets/button.global.dart';
 import 'package:fatal_breath_frontend/widgets/text.form.dart';

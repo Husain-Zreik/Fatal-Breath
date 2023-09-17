@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:fatal_breath_frontend/screens/login.screen.dart';
+import 'package:fatal_breath_frontend/screens/register/login.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
