@@ -1,24 +1,53 @@
+import 'dart:io';
+
 import 'package:fatal_breath_frontend/models/house.model.dart';
 import 'package:fatal_breath_frontend/models/room.model.dart';
+import 'package:fatal_breath_frontend/providers/room.provider.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/widgets/secondary.appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:provider/provider.dart';
 
-class RoomDetailsScreen extends StatelessWidget {
+class RoomDetailsScreen extends StatefulWidget {
   const RoomDetailsScreen({super.key, required this.room, required this.house});
 
   final House house;
   final Room room;
+
+  @override
+  State<RoomDetailsScreen> createState() => _RoomDetailsScreenState();
+}
+
+class _RoomDetailsScreenState extends State<RoomDetailsScreen> {
   final int percent = 50;
+  late Map weatherData = {};
+
+  Future<void> fetchWeather() async {
+    try {
+      final data = await Provider.of<RoomProvider>(context, listen: false)
+          .fetchWeather(widget.house.city, widget.house.country);
+      setState(() {
+        weatherData = data;
+      });
+    } catch (e) {
+      throw HttpException('Error fetching weather data:$e');
+    }
+  }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   fetchWeather();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80),
-        child: SecondaryAppBar(title: room.name),
+        child: SecondaryAppBar(title: widget.room.name),
       ),
       backgroundColor: GlobalColors.bgColor,
       body: SafeArea(
@@ -59,7 +88,7 @@ class RoomDetailsScreen extends StatelessWidget {
                           Text("Oxygen",
                               style: GoogleFonts.poppins(
                                 color: Colors.white,
-                                fontSize: 20,
+                                fontSize: 16,
                                 fontWeight: FontWeight.w500,
                               )),
                         ],
@@ -81,7 +110,7 @@ class RoomDetailsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        height: 47,
+                        height: 40,
                         padding: const EdgeInsets.all(7),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -101,17 +130,17 @@ class RoomDetailsScreen extends StatelessWidget {
                             const SizedBox(
                               width: 5,
                             ),
-                            Text("30%",
+                            Text("${weatherData["temp"]}°C",
                                 style: GoogleFonts.poppins(
                                   color: Colors.black,
-                                  fontSize: 20,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                 )),
                           ],
                         ),
                       ),
                       Container(
-                        height: 47,
+                        height: 40,
                         padding: const EdgeInsets.all(7),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -131,17 +160,17 @@ class RoomDetailsScreen extends StatelessWidget {
                             const SizedBox(
                               width: 5,
                             ),
-                            Text("30%",
+                            Text("${weatherData["wind"]}m/s",
                                 style: GoogleFonts.poppins(
                                   color: Colors.black,
-                                  fontSize: 20,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                 )),
                           ],
                         ),
                       ),
                       Container(
-                        height: 47,
+                        height: 40,
                         padding: const EdgeInsets.all(7),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -161,10 +190,10 @@ class RoomDetailsScreen extends StatelessWidget {
                             const SizedBox(
                               width: 5,
                             ),
-                            Text("30%",
+                            Text("${weatherData["humidity"]}%",
                                 style: GoogleFonts.poppins(
                                   color: Colors.black,
-                                  fontSize: 20,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                 )),
                           ],
