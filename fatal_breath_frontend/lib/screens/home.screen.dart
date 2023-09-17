@@ -229,10 +229,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               SizedBox(
                                                 width: 60,
                                                 child: Image.asset(
-                                                  // ignore: prefer_interpolation_to_compose_strings
-                                                  'assets/images/' +
-                                                      room.type +
-                                                      '.png',
+                                                  'assets/images/${room.type}.png',
                                                   scale: 1.2,
                                                 ),
                                               ),
