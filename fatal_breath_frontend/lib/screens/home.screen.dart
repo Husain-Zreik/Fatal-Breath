@@ -2,6 +2,7 @@ import 'package:fatal_breath_frontend/providers/house.provider.dart';
 import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/screens/empty/home.empty.state.screen.dart';
 import 'package:fatal_breath_frontend/screens/empty/house.empty.state.screen.dart';
+import 'package:fatal_breath_frontend/screens/empty/user.empty.state.screen.dart';
 import 'package:fatal_breath_frontend/screens/home/add.house.screen.dart';
 import 'package:fatal_breath_frontend/screens/home/add.room.screen.dart';
 import 'package:fatal_breath_frontend/screens/home/room.details.screen.dart';
@@ -138,7 +139,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
         ),
         body: houses!.isEmpty
-            ? const HomeEmptyStateScreen()
+            ? userType == "Manager"
+                ? const HomeEmptyStateScreen()
+                : const UserEmptyStateScreen(
+                    text: "You are not a member in any house",
+                  )
             : TabBarView(
                 physics: const BouncingScrollPhysics(),
                 children: [
@@ -148,61 +153,63 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Padding(
                             padding: const EdgeInsets.only(bottom: 30),
                             child: Column(children: [
-                              InkWell(
-                                onTap: () {
-                                  Get.to(
-                                      () => AddRoomScreen(houseId: house.id));
-                                },
-                                child: Container(
-                                  margin:
-                                      const EdgeInsets.fromLTRB(20, 20, 20, 5),
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        spreadRadius: 2,
-                                        blurRadius: 5,
-                                        offset: const Offset(0, 3),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              SizedBox(
-                                                  width: 60,
-                                                  child: Icon(
-                                                    Icons.add_circle_outline,
-                                                    size: 35,
-                                                    color:
-                                                        GlobalColors.mainColor,
-                                                  )),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(10),
-                                                child: Text("Add Room",
-                                                    style: GoogleFonts.poppins(
-                                                      color: Colors.black,
-                                                      fontSize: 18,
-                                                      fontWeight:
-                                                          FontWeight.w600,
+                              if (userType == "Manager")
+                                InkWell(
+                                  onTap: () {
+                                    Get.to(
+                                        () => AddRoomScreen(houseId: house.id));
+                                  },
+                                  child: Container(
+                                    margin: const EdgeInsets.fromLTRB(
+                                        20, 20, 20, 5),
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: const Offset(0, 3),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                SizedBox(
+                                                    width: 60,
+                                                    child: Icon(
+                                                      Icons.add_circle_outline,
+                                                      size: 35,
+                                                      color: GlobalColors
+                                                          .mainColor,
                                                     )),
-                                              ),
-                                            ],
-                                          )
-                                        ]),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(10),
+                                                  child: Text("Add Room",
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        color: Colors.black,
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      )),
+                                                ),
+                                              ],
+                                            )
+                                          ]),
+                                    ),
                                   ),
                                 ),
-                              ),
                               for (final room in house.rooms!)
                                 InkWell(
                                   onTap: () {
@@ -318,29 +325,34 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                             ]),
                           ))
-                        : HouseEmptyStateScreen(
-                            houseId: house.id,
-                          ),
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const TextTitle(text: "Add House"),
-                          const SizedBox(height: 20),
-                          ButtonGlobal(
-                            bgColor: GlobalColors.mainColor,
-                            textColor: Colors.white,
-                            icon: Icons.add,
-                            onBtnPressed: () {
-                              Get.to(() => const AddHouseScreen());
-                            },
-                          )
-                        ],
+                        : userType == "Manager"
+                            ? HouseEmptyStateScreen(
+                                houseId: house.id,
+                              )
+                            : const UserEmptyStateScreen(
+                                text: "There are no rooms in this house",
+                              ),
+                  if (userType == "Manager")
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const TextTitle(text: "Add House"),
+                            const SizedBox(height: 20),
+                            ButtonGlobal(
+                              bgColor: GlobalColors.mainColor,
+                              textColor: Colors.white,
+                              icon: Icons.add,
+                              onBtnPressed: () {
+                                Get.to(() => const AddHouseScreen());
+                              },
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  )
+                    )
                 ],
               ),
       ),
