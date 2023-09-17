@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 // import 'package:fatal_breath_frontend/screens/ai.screen.dart';
-import 'package:fatal_breath_frontend/screens/chats.screen.dart';
+import 'package:fatal_breath_frontend/screens/chats/chats.screen.dart';
 import 'package:fatal_breath_frontend/screens/home/home.screen.dart';
 import 'package:fatal_breath_frontend/screens/settings/settings.screen.dart';
 import 'package:fatal_breath_frontend/screens/users.screen.dart';

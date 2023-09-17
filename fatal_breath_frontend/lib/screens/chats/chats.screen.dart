@@ -1,7 +1,7 @@
 import 'package:fatal_breath_frontend/providers/house.provider.dart';
 import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/screens/empty/home.empty.state.screen.dart';
-import 'package:fatal_breath_frontend/screens/messages.screen.dart';
+import 'package:fatal_breath_frontend/screens/chats/messages.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/utils/text.note.dart';
 import 'package:fatal_breath_frontend/widgets/contact.box.dart';
