@@ -68,7 +68,7 @@ class ContactBox extends StatelessWidget {
                 ),
               ],
             ),
-            child ?? child!,
+            if (child != null) child!
           ],
         ),
       ),
