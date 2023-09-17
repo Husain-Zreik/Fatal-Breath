@@ -1,17 +1,23 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, unused_local_variable
 
 import 'dart:io';
 
 import 'package:fatal_breath_frontend/config/remote.config.dart';
 import 'package:fatal_breath_frontend/enums/request.methods.dart';
 import 'package:fatal_breath_frontend/models/house.model.dart';
+import 'package:fatal_breath_frontend/models/user.model.dart';
 import 'package:flutter/material.dart';
 
 class HouseProvider with ChangeNotifier {
   List? adminHouses;
+  List? members;
 
   List? get getHouses {
     return adminHouses;
+  }
+
+  List? get getMembers {
+    return members;
   }
 
   Future createHouse(name, country, city, context) async {
@@ -26,7 +32,6 @@ class HouseProvider with ChangeNotifier {
           method: RequestMethods.POST,
           load: body);
 
-      print(response);
       await getAdminHouses();
 
       notifyListeners();
@@ -50,9 +55,18 @@ class HouseProvider with ChangeNotifier {
         houses.add(house);
       }
 
-      print(response);
+      List<User> allMembers = [];
+
+      if (houses.isNotEmpty) {
+        for (var house in houses) {
+          if (house.members != null) {
+            allMembers.addAll(house.members!);
+          }
+        }
+      }
 
       adminHouses = houses;
+      members = allMembers;
 
       notifyListeners();
     } catch (e) {
@@ -67,7 +81,6 @@ class HouseProvider with ChangeNotifier {
         method: RequestMethods.DELETE,
       );
 
-      print(response);
       await getAdminHouses();
 
       notifyListeners();
@@ -88,7 +101,6 @@ class HouseProvider with ChangeNotifier {
           method: RequestMethods.POST,
           load: body);
 
-      print(response);
       await getAdminHouses();
 
       notifyListeners();
@@ -108,7 +120,6 @@ class HouseProvider with ChangeNotifier {
           method: RequestMethods.POST,
           load: body);
 
-      print(response);
       await getAdminHouses();
 
       notifyListeners();
