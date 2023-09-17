@@ -24,11 +24,16 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List? houses;
   String? name;
+  String? userType;
 
   @override
   void initState() {
     super.initState();
-    Provider.of<HouseProvider>(context, listen: false).getAdminHouses();
+    userType = Provider.of<UserProvider>(context, listen: false).getUserType;
+
+    if (userType == "Manager") {
+      Provider.of<HouseProvider>(context, listen: false).getAdminHouses();
+    }
     name = Provider.of<UserProvider>(context, listen: false).getName;
   }
 
@@ -36,7 +41,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     houses = Provider.of<HouseProvider>(context).getHouses ?? [];
     return DefaultTabController(
-      length: houses!.isEmpty ? 0 : houses!.length + 1,
+      length: houses!.isEmpty
+          ? 0
+          : userType == "Manager"
+              ? houses!.length + 1
+              : houses!.length,
       child: Scaffold(
         backgroundColor: GlobalColors.bgColor,
         appBar: AppBar(
@@ -119,9 +128,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           Tab(
                             text: house.name,
                           ),
-                        const Tab(
-                          text: "Add house",
-                        )
+                        if (userType == "Manager")
+                          const Tab(
+                            text: "Add house",
+                          )
                       ],
                     ),
                   ),
