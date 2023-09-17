@@ -60,7 +60,7 @@ class _MainScreenState extends State<MainScreen> {
                                   : "Breathy",
                   style: GoogleFonts.poppins(
                     color: GlobalColors.mainColor,
-                    fontSize: 22,
+                    fontSize: 24,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
