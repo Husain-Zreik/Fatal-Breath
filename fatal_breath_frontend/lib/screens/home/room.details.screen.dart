@@ -36,11 +36,11 @@ class _RoomDetailsScreenState extends State<RoomDetailsScreen> {
     }
   }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   fetchWeather();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    fetchWeather();
+  }
 
   @override
   Widget build(BuildContext context) {
