@@ -9,11 +9,11 @@ import 'package:fatal_breath_frontend/models/user.model.dart';
 import 'package:flutter/material.dart';
 
 class HouseProvider with ChangeNotifier {
-  List? adminHouses;
+  List? _houses;
   List? members;
 
   List? get getHouses {
-    return adminHouses;
+    return _houses;
   }
 
   List? get getMembers {
@@ -69,7 +69,45 @@ class HouseProvider with ChangeNotifier {
 
       List<User> allMembers = allMembersMap.values.toList();
 
-      adminHouses = houses;
+      _houses = houses;
+      members = allMembers;
+
+      notifyListeners();
+    } catch (e) {
+      throw HttpException('$e');
+    }
+  }
+
+  Future getUserHouses() async {
+    try {
+      final response = await sendRequest(
+        route: "/api/user/member/get-houses",
+        method: RequestMethods.GET,
+      );
+
+      final List<dynamic> houseList = response['houses'];
+      List<House> houses = [];
+
+      for (var houseData in houseList) {
+        House house = House.fromJson(houseData);
+        houses.add(house);
+      }
+
+      Map<int, User> allMembersMap = {};
+
+      if (houses.isNotEmpty) {
+        for (var house in houses) {
+          if (house.members != null) {
+            for (var member in house.members!) {
+              allMembersMap[member.id] = member;
+            }
+          }
+        }
+      }
+
+      List<User> allMembers = allMembersMap.values.toList();
+
+      _houses = houses;
       members = allMembers;
 
       notifyListeners();
