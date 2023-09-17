@@ -6,10 +6,12 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SecondaryAppBar extends StatefulWidget {
-  const SecondaryAppBar({Key? key, required this.title, this.isProfile})
+  const SecondaryAppBar(
+      {Key? key, required this.title, this.isProfile, this.imageLink})
       : super(key: key);
 
   final String title;
+  final String? imageLink;
   final bool? isProfile;
 
   @override
@@ -51,25 +53,25 @@ class _SecondaryAppBarState extends State<SecondaryAppBar> {
       actions: widget.isProfile == true
           ? [
               Padding(
-                padding: EdgeInsets.only(right: 10),
+                padding: const EdgeInsets.only(top: 10, bottom: 10, right: 10),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(100),
                   child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                      ),
-                      child:
-                          // value?.image != null && value.image.isNotEmpty
-                          //     ? Image.memory(
-                          //         base64Decode(value.image),
-                          //         fit: BoxFit.cover,
-                          //         width: 120,
-                          //         height: 120,
-                          //       ):
-                          Image.asset("assets/images/account_circle.png")),
+                    width: 60,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                    ),
+                    child: widget.imageLink == null
+                        ? Image.asset(
+                            'assets/images/account_circle.png',
+                            fit: BoxFit.cover,
+                          )
+                        : Image.network(
+                            widget.imageLink!,
+                            fit: BoxFit.cover,
+                          ),
+                  ),
                 ),
               ),
             ]
