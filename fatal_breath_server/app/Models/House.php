@@ -23,14 +23,14 @@ class House extends Model
         return $this->belongsTo(User::class, 'owner_id');
     }
 
-    public function rooms()
-    {
-        return $this->hasMany(Room::class);
-    }
-
     public function members()
     {
         return $this->belongsToMany(User::class, 'users_houses', 'house_id', 'user_id');
+    }
+
+    public function rooms()
+    {
+        return $this->hasMany(Room::class, 'house_id');
     }
 
     public function joinRequests()
