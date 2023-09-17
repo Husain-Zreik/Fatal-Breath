@@ -45,8 +45,7 @@ dependencies:
   fluttericon: ^2.0.0
   image_picker: ^1.0.4
   percent_indicator: ^4.2.3
-
-
+  http: ^1.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
