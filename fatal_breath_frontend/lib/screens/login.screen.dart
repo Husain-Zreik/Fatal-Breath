@@ -25,6 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final _form = GlobalKey<FormState>();
+  String? userType;
   String err = "";
   bool successful = true;
   bool validated() {
@@ -46,8 +47,12 @@ class _LoginScreenState extends State<LoginScreen> {
           .login(email, password, context);
 
       await Provider.of<UserProvider>(context, listen: false).getUser(context);
+      userType = Provider.of<UserProvider>(context, listen: false).getUserType;
 
-      await Provider.of<HouseProvider>(context, listen: false).getAdminHouses();
+      if (userType == "admin") {
+        await Provider.of<HouseProvider>(context, listen: false)
+            .getAdminHouses();
+      }
 
       Get.to(() => const MainScreen());
     } on HttpException catch (error) {
