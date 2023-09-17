@@ -42,7 +42,7 @@ class HouseController extends Controller
         }
     }
 
-    public function getHouses()
+    public function getAdminHouses()
     {
         $user = Auth::user();
 
@@ -60,5 +60,21 @@ class HouseController extends Controller
             'message' => 'Houses retrieved successfully',
             'houses' => $houses,
         ]);
+    }
+
+    public function getUserHouses()
+    {
+        $user = Auth::user();
+
+        $houses = $user->houses()->with('rooms', 'members')->get();
+
+        // You can customize the response format as needed
+        $response = [
+            'status' => 'success',
+            'message' => 'Houses retrieved successfully',
+            'houses' => $houses,
+        ];
+
+        return response()->json($response);
     }
 }
