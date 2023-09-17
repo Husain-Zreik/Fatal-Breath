@@ -3,7 +3,7 @@ import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/screens/empty/home.empty.state.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/utils/text.note.dart';
-import 'package:fatal_breath_frontend/widgets/profile.circle.dart';
+import 'package:fatal_breath_frontend/widgets/contact.box.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +22,6 @@ class _UsersScreenState extends State<UsersScreen> {
 
   String? image;
   List? houses;
-  // List? searchList = [];
 
   Future removePressed(houseId, userId, context) async {
     await Provider.of<HouseProvider>(context, listen: false)
@@ -114,7 +113,6 @@ class _UsersScreenState extends State<UsersScreen> {
                 borderRadius: BorderRadius.circular(100),
                 child: Container(
                   width: 60,
-                  // height: 15,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.white,
@@ -223,115 +221,42 @@ class _UsersScreenState extends State<UsersScreen> {
                                 ),
                               ),
                               for (final user in searchLists[house.id]!)
-                                Container(
-                                  margin:
-                                      const EdgeInsets.fromLTRB(20, 5, 20, 0),
-                                  height: 80,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        spreadRadius: 2,
-                                        blurRadius: 5,
-                                        offset: const Offset(0, 3),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                                width: 60,
-                                                child: ProfileCircle(
-                                                  size: 60,
-                                                  imageLink: user
-                                                              .profileImage !=
-                                                          null
-                                                      ? 'http://192.168.1.5:8000/storage/profile_images/${user.id}.png'
-                                                      : null,
-                                                )),
-                                            Padding(
-                                              padding: const EdgeInsets.all(10),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(user.username,
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                        color: Colors.black,
-                                                        fontSize: 18,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      )),
-                                                  const SizedBox(
-                                                    height: 5,
-                                                  ),
-                                                  Text(user.name,
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                        color: Colors.black,
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                      ))
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            toggleInvitePressed(
-                                                house.id,
-                                                user.id,
-                                                searchTerms[house.id],
-                                                context);
-                                          },
-                                          child: Container(
-                                            height: 25,
-                                            width: 70,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(40),
-                                              color: Colors.blue,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 2,
-                                                  blurRadius: 5,
-                                                  offset: const Offset(0, 3),
-                                                ),
-                                              ],
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                  user.isInvited
-                                                      ? "Cancel"
-                                                      : "Invite",
-                                                  style: GoogleFonts.poppins(
-                                                    color: Colors.white,
-                                                    fontSize: 10,
-                                                    fontWeight: FontWeight.w500,
-                                                  )),
-                                            ),
+                                ContactBox(
+                                  user: user,
+                                  child: InkWell(
+                                    onTap: () {
+                                      toggleInvitePressed(house.id, user.id,
+                                          searchTerms[house.id], context);
+                                    },
+                                    child: Container(
+                                      height: 25,
+                                      width: 70,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(40),
+                                        color: Colors.blue,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: const Offset(0, 3),
                                           ),
-                                        )
-                                      ],
+                                        ],
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                            user.isInvited
+                                                ? "Cancel"
+                                                : "Invite",
+                                            style: GoogleFonts.poppins(
+                                              color: Colors.white,
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w500,
+                                            )),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                )
                             ],
                           ),
                         if (house.members != null &&
@@ -353,109 +278,39 @@ class _UsersScreenState extends State<UsersScreen> {
                                 ),
                               ),
                               for (final member in house.members!)
-                                Container(
-                                  margin:
-                                      const EdgeInsets.fromLTRB(20, 5, 20, 0),
-                                  height: 80,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        spreadRadius: 2,
-                                        blurRadius: 5,
-                                        offset: const Offset(0, 3),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                                width: 60,
-                                                child: ProfileCircle(
-                                                  size: 60,
-                                                  imageLink: member
-                                                              .profileImage !=
-                                                          null
-                                                      ? 'http://192.168.1.5:8000/storage/profile_images/${member.id}.png'
-                                                      : null,
-                                                )),
-                                            Padding(
-                                              padding: const EdgeInsets.all(10),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(member.username,
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                        color: Colors.black,
-                                                        fontSize: 18,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      )),
-                                                  const SizedBox(
-                                                    height: 5,
-                                                  ),
-                                                  Text(member.name,
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                        color: Colors.black,
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                      ))
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            removePressed(
-                                                house.id, member.id, context);
-                                          },
-                                          child: Container(
-                                            height: 25,
-                                            width: 70,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(40),
-                                              color: Colors.red,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 2,
-                                                  blurRadius: 5,
-                                                  offset: const Offset(0, 3),
-                                                ),
-                                              ],
-                                            ),
-                                            child: Center(
-                                              child: Text("Remove",
-                                                  style: GoogleFonts.poppins(
-                                                    color: Colors.white,
-                                                    fontSize: 10,
-                                                    fontWeight: FontWeight.w500,
-                                                  )),
-                                            ),
+                                ContactBox(
+                                  user: member,
+                                  child: InkWell(
+                                    onTap: () {
+                                      removePressed(
+                                          house.id, member.id, context);
+                                    },
+                                    child: Container(
+                                      height: 25,
+                                      width: 70,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(40),
+                                        color: Colors.red,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: const Offset(0, 3),
                                           ),
-                                        )
-                                      ],
+                                        ],
+                                      ),
+                                      child: Center(
+                                        child: Text("Remove",
+                                            style: GoogleFonts.poppins(
+                                              color: Colors.white,
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w500,
+                                            )),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                )
                             ],
                           ),
                         if (house.requests != null &&
@@ -477,162 +332,81 @@ class _UsersScreenState extends State<UsersScreen> {
                                 ),
                               ),
                               for (final request in house.requests!)
-                                Container(
-                                  margin:
-                                      const EdgeInsets.fromLTRB(20, 5, 20, 0),
-                                  height: 80,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        spreadRadius: 2,
-                                        blurRadius: 5,
-                                        offset: const Offset(0, 3),
+                                ContactBox(
+                                  user: request,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          handleRequest(house.id, request.id,
+                                              "Accept", context);
+                                        },
+                                        child: Container(
+                                          height: 25,
+                                          width: 70,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(40),
+                                            color: Colors.blue,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.grey
+                                                    .withOpacity(0.5),
+                                                spreadRadius: 2,
+                                                blurRadius: 5,
+                                                offset: const Offset(0, 3),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Center(
+                                            child: Text("Accept",
+                                                style: GoogleFonts.poppins(
+                                                  color: Colors.white,
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w500,
+                                                )),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          handleRequest(house.id, request.id,
+                                              "Decline", context);
+                                        },
+                                        child: Container(
+                                          height: 25,
+                                          width: 70,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(40),
+                                            color: Colors.red,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.grey
+                                                    .withOpacity(0.5),
+                                                spreadRadius: 2,
+                                                blurRadius: 5,
+                                                offset: const Offset(0, 3),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Center(
+                                            child: Text("Decline",
+                                                style: GoogleFonts.poppins(
+                                                  color: Colors.white,
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w500,
+                                                )),
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                                width: 60,
-                                                child: ProfileCircle(
-                                                  size: 60,
-                                                  imageLink: request
-                                                              .profileImage !=
-                                                          null
-                                                      ? 'http://192.168.1.5:8000/storage/profile_images/${request.id}.png'
-                                                      : null,
-                                                )),
-                                            Padding(
-                                              padding: const EdgeInsets.all(10),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(request.username,
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                        color: Colors.black,
-                                                        fontSize: 18,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      )),
-                                                  const SizedBox(
-                                                    height: 5,
-                                                  ),
-                                                  Text(request.name,
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                        color: Colors.black,
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                      ))
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            InkWell(
-                                              onTap: () {
-                                                handleRequest(
-                                                    house.id,
-                                                    request.id,
-                                                    "Accept",
-                                                    context);
-                                              },
-                                              child: Container(
-                                                height: 25,
-                                                width: 70,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(40),
-                                                  color: Colors.blue,
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey
-                                                          .withOpacity(0.5),
-                                                      spreadRadius: 2,
-                                                      blurRadius: 5,
-                                                      offset:
-                                                          const Offset(0, 3),
-                                                    ),
-                                                  ],
-                                                ),
-                                                child: Center(
-                                                  child: Text("Accept",
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                        color: Colors.white,
-                                                        fontSize: 10,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      )),
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            InkWell(
-                                              onTap: () {
-                                                handleRequest(
-                                                    house.id,
-                                                    request.id,
-                                                    "Decline",
-                                                    context);
-                                              },
-                                              child: Container(
-                                                height: 25,
-                                                width: 70,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(40),
-                                                  color: Colors.red,
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey
-                                                          .withOpacity(0.5),
-                                                      spreadRadius: 2,
-                                                      blurRadius: 5,
-                                                      offset:
-                                                          const Offset(0, 3),
-                                                    ),
-                                                  ],
-                                                ),
-                                                child: Center(
-                                                  child: Text("Decline",
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                        color: Colors.white,
-                                                        fontSize: 10,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      )),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                                )
                             ],
                           )
                         else if (house.requests == null &&
