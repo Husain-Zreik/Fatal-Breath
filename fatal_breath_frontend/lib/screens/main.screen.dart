@@ -32,7 +32,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _selectedindex == 0 || _selectedindex == 2
+      appBar: _selectedindex == 0 || _selectedindex == 2 || _selectedindex == 1
           ? null
           : AppBar(
               backgroundColor: GlobalColors.bgColor,
