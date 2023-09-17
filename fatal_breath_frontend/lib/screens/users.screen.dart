@@ -108,11 +108,11 @@ class _UsersScreenState extends State<UsersScreen> {
           ),
           actions: [
             Padding(
-              padding: const EdgeInsets.only(top: 15, bottom: 5, right: 10),
+              padding: const EdgeInsets.only(top: 17, bottom: 10, right: 10),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(100),
                 child: Container(
-                  width: 60,
+                  width: 53,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.white,

@@ -8,6 +8,7 @@ import 'package:fatal_breath_frontend/widgets/contact.box.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
 class ChatsScreen extends StatefulWidget {
@@ -60,23 +61,72 @@ class _ChatsScreenState extends State<ChatsScreen> {
                   ),
                   title: Padding(
                     padding: const EdgeInsets.only(top: 13),
-                    child: Text(
-                      "Chats",
-                      style: GoogleFonts.poppins(
-                        color: GlobalColors.mainColor,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              'FATAL',
+                              style: TextStyle(
+                                color: GlobalColors.textColor,
+                                fontSize: 26,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                            Text(
+                              'CHAT',
+                              style: TextStyle(
+                                color: HexColor('#1424B9'),
+                                fontSize: 26,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 10,
+                              width: 10,
+                              decoration: const BoxDecoration(
+                                  shape: BoxShape.circle, color: Colors.green),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text("Online",
+                                style: GoogleFonts.poppins(
+                                  color: GlobalColors.mainColor,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                )),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
+                  // title: Padding(
+                  //   padding: const EdgeInsets.only(top: 13),
+                  //   child: Text(
+                  //     "Chats",
+                  //     style: GoogleFonts.poppins(
+                  //       color: GlobalColors.mainColor,
+                  //       fontSize: 24,
+                  //       fontWeight: FontWeight.w600,
+                  //     ),
+                  //   ),
+                  // ),
                   actions: [
                     Padding(
                       padding:
-                          const EdgeInsets.only(top: 15, bottom: 8, right: 10),
+                          const EdgeInsets.only(top: 17, bottom: 10, right: 10),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(100),
                         child: Container(
-                          width: 55,
+                          width: 53,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.white,
