@@ -52,6 +52,9 @@ class _LoginScreenState extends State<LoginScreen> {
       if (userType == "Manager") {
         await Provider.of<HouseProvider>(context, listen: false)
             .getAdminHouses();
+      } else {
+        await Provider.of<HouseProvider>(context, listen: false)
+            .getUserHouses();
       }
 
       Get.to(() => const MainScreen());
