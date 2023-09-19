@@ -47,12 +47,11 @@ class AuthProvider with ChangeNotifier {
             "password": password1,
           });
 
-      // Save user id and token with the correct types
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString("user_id", response['user']['id'].toString());
+      await prefs.setInt("user_id", response['user']['id']);
       await prefs.setString("token", response['user']['token']);
 
-      userId = response['user']['id'].toString();
+      userId = response['user']['id'];
       token = response['user']['token'];
       password = password1;
 
@@ -93,12 +92,11 @@ class AuthProvider with ChangeNotifier {
         },
       );
 
-      //Save user id and token
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString("user_id", response['user']['id'].toString());
+      await prefs.setInt("user_id", response['user']['id']);
       await prefs.setString("token", response['user']['token']);
 
-      userId = response['user']['id'].toString();
+      userId = response['user']['id'];
       token = response['user']['token'];
 
       notifyListeners();
