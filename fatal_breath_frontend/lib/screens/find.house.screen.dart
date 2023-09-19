@@ -55,6 +55,18 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
     }
   }
 
+  Future toggleRequestPressed(houseId, userId, searchTerm, context) async {
+    await Provider.of<HouseProvider>(context, listen: false)
+        .toggleRequest(houseId, userId, context);
+
+    await Provider.of<UserProvider>(context, listen: false)
+        .houseSearch(searchTerm, context);
+    setState(() {
+      searchList =
+          Provider.of<UserProvider>(context, listen: false).getSearchList!;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
