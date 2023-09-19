@@ -24,7 +24,6 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
         Route::post("/search", [ManagerController::class, "searchUsers"]);
         Route::post('/process-request', [ManagerController::class, "processRequest"]);
         Route::post('/toggle-invitation', [ManagerController::class, "toggleInvitation"]);
-        Route::delete('/remove-member/{houseId}/{userId}', [ManagerController::class, "removeMember"]);
         Route::get("/{houseId}/get-requests-members", [ManagerController::class, "getRequestsAndMembers"]);
     });
 
@@ -32,6 +31,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
         Route::get("/get-houses", [HouseController::class, "getUserHouses"]);
     });
 
+    Route::delete('/remove-member/{houseId}/{userId}', [UserController::class, "removeMember"]);
     Route::get("/info", [UserController::class, "getUser"]);
     Route::post("/info/update", [UserController::class, "updateProfile"]);
     Route::post('/info/change-password', [UserController::class, 'changePassword']);
