@@ -55,6 +55,13 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Notification::class);
     }
 
+    public function invitedHouses()
+    {
+        return $this->belongsToMany(House::class, 'membership_requests', 'user_id', 'house_id')
+            ->where('type', 'Invitation')
+            ->where('status', 'Pending');
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
