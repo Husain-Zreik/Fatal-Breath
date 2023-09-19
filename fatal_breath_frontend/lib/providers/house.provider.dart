@@ -6,7 +6,9 @@ import 'package:fatal_breath_frontend/config/remote.config.dart';
 import 'package:fatal_breath_frontend/enums/request.methods.dart';
 import 'package:fatal_breath_frontend/models/house.model.dart';
 import 'package:fatal_breath_frontend/models/user.model.dart';
+import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HouseProvider with ChangeNotifier {
   List? _houses;
@@ -136,8 +138,14 @@ class HouseProvider with ChangeNotifier {
         route: "/api/user/admin/remove-member/$houseId/$userId",
         method: RequestMethods.DELETE,
       );
+      final user =
+          Provider.of<UserProvider>(context, listen: false).getCurrentUser;
 
-      await getAdminHouses();
+      if (user!.role == 1) {
+        await getAdminHouses();
+      } else {
+        await getUserHouses();
+      }
 
       notifyListeners();
     } catch (e) {
