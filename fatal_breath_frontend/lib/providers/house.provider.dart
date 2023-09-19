@@ -11,9 +11,14 @@ import 'package:flutter/material.dart';
 class HouseProvider with ChangeNotifier {
   List? _houses;
   List? members;
+  List? invitations;
 
   List? get getHouses {
     return _houses;
+  }
+
+  List? get getInvitations {
+    return invitations;
   }
 
   List? get getMembers {
@@ -88,6 +93,14 @@ class HouseProvider with ChangeNotifier {
       final List<dynamic> houseList = response['houses'];
       List<House> houses = [];
 
+      final List<dynamic> invitedHouseList = response['invitations'];
+      List<House> invitedHouses = [];
+
+      for (var invitedHouseData in invitedHouseList) {
+        House invitedHouse = House.fromJson(invitedHouseData);
+        invitedHouses.add(invitedHouse);
+      }
+
       for (var houseData in houseList) {
         House house = House.fromJson(houseData);
         houses.add(house);
@@ -107,6 +120,7 @@ class HouseProvider with ChangeNotifier {
 
       List<User> allMembers = allMembersMap.values.toList();
 
+      invitations = invitedHouses;
       _houses = houses;
       members = allMembers;
 
