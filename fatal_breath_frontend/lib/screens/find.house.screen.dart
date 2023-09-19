@@ -327,13 +327,13 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
                     ),
                   )
               ],
-            )
-          else if (searchList != null && searchList!.isEmpty)
+            ),
+          if (searchList != null && searchList!.isEmpty)
             const Padding(
               padding: EdgeInsets.only(top: 20, right: 20, left: 23),
               child: TextNote(text: "House Not Found."),
-            )
-          else
+            ),
+          if (searchList == null && invitations!.isEmpty && houses!.isEmpty)
             const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
