@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ContactBox extends StatelessWidget {
-  const ContactBox({Key? key, this.child, required this.user})
+  const ContactBox({Key? key, this.child, required this.user, this.houseName})
       : super(key: key);
 
   final User user;
+  final String? houseName;
   final Widget? child;
 
   @override
@@ -57,7 +58,7 @@ class ContactBox extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      Text(user.name,
+                      Text(houseName != null ? houseName! : user.name,
                           style: GoogleFonts.poppins(
                             color: Colors.black,
                             fontSize: 12,
