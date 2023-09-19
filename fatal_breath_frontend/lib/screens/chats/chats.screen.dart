@@ -42,6 +42,8 @@ class _ChatsScreenState extends State<ChatsScreen> {
     houses = Provider.of<HouseProvider>(context).getHouses ?? [];
     members = Provider.of<HouseProvider>(context).getMembers ?? [];
     image = Provider.of<UserProvider>(context, listen: false).getImage;
+    print(houses);
+    print(members);
 
     return Scaffold(
       backgroundColor: GlobalColors.bgColor,
@@ -144,7 +146,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
       ),
       body: houses!.isEmpty && userType == "Manager"
           ? const HomeEmptyStateScreen()
-          : userType == "User"
+          : houses!.isEmpty && userType == "User"
               ? const UserEmptyStateScreen(
                   text: "You are not a member in any house")
               : members!.isEmpty
