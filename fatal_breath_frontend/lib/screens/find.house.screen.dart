@@ -42,7 +42,7 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
     });
     if (searchTerm!.isNotEmpty) {
       await Provider.of<UserProvider>(context, listen: false)
-          .usernameSearch(searchTerm, context);
+          .houseSearch(searchTerm, context);
       setState(() {
         searchList =
             Provider.of<UserProvider>(context, listen: false).getSearchList!;
