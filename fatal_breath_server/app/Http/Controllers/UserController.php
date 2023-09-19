@@ -194,12 +194,12 @@ class UserController extends Controller
                 return response()->json(['message' => 'User is already a member of the house.']);
             }
 
-            $request = new MembershipRequest();
-            $request->user_id = $request->user_id;
-            $request->house_id = $request->house_id;
-            $request->type = 'Request';
-            $request->status = 'Pending';
-            $request->save();
+            $newRequest = new MembershipRequest();
+            $newRequest->user_id = $request->user_id;
+            $newRequest->house_id = $request->house_id;
+            $newRequest->type = 'Request';
+            $newRequest->status = 'Pending';
+            $newRequest->save();
 
             return response()->json(['message' => 'Request sent successfully.']);
         }
