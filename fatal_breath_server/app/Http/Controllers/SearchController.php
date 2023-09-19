@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\House;
 use App\Models\MembershipRequest;
 use App\Models\User;
 use App\Models\UserHouse;
@@ -38,5 +39,25 @@ class SearchController extends Controller
         }
 
         return response()->json(['users' => $users]);
+    }
+
+    public function searchHouses(Request $request)
+    {
+        $request->validate([
+            'search_term' => 'required|string',
+        ]);
+
+        $searchTerm = $request->input('search_term');
+
+        $houses = House::where(function ($query) use ($searchTerm) {
+            $query->where('name', 'LIKE', "%$searchTerm%")
+                ->orWhereHas('owner', function ($subquery) use ($searchTerm) {
+                    $subquery->where('username', 'LIKE', "%$searchTerm%");
+                });
+        })
+            ->with('owner')
+            ->get();
+
+        return response()->json(['houses' => $houses]);
     }
 }
