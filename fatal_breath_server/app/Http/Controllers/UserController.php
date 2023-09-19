@@ -172,4 +172,36 @@ class UserController extends Controller
 
         return response()->json(['message' => 'Invitation processed successfully.']);
     }
+
+    public function toggleRequest(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'house_id' => 'required|exists:houses,id',
+        ]);
+
+        $existingRequest = MembershipRequest::where('user_id', $request->user_id)
+            ->where('house_id', $request->house_id)
+            ->where('type', 'Requset')
+            ->where('status', 'Pending')
+            ->first();
+
+        if ($existingRequest) {
+            $existingRequest->delete();
+            return response()->json(['message' => 'Request canceled successfully.']);
+        } else {
+            if (UserHouse::where('user_id', $request->user_id)->where('house_id', $request->house_id)->exists()) {
+                return response()->json(['message' => 'User is already a member of the house.']);
+            }
+
+            $request = new MembershipRequest();
+            $request->user_id = $request->user_id;
+            $request->house_id = $request->house_id;
+            $request->type = 'Request';
+            $request->status = 'Pending';
+            $request->save();
+
+            return response()->json(['message' => 'Request sent successfully.']);
+        }
+    }
 }
