@@ -11,6 +11,7 @@ class House {
   final List<Room>? rooms;
   final List<User>? members;
   final List<User>? requests;
+  final bool? isRequested;
 
   House({
     required this.id,
@@ -19,6 +20,7 @@ class House {
     required this.city,
     required this.country,
     this.owner,
+    this.isRequested,
     this.rooms,
     this.members,
     this.requests,
@@ -57,6 +59,7 @@ class House {
       ownerId: json['owner_id'],
       city: json['city'],
       country: json['country'],
+      isRequested: json['isRequested'],
       owner: owner,
       rooms: rooms,
       members: members,
