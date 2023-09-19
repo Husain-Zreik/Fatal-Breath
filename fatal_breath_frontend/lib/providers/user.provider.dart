@@ -19,6 +19,10 @@ class UserProvider with ChangeNotifier {
 
   List<User> searchList = [];
 
+  User? get getCurrentUser {
+    return user;
+  }
+
   String? get getName {
     return name;
   }
