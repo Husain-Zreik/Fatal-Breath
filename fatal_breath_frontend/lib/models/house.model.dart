@@ -5,6 +5,7 @@ class House {
   final int id;
   final String name;
   final int ownerId;
+  final User? owner;
   final String city;
   final String country;
   final List<Room>? rooms;
@@ -17,6 +18,7 @@ class House {
     required this.ownerId,
     required this.city,
     required this.country,
+    this.owner,
     this.rooms,
     this.members,
     this.requests,
@@ -46,12 +48,16 @@ class House {
       }).toList();
     }
 
+    final ownerJson = json['owner'];
+    final owner = ownerJson != null ? User.fromJson(ownerJson) : null;
+
     return House(
       id: json['id'],
       name: json['name'],
       ownerId: json['owner_id'],
       city: json['city'],
       country: json['country'],
+      owner: owner,
       rooms: rooms,
       members: members,
       requests: requests,
