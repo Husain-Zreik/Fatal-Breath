@@ -66,12 +66,20 @@ class HouseController extends Controller
     {
         $user = Auth::user();
 
-        $houses = $user->houses()->with('owner')->with('rooms', 'members')->get();
+        $houses = $user->houses()
+            ->with('owner')
+            ->with('rooms', 'members')
+            ->get();
+
+        $invitedHouses = $user->invitedHouses()
+            ->with('owner')
+            ->get();
 
         $response = [
             'status' => 'success',
             'message' => 'Houses retrieved successfully',
             'houses' => $houses,
+            'invitations' => $invitedHouses,
         ];
 
         return response()->json($response);
