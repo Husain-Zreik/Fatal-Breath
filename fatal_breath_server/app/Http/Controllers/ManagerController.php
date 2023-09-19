@@ -19,6 +19,7 @@ class ManagerController extends Controller
 
         $membershipRequest = MembershipRequest::where('user_id', $userId)
             ->where('house_id', $houseId)
+            ->where('type', 'Request')
             ->where('status', 'Pending')
             ->first();
 
