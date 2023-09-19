@@ -18,7 +18,7 @@ class UserProvider with ChangeNotifier {
   String? userType;
   User? user;
 
-  List<User> searchList = [];
+  List searchList = [];
 
   User? get getCurrentUser {
     return user;
@@ -200,7 +200,8 @@ class UserProvider with ChangeNotifier {
           houses.add(house);
         }
 
-        return houses;
+        searchList = houses;
+        notifyListeners();
       } else {
         return [];
       }
