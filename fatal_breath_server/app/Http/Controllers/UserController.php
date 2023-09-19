@@ -144,4 +144,32 @@ class UserController extends Controller
 
         return response()->json(['message' => 'User removed from the house successfully']);
     }
+
+    public function processInvitation(Request $request)
+    {
+        $userId = $request->input('user_id');
+        $houseId = $request->input('house_id');
+        $status = $request->input('status');
+
+        $invitation = MembershipRequest::where('user_id', $userId)
+            ->where('house_id', $houseId)
+            ->where('type', 'Invitation')
+            ->where('status', 'Pending')
+            ->first();
+
+        if (!$invitation) {
+            return response()->json(['message' => 'Invitation not found.'], 404);
+        }
+
+        if ($status === 'Accept') {
+            $userHouse = new UserHouse();
+            $userHouse->user_id = $userId;
+            $userHouse->house_id = $houseId;
+            $userHouse->save();
+        }
+
+        $invitation->delete();
+
+        return response()->json(['message' => 'Invitation processed successfully.']);
+    }
 }
