@@ -4,7 +4,6 @@ import 'package:fatal_breath_frontend/screens/empty/home.empty.state.screen.dart
 import 'package:fatal_breath_frontend/screens/chats/messages.screen.dart';
 import 'package:fatal_breath_frontend/screens/empty/user.empty.state.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
-import 'package:fatal_breath_frontend/utils/text.note.dart';
 import 'package:fatal_breath_frontend/widgets/contact.box.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,7 +32,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
     if (userType == "Manager") {
       Provider.of<HouseProvider>(context, listen: false).getAdminHouses();
     } else {
-      Provider.of<HouseProvider>(context, listen: false).getUserHouses(context);
+      Provider.of<HouseProvider>(context, listen: false).getUserHouses();
     }
   }
 
@@ -148,10 +147,8 @@ class _ChatsScreenState extends State<ChatsScreen> {
               ? const UserEmptyStateScreen(
                   text: "You are not a member in any house")
               : members!.isEmpty
-                  ? const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [TextNote(text: "No members in your houses")],
-                    )
+                  ? const UserEmptyStateScreen(
+                      text: "No members in your houses")
                   : SingleChildScrollView(
                       child: Padding(
                           padding: const EdgeInsets.only(
