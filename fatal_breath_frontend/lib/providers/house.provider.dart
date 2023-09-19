@@ -173,6 +173,26 @@ class HouseProvider with ChangeNotifier {
     }
   }
 
+  Future processInvitation(houseId, userId, status, context) async {
+    try {
+      final body = {
+        'user_id': userId,
+        'house_id': houseId,
+        'status': status,
+      };
+      final response = await sendRequest(
+          route: "/api/user/member/process-invitation",
+          method: RequestMethods.POST,
+          load: body);
+
+      await getUserHouses();
+
+      notifyListeners();
+    } catch (e) {
+      throw HttpException('$e');
+    }
+  }
+
   Future toggleInvite(houseId, userId, context) async {
     try {
       final body = {
