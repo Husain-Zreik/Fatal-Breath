@@ -66,9 +66,8 @@ class HouseController extends Controller
     {
         $user = Auth::user();
 
-        $houses = $user->houses()->with('rooms', 'members')->get();
+        $houses = $user->houses()->with('owner')->with('rooms', 'members')->get();
 
-        // You can customize the response format as needed
         $response = [
             'status' => 'success',
             'message' => 'Houses retrieved successfully',
