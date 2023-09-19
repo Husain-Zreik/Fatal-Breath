@@ -189,7 +189,10 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
                     user: house.owner,
                     houseName: house.name,
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        toggleRequestPressed(
+                            house.id, user!.id, searchTerm, context);
+                      },
                       child: Container(
                         height: 25,
                         width: 70,
