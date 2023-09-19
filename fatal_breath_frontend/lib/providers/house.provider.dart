@@ -135,7 +135,7 @@ class HouseProvider with ChangeNotifier {
   Future removeMember(houseId, userId, context) async {
     try {
       final response = await sendRequest(
-        route: "/api/user/admin/remove-member/$houseId/$userId",
+        route: "/api/user/remove-member/$houseId/$userId",
         method: RequestMethods.DELETE,
       );
       final user =
