@@ -211,4 +211,23 @@ class HouseProvider with ChangeNotifier {
       throw HttpException('$e');
     }
   }
+
+  Future toggleRequest(houseId, userId, context) async {
+    try {
+      final body = {
+        'user_id': userId,
+        'house_id': houseId,
+      };
+      final response = await sendRequest(
+          route: "/api/user/member/toggle-request",
+          method: RequestMethods.POST,
+          load: body);
+
+      await getUserHouses();
+
+      notifyListeners();
+    } catch (e) {
+      throw HttpException('$e');
+    }
+  }
 }
