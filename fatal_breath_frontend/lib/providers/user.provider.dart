@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:fatal_breath_frontend/config/remote.config.dart';
 import 'package:fatal_breath_frontend/enums/request.methods.dart';
+import 'package:fatal_breath_frontend/models/house.model.dart';
 import 'package:fatal_breath_frontend/models/user.model.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -160,6 +161,46 @@ class UserProvider with ChangeNotifier {
 
         searchList = users;
         notifyListeners();
+      } else {
+        return [];
+      }
+    } catch (e) {
+      if (e is DioException) {
+        if (e.response?.statusCode == 401) {
+          throw const HttpException(
+              "Unauthorized. Please log in and try again.");
+        } else {
+          throw const HttpException("An unexpected error occurred.");
+        }
+      } else {
+        throw HttpException('$e');
+      }
+    }
+  }
+
+  Future houseSearch(searchTerm, BuildContext context) async {
+    try {
+      final body = {
+        'search_term': searchTerm,
+      };
+
+      final response = await sendRequest(
+        route: "/api/user/member/search",
+        method: RequestMethods.POST,
+        load: body,
+      );
+      print(response);
+
+      if (response.containsKey('houses')) {
+        final List<dynamic> housesList = response['houses'];
+        List<House> houses = [];
+
+        for (var houseData in housesList) {
+          House house = House.fromJson(houseData);
+          houses.add(house);
+        }
+
+        return houses;
       } else {
         return [];
       }
