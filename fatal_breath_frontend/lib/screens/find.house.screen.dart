@@ -172,9 +172,10 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
                     ),
                   ),
                 ),
-                for (final user in searchList!)
+                for (final house in searchList!)
                   ContactBox(
-                    user: user,
+                    user: house.owner,
+                    houseName: house.name,
                     child: InkWell(
                       onTap: () {},
                       child: Container(

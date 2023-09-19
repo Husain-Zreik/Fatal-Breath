@@ -7,6 +7,7 @@ use App\Models\MembershipRequest;
 use App\Models\User;
 use App\Models\UserHouse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SearchController extends Controller
 {
@@ -47,6 +48,7 @@ class SearchController extends Controller
             'search_term' => 'required|string',
         ]);
 
+        $user = Auth::user();
         $searchTerm = $request->input('search_term');
 
         $houses = House::where(function ($query) use ($searchTerm) {
@@ -57,6 +59,15 @@ class SearchController extends Controller
         })
             ->with('owner')
             ->get();
+
+        foreach ($houses as $house) {
+            $requestExists = MembershipRequest::where('user_id', $user->id)
+                ->where('house_id', $house->id)
+                ->where('type', 'Request')
+                ->where('status', 'Pending')
+                ->exists();
+            $house->isRequested = $requestExists;
+        }
 
         return response()->json(['houses' => $houses]);
     }
