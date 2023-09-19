@@ -20,6 +20,7 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
 
   String? image;
   List? houses;
+  List? invitations;
   List? searchList;
 
   @override
@@ -31,6 +32,7 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
   @override
   Widget build(BuildContext context) {
     houses = Provider.of<HouseProvider>(context).getHouses ?? [];
+    invitations = Provider.of<HouseProvider>(context).getInvitations ?? [];
     image = Provider.of<UserProvider>(context, listen: false).getImage;
     return Scaffold(
       backgroundColor: GlobalColors.bgColor,
@@ -166,6 +168,149 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
                               )),
                         ),
                       ),
+                    ),
+                  )
+              ],
+            ),
+          if (houses != null && houses!.isNotEmpty && searchList == null)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 22, top: 5),
+                  child: Text(
+                    "Member of these houses :",
+                    style: GoogleFonts.poppins(
+                      color: GlobalColors.mainColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                for (final house in houses!)
+                  ContactBox(
+                    user: house.owner,
+                    houseName: house.name,
+                    child: InkWell(
+                      onTap: () {
+                        // removePressed(house.id, member.id, context);
+                      },
+                      child: Container(
+                        height: 25,
+                        width: 70,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(40),
+                          color: Colors.red,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: Center(
+                          child: Text("Leave",
+                              style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w500,
+                              )),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          if (invitations != null &&
+              invitations!.isNotEmpty &&
+              searchList == null)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 22, top: 5),
+                  child: Text(
+                    "Invitations :",
+                    style: GoogleFonts.poppins(
+                      color: GlobalColors.mainColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                for (final invitation in invitations!)
+                  ContactBox(
+                    user: invitation.owner,
+                    houseName: invitation.name,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            // handleRequest(
+                            //     house.id, request.id, "Accept", context);
+                          },
+                          child: Container(
+                            height: 25,
+                            width: 70,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(40),
+                              color: Colors.blue,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: Text("Accept",
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w500,
+                                  )),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            // handleRequest(
+                            //     house.id, request.id, "Decline", context);
+                          },
+                          child: Container(
+                            height: 25,
+                            width: 70,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(40),
+                              color: Colors.red,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: Text("Decline",
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w500,
+                                  )),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   )
               ],
