@@ -49,7 +49,7 @@ class ContactBox extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(user.username,
+                      Text(houseName != null ? houseName! : user.username,
                           style: GoogleFonts.poppins(
                             color: Colors.black,
                             fontSize: 18,
@@ -58,7 +58,7 @@ class ContactBox extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      Text(houseName != null ? houseName! : user.name,
+                      Text(houseName != null ? user.username : user.name,
                           style: GoogleFonts.poppins(
                             color: Colors.black,
                             fontSize: 12,
