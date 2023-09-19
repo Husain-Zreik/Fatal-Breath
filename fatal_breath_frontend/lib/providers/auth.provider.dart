@@ -8,11 +8,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider with ChangeNotifier {
-  String? userId;
+  int? userId;
   String? token;
   String? password;
 
-  String? get getUserId {
+  int? get getUserId {
     if (userId != null) {
       return userId;
     }
