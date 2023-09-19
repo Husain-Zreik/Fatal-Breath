@@ -194,7 +194,7 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
                           ],
                         ),
                         child: Center(
-                          child: Text(user.isInvited ? "Cancel" : "Request",
+                          child: Text(house.isRequested ? "Cancel" : "Request",
                               style: GoogleFonts.poppins(
                                 color: Colors.white,
                                 fontSize: 10,
