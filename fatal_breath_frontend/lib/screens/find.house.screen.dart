@@ -19,6 +19,7 @@ class FindHouseScreen extends StatefulWidget {
 class _FindHouseScreenState extends State<FindHouseScreen> {
   final TextEditingController searchController = TextEditingController();
 
+  String? searchTerm;
   String? image;
   User? user;
   List? houses;
@@ -33,6 +34,25 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
   Future handleInvitation(houseId, userId, status, context) async {
     await Provider.of<HouseProvider>(context, listen: false)
         .processInvitation(houseId, userId, status, context);
+  }
+
+  Future searchPressed() async {
+    setState(() {
+      searchTerm = searchController.text.replaceAll(' ', '');
+    });
+    if (searchTerm!.isNotEmpty) {
+      await Provider.of<UserProvider>(context, listen: false)
+          .usernameSearch(searchTerm, context);
+      setState(() {
+        searchList =
+            Provider.of<UserProvider>(context, listen: false).getSearchList!;
+      });
+    } else {
+      setState(() {
+        searchList = [];
+      });
+      Provider.of<UserProvider>(context, listen: false).clearSearchList();
+    }
   }
 
   @override
@@ -131,7 +151,7 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.send),
                   onPressed: () {
-                    // searchPressed(house.id);
+                    searchPressed();
                   },
                 ),
               ),
