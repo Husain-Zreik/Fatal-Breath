@@ -30,6 +30,11 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
         .removeMember(houseId, userId, context);
   }
 
+  Future handleInvitation(houseId, userId, status, context) async {
+    await Provider.of<HouseProvider>(context, listen: false)
+        .processInvitation(houseId, userId, status, context);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -248,17 +253,17 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
                     ),
                   ),
                 ),
-                for (final invitation in invitations!)
+                for (final house in invitations!)
                   ContactBox(
-                    user: invitation.owner,
-                    houseName: invitation.name,
+                    user: house.owner,
+                    houseName: house.name,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         InkWell(
                           onTap: () {
-                            // handleRequest(
-                            //     house.id, request.id, "Accept", context);
+                            handleInvitation(
+                                house.id, user!.id, "Accept", context);
                           },
                           child: Container(
                             height: 25,
@@ -290,8 +295,8 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
                         ),
                         InkWell(
                           onTap: () {
-                            // handleRequest(
-                            //     house.id, request.id, "Decline", context);
+                            handleInvitation(
+                                house.id, user!.id, "Decline", context);
                           },
                           child: Container(
                             height: 25,
