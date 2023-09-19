@@ -182,7 +182,7 @@ class UserController extends Controller
 
         $existingRequest = MembershipRequest::where('user_id', $request->user_id)
             ->where('house_id', $request->house_id)
-            ->where('type', 'Requset')
+            ->where('type', 'Request')
             ->where('status', 'Pending')
             ->first();
 
