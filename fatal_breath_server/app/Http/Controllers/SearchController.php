@@ -51,13 +51,23 @@ class SearchController extends Controller
         $user = Auth::user();
         $searchTerm = $request->input('search_term');
 
+        $userHouseIds = $user->houses()->pluck('houses.id')->toArray();
+
+        $pendingInvitationHouseIds = MembershipRequest::where('user_id', $user->id)
+            ->where('type', 'Invitation')
+            ->where('status', 'Pending')
+            ->pluck('house_id')
+            ->toArray();
+
         $houses = House::where(function ($query) use ($searchTerm) {
-            $query->where('name', 'LIKE', "%$searchTerm%")
+            $query->where('houses.name', 'LIKE', "%$searchTerm%")
                 ->orWhereHas('owner', function ($subquery) use ($searchTerm) {
-                    $subquery->where('username', 'LIKE', "%$searchTerm%");
+                    $subquery->where('users.username', 'LIKE', "%$searchTerm%");
                 });
         })
             ->with('owner')
+            ->whereNotIn('houses.id', $userHouseIds)
+            ->whereNotIn('houses.id', $pendingInvitationHouseIds)
             ->get();
 
         foreach ($houses as $house) {
