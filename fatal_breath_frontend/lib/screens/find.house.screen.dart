@@ -70,7 +70,7 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
   @override
   void initState() {
     super.initState();
-    Provider.of<HouseProvider>(context, listen: false).getUserHouses();
+    Provider.of<HouseProvider>(context, listen: false).getUserHouses(context);
   }
 
   @override

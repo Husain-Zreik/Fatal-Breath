@@ -33,7 +33,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
     if (userType == "Manager") {
       Provider.of<HouseProvider>(context, listen: false).getAdminHouses();
     } else {
-      Provider.of<HouseProvider>(context, listen: false).getUserHouses();
+      Provider.of<HouseProvider>(context, listen: false).getUserHouses(context);
     }
   }
 
@@ -42,8 +42,6 @@ class _ChatsScreenState extends State<ChatsScreen> {
     houses = Provider.of<HouseProvider>(context).getHouses ?? [];
     members = Provider.of<HouseProvider>(context).getMembers ?? [];
     image = Provider.of<UserProvider>(context, listen: false).getImage;
-    print(houses);
-    print(members);
 
     return Scaffold(
       backgroundColor: GlobalColors.bgColor,
