@@ -1,3 +1,4 @@
+import 'package:fatal_breath_frontend/models/user.model.dart';
 import 'package:fatal_breath_frontend/providers/house.provider.dart';
 import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/screens/empty/user.empty.state.screen.dart';
@@ -19,9 +20,15 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
   final TextEditingController searchController = TextEditingController();
 
   String? image;
+  User? user;
   List? houses;
   List? invitations;
   List? searchList;
+
+  Future leavePressed(houseId, userId, context) async {
+    await Provider.of<HouseProvider>(context, listen: false)
+        .removeMember(houseId, userId, context);
+  }
 
   @override
   void initState() {
@@ -33,6 +40,7 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
   Widget build(BuildContext context) {
     houses = Provider.of<HouseProvider>(context).getHouses ?? [];
     invitations = Provider.of<HouseProvider>(context).getInvitations ?? [];
+    user = Provider.of<UserProvider>(context, listen: false).getCurrentUser;
     image = Provider.of<UserProvider>(context, listen: false).getImage;
     return Scaffold(
       backgroundColor: GlobalColors.bgColor,
@@ -193,7 +201,7 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
                     houseName: house.name,
                     child: InkWell(
                       onTap: () {
-                        // removePressed(house.id, member.id, context);
+                        leavePressed(house.id, user!.id, context);
                       },
                       child: Container(
                         height: 25,
