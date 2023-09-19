@@ -2,7 +2,9 @@
 
 import 'dart:io';
 
+import 'package:fatal_breath_frontend/config/local.storage.config.dart';
 import 'package:fatal_breath_frontend/config/remote.config.dart';
+import 'package:fatal_breath_frontend/enums/local.types.dart';
 import 'package:fatal_breath_frontend/enums/request.methods.dart';
 import 'package:fatal_breath_frontend/models/house.model.dart';
 import 'package:fatal_breath_frontend/models/user.model.dart';
@@ -85,7 +87,7 @@ class HouseProvider with ChangeNotifier {
     }
   }
 
-  Future getUserHouses(context) async {
+  Future getUserHouses() async {
     try {
       final response = await sendRequest(
         route: "/api/user/member/get-houses",
@@ -107,8 +109,7 @@ class HouseProvider with ChangeNotifier {
         House house = House.fromJson(houseData);
         houses.add(house);
       }
-      final currentUser =
-          Provider.of<UserProvider>(context, listen: false).getCurrentUser;
+      final currentUser = await getLocal(type: LocalTypes.Int, key: "user_id");
 
       Map<int, User> allMembersMap = {};
 
@@ -116,10 +117,13 @@ class HouseProvider with ChangeNotifier {
         for (var house in houses) {
           if (house.members != null) {
             for (var member in house.members!) {
-              if (member.id != currentUser!.id) {
+              if (member.id != currentUser) {
                 allMembersMap[member.id] = member;
               }
             }
+          }
+          if (house.owner != null && house.owner!.id != currentUser!.id) {
+            allMembersMap[house.owner!.id] = house.owner!;
           }
         }
       }
@@ -148,7 +152,7 @@ class HouseProvider with ChangeNotifier {
       if (user!.role == 1) {
         await getAdminHouses();
       } else {
-        await getUserHouses(context);
+        await getUserHouses();
       }
 
       notifyListeners();
@@ -189,7 +193,7 @@ class HouseProvider with ChangeNotifier {
           method: RequestMethods.POST,
           load: body);
 
-      await getUserHouses(context);
+      await getUserHouses();
 
       notifyListeners();
     } catch (e) {
@@ -227,7 +231,7 @@ class HouseProvider with ChangeNotifier {
           method: RequestMethods.POST,
           load: body);
 
-      await getUserHouses(context);
+      await getUserHouses();
 
       notifyListeners();
     } catch (e) {
