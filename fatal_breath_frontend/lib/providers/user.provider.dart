@@ -15,6 +15,8 @@ class UserProvider with ChangeNotifier {
   String? email;
   String? image;
   String? userType;
+  User? user;
+
   List<User> searchList = [];
 
   String? get getName {
@@ -61,6 +63,7 @@ class UserProvider with ChangeNotifier {
       } else {
         userType = "User";
       }
+      user = User.fromJson(response['user']);
 
       notifyListeners();
     } catch (e) {
@@ -93,6 +96,7 @@ class UserProvider with ChangeNotifier {
       username = response['user']["username"];
       email = response['user']["email"];
       image = response['user']["profile_image"];
+      user = User.fromJson(response['user']);
 
       notifyListeners();
     } catch (error) {
