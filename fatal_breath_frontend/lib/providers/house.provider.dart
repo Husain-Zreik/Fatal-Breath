@@ -109,7 +109,8 @@ class HouseProvider with ChangeNotifier {
         House house = House.fromJson(houseData);
         houses.add(house);
       }
-      final currentUser = await getLocal(type: LocalTypes.Int, key: "user_id");
+      final currentUserId =
+          await getLocal(type: LocalTypes.Int, key: "user_id");
 
       Map<int, User> allMembersMap = {};
 
@@ -117,12 +118,12 @@ class HouseProvider with ChangeNotifier {
         for (var house in houses) {
           if (house.members != null) {
             for (var member in house.members!) {
-              if (member.id != currentUser) {
+              if (member.id != currentUserId) {
                 allMembersMap[member.id] = member;
               }
             }
           }
-          if (house.owner != null && house.owner!.id != currentUser!.id) {
+          if (house.owner != null && house.owner!.id != currentUserId) {
             allMembersMap[house.owner!.id] = house.owner!;
           }
         }
