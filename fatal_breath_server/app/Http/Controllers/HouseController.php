@@ -68,12 +68,21 @@ class HouseController extends Controller
 
         $houses = $user->houses()
             ->with('owner')
-            ->with('rooms', 'members')
+            ->with('rooms.sensors')
+            ->with('members')
             ->get();
 
         $invitedHouses = $user->invitedHouses()
             ->with('owner')
             ->get();
+
+        $houses = $houses->map(function ($house) {
+            $house->rooms = $house->rooms->map(function ($room) {
+                $room->hasSensor = $room->sensors->isNotEmpty();
+                return $room;
+            });
+            return $house;
+        });
 
         $response = [
             'status' => 'success',
