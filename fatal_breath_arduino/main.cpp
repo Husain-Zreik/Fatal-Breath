@@ -49,3 +49,27 @@ void loop()
 
     delay(5000);
 }
+
+void createSensor(int roomId)
+{
+    String serverEndpoint = "/api/sensor";
+    String sensorData = "room_id=" + String(roomId);
+
+    http.begin(client, serverAddress + serverEndpoint);
+    http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+    int httpResponseCode = http.POST(sensorData);
+
+    Serial.print("HTTP Response Code: ");
+    Serial.println(httpResponseCode);
+
+    if (httpResponseCode == 200)
+    {
+        Serial.println("Sensor created successfully");
+    }
+    else
+    {
+        Serial.println("Failed to create sensor");
+    }
+
+    http.end();
+}
