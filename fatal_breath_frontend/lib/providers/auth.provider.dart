@@ -36,7 +36,6 @@ class AuthProvider with ChangeNotifier {
     return null;
   }
 
-  //Login
   Future login(email, password1, context) async {
     try {
       final response = await sendRequest(
@@ -77,7 +76,6 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  //Sign up
   Future signUp(name, username, email, password, role, context) async {
     try {
       final response = await sendRequest(
@@ -120,7 +118,6 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  //Log out
   Future logout() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.clear();
