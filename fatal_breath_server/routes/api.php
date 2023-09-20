@@ -36,6 +36,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
     });
 
     Route::post('/sensor', [SensorController::class, 'connect']);
+    Route::post('/sensor/level', [SensorController::class, 'updateLevel']);
 
     Route::delete('/remove-member/{houseId}/{userId}', [UserController::class, "removeMember"]);
     Route::get("/info", [UserController::class, "getUser"]);
