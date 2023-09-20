@@ -14,6 +14,12 @@ class SensorController extends Controller
             'co_level' => 'nullable|numeric',
         ]);
 
+        $existingSensor = Sensor::where('room_id', $request->input('room_id'))->first();
+
+        if ($existingSensor) {
+            return response()->json(['message' => 'This room is already connected to a sensor'], 400);
+        }
+
         if ($request->has('co_level')) {
             $coLevel = $request->input('co_level');
         } else {
@@ -28,6 +34,7 @@ class SensorController extends Controller
 
         return response()->json(['message' => 'Sensor record created successfully'], 201);
     }
+
 
 
     public function updateLevel(Request $request)
