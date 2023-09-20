@@ -12,3 +12,21 @@ int roomId = 1;
 
 WiFiClient client;
 HTTPClient http;
+
+void setup()
+{
+    Serial.begin(115200);
+    WiFi.begin(ssid, password);
+    while (WiFi.status() != WL_CONNECTED)
+    {
+        delay(1000);
+        Serial.println("Connecting to WiFi...");
+    }
+    Serial.println("Connected to WiFi");
+
+    http.begin(client, serverAddress);
+
+    createSensor(roomId);
+
+    pinMode(sensorPin, INPUT);
+}
