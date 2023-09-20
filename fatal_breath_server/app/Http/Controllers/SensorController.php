@@ -23,13 +23,13 @@ class SensorController extends Controller
         return response()->json(['message' => 'Sensor record created successfully'], 201);
     }
 
-    public function updateLevel(Request $request, $id)
+    public function updateLevel(Request $request)
     {
         $request->validate([
             'co_level' => 'required|numeric',
         ]);
 
-        $sensor = Sensor::find($id);
+        $sensor = Sensor::find($request->id);
 
         if (!$sensor) {
             return response()->json(['message' => 'Sensor record not found'], 404);
