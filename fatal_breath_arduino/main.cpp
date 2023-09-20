@@ -30,3 +30,21 @@ void setup()
 
     pinMode(sensorPin, INPUT);
 }
+
+void loop()
+{
+    coValue = analogRead(sensorPin);
+
+    float coPercentage = map(coValue, 0, 1023, 0, 100);
+    Serial.print("CO Level: ");
+    Serial.print(coPercentage);
+    Serial.println("%");
+
+    if (abs(coPercentage - lastCoPercentage) >= 5.0)
+    {
+        updateLevel(roomId, coPercentage);
+        lastCoPercentage = coPercentage;
+    }
+
+    delay(5000);
+}
