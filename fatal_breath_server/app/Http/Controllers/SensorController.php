@@ -11,17 +11,24 @@ class SensorController extends Controller
     {
         $request->validate([
             'room_id' => 'required|exists:rooms,id',
-            'co_level' => 'required|numeric',
+            'co_level' => 'nullable|numeric',
         ]);
+
+        if ($request->has('co_level')) {
+            $coLevel = $request->input('co_level');
+        } else {
+            $coLevel = null;
+        }
 
         $sensor = new Sensor([
             'room_id' => $request->input('room_id'),
-            'co_level' => $request->input('co_level'),
+            'co_level' => $coLevel,
         ]);
         $sensor->save();
 
         return response()->json(['message' => 'Sensor record created successfully'], 201);
     }
+
 
     public function updateLevel(Request $request)
     {
