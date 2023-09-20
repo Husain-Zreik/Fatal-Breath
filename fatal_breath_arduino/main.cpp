@@ -73,3 +73,27 @@ void createSensor(int roomId)
 
     http.end();
 }
+
+void updateLevel(int roomId, float coPercentage)
+{
+    String serverEndpoint = "/api/sensor/updateLevel";
+    String postData = "room_id=" + String(roomId) + "&co_level=" + String(coPercentage);
+
+    http.begin(client, serverAddress + serverEndpoint);
+    http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+    int httpResponseCode = http.POST(postData);
+
+    Serial.print("HTTP Response Code: ");
+    Serial.println(httpResponseCode);
+
+    if (httpResponseCode == 200)
+    {
+        Serial.println("CO level updated successfully");
+    }
+    else
+    {
+        Serial.println("Failed to update CO level");
+    }
+
+    http.end();
+}
