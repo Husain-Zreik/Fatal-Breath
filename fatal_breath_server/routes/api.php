@@ -35,6 +35,8 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
         Route::post('/toggle-request', [UserController::class, "toggleRequest"]);
     });
 
+    Route::post('/sensor', [SensorController::class, 'connect']);
+
     Route::delete('/remove-member/{houseId}/{userId}', [UserController::class, "removeMember"]);
     Route::get("/info", [UserController::class, "getUser"]);
     Route::post("/info/update", [UserController::class, "updateProfile"]);
