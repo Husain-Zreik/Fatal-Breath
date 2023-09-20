@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('room_id');
             $table->foreign('room_id')->references('id')->on('rooms')->cascadeOnDelete();
-            $table->integer('co_level');
+            $table->integer('co_level')->nullable();
             $table->timestamps();
         });
     }
