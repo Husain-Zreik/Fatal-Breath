@@ -153,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     house.rooms != null && house.rooms!.isNotEmpty
                         ? SingleChildScrollView(
                             child: Padding(
-                            padding: const EdgeInsets.only(bottom: 30),
+                            padding: const EdgeInsets.only(bottom: 30, top: 10),
                             child: Column(children: [
                               if (userType == "Manager")
                                 InkWell(
@@ -162,8 +162,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         () => AddRoomScreen(houseId: house.id));
                                   },
                                   child: Container(
-                                    margin: const EdgeInsets.fromLTRB(
-                                        20, 20, 20, 5),
+                                    margin:
+                                        const EdgeInsets.fromLTRB(20, 0, 20, 5),
                                     height: 60,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
@@ -221,8 +221,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ));
                                   },
                                   child: Container(
-                                    margin: const EdgeInsets.fromLTRB(
-                                        20, 20, 20, 0),
+                                    margin:
+                                        const EdgeInsets.fromLTRB(20, 5, 20, 0),
                                     height: 80,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
