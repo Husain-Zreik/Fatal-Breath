@@ -5,6 +5,7 @@ use App\Http\Controllers\HouseController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SensorController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,8 +36,6 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
         Route::post('/toggle-request', [UserController::class, "toggleRequest"]);
     });
 
-    Route::post('/sensor', [SensorController::class, 'connect']);
-    Route::post('/sensor/level', [SensorController::class, 'updateLevel']);
 
     Route::delete('/remove-member/{houseId}/{userId}', [UserController::class, "removeMember"]);
     Route::get("/info", [UserController::class, "getUser"]);
@@ -47,3 +46,6 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
     Route::post("logout", [AuthController::class, "logout"]);
     Route::post("refresh", [AuthController::class, "refresh"]);
 });
+
+Route::post('/sensor', [SensorController::class, 'connect']);
+Route::post('/sensor/updateLevel', [SensorController::class, 'updateLevel']);
