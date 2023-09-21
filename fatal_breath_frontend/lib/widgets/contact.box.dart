@@ -1,3 +1,4 @@
+import 'package:fatal_breath_frontend/config/remote.config.dart';
 import 'package:fatal_breath_frontend/models/user.model.dart';
 import 'package:fatal_breath_frontend/widgets/profile.circle.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class ContactBox extends StatelessWidget {
                     child: ProfileCircle(
                       size: 60,
                       imageLink: user.profileImage != null
-                          ? 'http://192.168.1.5:8000/storage/profile_images/${user.id}.png'
+                          ? '$baseUrl/storage/profile_images/${user.id}.png'
                           : null,
                     )),
                 Padding(
