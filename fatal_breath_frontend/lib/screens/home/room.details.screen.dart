@@ -2,11 +2,14 @@ import 'dart:io';
 
 import 'package:fatal_breath_frontend/models/house.model.dart';
 import 'package:fatal_breath_frontend/models/room.model.dart';
+import 'package:fatal_breath_frontend/providers/house.provider.dart';
 import 'package:fatal_breath_frontend/providers/room.provider.dart';
+import 'package:fatal_breath_frontend/screens/home/home.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/widgets/details.box.dart';
 import 'package:fatal_breath_frontend/widgets/secondary.appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +38,11 @@ class _RoomDetailsScreenState extends State<RoomDetailsScreen> {
     } catch (e) {
       throw HttpException('Error fetching weather data:$e');
     }
+  }
+
+  Future deletePressed(roomId, context) async {
+    await Provider.of<HouseProvider>(context, listen: false)
+        .deleteRoom(roomId, context);
   }
 
   @override
@@ -131,29 +139,61 @@ class _RoomDetailsScreenState extends State<RoomDetailsScreen> {
                     ],
                   ),
                 ),
-                Container(
-                  height: 60,
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(bottom: 10),
-                  padding: const EdgeInsets.all(7),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.red,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
+                InkWell(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Confirm Delete'),
+                          content: const Text(
+                              'Are you sure you want to delete this house?'),
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text('Cancel'),
+                              onPressed: () {
+                                Get.back();
+                              },
+                            ),
+                            TextButton(
+                              child: const Text(
+                                'Delete',
+                                style: TextStyle(color: Colors.red),
+                              ),
+                              onPressed: () async {
+                                await deletePressed(widget.room.id, context);
+                                Get.to(() => const HomeScreen());
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  child: Container(
+                    height: 60,
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(bottom: 10),
+                    padding: const EdgeInsets.all(7),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.red,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: Text("Delete Room",
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        )),
                   ),
-                  child: Text("Delete Room",
-                      style: GoogleFonts.poppins(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      )),
                 ),
               ],
             ),
