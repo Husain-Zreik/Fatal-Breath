@@ -64,6 +64,21 @@ class HouseProvider with ChangeNotifier {
     }
   }
 
+  Future deleteRoom(roomId, context) async {
+    try {
+      final response = await sendRequest(
+        route: "/api/user/admin/room/$roomId",
+        method: RequestMethods.DELETE,
+      );
+
+      await getAdminHouses();
+
+      notifyListeners();
+    } catch (e) {
+      throw HttpException('$e');
+    }
+  }
+
   Future getAdminHouses() async {
     try {
       final response = await sendRequest(
