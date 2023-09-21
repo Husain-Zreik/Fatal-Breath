@@ -55,7 +55,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   value.username!,
                   style: GoogleFonts.poppins(
                     color: Colors.black,
-                    fontSize: 16,
+                    fontSize: 22,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -70,7 +70,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 20),
                 ButtonGlobal(
                   onBtnPressed: () {
                     Get.to(() => const EditProfileScreen());
