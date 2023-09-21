@@ -91,7 +91,9 @@ class HouseController extends Controller
 
         $houses = $user->houses()
             ->with('owner')
-            ->with('rooms.sensors')
+            ->with(['rooms' => function ($query) {
+                $query->with('sensor');
+            }])
             ->with('members')
             ->get();
 
@@ -101,7 +103,7 @@ class HouseController extends Controller
 
         $houses = $houses->map(function ($house) {
             $house->rooms = $house->rooms->map(function ($room) {
-                $room->hasSensor = $room->sensors->isNotEmpty();
+                $room->hasSensor = !is_null($room->sensor);
                 return $room;
             });
             return $house;
