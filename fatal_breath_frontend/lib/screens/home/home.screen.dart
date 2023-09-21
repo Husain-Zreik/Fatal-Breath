@@ -224,7 +224,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     const SizedBox(
                                                       height: 5,
                                                     ),
-                                                    Text("Oxygen : 30%",
+                                                    Text(
+                                                        "Carbon Monoxide : ${room.sensor == null ? "0" : room.sensor.coLevel}%",
                                                         style:
                                                             GoogleFonts.poppins(
                                                           color: Colors.black,
@@ -243,11 +244,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(40),
-                                              color: room.type == 'Kitchen'
-                                                  ? Colors.red
-                                                  : room.type == 'Bedroom'
-                                                      ? Colors.orange
-                                                      : Colors.green,
+                                              color: room.sensor == null
+                                                  ? Colors.grey
+                                                  : room.sensor.coLevel <= 30
+                                                      ? Colors.green
+                                                      : room.sensor.coLevel <=
+                                                              60
+                                                          ? Colors.orange
+                                                          : Colors.red,
+
+                                              // ######### Demo Purpose ###############
+                                              // color: room.type == 'Kitchen'
+                                              //     ? Colors.red
+                                              //     : room.type == 'Bedroom'
+                                              //         ? Colors.orange
+                                              //         : Colors.green,
+
                                               boxShadow: [
                                                 BoxShadow(
                                                   color: Colors.grey
@@ -260,11 +272,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                             child: Center(
                                               child: Text(
-                                                  room.type == 'Kitchen'
-                                                      ? "Dangerous"
-                                                      : room.type == 'Bedroom'
-                                                          ? "Sensetive"
-                                                          : "Normal",
+                                                  room.sensor == null
+                                                      ? "No Sensor"
+                                                      : room.sensor.coLevel <=
+                                                              30
+                                                          ? "Normal"
+                                                          : room.sensor
+                                                                      .coLevel <=
+                                                                  60
+                                                              ? "Sensetive"
+                                                              : "Dangerous",
+
+                                                  // ######### Demo Purpose ###############
+                                                  // room.type == 'Kitchen'
+                                                  //     ? "Dangerous"
+                                                  //     : room.type == 'Bedroom'
+                                                  //         ? "Sensetive"
+                                                  //         : "Normal",
+
                                                   style: GoogleFonts.poppins(
                                                     color: Colors.white,
                                                     fontSize: 10,
