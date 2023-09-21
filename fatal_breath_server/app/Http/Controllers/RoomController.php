@@ -37,28 +37,16 @@ class RoomController extends Controller
         }
     }
 
-    public function deleteRoom(Request $request, $room_id)
+    public function deleteRoom($room_id)
     {
-        try {
-            $request->validate([
-                'room_id' => 'required|exists:rooms,id',
-            ]);
+        $room = Room::find($room_id);
 
-            $room = Room::find($room_id);
-
-            if (!$room) {
-                return response()->json(['message' => 'Room not found'], 404);
-            }
-
-            $room->delete();
-
-            return response()->json(['message' => 'Room deleted successfully']);
-        } catch (ValidationException $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Validation failed',
-                'errors' => $e->errors(),
-            ], 422);
+        if (!$room) {
+            return response()->json(['message' => 'Room not found'], 404);
         }
+
+        $room->delete();
+
+        return response()->json(['message' => 'Room deleted successfully']);
     }
 }
