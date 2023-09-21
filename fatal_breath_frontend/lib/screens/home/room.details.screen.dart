@@ -4,6 +4,7 @@ import 'package:fatal_breath_frontend/models/house.model.dart';
 import 'package:fatal_breath_frontend/models/room.model.dart';
 import 'package:fatal_breath_frontend/providers/room.provider.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
+import 'package:fatal_breath_frontend/widgets/details.box.dart';
 import 'package:fatal_breath_frontend/widgets/secondary.appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,7 +22,7 @@ class RoomDetailsScreen extends StatefulWidget {
 }
 
 class _RoomDetailsScreenState extends State<RoomDetailsScreen> {
-  final int percent = 20;
+  late int percent = 0;
   late Map weatherData = {};
 
   Future<void> fetchWeather() async {
@@ -40,6 +41,9 @@ class _RoomDetailsScreenState extends State<RoomDetailsScreen> {
   void initState() {
     super.initState();
     fetchWeather();
+    if (widget.room.sensor != null) {
+      percent = widget.room.sensor!.coLevel;
+    }
   }
 
   @override
@@ -53,7 +57,7 @@ class _RoomDetailsScreenState extends State<RoomDetailsScreen> {
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(30, 80, 30, 0),
+            padding: const EdgeInsets.fromLTRB(30, 40, 30, 0),
             child: Column(
               children: [
                 CircularPercentIndicator(
@@ -111,105 +115,46 @@ class _RoomDetailsScreenState extends State<RoomDetailsScreen> {
                           : Colors.red,
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 0, vertical: 30),
-                  child: Row(
+                  padding: const EdgeInsets.only(top: 30, bottom: 10),
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        height: 40,
-                        padding: const EdgeInsets.all(7),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: const Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            Image.asset("assets/images/temperature_icon.png"),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Text("${weatherData["temp"]}°C",
-                                style: GoogleFonts.poppins(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                )),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 40,
-                        padding: const EdgeInsets.all(7),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: const Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            Image.asset("assets/images/wind_icon.png"),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Text("${weatherData["wind"]}m/s",
-                                style: GoogleFonts.poppins(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                )),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 40,
-                        padding: const EdgeInsets.all(7),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: const Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            Image.asset("assets/images/humidity_icon.png"),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Text("${weatherData["humidity"]}%",
-                                style: GoogleFonts.poppins(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                )),
-                          ],
-                        ),
+                      DetailsBox(
+                          title: "${weatherData["temp"]}°C",
+                          label: 'temperature'),
+                      DetailsBox(
+                          title: "${weatherData["wind"]}m/s", label: 'wind'),
+                      DetailsBox(
+                          title: "${weatherData["humidity"]}%",
+                          label: 'humidity'),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 60,
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.only(bottom: 10),
+                  padding: const EdgeInsets.all(7),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.red,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: const Offset(0, 3),
                       ),
                     ],
                   ),
-                )
+                  child: Text("Delete Room",
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      )),
+                ),
               ],
             ),
           ),
