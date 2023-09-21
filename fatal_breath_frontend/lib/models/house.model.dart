@@ -27,6 +27,9 @@ class House {
   });
 
   factory House.fromJson(Map<String, dynamic> json) {
+    final ownerJson = json['owner'];
+    final owner = ownerJson != null ? User.fromJson(ownerJson) : null;
+
     List<Room>? rooms;
     if (json['rooms'] != null && json['rooms'].isNotEmpty) {
       rooms = (json['rooms'] as List<dynamic>)
@@ -49,9 +52,6 @@ class House {
         return user;
       }).toList();
     }
-
-    final ownerJson = json['owner'];
-    final owner = ownerJson != null ? User.fromJson(ownerJson) : null;
 
     return House(
       id: json['id'],
