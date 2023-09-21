@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "21184394107",
+    "project_id": "fatal-breath",
+    "storage_bucket": "fatal-breath.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21184394107:android:aed6ca96e999416f8203de",
+        "android_client_info": {
+          "package_name": "com.example.fatal_breath_frontend"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbEd6iPRGdECWZ6vKfJCqRBBXkTGLn-bg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
