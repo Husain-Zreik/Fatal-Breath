@@ -14,7 +14,7 @@ class Room {
     required this.type,
     required this.name,
     required this.hasSensor,
-    required this.sensor,
+    this.sensor,
   });
 
   factory Room.fromJson(Map<String, dynamic> json) {
