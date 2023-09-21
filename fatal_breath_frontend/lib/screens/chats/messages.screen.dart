@@ -1,3 +1,4 @@
+import 'package:fatal_breath_frontend/config/remote.config.dart';
 import 'package:flutter/material.dart';
 import 'package:fatal_breath_frontend/models/user.model.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
@@ -25,7 +26,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
           isProfile: true,
           imageLink: widget.user.profileImage == null
               ? null
-              : 'http://192.168.1.5:8000/storage/profile_images/${widget.user.id}.png',
+              : '$baseUrl/storage/profile_images/${widget.user.id}.png',
         ),
       ),
       backgroundColor: GlobalColors.bgColor,
