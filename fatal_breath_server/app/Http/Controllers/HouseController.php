@@ -60,17 +60,19 @@ class HouseController extends Controller
         $user = Auth::user();
 
         $houses = House::with([
-            'rooms.sensors',
+            'rooms' => function ($query) {
+                $query->with('sensor')->get();
+            },
             'members',
             'requests' => function ($query) {
                 $query->where('type', 'Request');
             },
-            'requests.user'
+            'requests.user',
         ])->where('owner_id', $user->id)->get();
 
         $houses = $houses->map(function ($house) {
             $house->rooms = $house->rooms->map(function ($room) {
-                $room->hasSensor = $room->sensors->isNotEmpty();
+                $room->hasSensor = !is_null($room->sensor);
                 return $room;
             });
             return $house;
@@ -82,7 +84,6 @@ class HouseController extends Controller
             'houses' => $houses,
         ]);
     }
-
 
     public function getUserHouses()
     {
