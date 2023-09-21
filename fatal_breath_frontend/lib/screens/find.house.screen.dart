@@ -134,7 +134,7 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
         padding: const EdgeInsets.only(bottom: 30),
         child: Column(children: [
           Container(
-            margin: const EdgeInsets.fromLTRB(20, 20, 20, 5),
+            margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
             height: 50,
             child: TextField(
               keyboardType: TextInputType.text,
@@ -174,7 +174,7 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 22, top: 5),
+                  padding: const EdgeInsets.only(left: 22, top: 20),
                   child: Text(
                     "Results :",
                     style: GoogleFonts.poppins(
@@ -227,7 +227,7 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 22, top: 5),
+                  padding: const EdgeInsets.only(left: 22, top: 20),
                   child: Text(
                     "Member of these houses :",
                     style: GoogleFonts.poppins(
@@ -280,7 +280,7 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 22, top: 5),
+                  padding: const EdgeInsets.only(left: 22, top: 20),
                   child: Text(
                     "Invitations :",
                     style: GoogleFonts.poppins(
