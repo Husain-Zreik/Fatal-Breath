@@ -21,7 +21,7 @@ class RoomDetailsScreen extends StatefulWidget {
 }
 
 class _RoomDetailsScreenState extends State<RoomDetailsScreen> {
-  final int percent = 50;
+  final int percent = 20;
   late Map weatherData = {};
 
   Future<void> fetchWeather() async {
@@ -63,7 +63,7 @@ class _RoomDetailsScreenState extends State<RoomDetailsScreen> {
                   animationDuration: 1000,
                   curve: Curves.linear,
                   animateFromLastPercent: true,
-                  percent: 0.9,
+                  percent: percent / 100,
                   center: Container(
                     width: 160,
                     height: 160,
@@ -75,22 +75,30 @@ class _RoomDetailsScreenState extends State<RoomDetailsScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("90%",
-                              style: GoogleFonts.poppins(
-                                color: percent < 30
-                                    ? Colors.green
-                                    : percent < 70
-                                        ? const Color.fromARGB(255, 248, 116, 0)
-                                        : Colors.red,
-                                fontSize: 32,
-                                fontWeight: FontWeight.w600,
-                              )),
-                          Text("Oxygen",
-                              style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              )),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Text("$percent%",
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.poppins(
+                                  color: percent < 30
+                                      ? Colors.green
+                                      : percent < 70
+                                          ? const Color.fromARGB(
+                                              255, 248, 116, 0)
+                                          : Colors.red,
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.w600,
+                                )),
+                          ),
+                          Text(
+                            "Carbon\nMonoxide",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.poppins(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                         ],
                       ),
                     ),
