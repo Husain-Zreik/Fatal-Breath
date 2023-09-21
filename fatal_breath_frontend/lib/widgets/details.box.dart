@@ -11,7 +11,7 @@ class DetailsBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
+      height: 50,
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(7),
       decoration: BoxDecoration(
@@ -30,7 +30,7 @@ class DetailsBox extends StatelessWidget {
         children: [
           Image.asset("assets/images/${label}_icon.png"),
           const SizedBox(
-            width: 15,
+            width: 10,
           ),
           Text(title,
               style: GoogleFonts.poppins(
