@@ -42,6 +42,30 @@ class HouseController extends Controller
         }
     }
 
+    public function deleteHouse(Request $request, $house_id)
+    {
+        try {
+            $request->validate([
+                'house_id' => 'required|exists:houses,id',
+            ]);
+            $house = House::find($house_id);
+
+            if (!$house) {
+                return response()->json(['message' => 'House not found'], 404);
+            }
+
+            $house->delete();
+
+            return response()->json(['message' => 'House deleted successfully']);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation failed',
+                'errors' => $e->errors(),
+            ], 422);
+        }
+    }
+
     public function getAdminHouses()
     {
         $user = Auth::user();
