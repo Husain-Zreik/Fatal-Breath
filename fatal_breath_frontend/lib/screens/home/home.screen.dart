@@ -229,10 +229,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         "Carbon Monoxide : ${room.sensor == null ? "0" : room.sensor.coLevel}%",
                                                         style:
                                                             GoogleFonts.poppins(
-                                                          color: Colors.black,
                                                           fontSize: 10,
                                                           fontWeight:
                                                               FontWeight.w400,
+                                                          color: room.sensor ==
+                                                                  null
+                                                              ? Colors.grey
+                                                              : room.sensor
+                                                                          .coLevel <=
+                                                                      30
+                                                                  ? Colors.green
+                                                                  : room.sensor
+                                                                              .coLevel <=
+                                                                          60
+                                                                      ? Colors
+                                                                          .orange
+                                                                      : Colors
+                                                                          .red,
                                                         ))
                                                   ],
                                                 ),
