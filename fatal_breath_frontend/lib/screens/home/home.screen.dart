@@ -430,28 +430,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ],
                                   ),
-                                  Container(
-                                    height: 25,
-                                    width: 70,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(40),
-                                      color: Colors.red,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 2,
-                                          blurRadius: 5,
-                                          offset: const Offset(0, 3),
-                                        ),
-                                      ],
-                                    ),
-                                    child: Center(
-                                      child: Text('Delete',
-                                          style: GoogleFonts.poppins(
-                                            color: Colors.white,
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w500,
-                                          )),
+                                  InkWell(
+                                    onTap: () {},
+                                    child: Container(
+                                      height: 25,
+                                      width: 70,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(40),
+                                        color: Colors.red,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: const Offset(0, 3),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Center(
+                                        child: Text('Delete',
+                                            style: GoogleFonts.poppins(
+                                              color: Colors.white,
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w500,
+                                            )),
+                                      ),
                                     ),
                                   )
                                 ],
@@ -460,26 +463,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                       ]),
                     ))
-                  // Center(
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
-                  //     child: Column(
-                  //       mainAxisAlignment: MainAxisAlignment.center,
-                  //       children: [
-                  //         const TextTitle(text: "Add House"),
-                  //         const SizedBox(height: 20),
-                  //         ButtonGlobal(
-                  //           bgColor: GlobalColors.mainColor,
-                  //           textColor: Colors.white,
-                  //           icon: Icons.add,
-                  //           onBtnPressed: () {
-                  //             Get.to(() => const AddHouseScreen());
-                  //           },
-                  //         )
-                  //       ],
-                  //     ),
-                  //   ),
-                  // )
                 ],
               ),
       ),
