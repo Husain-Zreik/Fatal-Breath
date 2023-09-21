@@ -431,7 +431,36 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ],
                                   ),
                                   InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: const Text('Confirm Delete'),
+                                            content: const Text(
+                                                'Are you sure you want to delete this house?'),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                child: const Text('Cancel'),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                              TextButton(
+                                                child: const Text(
+                                                  'Delete',
+                                                  style: TextStyle(
+                                                      color: Colors.red),
+                                                ),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
                                     child: Container(
                                       height: 25,
                                       width: 70,
