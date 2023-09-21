@@ -1,11 +1,19 @@
 import 'package:fatal_breath_frontend/models/house.model.dart';
+import 'package:fatal_breath_frontend/providers/house.provider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class DeleteHouseBox extends StatelessWidget {
   const DeleteHouseBox({Key? key, required this.house}) : super(key: key);
 
   final House house;
+
+  Future deletePressed(houseId, context) async {
+    await Provider.of<HouseProvider>(context, listen: false)
+        .deleteHouse(houseId, context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +70,7 @@ class DeleteHouseBox extends StatelessWidget {
                         TextButton(
                           child: const Text('Cancel'),
                           onPressed: () {
-                            Navigator.of(context).pop();
+                            Get.back();
                           },
                         ),
                         TextButton(
@@ -70,8 +78,9 @@ class DeleteHouseBox extends StatelessWidget {
                             'Delete',
                             style: TextStyle(color: Colors.red),
                           ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
+                          onPressed: () async {
+                            await deletePressed(house.id, context);
+                            Get.back();
                           },
                         ),
                       ],
