@@ -45,7 +45,6 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
       if (!validated()) {
         return err = "Fill the inputs correctly";
       }
-      //Try signing up
       await Provider.of<HouseProvider>(context, listen: false)
           .createHouse(name, country, city, context);
 
