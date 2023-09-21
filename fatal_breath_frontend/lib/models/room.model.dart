@@ -6,7 +6,7 @@ class Room {
   final String type;
   final String name;
   final bool hasSensor;
-  final List<Sensor> sensors;
+  final Sensor? sensor;
 
   Room({
     required this.id,
@@ -14,17 +14,16 @@ class Room {
     required this.type,
     required this.name,
     required this.hasSensor,
-    required this.sensors,
+    required this.sensor,
   });
 
   factory Room.fromJson(Map<String, dynamic> json) {
-    final List<Sensor> roomSensors = [];
-    final sensorJson = json['sensors'];
+    final sensorJson = json['sensor'];
+
+    Sensor? roomSensor;
 
     if (sensorJson != null) {
-      for (final sensorData in sensorJson) {
-        roomSensors.add(Sensor.fromJson(sensorData));
-      }
+      roomSensor = Sensor.fromJson(sensorJson);
     }
 
     return Room(
@@ -33,7 +32,7 @@ class Room {
       type: json['type'],
       name: json['name'],
       hasSensor: json['hasSensor'],
-      sensors: roomSensors,
+      sensor: roomSensor,
     );
   }
 }
