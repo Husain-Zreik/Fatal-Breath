@@ -7,6 +7,8 @@ import 'package:fatal_breath_frontend/screens/home/add.house.screen.dart';
 import 'package:fatal_breath_frontend/screens/home/add.room.screen.dart';
 import 'package:fatal_breath_frontend/screens/home/room.details.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
+import 'package:fatal_breath_frontend/widgets/add.box.dart';
+import 'package:fatal_breath_frontend/widgets/delete.house.box.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -155,61 +157,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Column(children: [
                               if (userType == "Manager")
                                 InkWell(
-                                  onTap: () {
-                                    Get.to(
-                                        () => AddRoomScreen(houseId: house.id));
-                                  },
-                                  child: Container(
-                                    margin:
-                                        const EdgeInsets.fromLTRB(20, 0, 20, 5),
-                                    height: 60,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 2,
-                                          blurRadius: 5,
-                                          offset: const Offset(0, 3),
-                                        ),
-                                      ],
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10),
-                                      child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                    width: 60,
-                                                    child: Icon(
-                                                      Icons.add_circle_outline,
-                                                      size: 35,
-                                                      color: GlobalColors
-                                                          .mainColor,
-                                                    )),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(10),
-                                                  child: Text("Add Room",
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                        color: Colors.black,
-                                                        fontSize: 18,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      )),
-                                                ),
-                                              ],
-                                            )
-                                          ]),
-                                    ),
-                                  ),
-                                ),
+                                    onTap: () {
+                                      Get.to(() =>
+                                          AddRoomScreen(houseId: house.id));
+                                    },
+                                    child: const AddBox(label: "Add Room")),
                               for (final room in house.rooms!)
                                 InkWell(
                                   onTap: () {
@@ -341,155 +293,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: () {
                             Get.to(() => const AddHouseScreen());
                           },
-                          child: Container(
-                            margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
-                            height: 60,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: const Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                            width: 60,
-                                            child: Icon(
-                                              Icons.add_circle_outline,
-                                              size: 35,
-                                              color: GlobalColors.mainColor,
-                                            )),
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Text("Add House",
-                                              style: GoogleFonts.poppins(
-                                                color: Colors.black,
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w600,
-                                              )),
-                                        ),
-                                      ],
-                                    )
-                                  ]),
-                            ),
-                          ),
+                          child: const AddBox(label: "Add House"),
                         ),
                         for (final house in houses!)
-                          Container(
-                            margin: const EdgeInsets.fromLTRB(20, 5, 20, 0),
-                            height: 80,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: const Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      SizedBox(
-                                        width: 60,
-                                        child: Image.asset(
-                                          'assets/images/house_icon.png',
-                                          scale: 1.7,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(10),
-                                        child: Text(house.name,
-                                            style: GoogleFonts.poppins(
-                                              color: Colors.black,
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w500,
-                                            )),
-                                      ),
-                                    ],
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title: const Text('Confirm Delete'),
-                                            content: const Text(
-                                                'Are you sure you want to delete this house?'),
-                                            actions: <Widget>[
-                                              TextButton(
-                                                child: const Text('Cancel'),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                              ),
-                                              TextButton(
-                                                child: const Text(
-                                                  'Delete',
-                                                  style: TextStyle(
-                                                      color: Colors.red),
-                                                ),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: Container(
-                                      height: 25,
-                                      width: 70,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(40),
-                                        color: Colors.red,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: const Offset(0, 3),
-                                          ),
-                                        ],
-                                      ),
-                                      child: Center(
-                                        child: Text('Delete',
-                                            style: GoogleFonts.poppins(
-                                              color: Colors.white,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w500,
-                                            )),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
+                          DeleteHouseBox(house: house)
                       ]),
                     ))
                 ],
