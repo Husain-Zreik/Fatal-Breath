@@ -168,7 +168,7 @@ class _UsersScreenState extends State<UsersScreen> {
                       padding: const EdgeInsets.only(bottom: 30),
                       child: Column(children: [
                         Container(
-                          margin: const EdgeInsets.fromLTRB(20, 20, 20, 5),
+                          margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                           height: 50,
                           child: TextField(
                             keyboardType: TextInputType.text,
@@ -210,7 +210,7 @@ class _UsersScreenState extends State<UsersScreen> {
                             children: [
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 22, top: 5),
+                                    const EdgeInsets.only(left: 22, top: 15),
                                 child: Text(
                                   "Results :",
                                   style: GoogleFonts.poppins(
@@ -267,7 +267,7 @@ class _UsersScreenState extends State<UsersScreen> {
                             children: [
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 22, top: 5),
+                                    const EdgeInsets.only(left: 22, top: 15),
                                 child: Text(
                                   "Members of ${house.name} :",
                                   style: GoogleFonts.poppins(
@@ -321,7 +321,7 @@ class _UsersScreenState extends State<UsersScreen> {
                             children: [
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 22, top: 5),
+                                    const EdgeInsets.only(left: 22, top: 15),
                                 child: Text(
                                   "Requests :",
                                   style: GoogleFonts.poppins(
