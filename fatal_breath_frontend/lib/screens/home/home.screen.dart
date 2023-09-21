@@ -167,6 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   onTap: room.hasSensor
                                       ? () {
                                           Get.to(() => RoomDetailsScreen(
+                                                userType: userType!,
                                                 room: room,
                                                 house: house,
                                               ));
