@@ -164,12 +164,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child: const AddBox(label: "Add Room")),
                               for (final room in house.rooms!)
                                 InkWell(
-                                  onTap: () {
-                                    Get.to(() => RoomDetailsScreen(
-                                          room: room,
-                                          house: house,
-                                        ));
-                                  },
+                                  onTap: room.hasSensor
+                                      ? () {
+                                          Get.to(() => RoomDetailsScreen(
+                                                room: room,
+                                                house: house,
+                                              ));
+                                        }
+                                      : null,
                                   child: Container(
                                     margin:
                                         const EdgeInsets.fromLTRB(20, 5, 20, 0),
