@@ -134,12 +134,13 @@ class _RoomDetailsScreenState extends State<RoomDetailsScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       DetailsBox(
-                          title: "${weatherData["temp"]}°C",
+                          title: "Temperature :  ${weatherData["temp"]} °C",
                           label: 'temperature'),
                       DetailsBox(
-                          title: "${weatherData["wind"]}m/s", label: 'wind'),
+                          title: "Wind :  ${weatherData["wind"]} m/s",
+                          label: 'wind'),
                       DetailsBox(
-                          title: "${weatherData["humidity"]}%",
+                          title: "Humidity :  ${weatherData["humidity"]} %",
                           label: 'humidity'),
                     ],
                   ),
@@ -177,7 +178,7 @@ class _RoomDetailsScreenState extends State<RoomDetailsScreen> {
                       );
                     },
                     child: Container(
-                      height: 60,
+                      height: 50,
                       alignment: Alignment.center,
                       margin: const EdgeInsets.only(bottom: 10),
                       padding: const EdgeInsets.all(7),
