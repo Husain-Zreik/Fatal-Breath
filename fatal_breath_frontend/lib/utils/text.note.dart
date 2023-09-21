@@ -12,7 +12,7 @@ class TextNote extends StatelessWidget {
     return Text(text,
         style: GoogleFonts.poppins(
           color: GlobalColors.mainColor,
-          fontSize: 16,
+          fontSize: 15,
           fontWeight: FontWeight.w500,
         ));
   }
