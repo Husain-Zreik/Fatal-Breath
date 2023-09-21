@@ -209,12 +209,13 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
                           ],
                         ),
                         child: Center(
-                          child: Text(house.isRequested ? "Cancel" : "Request",
-                              style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontSize: 10,
-                                fontWeight: FontWeight.w500,
-                              )),
+                          child:
+                              Text(house.isRequested ? "Requested" : "Request",
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w500,
+                                  )),
                         ),
                       ),
                     ),
