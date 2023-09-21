@@ -23,8 +23,8 @@ class Room extends Model
         return $this->belongsTo(House::class);
     }
 
-    public function sensors()
+    public function sensor()
     {
-        return $this->hasMany(Sensor::class);
+        return $this->hasOne(Sensor::class);
     }
 }
