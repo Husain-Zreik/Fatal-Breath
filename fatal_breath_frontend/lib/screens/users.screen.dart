@@ -246,7 +246,7 @@ class _UsersScreenState extends State<UsersScreen> {
                                       child: Center(
                                         child: Text(
                                             user.isInvited
-                                                ? "Cancel"
+                                                ? "Invited"
                                                 : "Invite",
                                             style: GoogleFonts.poppins(
                                               color: Colors.white,
