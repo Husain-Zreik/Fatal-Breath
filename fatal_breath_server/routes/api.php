@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HouseController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SensorController;
@@ -51,3 +52,4 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
 
 Route::post('/sensor', [SensorController::class, 'connect']);
 Route::post('/sensor/updateLevel', [SensorController::class, 'updateLevel']);
+Route::post('/send-notification', [NotificationController::class, 'sendNotification']);
