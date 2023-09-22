@@ -7,25 +7,6 @@ use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
-    // public function sendNotification(Request $request)
-    // {
-
-    //     $user = $request->to;
-
-    //     FCMService::send(
-    //         $user,
-    //         [
-    //             'title' => 'hey there beautiful',
-    //             'body' => 'your body is tired',
-    //         ]
-    //     );
-
-    //     return response()->json([
-    //         'status' => 'success',
-    //         'user' => $user
-    //     ]);
-    // }
-
     public function sendNotification(Request $request)
     {
         $deviceToken = $request->input('to');
