@@ -30,7 +30,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  // final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
   @override
   void initState() {
@@ -40,7 +40,6 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> initFirebaseMessaging() async {
-    // Request permission for notifications
     NotificationSettings settings =
         await FirebaseMessaging.instance.requestPermission(
       alert: true,
