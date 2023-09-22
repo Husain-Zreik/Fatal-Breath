@@ -5,6 +5,9 @@ const char *ssid = "AMAN";
 const char *password = "Aliz1966";
 const char *serverAddress = "http://192.168.1.5:8000";
 
+const char *fcmServerKey = "AAAABO6wM3s:APA91bEn6u-6NPtmAi58nflNCyZLEN_iyG8wMSsej-S4SwQ80CoQ06AX0oSn0U6CXnyImiX3jPfYMEBkGAF9_VkGXrG93IDEJuhG33K1OBpTFM1zebu0qt8fgGiSTnxhf2Hb8JeL2n8n";
+const char *deviceFCMToken = "d3mxBLOuRyWl8nKJoAJBvc:APA91bGNxmA1K7KbzONr_RuaKQmgJrl5qCHxtZwMX9EdNmm86JG7udCsUjYemENzlhEP_hkcPoYC7lrelyAFrDdyg_dA0Xh-5v1jdG7pBSboZVZFRTl_wBDfVDuoKI0XFX_q-v3ZV0-t";
+
 float lastCoPercentage = 0.0;
 int sensorPin = A0;
 int coValue = 0;
@@ -44,6 +47,7 @@ void loop()
     if (abs(coPercentage - lastCoPercentage) >= 5.0)
     {
         updateLevel(roomId, coPercentage);
+        sendFCMNotification(coPercentage);
         lastCoPercentage = coPercentage;
     }
 
@@ -93,6 +97,30 @@ void updateLevel(int roomId, float coPercentage)
     else
     {
         Serial.println("Failed to update CO level");
+    }
+
+    http.end();
+}
+
+void sendFCMNotification(float coPercentage)
+{
+    String deviceFCMTokenStr = String(deviceFCMToken);
+
+    String jsonPayload = "{\"to\": \"" + deviceFCMTokenStr + "\", \"notification\": {\"title\": \"CO Level Update\", \"body\": \"CO Level is " + String(coPercentage) + "%\"}}";
+
+    HTTPClient http;
+    http.begin(client, "https://fcm.googleapis.com/fcm/send");
+    http.addHeader("Content-Type", "application/json");
+    http.addHeader("Authorization", "key=" + String(fcmServerKey));
+
+    int httpResponseCode = http.POST(jsonPayload);
+    if (httpResponseCode == 200)
+    {
+        Serial.println("Notification sent successfully");
+    }
+    else
+    {
+        Serial.println("Failed to send notification");
     }
 
     http.end();
