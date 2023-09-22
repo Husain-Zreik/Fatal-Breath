@@ -40,7 +40,9 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> initFirebaseMessaging() async {
-    NotificationSettings settings = await _firebaseMessaging.requestPermission(
+    // Request permission for notifications
+    NotificationSettings settings =
+        await FirebaseMessaging.instance.requestPermission(
       alert: true,
       badge: true,
       sound: true,
@@ -52,8 +54,23 @@ class _MyAppState extends State<MyApp> {
       print('Notification permission denied.');
     }
 
+    String? fcmToken = await FirebaseMessaging.instance.getToken();
+    print('FCM Token: $fcmToken');
+
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print('Received message: ${message.notification?.title}');
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('Notification opened while the app was in the background');
+    });
+
+    FirebaseMessaging.instance
+        .getInitialMessage()
+        .then((RemoteMessage? message) {
+      if (message != null) {
+        print('Notification opened when the app was terminated');
+      }
     });
   }
 
@@ -64,9 +81,6 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider<AuthProvider>(
           create: (context) => AuthProvider(),
         ),
-        // ChangeNotifierProvider.value(
-        //   value: AuthProvider(),
-        // ),
         ChangeNotifierProvider<UserProvider>(
           create: (context) => UserProvider(),
         ),
