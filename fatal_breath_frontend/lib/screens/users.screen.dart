@@ -417,7 +417,7 @@ class _UsersScreenState extends State<UsersScreen> {
                                 EdgeInsets.only(top: 80, right: 20, left: 25),
                             child: TextNote(
                                 text:
-                                    "No requests or members in this house ! Search for members and invite them by typing the username of them in the search bar."),
+                                    "No requests or members in this house ! Search for members and invite them by typing their username."),
                           )
                         else if (searchLists[house.id] != null &&
                             searchLists[house.id]!.isEmpty)
