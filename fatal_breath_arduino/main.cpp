@@ -7,7 +7,8 @@ const char *serverAddress = "http://192.168.1.5:8000";
 
 const char *deviceFCMToken = "d3mxBLOuRyWl8nKJoAJBvc:APA91bGNxmA1K7KbzONr_RuaKQmgJrl5qCHxtZwMX9EdNmm86JG7udCsUjYemENzlhEP_hkcPoYC7lrelyAFrDdyg_dA0Xh-5v1jdG7pBSboZVZFRTl_wBDfVDuoKI0XFX_q-v3ZV0-t";
 
-float lastCoPercentage = 0.0;
+int lastCoPercentage = 0.0;
+int previousCoPercentage = 0.0;
 int sensorPin = A0;
 int coValue = 0;
 
@@ -38,7 +39,7 @@ void loop()
 {
     coValue = analogRead(sensorPin);
 
-    float coPercentage = map(coValue, 0, 1023, 0, 100);
+    int coPercentage = map(coValue, 0, 1023, 0, 100);
     Serial.print("CO Level: ");
     Serial.print(coPercentage);
     Serial.println("%");
@@ -46,9 +47,18 @@ void loop()
     if (abs(coPercentage - lastCoPercentage) >= 5.0)
     {
         updateLevel(roomId, coPercentage);
-        sendFCMNotification(coPercentage);
         lastCoPercentage = coPercentage;
     }
+    if (coPercentage > 40.0 && previousCoPercentage <= 40.0)
+    {
+        sendFCMNotification(coPercentage, "CO Level Alert", "CO Level is sensetive it crossed 40% and now its ");
+    }
+
+    if (coPercentage > 70.0)
+    {
+        sendFCMNotification(coPercentage, "CO Level Alert", "CO Level is dangerous it crossed 70% and now its ");
+    }
+    previousCoPercentage = coPercentage;
 
     delay(5000);
 }
@@ -77,7 +87,7 @@ void createSensor(int roomId)
     http.end();
 }
 
-void updateLevel(int roomId, float coPercentage)
+void updateLevel(int roomId, int coPercentage)
 {
     String serverEndpoint = "/api/sensor/updateLevel";
     String postData = "room_id=" + String(roomId) + "&co_level=" + String(coPercentage);
@@ -101,16 +111,16 @@ void updateLevel(int roomId, float coPercentage)
     http.end();
 }
 
-void sendFCMNotification(float coPercentage, const String &title, const String &body)
+void sendFCMNotification(int coPercentage, const String &title, const String &body)
 {
     String serverEndpoint = "/api/send-notification";
     String jsonPayload = "{\"notification\":{"
                          "\"title\":\"" +
                          title + "\","
                                  "\"body\":\"" +
-                         body + "\","
-                                "},"
-                                "\"to\":\"" +
+                         body + String(coPercentage) + "%\""
+                                                       "},"
+                                                       "\"to\":\"" +
                          String(deviceFCMToken) + "\"}";
 
     http.begin(client, serverAddress + serverEndpoint);
