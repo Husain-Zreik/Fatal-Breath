@@ -39,90 +39,97 @@ class _MainScreenState extends State<MainScreen> {
       SettingsScreen(),
     ];
 
-    return Scaffold(
-      appBar: _selectedindex == 0 || _selectedindex == 2 || _selectedindex == 1
-          ? null
-          : AppBar(
-              backgroundColor: GlobalColors.bgColor,
-              elevation: 0,
-              centerTitle: true,
-              leadingWidth: 65,
-              toolbarHeight: 80,
-              leading: Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Image.asset(
-                  'assets/images/light_icon.png',
-                ),
-              ),
-              title: Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: Text(
-                  "Settings",
-                  style: GoogleFonts.poppins(
-                    color: GlobalColors.mainColor,
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
-      body: pages[_selectedindex],
-      backgroundColor: GlobalColors.bgColor,
-      bottomNavigationBar: BottomNavigationBar(
-        elevation: 0,
-        backgroundColor: GlobalColors.mainColor,
-        fixedColor: GlobalColors.mainColor,
-        selectedIconTheme: IconThemeData(color: Colors.black),
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        currentIndex: _selectedindex,
-        onTap: (int index) {
-          setState(() {
-            _selectedindex = index;
-          });
+    return WillPopScope(
+        onWillPop: () async {
+          return false;
         },
-        items: [
-          BottomNavigationBarItem(
-              icon: _selectedindex == 0
-                  ? Icon(
-                      Icons.home,
-                      color: Colors.white,
-                      size: 30,
-                    )
-                  : SvgPicture.asset(
-                      "assets/icons/home_icon.svg",
-                      height: 30,
-                      width: 30,
-                      // ignore: deprecated_member_use
-                      color: Colors.white,
+        child: Scaffold(
+          appBar:
+              _selectedindex == 0 || _selectedindex == 2 || _selectedindex == 1
+                  ? null
+                  : AppBar(
+                      backgroundColor: GlobalColors.bgColor,
+                      elevation: 0,
+                      centerTitle: true,
+                      leadingWidth: 65,
+                      toolbarHeight: 80,
+                      leading: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Image.asset(
+                          'assets/images/light_icon.png',
+                        ),
+                      ),
+                      title: Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Text(
+                          "Settings",
+                          style: GoogleFonts.poppins(
+                            color: GlobalColors.mainColor,
+                            fontSize: 24,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
                     ),
-              label: ''),
-          BottomNavigationBarItem(
-              icon: Icon(
-                _selectedindex == 1 ? Icons.chat : Icons.chat_outlined,
-                color: Colors.white,
-                size: 27,
-              ),
-              label: ''),
-          BottomNavigationBarItem(
-              icon: Icon(
-                _selectedindex == 2
-                    ? Icons.add_circle
-                    : Icons.add_circle_outline,
-                color: Colors.white,
-                size: 30,
-              ),
-              label: ''),
-          BottomNavigationBarItem(
-              icon: Icon(
-                _selectedindex == 3 ? Icons.settings : Icons.settings_outlined,
-                color: Colors.white,
-                size: 30,
-              ),
-              label: ''),
-        ],
-      ),
-    );
+          body: pages[_selectedindex],
+          backgroundColor: GlobalColors.bgColor,
+          bottomNavigationBar: BottomNavigationBar(
+            elevation: 0,
+            backgroundColor: GlobalColors.mainColor,
+            fixedColor: GlobalColors.mainColor,
+            selectedIconTheme: IconThemeData(color: Colors.black),
+            type: BottomNavigationBarType.fixed,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            currentIndex: _selectedindex,
+            onTap: (int index) {
+              setState(() {
+                _selectedindex = index;
+              });
+            },
+            items: [
+              BottomNavigationBarItem(
+                  icon: _selectedindex == 0
+                      ? Icon(
+                          Icons.home,
+                          color: Colors.white,
+                          size: 30,
+                        )
+                      : SvgPicture.asset(
+                          "assets/icons/home_icon.svg",
+                          height: 30,
+                          width: 30,
+                          // ignore: deprecated_member_use
+                          color: Colors.white,
+                        ),
+                  label: ''),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    _selectedindex == 1 ? Icons.chat : Icons.chat_outlined,
+                    color: Colors.white,
+                    size: 27,
+                  ),
+                  label: ''),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    _selectedindex == 2
+                        ? Icons.add_circle
+                        : Icons.add_circle_outline,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  label: ''),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    _selectedindex == 3
+                        ? Icons.settings
+                        : Icons.settings_outlined,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  label: ''),
+            ],
+          ),
+        ));
   }
 }
