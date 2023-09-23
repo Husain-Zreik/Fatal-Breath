@@ -28,7 +28,6 @@ class _SendMesssageBarState extends State<SendMesssageBar> {
     FocusScope.of(context).unfocus();
 
     final currentUserId = await getLocal(type: LocalTypes.Int, key: "user_id");
-    print('currentUserId  $currentUserId');
 
     await FirebaseFirestoreService.addTextMessage(
       senderId: currentUserId,
