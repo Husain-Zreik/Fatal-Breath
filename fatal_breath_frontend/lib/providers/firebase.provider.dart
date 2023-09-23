@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fatal_breath_frontend/models/message.model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class FirebaseProvider extends ChangeNotifier {
@@ -8,12 +7,12 @@ class FirebaseProvider extends ChangeNotifier {
 
   List<Message> messages = [];
 
-  List<Message> getMessages(String receiverId) {
+  List<Message> getMessages(int receiverId, int senderId) {
     FirebaseFirestore.instance
         .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .doc(senderId.toString())
         .collection('chat')
-        .doc(receiverId)
+        .doc(receiverId.toString())
         .collection('messages')
         .orderBy('sentTime', descending: false)
         .snapshots(includeMetadataChanges: true)
