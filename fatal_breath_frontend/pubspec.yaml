@@ -57,6 +57,7 @@ dependencies:
   cloud_firestore: ^4.9.2
   firebase_storage: ^11.2.7
   firebase_messaging: ^14.6.8
+  flutter_local_notifications: ^15.1.1
   # Date and Time
   timeago: ^3.5.0
 
