@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:fatal_breath_frontend/providers/auth.provider.dart';
+import 'package:fatal_breath_frontend/providers/firebase.provider.dart';
 import 'package:fatal_breath_frontend/providers/house.provider.dart';
 import 'package:fatal_breath_frontend/providers/room.provider.dart';
 import 'package:fatal_breath_frontend/providers/user.provider.dart';
@@ -88,6 +89,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider<RoomProvider>(
           create: (context) => RoomProvider(),
+        ),
+        ChangeNotifierProvider<FirebaseProvider>(
+          create: (context) => FirebaseProvider(),
         ),
       ],
       child: GetMaterialApp(
