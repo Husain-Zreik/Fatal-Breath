@@ -1,11 +1,11 @@
-import 'package:fatal_breath_frontend/config/local.storage.config.dart';
 import 'package:fatal_breath_frontend/config/remote.config.dart';
-import 'package:fatal_breath_frontend/enums/local.types.dart';
 import 'package:fatal_breath_frontend/models/message.model.dart';
+import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:flutter/material.dart';
 import 'package:fatal_breath_frontend/models/user.model.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/widgets/secondary.appbar.dart';
+import 'package:provider/provider.dart';
 
 class MessagesScreen extends StatefulWidget {
   const MessagesScreen({super.key, required this.user});
@@ -19,11 +19,8 @@ class MessagesScreen extends StatefulWidget {
 class _MessagesScreenState extends State<MessagesScreen> {
   final TextEditingController _messageController = TextEditingController();
 
-  final int? currentUserId = 1;
-  // final int? currentUserId = getLocal(type: LocalTypes.Int, key: "user_id");
-
   _chatBubble(Message message, bool isMe) {
-    if (isMe) {
+    if (!isMe) {
       return Container(
         alignment: Alignment.topLeft,
         child: Container(
@@ -105,6 +102,14 @@ class _MessagesScreenState extends State<MessagesScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    // ignore: unused_local_variable
+    final currentUser =
+        Provider.of<UserProvider>(context, listen: false).getCurrentUser;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
@@ -127,7 +132,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
               itemCount: messages.length,
               itemBuilder: (BuildContext context, int index) {
                 final Message message = messages[index];
-                final bool isMe = message.sender!.id == currentUserId;
+                final bool isMe = message.sender!.id == currentUser.id;
                 // final bool isSameUser = prevUserId == message.sender.id;
                 // prevUserId = message.sender.id;
                 return _chatBubble(message, isMe);
