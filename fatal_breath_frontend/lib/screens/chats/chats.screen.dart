@@ -1,3 +1,4 @@
+import 'package:fatal_breath_frontend/models/user.model.dart';
 import 'package:fatal_breath_frontend/providers/house.provider.dart';
 import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/screens/empty/home.empty.state.screen.dart';
@@ -23,11 +24,14 @@ class _ChatsScreenState extends State<ChatsScreen> {
   List? members;
   String? image;
   String? userType;
+  User? currentUser;
 
   @override
   void initState() {
     super.initState();
     userType = Provider.of<UserProvider>(context, listen: false).getUserType;
+    currentUser =
+        Provider.of<UserProvider>(context, listen: false).getCurrentUser;
 
     if (userType == "Manager") {
       Provider.of<HouseProvider>(context, listen: false).getAdminHouses();
@@ -147,7 +151,8 @@ class _ChatsScreenState extends State<ChatsScreen> {
                               for (final user in members!)
                                 InkWell(
                                   onTap: () {
-                                    Get.to(() => MessagesScreen(user: user));
+                                    Get.to(() => MessagesScreen(
+                                        user: user, currentUser: currentUser!));
                                   },
                                   child: ContactBox(
                                     user: user,
