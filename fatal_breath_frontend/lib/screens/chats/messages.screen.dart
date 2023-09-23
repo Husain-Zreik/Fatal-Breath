@@ -1,21 +1,32 @@
 import 'package:fatal_breath_frontend/config/remote.config.dart';
+import 'package:fatal_breath_frontend/providers/firebase.provider.dart';
 import 'package:fatal_breath_frontend/widgets/chat.messages.dart';
 import 'package:fatal_breath_frontend/widgets/send.message.bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fatal_breath_frontend/models/user.model.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/widgets/secondary.appbar.dart';
+import 'package:provider/provider.dart';
 
 class MessagesScreen extends StatefulWidget {
-  const MessagesScreen({super.key, required this.user});
+  const MessagesScreen(
+      {super.key, required this.user, required this.currentUser});
 
   final User user;
+  final User currentUser;
 
   @override
   State<MessagesScreen> createState() => _MessagesScreenState();
 }
 
 class _MessagesScreenState extends State<MessagesScreen> {
+  @override
+  void initState() {
+    Provider.of<FirebaseProvider>(context, listen: false)
+        .getMessages(widget.user.id, widget.currentUser.id);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
