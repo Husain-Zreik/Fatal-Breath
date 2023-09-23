@@ -10,7 +10,6 @@ import 'package:fatal_breath_frontend/screens/users.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-// import 'package:fluttericon/fontelico_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -35,9 +34,9 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     List pages = [
       HomeScreen(),
-      ChatsScreen(), userType == "Manager" ? UsersScreen() : FindHouseScreen(),
+      ChatsScreen(),
+      userType == "Manager" ? UsersScreen() : FindHouseScreen(),
       SettingsScreen(),
-      // AiScreen(),
     ];
 
     return Scaffold(
@@ -58,15 +57,7 @@ class _MainScreenState extends State<MainScreen> {
               title: Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
-                  _selectedindex == 0
-                      ? "Home"
-                      : _selectedindex == 1
-                          ? "Chats"
-                          : _selectedindex == 2
-                              ? "Members"
-                              : _selectedindex == 3
-                                  ? "Settings"
-                                  : "Breathy",
+                  "Settings",
                   style: GoogleFonts.poppins(
                     color: GlobalColors.mainColor,
                     fontSize: 24,
@@ -130,15 +121,6 @@ class _MainScreenState extends State<MainScreen> {
                 size: 30,
               ),
               label: ''),
-          // BottomNavigationBarItem(
-          //     icon: Icon(
-          //       _selectedindex == 4
-          //           ? Fontelico.emo_thumbsup
-          //           : Fontelico.emo_happy,
-          //       size: 22,
-          //       color: Colors.white,
-          //     ),
-          //     label: ''),
         ],
       ),
     );
