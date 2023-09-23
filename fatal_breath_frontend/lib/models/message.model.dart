@@ -1,6 +1,6 @@
 class Message {
-  final String senderId;
-  final String receiverId;
+  final int senderId;
+  final int receiverId;
   final String content;
   final DateTime sentTime;
 
@@ -28,74 +28,74 @@ class Message {
 
 List<Message> messages = [
   Message(
-    senderId: '2',
-    receiverId: 'gNfEHSQZ5ZUcY6JG5AarK8O0SVw1',
+    senderId: 1,
+    receiverId: 2,
     content: 'Hello',
     sentTime: DateTime.now(),
   ),
   Message(
-    senderId: 'gNfEHSQZ5ZUcY6JG5AarK8O0SVw1',
-    receiverId: '2',
+    senderId: 2,
+    receiverId: 1,
     content: 'How are you?',
     sentTime: DateTime.now(),
   ),
   Message(
-    senderId: '2',
-    receiverId: 'gNfEHSQZ5ZUcY6JG5AarK8O0SVw1',
+    senderId: 1,
+    receiverId: 2,
     content: 'Fine',
     sentTime: DateTime.now(),
   ),
   Message(
-    senderId: 'gNfEHSQZ5ZUcY6JG5AarK8O0SVw1',
-    receiverId: '2',
+    senderId: 2,
+    receiverId: 1,
     content: 'What are you doing?',
     sentTime: DateTime.now(),
   ),
   Message(
-    senderId: '2',
-    receiverId: 'gNfEHSQZ5ZUcY6JG5AarK8O0SVw1',
+    senderId: 1,
+    receiverId: 2,
     content: 'Nothing',
     sentTime: DateTime.now(),
   ),
   Message(
-    senderId: 'gNfEHSQZ5ZUcY6JG5AarK8O0SVw1',
-    receiverId: '2',
+    senderId: 2,
+    receiverId: 1,
     content: 'Can you help me?',
     sentTime: DateTime.now(),
   ),
   Message(
-    senderId: 'gNfEHSQZ5ZUcY6JG5AarK8O0SVw1',
-    receiverId: '2',
+    senderId: 2,
+    receiverId: 1,
     content: 'Thank you',
     sentTime: DateTime.now(),
   ),
   Message(
-    senderId: '2',
-    receiverId: 'gNfEHSQZ5ZUcY6JG5AarK8O0SVw1',
+    senderId: 1,
+    receiverId: 2,
     content: 'You are welcome',
     sentTime: DateTime.now(),
   ),
   Message(
-    senderId: 'gNfEHSQZ5ZUcY6JG5AarK8O0SVw1',
-    receiverId: '2',
+    senderId: 2,
+    receiverId: 1,
     content: 'Bye',
     sentTime: DateTime.now(),
   ),
   Message(
-    senderId: '2',
-    receiverId: 'gNfEHSQZ5ZUcY6JG5AarK8O0SVw1',
+    senderId: 1,
+    receiverId: 2,
     content: 'Bye',
     sentTime: DateTime.now(),
   ),
   Message(
-    senderId: 'gNfEHSQZ5ZUcY6JG5AarK8O0SVw1',
-    receiverId: '2',
+    senderId: 2,
+    receiverId: 1,
     content: 'See you later',
     sentTime: DateTime.now(),
   ),
   Message(
-    senderId: '2',
-    receiverId: 'gNfEHSQZ5ZUcY6JG5AarK8O0SVw1',
+    senderId: 1,
+    receiverId: 2,
     content: 'See you later',
     sentTime: DateTime.now(),
   )
