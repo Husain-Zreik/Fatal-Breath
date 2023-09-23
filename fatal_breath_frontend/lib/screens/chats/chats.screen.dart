@@ -105,17 +105,6 @@ class _ChatsScreenState extends State<ChatsScreen> {
             ],
           ),
         ),
-        // title: Padding(
-        //   padding: const EdgeInsets.only(top: 13),
-        //   child: Text(
-        //     "Chats",
-        //     style: GoogleFonts.poppins(
-        //       color: GlobalColors.mainColor,
-        //       fontSize: 24,
-        //       fontWeight: FontWeight.w600,
-        //     ),
-        //   ),
-        // ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(top: 17, bottom: 10, right: 10),
