@@ -3,7 +3,8 @@
 
 const char *ssid = "AMAN";
 const char *password = "Aliz1966";
-const char *serverAddress = "http://192.168.1.5:8000";
+// const char *serverAddress = "http://192.168.1.5:8000";
+const char *serverAddress = "http://54.75.66.192";
 
 const char *deviceFCMToken = "d3mxBLOuRyWl8nKJoAJBvc:APA91bGNxmA1K7KbzONr_RuaKQmgJrl5qCHxtZwMX9EdNmm86JG7udCsUjYemENzlhEP_hkcPoYC7lrelyAFrDdyg_dA0Xh-5v1jdG7pBSboZVZFRTl_wBDfVDuoKI0XFX_q-v3ZV0-t";
 
