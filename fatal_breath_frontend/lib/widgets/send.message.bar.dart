@@ -1,10 +1,12 @@
+import 'package:fatal_breath_frontend/config/local.storage.config.dart';
+import 'package:fatal_breath_frontend/enums/local.types.dart';
+import 'package:fatal_breath_frontend/services/firebase.firestore.service.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:flutter/material.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SendMesssageBar extends StatefulWidget {
-  const SendMesssageBar({super.key});
+  const SendMesssageBar({super.key, required this.receiverId});
+  final int receiverId;
 
   @override
   State<SendMesssageBar> createState() => _SendMesssageBarState();
@@ -12,25 +14,27 @@ class SendMesssageBar extends StatefulWidget {
 
 class _SendMesssageBarState extends State<SendMesssageBar> {
   final _messageController = TextEditingController();
+
   @override
   void dispose() {
     _messageController.dispose();
     super.dispose();
   }
 
-  void submitMessage(String message) {
+  void submitMessage(String message) async {
     if (message.trim().isEmpty) {
       return;
     }
     FocusScope.of(context).unfocus();
 
-    // final user = FirebaseAuth.instance.currentUser!;
+    final currentUserId = await getLocal(type: LocalTypes.Int, key: "user_id");
+    print('currentUserId  $currentUserId');
 
-    // FirebaseFirestore.instance.collection("chat").add({
-    //   "text": enteredText,
-    //   "createdAt": Timestamp.now(),
-    //   "userId": user.uid,
-    // });
+    await FirebaseFirestoreService.addTextMessage(
+      senderId: currentUserId,
+      receiverId: widget.receiverId,
+      content: message.trim(),
+    );
 
     _messageController.clear();
   }
