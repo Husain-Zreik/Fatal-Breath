@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, unused_local_variable
 
 import 'dart:io';
 import 'dart:convert';
@@ -21,41 +21,11 @@ class RoomProvider with ChangeNotifier {
           method: RequestMethods.POST,
           load: body);
 
-      print(response);
-
       notifyListeners();
     } catch (e) {
       throw HttpException('$e');
     }
   }
-
-  // Future fetchWeather1(city, country) async {
-  //   const apiKey = '232dfd47c590be56ac3d87bf82aab944';
-  //   // const apiKey = '914536411a15b4683380209ccf43fb0f';
-  //   final apiUrl =
-  //       'https://api.openweathermap.org/data/2.5/weather?q=$city,$country&units=metric&appid=$apiKey';
-  //   final dio = Dio();
-
-  //   try {
-  //     final response = await dio.get(
-  //       apiUrl,
-  //     );
-
-  //     if (response.statusCode == 200) {
-  //       final Map<String, dynamic> weatherData = {
-  //         'temp': response.data['main']['temp'],
-  //         'humidity': response.data['main']['humidity'],
-  //         'wind': response.data['wind']['speed'],
-  //       };
-
-  //       return weatherData;
-  //     } else {
-  //       throw Exception('Failed to load weather data');
-  //     }
-  //   } catch (e) {
-  //     throw HttpException('$e');
-  //   }
-  // }
 
   Future<Map<String, dynamic>> fetchWeather(String city, String country) async {
     const apiKey = 'e7c02a9f01c54d44a33133922231709';
