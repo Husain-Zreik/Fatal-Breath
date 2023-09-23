@@ -41,11 +41,19 @@ class _MessagesScreenState extends State<MessagesScreen> {
         ),
       ),
       backgroundColor: GlobalColors.bgColor,
-      body: Column(
-        children: [
-          ChatMessages(receiverId: widget.user.id),
-          SendMesssageBar(receiverId: widget.user.id),
-        ],
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/main-bg3.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Column(
+          children: [
+            ChatMessages(receiverId: widget.user.id),
+            SendMesssageBar(receiverId: widget.user.id),
+          ],
+        ),
       ),
     );
   }
