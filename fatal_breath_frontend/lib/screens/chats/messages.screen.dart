@@ -1,6 +1,7 @@
 import 'package:fatal_breath_frontend/config/remote.config.dart';
 import 'package:fatal_breath_frontend/models/message.model.dart';
 import 'package:fatal_breath_frontend/providers/user.provider.dart';
+import 'package:fatal_breath_frontend/widgets/send.message.bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fatal_breath_frontend/models/user.model.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
@@ -17,8 +18,6 @@ class MessagesScreen extends StatefulWidget {
 }
 
 class _MessagesScreenState extends State<MessagesScreen> {
-  final TextEditingController _messageController = TextEditingController();
-
   _chatBubble(Message message, bool isMe) {
     if (!isMe) {
       return Container(
@@ -63,44 +62,6 @@ class _MessagesScreenState extends State<MessagesScreen> {
     }
   }
 
-  _sendMessageArea() {
-    return Container(
-      color: GlobalColors.mainColor,
-      padding: const EdgeInsets.only(top: 15, bottom: 15, left: 20),
-      child: Row(
-        children: [
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(40),
-              ),
-              child: TextField(
-                controller: _messageController,
-                decoration: const InputDecoration(
-                  hintText: 'Message',
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16),
-                ),
-              ),
-            ),
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.send,
-              color: Colors.white,
-              size: 30,
-            ),
-            onPressed: () {
-              // String message = _messageController.text;
-              _messageController.clear();
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   void initState() {
     super.initState();
@@ -139,46 +100,9 @@ class _MessagesScreenState extends State<MessagesScreen> {
               },
             ),
           ),
-          _sendMessageArea(),
+          const SendMesssageBar(),
         ],
       ),
-      // bottomNavigationBar: Container(
-      //   color: GlobalColors.mainColor,
-      //   padding: const EdgeInsets.only(top: 15, bottom: 15, left: 20),
-      //   child: Row(
-      //     children: [
-      //       Expanded(
-      //         child: Container(
-      //           decoration: BoxDecoration(
-      //             color: Colors.white,
-      //             borderRadius: BorderRadius.circular(40),
-      //           ),
-      //           child: TextField(
-      //             // autofocus: true,
-      //             controller: _messageController,
-      //             decoration: const InputDecoration(
-      //               hintText: 'Message',
-      //               border: InputBorder.none,
-      //               contentPadding: EdgeInsets.symmetric(horizontal: 16),
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //       IconButton(
-      //         icon: const Icon(
-      //           Icons.send,
-      //           color: Colors.white,
-      //           size: 30,
-      //         ),
-      //         onPressed: () {
-      //           // String message = _messageController.text;
-      //           _messageController.clear();
-      //         },
-      //       ),
-      //     ],
-      //   ),
-      // ),
-      // resizeToAvoidBottomInset: false,
     );
   }
 }
