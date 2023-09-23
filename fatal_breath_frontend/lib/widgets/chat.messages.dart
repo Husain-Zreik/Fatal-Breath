@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 class ChatMessages extends StatelessWidget {
   const ChatMessages({super.key, required this.receiverId});
-  final String receiverId;
+  final int receiverId;
 
   @override
   Widget build(BuildContext context) => Consumer<FirebaseProvider>(
