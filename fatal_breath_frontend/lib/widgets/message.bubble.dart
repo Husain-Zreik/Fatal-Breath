@@ -15,7 +15,7 @@ class MessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        alignment: isMe ? Alignment.topLeft : Alignment.topRight,
+        alignment: !isMe ? Alignment.topLeft : Alignment.topRight,
         child: Container(
           constraints: BoxConstraints(
               maxWidth: MediaQuery.of(context).size.width * 0.80),
@@ -24,7 +24,7 @@ class MessageBubble extends StatelessWidget {
               color: isMe
                   ? const Color.fromARGB(255, 161, 0, 0)
                   : GlobalColors.mainColor,
-              borderRadius: isMe
+              borderRadius: !isMe
                   ? const BorderRadius.only(
                       topRight: Radius.circular(15),
                       bottomRight: Radius.circular(15),
@@ -36,7 +36,8 @@ class MessageBubble extends StatelessWidget {
                       topLeft: Radius.circular(15),
                     ),
             ),
-            margin: const EdgeInsets.only(top: 10, right: 10, left: 10),
+            margin:
+                const EdgeInsets.only(top: 5, right: 10, left: 10, bottom: 5),
             padding:
                 const EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 15),
             child: Column(
