@@ -51,4 +51,48 @@ class MessageBubble extends StatelessWidget {
           ),
         ),
       );
+
+  // _chatBubble(Message message, bool isMe) {
+  //   if (!isMe) {
+  //     return Container(
+  //       alignment: Alignment.topLeft,
+  //       child: Container(
+  //         constraints: BoxConstraints(
+  //             maxWidth: MediaQuery.of(context).size.width * 0.70),
+  //         child: Container(
+  //             padding: const EdgeInsets.all(10),
+  //             margin: const EdgeInsets.symmetric(vertical: 10),
+  //             decoration: const BoxDecoration(
+  //               color: Colors.white,
+  //               borderRadius: BorderRadius.only(
+  //                   topLeft: Radius.zero,
+  //                   topRight: Radius.circular(20),
+  //                   bottomLeft: Radius.circular(20),
+  //                   bottomRight: Radius.circular(20)),
+  //             ),
+  //             child: Text(message.content)),
+  //       ),
+  //     );
+  //   } else {
+  //     return Container(
+  //       alignment: Alignment.topRight,
+  //       child: Container(
+  //         constraints: BoxConstraints(
+  //             maxWidth: MediaQuery.of(context).size.width * 0.70),
+  //         child: Container(
+  //             padding: const EdgeInsets.all(10),
+  //             margin: const EdgeInsets.symmetric(vertical: 10),
+  //             decoration: const BoxDecoration(
+  //               color: Colors.white,
+  //               borderRadius: BorderRadius.only(
+  //                   topRight: Radius.zero,
+  //                   topLeft: Radius.circular(20),
+  //                   bottomLeft: Radius.circular(20),
+  //                   bottomRight: Radius.circular(20)),
+  //             ),
+  //             child: Text(message.content)),
+  //       ),
+  //     );
+  //   }
+  // }
 }
