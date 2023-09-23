@@ -27,9 +27,9 @@ class FirebaseFirestoreService {
   ) async {
     await firestore
         .collection('users')
-        .doc(senderId)
+        .doc(senderId as String?)
         .collection('chat')
-        .doc(receiverId)
+        .doc(receiverId as String?)
         .collection('messages')
         .add(message.toJson());
   }
