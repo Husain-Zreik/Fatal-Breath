@@ -24,7 +24,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
         alignment: Alignment.topLeft,
         child: Container(
           constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width * 0.80),
+              maxWidth: MediaQuery.of(context).size.width * 0.70),
           child: Container(
               padding: const EdgeInsets.all(10),
               margin: const EdgeInsets.symmetric(vertical: 10),
@@ -36,7 +36,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                     bottomLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20)),
               ),
-              child: Text(message.text!)),
+              child: Text(message.content)),
         ),
       );
     } else {
@@ -44,7 +44,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
         alignment: Alignment.topRight,
         child: Container(
           constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width * 0.80),
+              maxWidth: MediaQuery.of(context).size.width * 0.70),
           child: Container(
               padding: const EdgeInsets.all(10),
               margin: const EdgeInsets.symmetric(vertical: 10),
@@ -56,7 +56,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                     bottomLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20)),
               ),
-              child: Text(message.text!)),
+              child: Text(message.content)),
         ),
       );
     }
@@ -84,23 +84,23 @@ class _MessagesScreenState extends State<MessagesScreen> {
         ),
       ),
       backgroundColor: GlobalColors.bgColor,
-      body: Column(
+      body: const Column(
         children: [
-          Expanded(
-            child: ListView.builder(
-              reverse: true,
-              padding: const EdgeInsets.all(20),
-              itemCount: messages.length,
-              itemBuilder: (BuildContext context, int index) {
-                final Message message = messages[index];
-                final bool isMe = message.sender!.id == currentUser.id;
-                // final bool isSameUser = prevUserId == message.sender.id;
-                // prevUserId = message.sender.id;
-                return _chatBubble(message, isMe);
-              },
-            ),
-          ),
-          const SendMesssageBar(),
+          // Expanded(
+          //   // child: ListView.builder(
+          //   //   reverse: true,
+          //   //   padding: const EdgeInsets.all(20),
+          //   //   itemCount: messages.length,
+          //   //   itemBuilder: (BuildContext context, int index) {
+          //   //     final Message message = messages[index];
+          //   //     final bool isMe = message.sender!.id == currentUser.id;
+          //   //     // final bool isSameUser = prevUserId == message.sender.id;
+          //   //     // prevUserId = message.sender.id;
+          //   //     return _chatBubble(message, isMe);
+          //   //   },
+          //   // ),
+          // ),
+          SendMesssageBar(),
         ],
       ),
     );

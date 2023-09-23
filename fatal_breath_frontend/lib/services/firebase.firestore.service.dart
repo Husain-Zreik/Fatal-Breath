@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fatal_breath_frontend/models/message.model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseFirestoreService {
   static final firestore = FirebaseFirestore.instance;
