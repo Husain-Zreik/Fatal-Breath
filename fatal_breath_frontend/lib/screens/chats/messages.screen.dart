@@ -32,7 +32,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
       backgroundColor: GlobalColors.bgColor,
       body: Column(
         children: [
-          ChatMessages(receiverId: widget.user.name),
+          ChatMessages(receiverId: widget.user.id),
           SendMesssageBar(receiverId: widget.user.id),
         ],
       ),
