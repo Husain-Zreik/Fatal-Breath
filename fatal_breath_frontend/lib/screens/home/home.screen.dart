@@ -266,14 +266,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               60
                                                           ? Colors.orange
                                                           : Colors.red,
-
-                                              // ######### Demo Purpose ###############
-                                              // color: room.type == 'Kitchen'
-                                              //     ? Colors.red
-                                              //     : room.type == 'Bedroom'
-                                              //         ? Colors.orange
-                                              //         : Colors.green,
-
                                               boxShadow: [
                                                 BoxShadow(
                                                   color: Colors.grey
@@ -296,14 +288,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   60
                                                               ? "Sensetive"
                                                               : "Dangerous",
-
-                                                  // ######### Demo Purpose ###############
-                                                  // room.type == 'Kitchen'
-                                                  //     ? "Dangerous"
-                                                  //     : room.type == 'Bedroom'
-                                                  //         ? "Sensetive"
-                                                  //         : "Normal",
-
                                                   style: GoogleFonts.poppins(
                                                     color: Colors.white,
                                                     fontSize: 10,
