@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, avoid_print
-
 import 'dart:io';
 
 import 'package:fatal_breath_frontend/providers/user.provider.dart';
@@ -53,7 +51,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         selectedImage = imageInfo["selectedImage"];
       });
     } on HttpException catch (e) {
-      print(e);
+      setState(() {
+        err = e.message;
+      });
     }
   }
 
@@ -126,7 +126,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
+      appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: SecondaryAppBar(title: "Edit Profile"),
       ),
@@ -159,7 +159,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     border: Border.all(
                                         width: 2, color: Colors.white),
                                     color: GlobalColors.mainColor),
-                                child: Icon(
+                                child: const Icon(
                                   Icons.edit,
                                   color: Colors.white,
                                 ),
@@ -170,7 +170,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         key: _form,
                         child: Column(
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
                             TextForm(
@@ -180,7 +180,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               label: 'Name',
                               validator: namevalidator,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             TextForm(
@@ -191,7 +191,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               label: 'Username',
                               validator: usernamevalidator,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             TextForm(
@@ -201,7 +201,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               label: 'Email',
                               validator: emailvalidator,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
                             ButtonGlobal(

@@ -1,6 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
-// import 'package:fatal_breath_frontend/screens/ai.screen.dart';
 import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/screens/chats/chats.screen.dart';
 import 'package:fatal_breath_frontend/screens/find.house.screen.dart';
@@ -33,10 +30,10 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     List pages = [
-      HomeScreen(),
-      ChatsScreen(),
-      userType == "Manager" ? UsersScreen() : FindHouseScreen(),
-      SettingsScreen(),
+      const HomeScreen(),
+      const ChatsScreen(),
+      userType == "Manager" ? const UsersScreen() : const FindHouseScreen(),
+      const SettingsScreen(),
     ];
 
     return WillPopScope(
@@ -77,7 +74,7 @@ class _MainScreenState extends State<MainScreen> {
             elevation: 0,
             backgroundColor: GlobalColors.mainColor,
             fixedColor: GlobalColors.mainColor,
-            selectedIconTheme: IconThemeData(color: Colors.black),
+            selectedIconTheme: const IconThemeData(color: Colors.black),
             type: BottomNavigationBarType.fixed,
             showSelectedLabels: false,
             showUnselectedLabels: false,
@@ -90,7 +87,7 @@ class _MainScreenState extends State<MainScreen> {
             items: [
               BottomNavigationBarItem(
                   icon: _selectedindex == 0
-                      ? Icon(
+                      ? const Icon(
                           Icons.home,
                           color: Colors.white,
                           size: 30,
