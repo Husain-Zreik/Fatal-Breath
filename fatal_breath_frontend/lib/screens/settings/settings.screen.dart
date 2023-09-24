@@ -40,9 +40,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             padding: const EdgeInsets.fromLTRB(40, 20, 40, 0),
             child: Column(
               children: [
-                const SizedBox(
-                  height: 20,
-                ),
                 ProfileCircle(
                   size: 140,
                   imageLink: context.watch<UserProvider>().getImage == 'null'
@@ -50,7 +47,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       : context.watch<UserProvider>().getImage,
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 Text(
                   value.username!,
@@ -71,7 +68,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 20),
                 ButtonGlobal(
                   onBtnPressed: () {
                     Get.to(() => const EditProfileScreen());
@@ -99,6 +96,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   text: "Log Out",
                   icon: Icons.logout,
                 ),
+                const SizedBox(height: 10),
               ],
             ),
           ),
