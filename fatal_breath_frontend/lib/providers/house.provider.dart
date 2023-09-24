@@ -9,7 +9,9 @@ import 'package:fatal_breath_frontend/enums/request.methods.dart';
 import 'package:fatal_breath_frontend/models/house.model.dart';
 import 'package:fatal_breath_frontend/models/user.model.dart';
 import 'package:fatal_breath_frontend/providers/user.provider.dart';
+import 'package:fatal_breath_frontend/screens/register/login.screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class HouseProvider with ChangeNotifier {
@@ -86,32 +88,38 @@ class HouseProvider with ChangeNotifier {
         method: RequestMethods.GET,
       );
 
-      final List<dynamic> houseList = response['houses'];
-      List<House> houses = [];
+      if (response.containsKey('houses')) {
+        final List<dynamic> houseList = response['houses'];
+        List<House> houses = [];
 
-      for (var houseData in houseList) {
-        House house = House.fromJson(houseData);
-        houses.add(house);
-      }
+        for (var houseData in houseList) {
+          House house = House.fromJson(houseData);
+          houses.add(house);
+        }
 
-      Map<int, User> allMembersMap = {};
+        Map<int, User> allMembersMap = {};
 
-      if (houses.isNotEmpty) {
-        for (var house in houses) {
-          if (house.members != null) {
-            for (var member in house.members!) {
-              allMembersMap[member.id] = member;
+        if (houses.isNotEmpty) {
+          for (var house in houses) {
+            if (house.members != null) {
+              for (var member in house.members!) {
+                allMembersMap[member.id] = member;
+              }
             }
           }
         }
+
+        List<User> allMembers = allMembersMap.values.toList();
+
+        _houses = houses;
+        members = allMembers;
+
+        notifyListeners();
+      } else {
+        Get.off(() => const LoginScreen(
+              error: "Token Expired",
+            ));
       }
-
-      List<User> allMembers = allMembersMap.values.toList();
-
-      _houses = houses;
-      members = allMembers;
-
-      notifyListeners();
     } catch (e) {
       throw HttpException('$e');
     }
@@ -123,49 +131,54 @@ class HouseProvider with ChangeNotifier {
         route: "/api/user/member/get-houses",
         method: RequestMethods.GET,
       );
+      if (response.containsKey('houses')) {
+        final List<dynamic> houseList = response['houses'];
+        List<House> houses = [];
 
-      final List<dynamic> houseList = response['houses'];
-      List<House> houses = [];
+        final List<dynamic> invitedHouseList = response['invitations'];
+        List<House> invitedHouses = [];
 
-      final List<dynamic> invitedHouseList = response['invitations'];
-      List<House> invitedHouses = [];
+        for (var invitedHouseData in invitedHouseList) {
+          House invitedHouse = House.fromJson(invitedHouseData);
+          invitedHouses.add(invitedHouse);
+        }
 
-      for (var invitedHouseData in invitedHouseList) {
-        House invitedHouse = House.fromJson(invitedHouseData);
-        invitedHouses.add(invitedHouse);
-      }
+        for (var houseData in houseList) {
+          House house = House.fromJson(houseData);
+          houses.add(house);
+        }
+        final currentUserId =
+            await getLocal(type: LocalTypes.Int, key: "user_id");
 
-      for (var houseData in houseList) {
-        House house = House.fromJson(houseData);
-        houses.add(house);
-      }
-      final currentUserId =
-          await getLocal(type: LocalTypes.Int, key: "user_id");
+        Map<int, User> allMembersMap = {};
 
-      Map<int, User> allMembersMap = {};
-
-      if (houses.isNotEmpty) {
-        for (var house in houses) {
-          if (house.members != null) {
-            for (var member in house.members!) {
-              if (member.id != currentUserId) {
-                allMembersMap[member.id] = member;
+        if (houses.isNotEmpty) {
+          for (var house in houses) {
+            if (house.members != null) {
+              for (var member in house.members!) {
+                if (member.id != currentUserId) {
+                  allMembersMap[member.id] = member;
+                }
               }
             }
-          }
-          if (house.owner != null && house.owner!.id != currentUserId) {
-            allMembersMap[house.owner!.id] = house.owner!;
+            if (house.owner != null && house.owner!.id != currentUserId) {
+              allMembersMap[house.owner!.id] = house.owner!;
+            }
           }
         }
+
+        List<User> allMembers = allMembersMap.values.toList();
+
+        invitations = invitedHouses;
+        _houses = houses;
+        members = allMembers;
+
+        notifyListeners();
+      } else {
+        Get.off(() => const LoginScreen(
+              error: "Token Expired",
+            ));
       }
-
-      List<User> allMembers = allMembersMap.values.toList();
-
-      invitations = invitedHouses;
-      _houses = houses;
-      members = allMembers;
-
-      notifyListeners();
     } catch (e) {
       throw HttpException('$e');
     }
