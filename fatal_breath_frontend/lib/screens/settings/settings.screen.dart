@@ -30,7 +30,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   void signUserout() {
     Provider.of<AuthProvider>(context, listen: false).logout();
-    Get.to(() => const LoginScreen());
+    Get.off(() => const LoginScreen());
   }
 
   @override
