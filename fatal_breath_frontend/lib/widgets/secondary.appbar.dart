@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,7 +28,7 @@ class _SecondaryAppBarState extends State<SecondaryAppBar> {
         onTap: () {
           Get.back();
         },
-        child: Icon(
+        child: const Icon(
           Icons.arrow_back,
           size: 26,
         ),
@@ -44,7 +42,7 @@ class _SecondaryAppBarState extends State<SecondaryAppBar> {
           fontWeight: FontWeight.w500,
         ),
       ),
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(5),
           bottomRight: Radius.circular(5),
