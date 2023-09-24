@@ -19,6 +19,25 @@ class AuthController extends Controller
         ]);
     }
 
+    public function checkTokenValidity()
+    {
+        $user = Auth::user();
+
+        if ($user) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Token is valid',
+                'user' => $user,
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Token is invalid',
+        ], 401);
+    }
+
+
     public function register(Request $request)
     {
         try {
