@@ -222,7 +222,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 10),
+                                      padding: const EdgeInsets.only(left: 5),
                                       child: Row(
                                         children: [
                                           Radio(
@@ -237,7 +237,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             'User',
                                             style: GoogleFonts.poppins(
                                               color: Colors.black,
-                                              fontSize: 14,
+                                              fontSize: 12,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
@@ -253,7 +253,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             'Manager',
                                             style: GoogleFonts.poppins(
                                               color: Colors.black,
-                                              fontSize: 14,
+                                              fontSize: 12,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
