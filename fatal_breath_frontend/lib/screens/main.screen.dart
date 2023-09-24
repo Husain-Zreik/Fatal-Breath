@@ -1,9 +1,9 @@
 import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/screens/chats/chats.screen.dart';
-import 'package:fatal_breath_frontend/screens/find.house.screen.dart';
+import 'package:fatal_breath_frontend/screens/users-houses/find.house.screen.dart';
 import 'package:fatal_breath_frontend/screens/home/home.screen.dart';
 import 'package:fatal_breath_frontend/screens/settings/settings.screen.dart';
-import 'package:fatal_breath_frontend/screens/users.screen.dart';
+import 'package:fatal_breath_frontend/screens/users-houses/users.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
