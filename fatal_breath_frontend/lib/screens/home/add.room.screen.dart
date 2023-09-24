@@ -32,6 +32,8 @@ class _AddRoomScreenState extends State<AddRoomScreen> {
   List<String> roomTypes = RoomTypes.roomTypes;
 
   String err = "";
+  bool successful = true;
+
   bool validated() {
     return _form.currentState!.validate();
   }
@@ -43,6 +45,8 @@ class _AddRoomScreenState extends State<AddRoomScreen> {
       });
 
       if (!validated()) {
+        successful = true;
+
         return err = "Fill the inputs correctly";
       }
 
@@ -55,6 +59,7 @@ class _AddRoomScreenState extends State<AddRoomScreen> {
     } on HttpException catch (error) {
       setState(() {
         err = error.message;
+        successful = true;
       });
     }
   }
@@ -76,67 +81,77 @@ class _AddRoomScreenState extends State<AddRoomScreen> {
         child: SecondaryAppBar(title: "Add Room"),
       ),
       backgroundColor: GlobalColors.bgColor,
-      body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-            child: Form(
-              key: _form,
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 30,
+      body: successful
+          ? SingleChildScrollView(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                  child: Form(
+                    key: _form,
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        TextForm(
+                          textInputType: TextInputType.text,
+                          controller: nameController,
+                          label: 'Room Name',
+                          hintText: 'Enter the room name',
+                          isPass: false,
+                          validator: inputvalidator,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomDropdown<String>(
+                          label: 'Select Room Type',
+                          value: _selectedType,
+                          items: roomTypes.map((String type) {
+                            return DropdownMenuItem<String>(
+                              value: type,
+                              child: Text(type),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              _selectedType = newValue;
+                            });
+                          },
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        ButtonGlobal(
+                            text: 'Create',
+                            bgColor: GlobalColors.mainColor,
+                            textColor: Colors.white,
+                            onBtnPressed: () {
+                              setState(() {
+                                successful = false;
+                              });
+                              createPressed(nameController.text, _selectedType,
+                                  widget.houseId, context);
+                            }),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        TextError(text: err),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
                   ),
-                  TextForm(
-                    textInputType: TextInputType.text,
-                    controller: nameController,
-                    label: 'Room Name',
-                    hintText: 'Enter the room name',
-                    isPass: false,
-                    validator: inputvalidator,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  CustomDropdown<String>(
-                    label: 'Select Room Type',
-                    value: _selectedType,
-                    items: roomTypes.map((String type) {
-                      return DropdownMenuItem<String>(
-                        value: type,
-                        child: Text(type),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _selectedType = newValue;
-                      });
-                    },
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  ButtonGlobal(
-                      text: 'Create',
-                      bgColor: GlobalColors.mainColor,
-                      textColor: Colors.white,
-                      onBtnPressed: () {
-                        createPressed(nameController.text, _selectedType,
-                            widget.houseId, context);
-                      }),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  TextError(text: err),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                ],
+                ),
+              ),
+            )
+          : SizedBox(
+              height: MediaQuery.of(context).size.height * 0.6,
+              child: const Center(
+                child: CircularProgressIndicator(),
               ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }

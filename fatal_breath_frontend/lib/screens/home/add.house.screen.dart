@@ -32,6 +32,8 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
   Map<String, List<String>> citiesByCountry = CountryData.citiesByCountry;
 
   String err = "";
+  bool successful = true;
+
   bool validated() {
     return _form.currentState!.validate();
   }
@@ -43,6 +45,7 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
       });
 
       if (!validated()) {
+        successful = true;
         return err = "Fill the inputs correctly";
       }
       await Provider.of<HouseProvider>(context, listen: false)
@@ -54,13 +57,16 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
     } on HttpException catch (error) {
       setState(() {
         err = error.message;
+        successful = true;
       });
     }
   }
 
   inputvalidator(value) {
     if (value!.isEmpty) {
-      return "Please re-enter your password";
+      return "Please enter the house name";
+    } else if (value.length > 12) {
+      return "The room name must not exceed 12 characters";
     }
     return null;
   }
@@ -73,91 +79,101 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
         child: SecondaryAppBar(title: "Add House"),
       ),
       backgroundColor: GlobalColors.bgColor,
-      body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-            child: Form(
-              key: _form,
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 30,
+      body: successful
+          ? SingleChildScrollView(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                  child: Form(
+                    key: _form,
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        TextForm(
+                          textInputType: TextInputType.text,
+                          controller: nameController,
+                          label: 'House Name',
+                          hintText: 'Enter the house name',
+                          isPass: false,
+                          validator: inputvalidator,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomDropdown<String>(
+                          label: 'Select Country',
+                          value: _selectedCountry,
+                          items: countries.map((String country) {
+                            return DropdownMenuItem<String>(
+                              value: country,
+                              child: Text(country),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              _selectedCountry = newValue;
+                              _selectedCity = null;
+                            });
+                          },
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomDropdown<String>(
+                          label: 'Select City',
+                          value: _selectedCity,
+                          items: _selectedCountry != null
+                              ? citiesByCountry[_selectedCountry!]
+                                      ?.toSet()
+                                      .map((String city) {
+                                    return DropdownMenuItem<String>(
+                                      value: city,
+                                      child: Text(city),
+                                    );
+                                  }).toList() ??
+                                  []
+                              : [],
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              _selectedCity = newValue;
+                            });
+                          },
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        ButtonGlobal(
+                            text: 'Create',
+                            bgColor: GlobalColors.mainColor,
+                            textColor: Colors.white,
+                            onBtnPressed: () {
+                              setState(() {
+                                successful = false;
+                              });
+                              createPressed(nameController.text,
+                                  _selectedCountry, _selectedCity, context);
+                            }),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        TextError(text: err),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
                   ),
-                  TextForm(
-                    textInputType: TextInputType.text,
-                    controller: nameController,
-                    label: 'House Name',
-                    hintText: 'Enter the house name',
-                    isPass: false,
-                    validator: inputvalidator,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  CustomDropdown<String>(
-                    label: 'Select Country',
-                    value: _selectedCountry,
-                    items: countries.map((String country) {
-                      return DropdownMenuItem<String>(
-                        value: country,
-                        child: Text(country),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _selectedCountry = newValue;
-                        _selectedCity = null;
-                      });
-                    },
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  CustomDropdown<String>(
-                    label: 'Select City',
-                    value: _selectedCity,
-                    items: _selectedCountry != null
-                        ? citiesByCountry[_selectedCountry!]
-                                ?.toSet()
-                                .map((String city) {
-                              return DropdownMenuItem<String>(
-                                value: city,
-                                child: Text(city),
-                              );
-                            }).toList() ??
-                            []
-                        : [],
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _selectedCity = newValue;
-                      });
-                    },
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  ButtonGlobal(
-                      text: 'Create',
-                      bgColor: GlobalColors.mainColor,
-                      textColor: Colors.white,
-                      onBtnPressed: () {
-                        createPressed(nameController.text, _selectedCountry,
-                            _selectedCity, context);
-                      }),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  TextError(text: err),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                ],
+                ),
+              ),
+            )
+          : SizedBox(
+              height: MediaQuery.of(context).size.height * 0.6,
+              child: const Center(
+                child: CircularProgressIndicator(),
               ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }
