@@ -127,6 +127,19 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<bool> checkTokenValidity() async {
+    final response = await sendRequest(
+      method: RequestMethods.GET,
+      route: "/api/user/check-token",
+    );
+
+    if (response.containsKey('status') && response['status'] == 'success') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   void updatePassword(String newPassword) {
     password = newPassword;
     notifyListeners();
