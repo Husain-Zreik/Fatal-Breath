@@ -134,10 +134,24 @@ class AuthProvider with ChangeNotifier {
     );
 
     if (response.containsKey('status') && response['status'] == 'success') {
+      await refreshToken();
       return true;
     } else {
       return false;
     }
+  }
+
+  Future refreshToken() async {
+    final response = await sendRequest(
+      method: RequestMethods.POST,
+      route: "/api/user/refresh",
+    );
+
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString("token", response['user']['token']);
+
+    token = response['user']['token'];
+    notifyListeners();
   }
 
   void updatePassword(String newPassword) {
