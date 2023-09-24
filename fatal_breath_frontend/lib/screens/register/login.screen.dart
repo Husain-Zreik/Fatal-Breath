@@ -9,14 +9,15 @@ import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/widgets/button.global.dart';
 import 'package:fatal_breath_frontend/widgets/text.form.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({Key? key, this.error}) : super(key: key);
+
+  final String? error;
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -79,6 +80,12 @@ class _LoginScreenState extends State<LoginScreen> {
       return "Please enter password";
     }
     return null;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    err = widget.error ?? "";
   }
 
   @override
