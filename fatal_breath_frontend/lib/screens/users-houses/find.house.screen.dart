@@ -378,7 +378,10 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
                   SizedBox(
                     height: 50,
                   ),
-                  UserEmptyStateScreen(text: "Search for a house"),
+                  UserEmptyStateScreen(
+                    text: "",
+                    isSearch: true,
+                  ),
                 ],
               ),
             ),
