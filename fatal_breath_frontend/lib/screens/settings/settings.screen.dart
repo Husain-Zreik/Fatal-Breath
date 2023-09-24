@@ -40,6 +40,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             padding: const EdgeInsets.fromLTRB(40, 20, 40, 0),
             child: Column(
               children: [
+                const SizedBox(
+                  height: 20,
+                ),
                 ProfileCircle(
                   size: 140,
                   imageLink: context.watch<UserProvider>().getImage == 'null'
@@ -58,7 +61,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Text(
                   value.email!,
@@ -68,7 +71,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 30),
                 ButtonGlobal(
                   onBtnPressed: () {
                     Get.to(() => const EditProfileScreen());
