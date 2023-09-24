@@ -27,7 +27,6 @@ class HouseEmptyStateScreen extends StatelessWidget {
             ButtonGlobal(
               bgColor: GlobalColors.mainColor,
               textColor: Colors.white,
-              // icon: Icons.add,
               text: "Add Room",
               onBtnPressed: () {
                 Get.to(() => AddRoomScreen(
