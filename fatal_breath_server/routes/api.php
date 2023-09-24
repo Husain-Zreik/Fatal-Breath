@@ -46,6 +46,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
     Route::post('/info/change-password', [UserController::class, 'changePassword']);
 
 
+    Route::get('check-token', [AuthController::class, 'checkTokenValidity']);
     Route::post("logout", [AuthController::class, "logout"]);
     Route::post("refresh", [AuthController::class, "refresh"]);
 });
