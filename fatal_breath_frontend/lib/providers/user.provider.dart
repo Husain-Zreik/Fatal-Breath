@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, unused_local_variable
+// ignore_for_file: unused_local_variable
 
 import 'dart:convert';
 import 'dart:io';
@@ -95,7 +95,6 @@ class UserProvider with ChangeNotifier {
           route: "/api/user/info/update",
           method: RequestMethods.POST,
           load: body);
-      print(response);
 
       name = response['user']["name"];
       username = response['user']["username"];
@@ -111,7 +110,7 @@ class UserProvider with ChangeNotifier {
 
   Future changePassword(currentPassword, newPassword, context) async {
     try {
-      final response = await sendRequest(
+      await sendRequest(
         route: "/api/user/info/change-password",
         method: RequestMethods.POST,
         load: {

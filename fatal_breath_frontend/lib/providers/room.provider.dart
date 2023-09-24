@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print, unused_local_variable
-
 import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -16,7 +14,7 @@ class RoomProvider with ChangeNotifier {
         'type': type,
         'house_id': house,
       };
-      final response = await sendRequest(
+      await sendRequest(
           route: "/api/user/admin/add-room",
           method: RequestMethods.POST,
           load: body);

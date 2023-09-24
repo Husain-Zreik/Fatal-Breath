@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print, unused_local_variable
-
 import 'dart:io';
 
 import 'package:fatal_breath_frontend/config/local.storage.config.dart';
@@ -38,7 +36,7 @@ class HouseProvider with ChangeNotifier {
         'city': city,
         'country': country,
       };
-      final response = await sendRequest(
+      await sendRequest(
           route: "/api/user/admin/add-house",
           method: RequestMethods.POST,
           load: body);
@@ -53,7 +51,7 @@ class HouseProvider with ChangeNotifier {
 
   Future deleteHouse(houseId, context) async {
     try {
-      final response = await sendRequest(
+      await sendRequest(
         route: "/api/user/admin/house/$houseId",
         method: RequestMethods.DELETE,
       );
@@ -68,7 +66,7 @@ class HouseProvider with ChangeNotifier {
 
   Future deleteRoom(roomId, context) async {
     try {
-      final response = await sendRequest(
+      await sendRequest(
         route: "/api/user/admin/room/$roomId",
         method: RequestMethods.DELETE,
       );
@@ -186,7 +184,7 @@ class HouseProvider with ChangeNotifier {
 
   Future removeMember(houseId, userId, context) async {
     try {
-      final response = await sendRequest(
+      await sendRequest(
         route: "/api/user/remove-member/$houseId/$userId",
         method: RequestMethods.DELETE,
       );
@@ -212,7 +210,7 @@ class HouseProvider with ChangeNotifier {
         'house_id': houseId,
         'status': status,
       };
-      final response = await sendRequest(
+      await sendRequest(
           route: "/api/user/admin/process-request",
           method: RequestMethods.POST,
           load: body);
@@ -232,7 +230,7 @@ class HouseProvider with ChangeNotifier {
         'house_id': houseId,
         'status': status,
       };
-      final response = await sendRequest(
+      await sendRequest(
           route: "/api/user/member/process-invitation",
           method: RequestMethods.POST,
           load: body);
@@ -251,7 +249,7 @@ class HouseProvider with ChangeNotifier {
         'user_id': userId,
         'house_id': houseId,
       };
-      final response = await sendRequest(
+      await sendRequest(
           route: "/api/user/admin/toggle-invitation",
           method: RequestMethods.POST,
           load: body);
@@ -270,7 +268,7 @@ class HouseProvider with ChangeNotifier {
         'user_id': userId,
         'house_id': houseId,
       };
-      final response = await sendRequest(
+      await sendRequest(
           route: "/api/user/member/toggle-request",
           method: RequestMethods.POST,
           load: body);

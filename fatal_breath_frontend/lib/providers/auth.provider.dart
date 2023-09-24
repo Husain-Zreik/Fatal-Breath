@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:fatal_breath_frontend/config/remote.config.dart';
