@@ -50,7 +50,6 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
 
       await Provider.of<HouseProvider>(context, listen: false).getAdminHouses();
 
-      //Navigation
       Get.back();
     } on HttpException catch (error) {
       setState(() {
