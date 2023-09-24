@@ -27,8 +27,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       TextEditingController(text: "");
   final TextEditingController emailController = TextEditingController(text: "");
   final TextEditingController nameController = TextEditingController(text: "");
-  String? currentImageLink;
 
+  String? currentImageLink;
   String? encodedImage;
   Uint8List? decoded;
   File? selectedImage;
@@ -67,7 +67,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         successful = true;
         return err = "Fill the inputs correctly";
       }
-      //Try signing up
+
       await Provider.of<UserProvider>(context, listen: false).updateProfile(
         name,
         username,
@@ -76,7 +76,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         context,
       );
 
-      //Navigation
       Get.back();
     } on HttpException catch (error) {
       setState(() {
@@ -132,114 +131,122 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         child: SecondaryAppBar(title: "Edit Profile"),
       ),
       backgroundColor: GlobalColors.bgColor,
-      body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(40, 20, 40, 0),
-            child: Column(
-              children: [
-                Stack(children: [
-                  ProfileCircle(
-                    size: 140,
-                    decoded: decoded != null ? decoded! : null,
-                    imageLink: currentImageLink,
-                    // currentImageLink == 'null' ? null : currentImageLink,
-                  ),
-                  Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: InkWell(
-                        onTap: () {
-                          inputImage();
-                        },
-                        child: Container(
-                          width: 45,
-                          height: 45,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(width: 2, color: Colors.white),
-                              color: GlobalColors.mainColor),
-                          child: Icon(
-                            Icons.edit,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ))
-                ]),
-                Form(
-                  key: _form,
+      body: successful
+          ? SingleChildScrollView(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(40, 20, 40, 0),
                   child: Column(
                     children: [
-                      SizedBox(
-                        height: 30,
-                      ),
-                      TextForm(
-                        controller: nameController,
-                        hintText: context.watch<UserProvider>().getName!,
-                        isPass: false,
-                        label: 'Name',
-                        validator: namevalidator,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextForm(
-                        controller: usernameController,
-                        hintText: context.watch<UserProvider>().getUsername!,
-                        isPass: false,
-                        label: 'Username',
-                        validator: usernamevalidator,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextForm(
-                        controller: emailController,
-                        hintText: context.watch<UserProvider>().getEmail!,
-                        isPass: false,
-                        label: 'Email',
-                        validator: emailvalidator,
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      ButtonGlobal(
-                          text: 'Save',
-                          bgColor: GlobalColors.mainColor,
-                          textColor: Colors.white,
-                          onBtnPressed: () {
-                            setState(() {
-                              successful = false;
-                            });
-                            saveProfile(
-                                nameController.text,
-                                usernameController.text,
-                                emailController.text,
-                                encodedImage,
-                                context);
-                          }),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      Text(
-                        err,
-                        style: GoogleFonts.poppins(
-                          color: GlobalColors.errColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
+                      Stack(children: [
+                        ProfileCircle(
+                          size: 140,
+                          decoded: decoded != null ? decoded! : null,
+                          imageLink: currentImageLink,
                         ),
-                      ),
-                      const SizedBox(
-                        height: 10,
+                        Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: InkWell(
+                              onTap: () {
+                                inputImage();
+                              },
+                              child: Container(
+                                width: 45,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                        width: 2, color: Colors.white),
+                                    color: GlobalColors.mainColor),
+                                child: Icon(
+                                  Icons.edit,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ))
+                      ]),
+                      Form(
+                        key: _form,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 30,
+                            ),
+                            TextForm(
+                              controller: nameController,
+                              hintText: context.watch<UserProvider>().getName!,
+                              isPass: false,
+                              label: 'Name',
+                              validator: namevalidator,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            TextForm(
+                              controller: usernameController,
+                              hintText:
+                                  context.watch<UserProvider>().getUsername!,
+                              isPass: false,
+                              label: 'Username',
+                              validator: usernamevalidator,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            TextForm(
+                              controller: emailController,
+                              hintText: context.watch<UserProvider>().getEmail!,
+                              isPass: false,
+                              label: 'Email',
+                              validator: emailvalidator,
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            ButtonGlobal(
+                                text: 'Save',
+                                bgColor: GlobalColors.mainColor,
+                                textColor: Colors.white,
+                                onBtnPressed: () {
+                                  setState(() {
+                                    successful = false;
+                                  });
+                                  saveProfile(
+                                      nameController.text,
+                                      usernameController.text,
+                                      emailController.text,
+                                      encodedImage,
+                                      context);
+                                }),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            Text(
+                              err,
+                              style: GoogleFonts.poppins(
+                                color: GlobalColors.errColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
-              ],
+              ),
+            )
+          : SizedBox(
+              height: MediaQuery.of(context).size.height * 0.6,
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }
