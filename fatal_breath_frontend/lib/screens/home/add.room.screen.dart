@@ -61,7 +61,9 @@ class _AddRoomScreenState extends State<AddRoomScreen> {
 
   inputvalidator(value) {
     if (value!.isEmpty) {
-      return "Please re-enter your password";
+      return "Please enter the room name";
+    } else if (value.length > 12) {
+      return "The room name must not exceed 12 characters";
     }
     return null;
   }
