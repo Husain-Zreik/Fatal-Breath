@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import CustomButton from "./CustomButton";
+import { CustomButton } from ".";
 
 
 const Hero = () => {
@@ -14,7 +14,7 @@ const Hero = () => {
     };
 
     return (
-    <div className="hero">
+    <div className="hero ">
         <div className="flex-1 pt-36 padding-x">
             <h1 className="hero__title">
             Fatal Breath: {<br/>} Your Guardian Angel Against Toxic Gases!
@@ -26,7 +26,7 @@ const Hero = () => {
 
             <CustomButton
                 title="Explore"
-                containerStyles="bg-primary-blue text-white rounded-full mt-10"
+                containerStyles="bg-primary-blue bg-[#1C246C] text-white rounded-full mt-10"
                 handleClick={handleScroll}
             />
         </div>
