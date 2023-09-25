@@ -10,14 +10,14 @@ const NavBar = () => (
         <Image
           src='/logo.svg'
           alt='logo'
-          width={220}
+          width={250}
           height={18}
           className='object-contain'
         />
       </Link>
 
       <CustomButton
-        title='Sign in'
+        title='Download'
         btnType='button'
         containerStyles='text-primary-blue rounded-full bg-white min-w-[130px]'
       />
