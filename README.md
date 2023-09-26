@@ -41,7 +41,7 @@
 ### Wireframes
 | Login screen  | Chat screen |  Landing screen |
 | ---| ---| ---|
-| ![Landing](./readme/assets/1440x1024.png) | ![fsdaf](./readme/assets/chatScreen.png) | ![fsdaf](./readme/assets/1440x1024.png) |
+| ![Landing](./readme/assets/1440x1024.png) | ![fsdaf](./readme/assets/chatScreen.jpeg) | ![fsdaf](./readme/assets/1440x1024.png) |
 
 ### Mockups
 | Home screen  | Menu Screen | Order Screen |
