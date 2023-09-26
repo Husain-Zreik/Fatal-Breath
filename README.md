@@ -40,12 +40,15 @@
 
 ### Wireframes
 | Sign Up screen  | Home screen |  Chat screen |
+| ---| ---| ---|
 | ![Sign UP](./readme/assets/registerScreen.png) | ![Home](./readme/assets/homeScreen.jpeg) | ![Chat](./readme/assets/chatScreen.png) |
 
 ### Mockups
 | Sign Up screen  | Menu Screen | Order Screen |
 | ---| ---| ---|
 | ![Sign Up](./readme/mockups/registerScreen.png) | ![Home](./readme/mockups/homeScreen.png) | ![Chat](./readme/mockups/chatScreen.png) |
+| ---| ---| ---|
+| ![Sign Up](./readme/mockups/part1.mp4) | ![Home](./readme/mockups/part2.mp4) | ![Chat](./readme/mockups/part3.mp4) |
 
 <br><br>
 
