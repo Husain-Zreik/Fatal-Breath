@@ -286,7 +286,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           : room.sensor
                                                                       .coLevel <=
                                                                   60
-                                                              ? "Sensetive"
+                                                              ? "Sensitive"
                                                               : "Dangerous",
                                                   style: GoogleFonts.poppins(
                                                     color: Colors.white,
