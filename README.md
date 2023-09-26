@@ -7,17 +7,14 @@
 
 > "Fatal Breath" - Your Safety Guardian
 
-"Fatal Breath" is an IOT revolutionary application designed to safeguard lives by monitoring and controlling indoor air quality in real-time. Our mission is to protect you and your loved ones from the silent threat of toxic gases, like carbon monoxide (CO), in your living spaces.
+>"Fatal Breath" is an IOT revolutionary application designed to safeguard lives by monitoring and controlling indoor air quality in real-time. Our mission is to protect you and your loved ones from the silent threat of toxic gases, like carbon monoxide (CO), in your living spaces.
 
-With "Fatal Breath," you can ensure a safe environment by easily monitoring gas levels, receiving timely alerts, and taking immediate action when needed. Breathe easy and live with confidence, knowing that "Fatal Breath" has your back.
-
-<br><br>
+>With "Fatal Breath," you can ensure a safe environment by easily monitoring gas levels, receiving timely alerts, and taking immediate action when needed. Breathe easy and live with confidence, knowing that "Fatal Breath" has your back.
 
 ### Key Features
-- **Real-Time Monitoring:** Keep an eye on gas levels in your rooms, ensuring a safe living environment for you and your family.
+- **Real-Time Monitoring:** Keep an eye on gas levels, ensuring a safe living environment for you and your family.
 - **Instant Alerts:** Receive notifications when gas levels exceed safe limits, allowing you to take immediate action.
 - **Secure Communication:** Stay connected with your household members through our in-house chat feature.
-- **Safety Consultation:** Get expert advice on safety procedures and emergency response through our AI-powered consultation feature.
 
 <br><br>
 
@@ -28,6 +25,7 @@ With "Fatal Breath," you can ensure a safe environment by easily monitoring gas 
 - As a user, I want to chat with other users in the same house, so I can check on them if something happens.
 - As a user, I want to recieve notifications about the CO level, so I can stay aware about the current status.
 
+<br/>
 
 ### Manager Stories
 - As a manager, I want to add or delete my houses and rooms, so I can monitor all my houses at the same time.
