@@ -12,11 +12,11 @@ const Purpose = () => {
 
         <div className="flex-1 pt-24 padding-x mb-20">
             <h1 className="hero__title">
-            Purpose:
+            Purpose
             </h1>
 
             <p className="hero__subtitle">
-            “Fatal Breathe” is an application built to reduce the death caused by the high amount of toxic gases such as CO in the house. 
+            “Fatal Breath” is an application built to reduce the death caused by the high amount of toxic gases such as CO in the house. 
             </p>
 
         </div>
