@@ -160,3 +160,7 @@ _Below is an example of how you can instruct your audience on installing and set
 3. Upload the Arduino code located in the esp8266 directory to your ESP8266 microchip using the Arduino IDE.
 
 4. Connect the ESP8266 to the MQ2 sensor and other required components as per your hardware configuration.
+
+<br>
+
+Now, you should be able to run **Fatal Breath** locally and explore its features
