@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:fatal_breath_frontend/providers/house.provider.dart';
 import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/screens/empty/home.empty.state.screen.dart';
@@ -22,6 +24,13 @@ class _UsersScreenState extends State<UsersScreen> {
 
   String? image;
   List? houses;
+  Timer? _debounce;
+
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    super.dispose();
+  }
 
   Future removePressed(houseId, userId, context) async {
     await Provider.of<HouseProvider>(context, listen: false)
@@ -171,37 +180,45 @@ class _UsersScreenState extends State<UsersScreen> {
                           margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                           height: 50,
                           child: TextField(
-                            keyboardType: TextInputType.text,
-                            controller: searchControllers[house.id],
-                            decoration: InputDecoration(
-                              hintText: 'Search users...',
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none,
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: const BorderSide(
-                                  color: Colors.transparent,
+                              keyboardType: TextInputType.text,
+                              controller: searchControllers[house.id],
+                              decoration: InputDecoration(
+                                hintText: 'Search users...',
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide.none,
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: const BorderSide(
+                                    color: Colors.transparent,
+                                  ),
+                                ),
+                                prefixIcon: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Icon(
+                                    Icons.search,
+                                    color: GlobalColors.mainColor,
+                                  ),
+                                ),
+                                suffixIcon: IconButton(
+                                  icon: const Icon(Icons.send),
+                                  onPressed: () {
+                                    searchPressed(house.id);
+                                  },
                                 ),
                               ),
-                              prefixIcon: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Icon(
-                                  Icons.search,
-                                  color: GlobalColors.mainColor,
-                                ),
-                              ),
-                              suffixIcon: IconButton(
-                                icon: const Icon(Icons.send),
-                                onPressed: () {
+                              onChanged: (term) {
+                                if (_debounce != null) {
+                                  _debounce!.cancel();
+                                }
+                                _debounce = Timer(
+                                    const Duration(milliseconds: 3000), () {
                                   searchPressed(house.id);
-                                },
-                              ),
-                            ),
-                          ),
+                                });
+                              }),
                         ),
                         if (searchLists[house.id] != null &&
                             searchLists[house.id]!.isNotEmpty)
