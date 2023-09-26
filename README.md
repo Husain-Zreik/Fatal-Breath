@@ -39,14 +39,13 @@
 > We designed Fatal Breath using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
 
 ### Wireframes
-| Login screen  | Chat screen |  Landing screen |
-| ---| ---| ---|
-| ![Landing](./readme/assets/1440x1024.png) | ![fsdaf](./readme/assets/chatScreen.jpeg) | ![fsdaf](./readme/assets/1440x1024.png) |
+| Sign Up screen  | Home screen |  Chat screen |
+| ![Sign UP](./readme/assets/registerScreen.png) | ![Home](./readme/assets/homeScreen.jpeg) | ![Chat](./readme/assets/chatScreen.png) |
 
 ### Mockups
-| Home screen  | Menu Screen | Order Screen |
+| Sign Up screen  | Menu Screen | Order Screen |
 | ---| ---| ---|
-| ![Landing](./readme/assets/1440x1024.png) | ![fsdaf](./readme/assets/1440x1024.png) | ![fsdaf](./readme/assets/1440x1024.png) |
+| ![Sign Up](./readme/mockups/registerScreen.png) | ![Home](./readme/mockups/homeScreen.png) | ![Chat](./readme/mockups/chatScreen.png) |
 
 <br><br>
 
