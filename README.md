@@ -78,23 +78,23 @@
 
 ###  Fatal Breath is built using the following technologies:
 
-- Frontend Development: The Fatal Breath app is built using [Flutter app development framework](https://flutter.dev/). Flutter enables the development of cross-platform mobile applications with a single codebase, allowing it to run seamlessly on various devices, including mobile, desktop, and web.
+- **Frontend Development:** The Fatal Breath app is built using [Flutter app development framework](https://flutter.dev/). Flutter enables the development of cross-platform mobile applications with a single codebase, allowing it to run seamlessly on various devices, including mobile, desktop, and web.
 
-- Backend Development: For the backend, [Laravel](https://laravel.com) is used. Laravel is a robust PHP framework known for its elegant syntax and powerful features, making it ideal for building efficient and secure server-side applications.
+- **Backend Development:** For the backend, [Laravel](https://laravel.com) is used. Laravel is a robust PHP framework known for its elegant syntax and powerful features, making it ideal for building efficient and secure server-side applications.
 
-- Database Management: The application relies on MySQL for database management. MySQL is a widely used open-source relational database management system that ensures data is stored and retrieved efficiently.
+- **Database Management:** The application relies on MySQL for database management. MySQL is a widely used open-source relational database management system that ensures data is stored and retrieved efficiently.
 
-- Real-time Chat: To facilitate real-time communication among users, Firebase Realtime Database is integrated. [Firebase](https://firebase.google.com) is a Google-backed platform that offers real-time database capabilities, making it perfect for features like live chatting within the app.
+- **Real-time Chat:** To facilitate real-time communication among users, Firebase Realtime Database is integrated. [Firebase](https://firebase.google.com) is a Google-backed platform that offers real-time database capabilities, making it perfect for features like live chatting within the app.
 
-- Notifications: Firebase Cloud Messaging (FCM) is used for sending push notifications to users. FCM is a cross-platform messaging solution that ensures reliable message delivery across different devices.
+- **Notifications:** Firebase Cloud Messaging (FCM) is used for sending push notifications to users. FCM is a cross-platform messaging solution that ensures reliable message delivery across different devices.
 
-- Advertising Website: The advertising website for the Fatal Breath app is developed using [Next.js](https://nextjs.org), a popular React framework for building fast and SEO-friendly web applications. [TypeScript](https://www.typescriptlang.org) is used to enhance the website's development, providing static typing and better tooling support.
+- **Advertising Website:** The advertising website for the Fatal Breath app is developed using [Next.js](https://nextjs.org), a popular React framework for building fast and SEO-friendly web applications. [TypeScript](https://www.typescriptlang.org) is used to enhance the website's development, providing static typing and better tooling support.
 
-- User Interface: The app's user interface adheres to a responsive and modern design using [Tailwind CSS](https://tailwindcss.com). Tailwind CSS is a utility-first CSS framework that simplifies the styling process while maintaining a highly customizable design.
+- **User Interface:** The app's user interface adheres to a responsive and modern design using [Tailwind CSS](https://tailwindcss.com). Tailwind CSS is a utility-first CSS framework that simplifies the styling process while maintaining a highly customizable design.
 
-- Hardware Integration: Fatal Breath includes hardware integration with an [ESP8266 microchip](https://www.espressif.com/en/products/socs/esp8266) connected to an MQ2 sensor. This setup enables the monitoring of CO levels within rooms and provides real-time data to the app.
+- **Hardware Integration:** Fatal Breath includes hardware integration with an [ESP8266 microchip](https://www.espressif.com/en/products/socs/esp8266) connected to an MQ2 sensor. This setup enables the monitoring of CO levels within rooms and provides real-time data to the app.
 
-- Font: The primary font used in the app is ["Poppins"](https://fonts.google.com/specimen/Poppins), known for its readability and versatility.
+- **Font:** The primary font used in the app is ["Poppins"](https://fonts.google.com/specimen/Poppins), known for its readability and versatility.
 
 <br><br>
 
@@ -105,28 +105,58 @@
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+- Flutter SDK: Install the Flutter SDK to build and run the mobile application.
+
+- Arduino IDE: You'll need the Arduino IDE to upload code to the ESP8266 microchip.
+
+- ESP8266 (Hardware): Ensure you have the ESP8266 microchip connected to an MQ2 sensor for monitoring CO levels.
 
 ### Installation
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
+
+    ```sh
+    git clone https://github.com/Hu-zk/Fatal-Breath.git
+    ```
+
+2. Install Laravel dependencies by navigating to the Laravel project directory:
+
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+   cd laravel-backend
+   composer install
    ```
 
-Now, you should be able to run Coffee Express locally and explore its features.
+3. Set up your Laravel environment and configure the .env file with your database settings.
+
+   Run Laravel migrations to set up the database:
+
+   ```sh
+   php artisan migrate
+   ```
+
+4. Navigate to the Flutter app directory:
+
+   ```sh
+   Navigate to the Flutter app directory:
+   ```
+
+5. Install Flutter dependencies and run the Flutter app on your emulator or connected device:
+
+   ```sh
+   flutter pub get
+   flutter run
+   ```
+
+### Hardware Setup (Go to sumulation section to simulate hardware functionality)
+
+-  ESP8266 Hardware Setup:
+
+1. Plug your arduino to your laptop/mac
+
+2. Install [Arduino IDE](https://docs.arduino.cc/software/ide-v2/tutorials/getting-started/ide-v2-downloading-and-installing)(You can use alternative aurduino IDE's)
+
+3. Upload the Arduino code located in the esp8266 directory to your ESP8266 microchip using the Arduino IDE.
+
+4. Connect the ESP8266 to the MQ2 sensor and other required components as per your hardware configuration.
