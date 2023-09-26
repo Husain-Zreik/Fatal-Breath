@@ -16,7 +16,7 @@
 - **Instant Alerts:** Receive notifications when gas levels exceed safe limits, allowing you to take immediate action.
 - **Secure Communication:** Stay connected with your household members through our in-house chat feature.
 
-<br><br>
+<br>
 
 ### User Stories
 - As a user, I want to monitor the CO level in the rooms, so I can know the room status.
@@ -36,17 +36,17 @@
 <!-- Prototyping -->
 <img src="./readme/titles/title3.svg"/>
 
-> We designed Coffee Express using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
+> We designed Fatal Breath using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
 
 ### Wireframes
-| Login screen  | Register screen |  Landing screen |
+| Login screen  | Chat screen |  Landing screen |
 | ---| ---| ---|
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| ![Landing](./readme/assets/1440x1024.png) | ![fsdaf](./readme/assets/chatScreen.png) | ![fsdaf](./readme/assets/1440x1024.png) |
 
 ### Mockups
 | Home screen  | Menu Screen | Order Screen |
 | ---| ---| ---|
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| ![Landing](./readme/assets/1440x1024.png) | ![fsdaf](./readme/assets/1440x1024.png) | ![fsdaf](./readme/assets/1440x1024.png) |
 
 <br><br>
 
