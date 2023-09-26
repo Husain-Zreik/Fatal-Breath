@@ -44,9 +44,10 @@
 | ![Sign UP](./readme/assets/registerScreen.png) | ![Home](./readme/assets/homeScreen.png) | ![Chat](./readme/assets/chatScreen.png) |
 
 ### Mockups
-| Sign Up screen  | Home Screen | Chat Screen |
+| Sign Up screen  | Main Screen | Chat Screen |
 | ---| ---| ---|
 | ![Sign Up](./readme/mockups/registerScreen.png) | ![Home](./readme/mockups/homeScreen.png) | ![Chat](./readme/mockups/chatScreen.png) |
+| Register screens  | Home Screens | Users Screens |
 | ---| ---| ---|
 | ![Sign Up](./readme/mockups/part1.gif) | ![Home](./readme/mockups/part2.gif) | ![Chat](./readme/mockups/part3.gif) |
 
@@ -55,7 +56,7 @@
 <!-- Implementation -->
 <img src="./readme/titles/title4.svg"/>
 
-> Using the wireframes and mockups as a guide, we implemented the Coffee Express app with the following features:
+> Using the wireframes and mockups as a guide, we implemented Fatal Breath app with the following features:
 
 ### User Screens (Mobile)
 | Login screen  | Register screen | Landing screen | Loading screen |
