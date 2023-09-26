@@ -5,14 +5,33 @@
 <!-- project philosophy -->
 <img src="./readme/titles/title2.svg"/>
 
-> A mobile app for ordering coffee on-the-go, making it easier for coffee lovers to get their favorite beverages without waiting in line.
->
-> Coffee Express aims to streamline the coffee-ordering process by providing a user-friendly platform for customers to place orders and pick up their coffee at their convenience. We believe in enhancing the coffee experience by saving time and ensuring customer satisfaction.
+> "Fatal Breath" - Your Safety Guardian
+
+"Fatal Breath" is an IOT revolutionary application designed to safeguard lives by monitoring and controlling indoor air quality in real-time. Our mission is to protect you and your loved ones from the silent threat of toxic gases, like carbon monoxide (CO), in your living spaces.
+
+With "Fatal Breath," you can ensure a safe environment by easily monitoring gas levels, receiving timely alerts, and taking immediate action when needed. Breathe easy and live with confidence, knowing that "Fatal Breath" has your back.
+
+<br><br>
+
+### Key Features
+- **Real-Time Monitoring:** Keep an eye on gas levels in your rooms, ensuring a safe living environment for you and your family.
+- **Instant Alerts:** Receive notifications when gas levels exceed safe limits, allowing you to take immediate action.
+- **Secure Communication:** Stay connected with your household members through our in-house chat feature.
+- **Safety Consultation:** Get expert advice on safety procedures and emergency response through our AI-powered consultation feature.
+
+<br><br>
 
 ### User Stories
-- As a user, I want to browse the menu, so I can find my favorite coffee drinks.
-- As a user, I want to customize my order, so I can add or remove ingredients according to my preferences.
-- As a user, I want to pay for my order through the app, so I can avoid waiting in line at the store.
+- As a user, I want to monitor the CO level in the rooms, so I can know the room status.
+- As a user, I want to login and edit my profile, so I can enter the app and change my info.
+- As a user, I want to request to enter a house and accept invitations, so I can be a member of a house.
+- As a user, I want to chat with other users in the same house, so I can check on them if something happens.
+- As a user, I want to recieve notifications about the CO level, so I can stay aware about the current status.
+
+
+### Manager Stories
+- As a manager, I want to add or delete my houses and rooms, so I can monitor all my houses at the same time.
+- As a manager, I want to invite users to enter my house and accept requests, so I can add members to my house.
 
 <br><br>
 
