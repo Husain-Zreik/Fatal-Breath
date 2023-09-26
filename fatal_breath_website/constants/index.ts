@@ -38,7 +38,7 @@ export const features = [
 },
 {
     title: "House Connectivity",
-    description: "Connect your entire house to the application for comprehensive coverage.",
+    description: "Connect your house to the application for comprehensive coverage.",
 },
 {
     title: "User Management",
