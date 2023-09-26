@@ -44,11 +44,11 @@
 | ![Sign UP](./readme/assets/registerScreen.png) | ![Home](./readme/assets/homeScreen.png) | ![Chat](./readme/assets/chatScreen.png) |
 
 ### Mockups
-| Sign Up screen  | Menu Screen | Order Screen |
+| Sign Up screen  | Home Screen | Chat Screen |
 | ---| ---| ---|
-| ![Sign Up](./readme/mockups/registerScreen.gif) | ![Home](./readme/mockups/homeScreen.gif) | ![Chat](./readme/mockups/chatScreen.gif) |
+| ![Sign Up](./readme/mockups/registerScreen.png) | ![Home](./readme/mockups/homeScreen.png) | ![Chat](./readme/mockups/chatScreen.png) |
 | ---| ---| ---|
-| ![Sign Up](./readme/mockups/part1.mp4) | ![Home](./readme/mockups/part2.mp4) | ![Chat](./readme/mockups/part3.mp4) |
+| ![Sign Up](./readme/mockups/part1.gif) | ![Home](./readme/mockups/part2.gif) | ![Chat](./readme/mockups/part3.gif) |
 
 <br><br>
 
