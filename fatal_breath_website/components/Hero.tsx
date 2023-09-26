@@ -25,17 +25,7 @@ const Hero = () => {
             Protect your family from the silent killer with Fatal Breath.
             </p>
 
-            <div className="flex justify-around flex-row items-center">
-                <CustomButton
-                            title="Purpose"
-                            containerStyles="bg-primary-blue bg-[#1C246C] text-white rounded-full mt-10"
-                            handleClick={()=>handleScroll("Purpose")}
-                />
-                <CustomButton
-                    title="Users"
-                    containerStyles="bg-primary-blue bg-[#1C246C] text-white rounded-full mt-10"
-                    handleClick={()=>handleScroll("User-Types")}
-                />
+            <div className="flex justify-start flex-row items-center">
                 <CustomButton
                     title="Features"
                     containerStyles="bg-primary-blue bg-[#1C246C] text-white rounded-full mt-10"
