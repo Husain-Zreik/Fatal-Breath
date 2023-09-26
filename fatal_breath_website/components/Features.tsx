@@ -3,13 +3,9 @@ import Image from "next/image";
 
 const Features = () => {
     return (
-        <div className="bg-[#FFE3E3] md:h-screen">
+        <div className="bg-[#FFE3E3] md:h-screen" id="Features">
             <div className="hero h-full flex flex-col justify-center items-center">
-                <div className="flex flex-col">
-
-                <Image src="/icons.png" alt="mobile" width={400} height={400} className="object-contain" />
-                <Image src="/devs.png" alt="devs" width={400} height={400} className="object-contain" />
-                </div>
+                <Image src="/icons.png" alt="application" width={400} height={400} className="object-contain" />
 
                 <div className="flex-1 padding-x">
                     <h1 className="hero__title mb-16">Features</h1>
