@@ -64,14 +64,21 @@
 | Home screen  | Menu Screen | Order Screen | Checkout Screen |
 | ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
 
+### User Screens (Mobile)
+| Login screen  | Register screen | Landing screen | Loading screen |
+| ---| ---| ---| ---|
+| ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
+| Home screen  | Menu Screen | Order Screen | Checkout Screen |
+| ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
+
 ### Advertising Website
 
  [Click Here to Visit the Website](https://fatal-breath.vercel.app)
 
-<br>
 | Website Preview |
 | ---|
 | ![Website](./readme/implementation/website.gif) |
+
 
 
 <br><br>
