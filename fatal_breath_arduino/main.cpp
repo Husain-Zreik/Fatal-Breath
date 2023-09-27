@@ -6,7 +6,7 @@ const char *password = "Aliz1966";
 // const char *serverAddress = "http://192.168.1.5:8000";
 const char *serverAddress = "http://54.75.66.192";
 
-const char *deviceFCMToken = "d3mxBLOuRyWl8nKJoAJBvc:APA91bGNxmA1K7KbzONr_RuaKQmgJrl5qCHxtZwMX9EdNmm86JG7udCsUjYemENzlhEP_hkcPoYC7lrelyAFrDdyg_dA0Xh-5v1jdG7pBSboZVZFRTl_wBDfVDuoKI0XFX_q-v3ZV0-t";
+const char *deviceFCMToken = "dIg7CJYrRNeiBhJ4IjXpcP:APA91bGSnwRy4OFyRttKizzJjQWSMEVa_pekfbhDl3iZ554Ty-idkLXuc9jtyANxLPJjwVzrHmLw5s5utBnw3xRM-4qmXNJ545DKVHmBsnaQAW5j2iRbT-6isLxxsffp1Zz8ckuBNl0J";
 
 int lastCoPercentage = 0.0;
 int previousCoPercentage = 0.0;
@@ -52,12 +52,12 @@ void loop()
     }
     if (coPercentage > 40.0 && previousCoPercentage <= 40.0)
     {
-        sendFCMNotification(coPercentage, "CO Level Alert", "CO Level is sensetive it crossed 40% and now its ");
+        sendFCMNotification(coPercentage, "CO Level Alert", "CO Level is sensitive it crossed 40% and now it is ");
     }
 
     if (coPercentage > 70.0)
     {
-        sendFCMNotification(coPercentage, "CO Level Alert", "CO Level is dangerous it crossed 70% and now its ");
+        sendFCMNotification(coPercentage, "CO Level Alert", "CO Level is dangerous it crossed 70% and now it is ");
     }
     previousCoPercentage = coPercentage;
 
