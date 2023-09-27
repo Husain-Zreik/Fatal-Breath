@@ -61,8 +61,18 @@
 | Sign Up | Sign In | Edit Profile |
 | ---| ---| ---|
 | ![Landing](./readme/implementation/signup.gif) | ![Sign In](./readme/implementation/login.gif) | ![Edit Profile](./readme/implementation/settings.gif) |
-| Chats | Live | View | 
-| ![chats](./readme/implementation/chats.gif) | ![notifications](./readme/implementation/notification.gif) | ![hardware](./readme/implementation/experement.gif) |
+
+<br><be>
+
+| Chatting-System |Notification| Change-Password | 
+| ---| ---| ---|
+| ![chats](./readme/implementation/chats.gif) | ![notifications](./readme/implementation/notification.gif) | ![Change Password ](./readme/implementation/change_password.gif) |
+
+<br><be>
+
+| Hardware | 
+| ---|
+| ![Hardware](./readme/implementation/experement.gif) |
 
 <br><br>
 
@@ -82,7 +92,7 @@
 
  [Click Here to Visit the Website](https://fatal-breath.vercel.app)
 
-| Website Preview |
+| Website Preview | 
 | ---|
 | ![Website](./readme/implementation/website.gif) |
 
