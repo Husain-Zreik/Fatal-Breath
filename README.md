@@ -57,19 +57,26 @@
 
 > Using the wireframes and mockups as a guide, we implemented Fatal Breath app with the following features:
 
-### User Screens (Mobile)
-| Login screen  | Register screen | Landing screen | Loading screen |
-| ---| ---| ---| ---|
-| ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
-| Home screen  | Menu Screen | Order Screen | Checkout Screen |
-| ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
+### Common Screens (Mobile)
+| Sign Up | Sign In | Edit Profile |
+| ---| ---| ---|
+| ![Landing](./readme/implementation/signup.gif) | ![Sign In](./readme/implementation/login.gif) | ![Edit Profile](./readme/implementation/settings.gif) |
+| Chats | Notifications | Hardware | 
+| ![chats](./readme/implementation/chats.gif) | ![notifications](./readme/implementation/notification.gif) | ![hardware](./readme/implementation/experement.gif) |
 
-### User Screens (Mobile)
-| Login screen  | Register screen | Landing screen | Loading screen |
-| ---| ---| ---| ---|
-| ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
-| Home screen  | Menu Screen | Order Screen | Checkout Screen |
-| ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
+<br><br>
+
+### Member Screens (Mobile)
+| Monitor CO Level | Manage Houses | Search for houses | 
+| ---| ---| ---|
+| ![room monitor](./readme/implementation/room_monitor.gif) | ![Edit houses](./readme/implementation/edit_houses.gif) | ![UX](./readme/implementation/member_E.gif) |
+
+<br><br>
+
+### Manager Screens (Mobile)
+| Login screen  | Register screen | Landing screen | 
+| ---| ---| ---|
+| ![Landing](./readme/implementation/website.gif) | ![fsdaf](./readme/implementation/website.gif) | ![fsdaf](./readme/implementation/website.gif) |
 
 ### Advertising Website
 
