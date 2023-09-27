@@ -123,7 +123,7 @@ class _RoomDetailsScreenState extends State<RoomDetailsScreen> {
                   maskFilter: const MaskFilter.blur(BlurStyle.solid, 1),
                   progressColor: percent < 30
                       ? Colors.green
-                      : percent < 70
+                      : percent < 60
                           ? const Color.fromARGB(255, 248, 116, 0)
                           : Colors.red,
                 ),
