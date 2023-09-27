@@ -7,7 +7,7 @@
 
 > "Fatal Breath" - Your Safety Guardian
 
->"Fatal Breath" is an IOT revolutionary application designed to safeguard lives by monitoring and controlling indoor air quality in real-time. Our mission is to protect you and your loved ones from the silent threat of toxic gases, like carbon monoxide (CO), in your living spaces.
+>"Fatal Breath" is an IOT revolutionary application designed to safeguard lives by monitoring and controlling indoor air quality in real time. Our mission is to protect you and your loved ones from the silent threat of toxic gases, like carbon monoxide (CO), in your living spaces.
 
 >With "Fatal Breath," you can ensure a safe environment by easily monitoring gas levels, receiving timely alerts, and taking immediate action when needed. Breathe easy and live with confidence, knowing that "Fatal Breath" has your back.
 
@@ -20,10 +20,10 @@
 
 ### User Stories
 - As a user, I want to monitor the CO level in the rooms, so I can know the room status.
-- As a user, I want to login and edit my profile, so I can enter the app and change my info.
+- As a user, I want to log in and edit my profile, so I can enter the app and change my info.
 - As a user, I want to request to enter a house and accept invitations, so I can be a member of a house.
 - As a user, I want to chat with other users in the same house, so I can check on them if something happens.
-- As a user, I want to recieve notifications about the CO level, so I can stay aware about the current status.
+- As a user, I want to receive notifications about the CO level, so I can stay aware of the current status.
 
 <br/>
 
@@ -55,28 +55,28 @@
 <!-- Implementation -->
 <img src="./readme/titles/title4.svg"/>
 
-> Using the wireframes and mockups as a guide, we implemented Fatal Breath app with the following features:
+> Using the wireframes and mockups as a guide, we implemented the Fatal Breath app with the following features:
 
 ### Common Screens (Mobile)
 | Sign Up | Sign In | Edit Profile |
 | ---| ---| ---|
 | ![Landing](./readme/implementation/signup.gif) | ![Sign In](./readme/implementation/login.gif) | ![Edit Profile](./readme/implementation/settings.gif) |
-| Chats | Notifications | Hardware | 
+| Chats | Live | View | 
 | ![chats](./readme/implementation/chats.gif) | ![notifications](./readme/implementation/notification.gif) | ![hardware](./readme/implementation/experement.gif) |
 
 <br><br>
 
-### Member Screens (Mobile)
-| Monitor CO Level | Manage Houses | Search for houses | 
+### Member Screens
+| Monitor CO Level | Manage Houses | Search for Houses | 
 | ---| ---| ---|
 | ![room monitor](./readme/implementation/room_monitor.gif) | ![Edit houses](./readme/implementation/edit_houses.gif) | ![UX](./readme/implementation/member_E.gif) |
 
 <br><br>
 
-### Manager Screens (Mobile)
-| Login screen  | Register screen | Landing screen | 
+### Manager Screens
+| Edit Houses  | Monitor Rooms | Search for Members | 
 | ---| ---| ---|
-| ![Landing](./readme/implementation/website.gif) | ![fsdaf](./readme/implementation/website.gif) | ![fsdaf](./readme/implementation/website.gif) |
+| ![Edit Houses](./readme/implementation/creation.gif) | ![Monitor Rooms](./readme/implementation/manager_houses.gif) | ![Search for Members](./readme/implementation/edit_houses.gif) |
 
 ### Advertising Website
 
@@ -166,11 +166,11 @@ _Below is an example of how you can instruct your audience on installing and set
    flutter run
    ```
 
-### Hardware Setup (Go to sumulation section to simulate hardware functionality)
+### Hardware Setup (Go to the simulation section to simulate hardware functionality)
 
 -  ESP8266 Hardware Setup:
 
-1. Plug your arduino to your laptop/mac
+1. Plug your Arduino to your laptop/mac
 
 2. Install [Arduino IDE](https://docs.arduino.cc/software/ide-v2/tutorials/getting-started/ide-v2-downloading-and-installing)(You can use alternative aurduino IDE's)
 
