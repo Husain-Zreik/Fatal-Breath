@@ -22,9 +22,10 @@ class _UsersScreenState extends State<UsersScreen> {
   Map<int, List> searchLists = {};
   Map<int, String> searchTerms = {};
 
+  Timer? _debounce;
   String? image;
   List? houses;
-  Timer? _debounce;
+  bool isSearch = false;
 
   @override
   void dispose() {
@@ -53,10 +54,11 @@ class _UsersScreenState extends State<UsersScreen> {
       setState(() {
         searchLists[houseId] =
             Provider.of<UserProvider>(context, listen: false).getSearchList!;
+        isSearch = true;
       });
     } else {
       setState(() {
-        searchLists[houseId] = [];
+        isSearch = false;
       });
       Provider.of<UserProvider>(context, listen: false).clearSearchList();
     }
@@ -71,6 +73,7 @@ class _UsersScreenState extends State<UsersScreen> {
     setState(() {
       searchLists[houseId] =
           Provider.of<UserProvider>(context, listen: false).getSearchList!;
+      isSearch = true;
     });
   }
 
@@ -217,12 +220,13 @@ class _UsersScreenState extends State<UsersScreen> {
                                   _debounce!.cancel();
                                 }
                                 _debounce = Timer(
-                                    const Duration(milliseconds: 3000), () {
+                                    const Duration(milliseconds: 2500), () {
                                   searchPressed(house.id);
                                 });
                               }),
                         ),
-                        if (searchLists[house.id] != null &&
+                        if (isSearch &&
+                            searchLists[house.id] != null &&
                             searchLists[house.id]!.isNotEmpty)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -278,9 +282,9 @@ class _UsersScreenState extends State<UsersScreen> {
                                 )
                             ],
                           ),
-                        if (house.members != null &&
-                            house.members!.isNotEmpty &&
-                            searchLists[house.id] == null)
+                        if (!isSearch &&
+                            house.members != null &&
+                            house.members!.isNotEmpty)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -332,9 +336,9 @@ class _UsersScreenState extends State<UsersScreen> {
                                 )
                             ],
                           ),
-                        if (house.requests != null &&
-                            house.requests!.isNotEmpty &&
-                            searchLists[house.id] == null)
+                        if (!isSearch &&
+                            house.requests != null &&
+                            house.requests!.isNotEmpty)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -427,10 +431,10 @@ class _UsersScreenState extends State<UsersScreen> {
                                   ),
                                 )
                             ],
-                          )
-                        else if (house.requests == null &&
-                            house.members == null &&
-                            searchLists[house.id] == null)
+                          ),
+                        if (!isSearch &&
+                            house.requests == null &&
+                            house.members == null)
                           const Padding(
                             padding:
                                 EdgeInsets.only(top: 80, right: 20, left: 25),
@@ -438,7 +442,8 @@ class _UsersScreenState extends State<UsersScreen> {
                                 text:
                                     "No requests or members in this house ! Search for members and invite them by typing their username."),
                           )
-                        else if (searchLists[house.id] != null &&
+                        else if (isSearch &&
+                            searchLists[house.id] != null &&
                             searchLists[house.id]!.isEmpty)
                           const Padding(
                             padding:
