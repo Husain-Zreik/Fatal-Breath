@@ -53,7 +53,6 @@ class UserProvider with ChangeNotifier {
     return null;
   }
 
-  //Get user data
   Future getUser(context) async {
     try {
       final response = await sendRequest(route: "/api/user/info");

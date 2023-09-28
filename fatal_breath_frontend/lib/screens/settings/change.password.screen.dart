@@ -45,7 +45,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       Provider.of<AuthProvider>(context, listen: false)
           .updatePassword(newPassword);
 
-      //Navigation
       Get.back();
     } on HttpException catch (error) {
       setState(() {
