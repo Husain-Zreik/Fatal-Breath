@@ -23,11 +23,12 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
 
   String? searchTerm;
   String? image;
-  User? user;
-  List? houses;
+  Timer? _debounce;
   List? invitations;
   List? searchList;
-  Timer? _debounce;
+  List? houses;
+  User? user;
+  bool isSearch = false;
 
   @override
   void dispose() {
@@ -55,10 +56,11 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
       setState(() {
         searchList =
             Provider.of<UserProvider>(context, listen: false).getSearchList!;
+        isSearch = true;
       });
     } else {
       setState(() {
-        searchList = [];
+        isSearch = false;
       });
       Provider.of<UserProvider>(context, listen: false).clearSearchList();
     }
@@ -73,6 +75,7 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
     setState(() {
       searchList =
           Provider.of<UserProvider>(context, listen: false).getSearchList!;
+      isSearch = true;
     });
   }
 
@@ -185,7 +188,7 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
                   });
                 }),
           ),
-          if (searchList != null && searchList!.isNotEmpty)
+          if (isSearch && searchList != null && searchList!.isNotEmpty)
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -238,7 +241,7 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
                   )
               ],
             ),
-          if (houses != null && houses!.isNotEmpty && searchList == null)
+          if (!isSearch && houses != null && houses!.isNotEmpty)
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -289,9 +292,7 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
                   ),
               ],
             ),
-          if (invitations != null &&
-              invitations!.isNotEmpty &&
-              searchList == null)
+          if (!isSearch && invitations != null && invitations!.isNotEmpty)
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -381,12 +382,12 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
                   )
               ],
             ),
-          if (searchList != null && searchList!.isEmpty)
+          if (isSearch && searchList != null && searchList!.isEmpty)
             const Padding(
               padding: EdgeInsets.only(top: 20, right: 20, left: 23),
               child: TextNote(text: "House Not Found."),
             ),
-          if (searchList == null && invitations!.isEmpty && houses!.isEmpty)
+          if (!isSearch && invitations!.isEmpty && houses!.isEmpty)
             const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
