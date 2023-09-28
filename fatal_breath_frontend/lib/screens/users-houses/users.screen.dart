@@ -78,14 +78,16 @@ class _UsersScreenState extends State<UsersScreen> {
   void initState() {
     super.initState();
     Provider.of<HouseProvider>(context, listen: false).getAdminHouses();
+    image = Provider.of<UserProvider>(context, listen: false).getImage;
   }
 
   @override
   Widget build(BuildContext context) {
     houses = Provider.of<HouseProvider>(context).getHouses ?? [];
-    image = Provider.of<UserProvider>(context, listen: false).getImage;
     for (final house in houses!) {
-      searchControllers[house.id] = TextEditingController();
+      searchControllers[house.id]?.text == null
+          ? searchControllers[house.id] = TextEditingController()
+          : null;
       searchTerms[house.id];
     }
     return DefaultTabController(
