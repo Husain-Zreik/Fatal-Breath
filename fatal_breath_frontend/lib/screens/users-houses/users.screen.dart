@@ -220,7 +220,7 @@ class _UsersScreenState extends State<UsersScreen> {
                                   _debounce!.cancel();
                                 }
                                 _debounce = Timer(
-                                    const Duration(milliseconds: 2500), () {
+                                    const Duration(milliseconds: 1500), () {
                                   searchPressed(house.id);
                                 });
                               }),
