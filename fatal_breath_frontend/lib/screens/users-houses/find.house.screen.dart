@@ -183,7 +183,7 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
                   if (_debounce != null) {
                     _debounce!.cancel();
                   }
-                  _debounce = Timer(const Duration(milliseconds: 3000), () {
+                  _debounce = Timer(const Duration(milliseconds: 1500), () {
                     searchPressed();
                   });
                 }),
