@@ -1,13 +1,24 @@
 <img src="./readme/titles/title1.svg"/>
 
-<br><br>
+<br>
+<div align="center">
+
+> Hello world! This is the project’s summary that describes the project as plain, simple, and limited to the space available.
+
+<br>
+
+**[PROJECT PHILOSOPHY](#project-philosophy) • [USER TYPES](#user-types) • [PROTOTYPING](#prototyping) • [TECH STACK](#tech-stack) • [IMPLEMENTATION](#implementation) • [HOW TO RUN?](#how-to-run)**
+
+</div>
+<br>
 
 <!-- project philosophy -->
-<img src="./readme/titles/title2.svg"/>
+<a name="project-philosophy"></a>
+<img src="./readme/titles/title2.svg"  name="project-philosophy"/>
 
 > "Fatal Breath" - Your Safety Guardian
 
->"Fatal Breath" is an IOT revolutionary application designed to safeguard lives by monitoring and controlling indoor air quality in real time. Our mission is to protect you and your loved ones from the silent threat of toxic gases, like carbon monoxide (CO), in your living spaces.
+>"Fatal Breath" is an IOT revolutionary application designed to safeguard lives by monitoring and controlling indoor air quality in real time. Our mission is to protect you and your loved ones from the silent threat of toxic gases in your living spaces, like carbon monoxide (CO).
 
 >With "Fatal Breath," you can ensure a safe environment by easily monitoring gas levels, receiving timely alerts, and taking immediate action when needed. Breathe easy and live with confidence, knowing that "Fatal Breath" has your back.
 
@@ -15,6 +26,14 @@
 - **Real-Time Monitoring:** Keep an eye on gas levels, ensuring a safe living environment for you and your family.
 - **Instant Alerts:** Receive notifications when gas levels exceed safe limits, allowing you to take immediate action.
 - **Secure Communication:** Stay connected with your household members through our in-house chat feature.
+
+<br> <br>
+
+<a name="user-types" id="user-types"></a>
+### User Types 
+
+1. Manager 
+2. General Users
 
 <br>
 
@@ -34,7 +53,7 @@
 <br><br>
 
 <!-- Prototyping -->
-<img src="./readme/titles/title3.svg"/>
+<img src="./readme/titles/title3.svg" name="prototyping"/>
 
 > We designed Fatal Breath using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
 
@@ -53,7 +72,7 @@
 <br><br>
 
 <!-- Implementation -->
-<img src="./readme/titles/title4.svg"/>
+<img src="./readme/titles/title4.svg" name="implementation"/>
 
 > Using the wireframes and mockups as a guide, we implemented the Fatal Breath app with the following features:
 
@@ -101,7 +120,7 @@
 <br><br>
 
 <!-- Tech stack -->
-<img src="./readme/titles/title5.svg"/>
+<img src="./readme/titles/title5.svg" name="tech-stack"/>
 
 ###  Fatal Breath is built using the following technologies:
 
@@ -126,7 +145,7 @@
 <br><br>
 
 <!-- How to run -->
-<img src="./readme/titles/title6.svg"/>
+<img src="./readme/titles/title6.svg" name="how-to-run"/>
 
 > To set up Coffee Express locally, follow these steps:
 
