@@ -7,13 +7,12 @@
 
 <br>
 
-**[PROJECT PHILOSOPHY](#project-philosophy) • [USER TYPES](#user-types) • [PROTOTYPING](#prototyping) • [TECH STACK](#tech-stack) • [IMPLEMENTATION](#implementation) • [HOW TO RUN?](#how-to-run)**
+**[PROJECT PHILOSOPHY](#project-philosophy) • [USER TYPES](#user-types) • [PROTOTYPING](#prototyping) • [IMPLEMENTATION](#implementation) • [TECH STACK](#tech-stack)  • [HOW TO RUN?](#how-to-run)**
 
 </div>
 <br>
 
 <!-- project philosophy -->
-<a name="project-philosophy"></a>
 <img src="./readme/titles/title2.svg"  name="project-philosophy"/>
 
 > "Fatal Breath" - Your Safety Guardian
