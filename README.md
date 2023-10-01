@@ -1,20 +1,40 @@
 <img src="./readme/titles/title1.svg"/>
 
-<br><br>
+<br>
+<div align="center">
+
+> Hello world! This is the project’s summary that describes the project as plain, simple, and limited to the space available.
+
+<br>
+
+**[PROJECT PHILOSOPHY](#project-philosophy) • [USER TYPES](#user-types) • [PROTOTYPING](#prototyping) • [IMPLEMENTATION](#implementation) • [TECH STACK](#tech-stack)  • [HOW TO RUN?](#how-to-run)**
+
+</div>
+<br>
 
 <!-- project philosophy -->
-<img src="./readme/titles/title2.svg"/>
+<img src="./readme/titles/title2.svg"  name="project-philosophy"/>
 
 > "Fatal Breath" - Your Safety Guardian
 
->"Fatal Breath" is an IOT revolutionary application designed to safeguard lives by monitoring and controlling indoor air quality in real time. Our mission is to protect you and your loved ones from the silent threat of toxic gases, like carbon monoxide (CO), in your living spaces.
+>"Fatal Breath" is an IOT revolutionary application designed to safeguard lives by monitoring and controlling indoor air quality in real time. Our mission is to protect you and your loved ones from the silent threat of toxic gases in your living spaces, like carbon monoxide (CO).
 
 >With "Fatal Breath," you can ensure a safe environment by easily monitoring gas levels, receiving timely alerts, and taking immediate action when needed. Breathe easy and live with confidence, knowing that "Fatal Breath" has your back.
+
+<br>
 
 ### Key Features
 - **Real-Time Monitoring:** Keep an eye on gas levels, ensuring a safe living environment for you and your family.
 - **Instant Alerts:** Receive notifications when gas levels exceed safe limits, allowing you to take immediate action.
 - **Secure Communication:** Stay connected with your household members through our in-house chat feature.
+
+<br> 
+
+<a name="user-types" id="user-types"></a>
+### User Types 
+
+1. Manager 
+2. General Users
 
 <br>
 
@@ -34,14 +54,19 @@
 <br><br>
 
 <!-- Prototyping -->
-<img src="./readme/titles/title3.svg"/>
+<img src="./readme/titles/title3.svg" name="prototyping"/>
 
 > We designed Fatal Breath using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
+
+<br>
 
 ### Wireframes
 | Sign Up screen  | Home screen |  Chat screen |
 | ---| ---| ---|
 | ![Sign UP](./readme/assets/registerScreen.png) | ![Home](./readme/assets/homeScreen.png) | ![Chat](./readme/assets/chatScreen.png) |
+
+<br>
+
 
 ### Mockups
 | Sign Up screen  | Main Screen | Chat Screen |
@@ -53,7 +78,7 @@
 <br><br>
 
 <!-- Implementation -->
-<img src="./readme/titles/title4.svg"/>
+<img src="./readme/titles/title4.svg" name="implementation"/>
 
 > Using the wireframes and mockups as a guide, we implemented the Fatal Breath app with the following features:
 
@@ -62,18 +87,19 @@
 | ---| ---| ---|
 | ![Landing](./readme/implementation/signup.gif) | ![Sign In](./readme/implementation/login.gif) | ![Edit Profile](./readme/implementation/settings.gif) |
 
-<br><be>
+<br>
 
 | Chatting-System |Notification| Change-Password | 
 | ---| ---| ---|
 | ![chats](./readme/implementation/chats.gif) | ![notifications](./readme/implementation/notification.gif) | ![Change Password ](./readme/implementation/change_password.gif) |
 
-<br><be>
+<br><br>
+<div align="center">
 
 | Hardware | 
 | ---|
 | ![Hardware](./readme/implementation/experement.gif) |
-
+</div>
 <br><br>
 
 ### Member Screens
@@ -88,20 +114,25 @@
 | ---| ---| ---|
 | ![Edit Houses](./readme/implementation/creation.gif) | ![Monitor Rooms](./readme/implementation/manager_houses.gif) | ![Search for Members](./readme/implementation/edit_houses.gif) |
 
+<br><br>
+
 ### Advertising Website
 
- [Click Here to Visit the Website](https://fatal-breath.vercel.app)
+[Click Here to Visit the Website](https://fatal-breath.vercel.app)
+
+<div align="center">
 
 | Website Preview | 
 | ---|
 | ![Website](./readme/implementation/website.gif) |
 
+</div>
 
 
 <br><br>
 
 <!-- Tech stack -->
-<img src="./readme/titles/title5.svg"/>
+<img src="./readme/titles/title5.svg" name="tech-stack"/>
 
 ###  Fatal Breath is built using the following technologies:
 
@@ -126,7 +157,7 @@
 <br><br>
 
 <!-- How to run -->
-<img src="./readme/titles/title6.svg"/>
+<img src="./readme/titles/title6.svg" name="how-to-run"/>
 
 > To set up Coffee Express locally, follow these steps:
 
