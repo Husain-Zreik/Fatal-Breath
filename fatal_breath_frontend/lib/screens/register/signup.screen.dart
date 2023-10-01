@@ -158,7 +158,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             children: [
                               TextForm(
                                 controller: nameController,
-                                hintText: 'Enter your Full Name',
+                                hintText: 'Enter Your Full Name',
                                 textInputType: TextInputType.emailAddress,
                                 isPass: false,
                                 label: 'Full Name',
@@ -169,7 +169,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                               TextForm(
                                 controller: usernameController,
-                                hintText: 'Enter your Username',
+                                hintText: 'Enter Your Username',
                                 textInputType: TextInputType.emailAddress,
                                 isPass: false,
                                 label: 'Username',
@@ -180,7 +180,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                               TextForm(
                                 controller: emailController,
-                                hintText: 'Enter your Email',
+                                hintText: 'Enter Your Email',
                                 textInputType: TextInputType.emailAddress,
                                 isPass: false,
                                 label: 'Email',
@@ -191,7 +191,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                               TextForm(
                                 controller: passwordController,
-                                hintText: 'Enter your Password',
+                                hintText: 'Enter Your Password',
                                 textInputType: TextInputType.text,
                                 isPass: true,
                                 label: 'Password',
@@ -204,7 +204,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 textInputType: TextInputType.text,
                                 controller: verifypassController,
                                 label: 'Verify Password',
-                                hintText: 'Re-enter the Password',
+                                hintText: 'Re-enter Your Password',
                                 isPass: true,
                                 validator: verifypasswordvalidator,
                               ),
@@ -318,7 +318,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Already have an Account?',
+              'Already have an account?',
               style: GoogleFonts.poppins(
                   color: Colors.black, fontWeight: FontWeight.w400),
             ),

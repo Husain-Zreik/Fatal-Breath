@@ -145,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   textInputType: TextInputType.emailAddress,
                                   controller: emailController,
                                   label: 'Email',
-                                  hintText: 'Enter your Email',
+                                  hintText: 'Enter Your Email',
                                   isPass: false,
                                   validator: emailvalidator,
                                 ),
@@ -156,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   textInputType: TextInputType.text,
                                   controller: passwordController,
                                   label: 'Password',
-                                  hintText: 'Enter your Password',
+                                  hintText: 'Enter Your Password',
                                   isPass: true,
                                   validator: passwordvalidator,
                                 ),
@@ -207,7 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Don’t have an Account?',
+              'Don’t have an account?',
               style: GoogleFonts.poppins(
                   color: Colors.black, fontWeight: FontWeight.w400),
             ),
