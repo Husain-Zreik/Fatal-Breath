@@ -1,5 +1,6 @@
 import 'package:fatal_breath_frontend/models/house.model.dart';
 import 'package:fatal_breath_frontend/providers/house.provider.dart';
+import 'package:fatal_breath_frontend/screens/main.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -80,7 +81,7 @@ class DeleteHouseBox extends StatelessWidget {
                           ),
                           onPressed: () async {
                             await deletePressed(house.id, context);
-                            Get.back();
+                            Get.off(() => const MainScreen());
                           },
                         ),
                       ],
