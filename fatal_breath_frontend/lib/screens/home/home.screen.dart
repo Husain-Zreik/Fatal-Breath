@@ -3,13 +3,13 @@ import 'package:fatal_breath_frontend/providers/user.provider.dart';
 import 'package:fatal_breath_frontend/screens/empty/home.empty.state.screen.dart';
 import 'package:fatal_breath_frontend/screens/empty/house.empty.state.screen.dart';
 import 'package:fatal_breath_frontend/screens/empty/user.empty.state.screen.dart';
-import 'package:fatal_breath_frontend/screens/home/add.house.screen.dart';
 import 'package:fatal_breath_frontend/screens/home/add.room.screen.dart';
+import 'package:fatal_breath_frontend/screens/home/edit.houses.screen.dart';
 import 'package:fatal_breath_frontend/screens/home/room.details.screen.dart';
 import 'package:fatal_breath_frontend/utils/global.colors.dart';
 import 'package:fatal_breath_frontend/widgets/add.box.dart';
-import 'package:fatal_breath_frontend/widgets/delete.house.box.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -44,11 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     houses = Provider.of<HouseProvider>(context).getHouses ?? [];
     return DefaultTabController(
-      length: houses!.isEmpty
-          ? 0
-          : userType == "Manager"
-              ? houses!.length + 1
-              : houses!.length,
+      length: houses!.isEmpty ? 0 : houses!.length,
       child: Scaffold(
         backgroundColor: GlobalColors.bgColor,
         appBar: AppBar(
@@ -109,6 +105,23 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
+          actions: userType == "Manager"
+              ? [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15, right: 15),
+                    child: InkWell(
+                      onTap: () {
+                        Get.to(() => EditHousesScreen(houses: houses));
+                      },
+                      child: Icon(
+                        FontAwesome.edit,
+                        size: 32,
+                        color: GlobalColors.mainColor,
+                      ),
+                    ),
+                  )
+                ]
+              : null,
           bottom: houses!.isEmpty
               ? null
               : PreferredSize(
@@ -131,10 +144,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           Tab(
                             text: house.name,
                           ),
-                        if (userType == "Manager")
-                          const Tab(
-                            text: "Edit houses",
-                          )
                       ],
                     ),
                   ),
@@ -309,21 +318,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             : const UserEmptyStateScreen(
                                 text: "There are no rooms in this house",
                               ),
-                  if (userType == "Manager")
-                    SingleChildScrollView(
-                        child: Padding(
-                      padding: const EdgeInsets.only(bottom: 30, top: 10),
-                      child: Column(children: [
-                        InkWell(
-                          onTap: () {
-                            Get.to(() => const AddHouseScreen());
-                          },
-                          child: const AddBox(label: "Add House"),
-                        ),
-                        for (final house in houses!)
-                          DeleteHouseBox(house: house)
-                      ]),
-                    ))
                 ],
               ),
       ),
