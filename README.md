@@ -128,6 +128,13 @@
 
 </div>
 
+### Application Capabilities
+-The application can handle thounsands of records and users
+
+| Users Table | Live Testing |
+| ---| ---|
+| ![Website](./readme/implementation/users_table.jpeg) | ![testing](./readme/implementation/records.gif) |
+
 
 <br><br>
 
