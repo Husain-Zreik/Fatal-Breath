@@ -217,7 +217,11 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
                         width: 70,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(40),
-                          color: Colors.blue,
+                          color: house.isRequested ? Colors.white : Colors.blue,
+                          border: Border.all(
+                            color: Colors.blue,
+                            width: 2.0,
+                          ),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.withOpacity(0.5),
@@ -231,7 +235,9 @@ class _FindHouseScreenState extends State<FindHouseScreen> {
                           child:
                               Text(house.isRequested ? "Requested" : "Request",
                                   style: GoogleFonts.poppins(
-                                    color: Colors.white,
+                                    color: house.isRequested
+                                        ? Colors.blue
+                                        : Colors.white,
                                     fontSize: 10,
                                     fontWeight: FontWeight.w500,
                                   )),
