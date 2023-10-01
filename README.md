@@ -118,7 +118,7 @@
 
 ### Advertising Website
 
-[Click Here to Visit the Website](https://fatal-breath.vercel.app)
+Visit the [application advertising website](https://fatal-breath.vercel.app) to learn more about the application's features and benefits.
 
 <div align="center">
 
@@ -128,8 +128,12 @@
 
 </div>
 
+<br><br>
+
 ### Application Capabilities
--The application can handle thounsands of records and users
+- The application is designed to be highly scalable and can effortlessly accommodate a substantial number of users and records. It has been engineered to manage large user volumes and high demand, allowing you to concentrate on your core activities with confidence.
+
+<br>
 
 | Users Table | Live Testing |
 | ---| ---|
