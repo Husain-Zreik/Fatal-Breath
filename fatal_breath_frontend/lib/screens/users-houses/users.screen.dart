@@ -256,7 +256,13 @@ class _UsersScreenState extends State<UsersScreen> {
                                       width: 70,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(40),
-                                        color: Colors.blue,
+                                        color: user.isInvited
+                                            ? Colors.white
+                                            : Colors.blue,
+                                        border: Border.all(
+                                          color: Colors.blue,
+                                          width: 2.0,
+                                        ),
                                         boxShadow: [
                                           BoxShadow(
                                             color: Colors.grey.withOpacity(0.5),
@@ -272,7 +278,9 @@ class _UsersScreenState extends State<UsersScreen> {
                                                 ? "Invited"
                                                 : "Invite",
                                             style: GoogleFonts.poppins(
-                                              color: Colors.white,
+                                              color: user.isInvited
+                                                  ? Colors.blue
+                                                  : Colors.white,
                                               fontSize: 10,
                                               fontWeight: FontWeight.w500,
                                             )),
