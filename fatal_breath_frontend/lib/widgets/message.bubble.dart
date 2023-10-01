@@ -22,7 +22,7 @@ class MessageBubble extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               color: isMe
-                  ? const Color.fromARGB(255, 161, 0, 0)
+                  ? const Color.fromARGB(255, 255, 251, 219)
                   : GlobalColors.mainColor,
               borderRadius: !isMe
                   ? const BorderRadius.only(
@@ -46,12 +46,14 @@ class MessageBubble extends StatelessWidget {
                   isMe ? CrossAxisAlignment.start : CrossAxisAlignment.end,
               children: [
                 Text(message.content,
-                    style: const TextStyle(color: Colors.white, fontSize: 15)),
+                    style: TextStyle(
+                        color: isMe ? Colors.black : Colors.white,
+                        fontSize: 15)),
                 const SizedBox(height: 5),
                 Text(
                   timeago.format(message.sentTime),
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: isMe ? Colors.black : Colors.white,
                     fontSize: 10,
                   ),
                 ),
