@@ -68,6 +68,31 @@
 
 <br><br>
 
+<!-- Tech stack -->
+<img src="./readme/titles/title5.svg" name="tech-stack"/>
+
+###  Fatal Breath is built using the following technologies:
+
+- **Frontend Development:** <br> The Fatal Breath app is built using [Flutter app development framework](https://flutter.dev/). Flutter enables the development of cross-platform mobile applications with a single codebase, allowing them to run seamlessly on various devices, including mobile, desktop, and web.
+
+- **Backend Development:** <br> For the backend, [Laravel](https://laravel.com) is used. Laravel is a robust PHP framework known for its elegant syntax and powerful features, making it ideal for building efficient and secure server-side applications.
+
+- **Database Management:** <br> The application relies on MySQL for database management. MySQL is a widely used open-source relational database management system that ensures data is stored and retrieved efficiently.
+
+- **Real-time Chat:** <br> To facilitate real-time communication among users, Firebase Realtime Database is integrated. [Firebase](https://firebase.google.com) is a Google-backed platform that offers real-time database capabilities, making it perfect for features like live chatting within the app.
+
+- **Notifications:** <br> Firebase Cloud Messaging (FCM) is used for sending push notifications to users. FCM is a cross-platform messaging solution that ensures reliable message delivery across different devices.
+
+- **Advertising Website:** <br> The advertising website for the Fatal Breath app is developed using [Next.js](https://nextjs.org), a popular React framework for building fast and SEO-friendly web applications. [TypeScript](https://www.typescriptlang.org) is used to enhance the website's development, providing static typing and better tooling support.
+
+- **User Interface:** <br> The app's user interface adheres to a responsive and modern design using [Tailwind CSS](https://tailwindcss.com). Tailwind CSS is a utility-first CSS framework that simplifies the styling process while maintaining a highly customizable design.
+
+- **Hardware Integration:** <br> Fatal Breath includes hardware integration with an [ESP8266 microchip](https://www.espressif.com/en/products/socs/esp8266) connected to an MQ2 sensor. This setup enables the monitoring of CO levels within rooms and provides real-time data to the app.
+
+- **Font:** <br> The primary font used in the app is ["Poppins"](https://fonts.google.com/specimen/Poppins), known for its readability and versatility.
+
+<br><br>
+
 <!-- Prototyping -->
 <img src="./readme/titles/title3.svg" name="prototyping"/>
 
@@ -160,30 +185,6 @@ Visit the [application advertising website](https://fatal-breath.vercel.app) to 
 
 <br><br>
 
-<!-- Tech stack -->
-<img src="./readme/titles/title5.svg" name="tech-stack"/>
-
-###  Fatal Breath is built using the following technologies:
-
-- **Frontend Development:** <br> The Fatal Breath app is built using [Flutter app development framework](https://flutter.dev/). Flutter enables the development of cross-platform mobile applications with a single codebase, allowing them to run seamlessly on various devices, including mobile, desktop, and web.
-
-- **Backend Development:** <br> For the backend, [Laravel](https://laravel.com) is used. Laravel is a robust PHP framework known for its elegant syntax and powerful features, making it ideal for building efficient and secure server-side applications.
-
-- **Database Management:** <br> The application relies on MySQL for database management. MySQL is a widely used open-source relational database management system that ensures data is stored and retrieved efficiently.
-
-- **Real-time Chat:** <br> To facilitate real-time communication among users, Firebase Realtime Database is integrated. [Firebase](https://firebase.google.com) is a Google-backed platform that offers real-time database capabilities, making it perfect for features like live chatting within the app.
-
-- **Notifications:** <br> Firebase Cloud Messaging (FCM) is used for sending push notifications to users. FCM is a cross-platform messaging solution that ensures reliable message delivery across different devices.
-
-- **Advertising Website:** <br> The advertising website for the Fatal Breath app is developed using [Next.js](https://nextjs.org), a popular React framework for building fast and SEO-friendly web applications. [TypeScript](https://www.typescriptlang.org) is used to enhance the website's development, providing static typing and better tooling support.
-
-- **User Interface:** <br> The app's user interface adheres to a responsive and modern design using [Tailwind CSS](https://tailwindcss.com). Tailwind CSS is a utility-first CSS framework that simplifies the styling process while maintaining a highly customizable design.
-
-- **Hardware Integration:** <br> Fatal Breath includes hardware integration with an [ESP8266 microchip](https://www.espressif.com/en/products/socs/esp8266) connected to an MQ2 sensor. This setup enables the monitoring of CO levels within rooms and provides real-time data to the app.
-
-- **Font:** <br> The primary font used in the app is ["Poppins"](https://fonts.google.com/specimen/Poppins), known for its readability and versatility.
-
-<br><br>
 
 <!-- How to run -->
 <img src="./readme/titles/title6.svg" name="how-to-run"/>
