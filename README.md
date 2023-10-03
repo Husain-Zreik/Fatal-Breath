@@ -1,12 +1,12 @@
 <img src="./readme/titles/title1.svg"/>
 <br>
 
-<img src="./readme/titles/title7.svg"/>
-<br>
-
 > Hello world! This is the project’s summary that describes the project as plain, simple, and limited to the space available.
 
 <br>
+<img src="./readme/titles/title7.svg"/>
+<br>
+
 
 - [PROJECT PHILOSOPHY](#project-philosophy)
 - [USER TYPES](#user-types)
