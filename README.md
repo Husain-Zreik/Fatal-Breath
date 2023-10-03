@@ -3,13 +3,13 @@
 
 <img src="./readme/titles/title7.svg"/>
 <br>
-<div align="center">
 
 > Hello world! This is the project’s summary that describes the project as plain, simple, and limited to the space available.
+<div align="center">
 
 <br>
 
-**[PROJECT PHILOSOPHY](#project-philosophy) • [USER TYPES](#user-types) • [PROTOTYPING](#prototyping) • [IMPLEMENTATION](#implementation) • [TECH STACK](#tech-stack)  • [HOW TO RUN?](#how-to-run)**
+**[PROJECT PHILOSOPHY](#project-philosophy) • [USER TYPES](#user-types) • [PROTOTYPING](#prototyping) • [Demo](#implementation) • [TECH STACK](#tech-stack)  • [HOW TO RUN?](#how-to-run)**
 
 </div>
 <br>
