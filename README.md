@@ -1,5 +1,7 @@
 <img src="./readme/titles/title1.svg"/>
+<br>
 
+<img src="./readme/titles/title7.svg"/>
 <br>
 <div align="center">
 
@@ -96,9 +98,9 @@
 <br><br>
 <div align="center">
 
-| Hardware | 
-| ---|
-| ![Hardware](./readme/implementation/experement.gif) |
+| Hardware | Circuit |
+| ---| ---|
+| ![Hardware](./readme/implementation/experement.gif) |  ![Circuit](./readme/implementation/circuit.jpeg) |
 </div>
 <br><br>
 
@@ -130,8 +132,9 @@ Visit the [application advertising website](https://fatal-breath.vercel.app) to 
 
 <br><br>
 
-### Application Capabilities
-- The application is designed to be highly scalable and can effortlessly accommodate a substantial number of users and records. It has been engineered to manage large user volumes and high demand, allowing you to concentrate on your core activities with confidence.
+<img src="./readme/titles/title8.svg" name="performance"/>
+
+>The application is designed to be highly scalable and can effortlessly accommodate a substantial number of users and records. It has been engineered to manage large user volumes and high demand, allowing you to concentrate on your core activities with confidence.
 
 <br>
 
