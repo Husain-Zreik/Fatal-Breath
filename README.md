@@ -5,13 +5,25 @@
 <br>
 
 > Hello world! This is the project’s summary that describes the project as plain, simple, and limited to the space available.
-<div align="center">
 
 <br>
 
-**[PROJECT PHILOSOPHY](#project-philosophy) • [USER TYPES](#user-types) • [PROTOTYPING](#prototyping) • [Demo](#implementation) • [TECH STACK](#tech-stack)  • [HOW TO RUN?](#how-to-run)**
+- [PROJECT PHILOSOPHY](#project-philosophy)
+- [USER TYPES](#user-types)
+- [Key Features of the App](#features)
+- [PROTOTYPING](#prototyping)
+- [Demo](#implementation)
+  - [App](#implementation)
+  - [IoT System](#iot)
+  - [Advertising Website](#website)
+- [Performance](#performance) 
+- [TECH STACK](#tech-stack)
+- [How to Run](#how-to-run)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Hardware](#hardware)
 
-</div>
+
 <br>
 
 <!-- project philosophy -->
@@ -25,6 +37,7 @@
 
 <br>
 
+<a name="features" id="features"></a>
 ### Key Features
 - **Real-Time Monitoring:** Keep an eye on gas levels, ensuring a safe living environment for you and your family.
 - **Instant Alerts:** Receive notifications when gas levels exceed safe limits, allowing you to take immediate action.
@@ -96,13 +109,6 @@
 | ![chats](./readme/implementation/chats.gif) | ![notifications](./readme/implementation/notification.gif) | ![Change Password ](./readme/implementation/change_password.gif) |
 
 <br><br>
-<div align="center">
-
-| Hardware | Circuit |
-| ---| ---|
-| ![Hardware](./readme/implementation/experement.gif) |  ![Circuit](./readme/implementation/circuit.jpeg) |
-</div>
-<br><br>
 
 ### Member Screens
 | Monitor CO Level | Manage Houses | Search for Houses | 
@@ -118,11 +124,20 @@
 
 <br><br>
 
+### IoT System
+<div align="center" name="iot">
+
+| Hardware | Circuit |
+| ---| ---|
+| ![Hardware](./readme/implementation/experement.gif) |  ![Circuit](./readme/implementation/circuit.jpeg) |
+</div>
+<br><be>
+
 ### Advertising Website
 
 Visit the [application advertising website](https://fatal-breath.vercel.app) to learn more about the application's features and benefits.
 
-<div align="center">
+<div align="center" name="website">
 
 | Website Preview | 
 | ---|
@@ -150,7 +165,7 @@ Visit the [application advertising website](https://fatal-breath.vercel.app) to 
 
 ###  Fatal Breath is built using the following technologies:
 
-- **Frontend Development:** <br> The Fatal Breath app is built using [Flutter app development framework](https://flutter.dev/). Flutter enables the development of cross-platform mobile applications with a single codebase, allowing it to run seamlessly on various devices, including mobile, desktop, and web.
+- **Frontend Development:** <br> The Fatal Breath app is built using [Flutter app development framework](https://flutter.dev/). Flutter enables the development of cross-platform mobile applications with a single codebase, allowing them to run seamlessly on various devices, including mobile, desktop, and web.
 
 - **Backend Development:** <br> For the backend, [Laravel](https://laravel.com) is used. Laravel is a robust PHP framework known for its elegant syntax and powerful features, making it ideal for building efficient and secure server-side applications.
 
@@ -175,6 +190,8 @@ Visit the [application advertising website](https://fatal-breath.vercel.app) to 
 
 > To set up Coffee Express locally, follow these steps:
 
+<a name="prerequisites"></a>
+
 ### Prerequisites
 
 - Flutter SDK: Install the Flutter SDK to build and run the mobile application.
@@ -182,6 +199,8 @@ Visit the [application advertising website](https://fatal-breath.vercel.app) to 
 - Arduino IDE: You'll need the Arduino IDE to upload code to the ESP8266 microchip.
 
 - ESP8266 (Hardware): Ensure you have the ESP8266 microchip connected to an MQ2 sensor for monitoring CO levels.
+
+<a name="installation"></a>
 
 ### Installation
 
@@ -220,6 +239,7 @@ _Below is an example of how you can instruct your audience on installing and set
    flutter pub get
    flutter run
    ```
+<a name="hardware"></a>
 
 ### Hardware Setup (Go to the simulation section to simulate hardware functionality)
 
@@ -227,7 +247,7 @@ _Below is an example of how you can instruct your audience on installing and set
 
 1. Plug your Arduino to your laptop/mac
 
-2. Install [Arduino IDE](https://docs.arduino.cc/software/ide-v2/tutorials/getting-started/ide-v2-downloading-and-installing)(You can use alternative aurduino IDE's)
+2. Install [Arduino IDE](https://docs.arduino.cc/software/ide-v2/tutorials/getting-started/ide-v2-downloading-and-installing)(You can use alternative Arduino IDE's)
 
 3. Upload the Arduino code located in the esp8266 directory to your ESP8266 microchip using the Arduino IDE.
 
