@@ -8,11 +8,11 @@
 <br>
 
 
-- [PROJECT PHILOSOPHY](#project-philosophy)
-- [USER TYPES](#user-types)
-- [Key Features of the App](#features)
-- [TECH STACK](#tech-stack)
-- [PROTOTYPING](#prototyping)
+- [Project Philosophy](#project-philosophy)
+- [User Types](#user-types)
+- [Key Features](#features)
+- [Tech Stack](#tech-stack)
+- [Prototyping](#prototyping)
 - [Demo](#implementation)
   - [App](#implementation)
   - [IoT System](#iot)
