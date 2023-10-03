@@ -189,7 +189,7 @@ Visit the [application advertising website](https://fatal-breath.vercel.app) to 
 <!-- How to run -->
 <img src="./readme/titles/title6.svg" name="how-to-run"/>
 
-> To set up Coffee Express locally, follow these steps:
+> To set up Fatal Breath locally, follow these steps:
 
 <a name="prerequisites"></a>
 
