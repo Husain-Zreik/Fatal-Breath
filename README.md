@@ -9,8 +9,8 @@
 
 
 - [Project Philosophy](#project-philosophy)
-- [User Types](#user-types)
-- [Key Features](#features)
+  - [Key Features](#features)
+  - [User Types](#user-types)
 - [Tech Stack](#tech-stack)
 - [Prototyping](#prototyping)
 - [Demo](#implementation)
