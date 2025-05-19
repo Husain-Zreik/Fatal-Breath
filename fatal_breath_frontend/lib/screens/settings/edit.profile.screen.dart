@@ -141,7 +141,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       Stack(children: [
                         ProfileCircle(
                           size: 140,
-                          decoded: decoded != null ? decoded! : null,
+                          decoded: decoded,
                           imageLink: currentImageLink,
                         ),
                         Positioned(
