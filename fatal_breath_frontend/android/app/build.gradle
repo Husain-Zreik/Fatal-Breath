@@ -1,12 +1,9 @@
 plugins {
-    id "com.android.application"
-    id "kotlin-android"
-    id "dev.flutter.flutter-gradle-plugin"
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android") // ✅ Use the correct ID for Kotlin Android
+    id("com.google.gms.google-services") // ✅ Google Services plugin (for Firebase, etc.)
+    id("dev.flutter.flutter-gradle-plugin") // ✅ Flutter plugin
 }
-apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services' 
-apply plugin: 'kotlin-android'
-
 
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
@@ -29,11 +26,13 @@ if (flutterVersionName == null) {
 android {
     namespace "com.example.fatal_breath_frontend"
     compileSdkVersion flutter.compileSdkVersion
-    ndkVersion flutter.ndkVersion
+    // ndkVersion flutter.ndkVersion
+    ndkVersion = "29.0.13113456"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+        coreLibraryDesugaringEnabled true
     }
 
     kotlinOptions {
@@ -74,4 +73,5 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.0.3')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'androidx.multidex:multidex:2.0.1'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'
 }
