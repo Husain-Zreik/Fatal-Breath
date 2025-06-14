@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\User;
-use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -82,7 +84,21 @@ class AuthController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
 
-        $token = Auth::attempt($credentials);
+        $deviceName = $request->input('device_name');
+        $deviceToken = $request->input('fcm_token');
+
+        // Prepare custom claims only if both are present
+        $customClaims = [];
+        if ($deviceName && $deviceToken) {
+            $customClaims = [
+                'device_name' => $deviceName,
+                'device_token' => $deviceToken,
+                'jti' => (string) Str::uuid(),
+            ];
+        }
+
+        $token = Auth::claims($customClaims)->attempt($credentials);
+
         if (!$token) {
             return response()->json([
                 'status' => 'error',
@@ -90,30 +106,134 @@ class AuthController extends Controller
             ], 401);
         }
 
+        /** @var \App\Models\User $user */
         $user = Auth::user();
         $user->token = $token;
+
+        // Save session only if both device_name and fcm_token are given
+        if ($deviceName && $deviceToken) {
+            $payload = JWTAuth::setToken($token)->getPayload();
+            $sessionId = $payload->get('jti');
+
+            $user->sessions()->create([
+                'session_id' => $sessionId,
+                'device_name' => $deviceName,
+                'device_token' => $deviceToken,
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+                'last_active_at' => now(),
+            ]);
+        }
+
         return response()->json([
             'status' => 'success',
             'user' => $user,
         ]);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        Auth::logout();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Successfully logged out',
-        ]);
+        try {
+            $token = JWTAuth::getToken();
+
+            if (!$token) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Token not provided',
+                ], 400);
+            }
+
+            $payload = JWTAuth::getPayload($token);
+            $sessionId = $payload->get('jti');
+
+            // Delete the session from DB
+            /** @var \App\Models\User $user */
+            $user = Auth::user();
+            if ($user && $sessionId) {
+                $user->sessions()->where('session_id', $sessionId)->delete();
+            }
+
+            JWTAuth::invalidate($token); // Invalidate token
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Successfully logged out',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to logout',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
-    public function refresh()
+    public function refresh(Request $request)
     {
-        $user = Auth::user();
-        $user->token = Auth::refresh();
-        return response()->json([
-            'status' => 'success',
-            'user' => $user,
-        ]);
+        try {
+            $oldToken = JWTAuth::getToken();
+
+            if (!$oldToken) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Token not provided',
+                ], 400);
+            }
+
+            $oldPayload = JWTAuth::getPayload($oldToken);
+            $oldSessionId = $oldPayload->get('jti');
+
+            $deviceName = $oldPayload->get('device_name');
+            $deviceToken = $oldPayload->get('device_token');
+
+            // Build new claims (keep same device info, new jti)
+            $newClaims = [];
+            if ($deviceName && $deviceToken) {
+                $newClaims = [
+                    'device_name' => $deviceName,
+                    'device_token' => $deviceToken,
+                    'jti' => (string) Str::uuid(),
+                ];
+            }
+
+            // Refresh token with new claims
+            $newToken = Auth::claims($newClaims)->refresh();
+
+            // Delete old session
+            /** @var \App\Models\User $user */
+
+            $user = Auth::user();
+            if ($user && $oldSessionId) {
+                $user->sessions()->where('session_id', $oldSessionId)->delete();
+            }
+
+            // Create new session
+            if ($deviceName && $deviceToken) {
+                $newPayload = JWTAuth::setToken($newToken)->getPayload();
+                $newSessionId = $newPayload->get('jti');
+
+                $user->sessions()->create([
+                    'session_id' => $newSessionId,
+                    'device_name' => $deviceName,
+                    'device_token' => $deviceToken,
+                    'ip_address' => $request->ip(),
+                    'user_agent' => $request->userAgent(),
+                    'last_active_at' => now(),
+                ]);
+            }
+
+            $user->token = $newToken;
+
+            return response()->json([
+                'status' => 'success',
+                'user' => $user,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Token refresh failed',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 }
