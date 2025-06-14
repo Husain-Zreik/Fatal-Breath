@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -35,6 +34,11 @@ class User extends Authenticatable implements JWTSubject
         'password' => 'hashed',
     ];
 
+    public function sessions()
+    {
+        return $this->hasMany(Session::class);
+    }
+
     public function ownedHouses()
     {
         return $this->hasMany(House::class, 'owner_id');
@@ -43,11 +47,6 @@ class User extends Authenticatable implements JWTSubject
     public function houses()
     {
         return $this->belongsToMany(House::class, 'users_houses', 'user_id', 'house_id');
-    }
-
-    public function chatMessages()
-    {
-        return $this->hasMany(ChatMessage::class);
     }
 
     public function notifications()

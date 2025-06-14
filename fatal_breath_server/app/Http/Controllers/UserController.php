@@ -17,6 +17,8 @@ class UserController extends Controller
 {
     public function getUser()
     {
+
+        /** @var \App\Models\User $user */
         $user = Auth::user();
 
         if (!$user) {
@@ -35,6 +37,7 @@ class UserController extends Controller
     public function updateProfile(Request $request)
     {
         try {
+            /** @var \App\Models\User $user */
             $user = Auth::user();
 
             $request->validate([
@@ -97,6 +100,7 @@ class UserController extends Controller
     public function changePassword(Request $request)
     {
         try {
+            /** @var \App\Models\User $user */
             $user = Auth::user();
 
             $request->validate([
