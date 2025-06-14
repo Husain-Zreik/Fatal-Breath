@@ -8,7 +8,6 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SensorController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'auth'], function () {
@@ -27,7 +26,6 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
         Route::post("/search", [SearchController::class, "searchUsers"]);
         Route::post('/process-request', [ManagerController::class, "processRequest"]);
         Route::post('/toggle-invitation', [ManagerController::class, "toggleInvitation"]);
-        Route::get("/{houseId}/get-requests-members", [ManagerController::class, "getRequestsAndMembers"]);
         Route::delete('/house/{houseId}', [HouseController::class, "deleteHouse"]);
         Route::delete('/room/{roomId}', [RoomController::class, "deleteRoom"]);
     });
