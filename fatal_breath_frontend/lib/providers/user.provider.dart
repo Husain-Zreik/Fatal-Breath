@@ -1,8 +1,6 @@
 // ignore_for_file: unused_local_variable
 
-import 'dart:convert';
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:fatal_breath_frontend/config/remote.config.dart';
 import 'package:fatal_breath_frontend/enums/request.methods.dart';
