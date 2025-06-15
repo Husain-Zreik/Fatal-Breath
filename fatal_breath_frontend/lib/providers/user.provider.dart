@@ -219,26 +219,4 @@ class UserProvider with ChangeNotifier {
     searchList.clear();
     notifyListeners();
   }
-
-  Future getUsers(houseId, context) async {
-    try {
-      final response = await sendRequest(
-        route: "/api/user/admin/$houseId/get-requests-members",
-      );
-
-      final data = json.decode(response);
-
-      final List<User> requests = (data['pending_requests'] as List)
-          .map((json) => User.fromJson(json['user']))
-          .toList();
-
-      final List<User> members = (data['house_members'] as List)
-          .map((json) => User.fromJson(json['user']))
-          .toList();
-
-      notifyListeners();
-    } catch (e) {
-      throw HttpException('$e');
-    }
-  }
 }

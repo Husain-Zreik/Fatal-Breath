@@ -27,39 +27,46 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
+
 dependencies:
   flutter:
     sdk: flutter
 
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  # navigation
+  # Navigation
   get: ^4.6.5
-  # ui design
+
+  # UI Design
   hexcolor: ^3.0.1
   google_fonts: ^5.1.0
   percent_indicator: ^4.2.3
-  # send requests
+
+  # Send Requests
   dio: ^5.3.2
   http: ^1.1.0
-  # state management
+
+  # State Management
   shared_preferences: ^2.1.0
   provider: ^6.0.5
-  # images and icons
+
+  # Images and Icons
   flutter_svg: ^2.0.7
   fluttericon: ^2.0.0
   image_picker: ^1.0.4
-  cupertino_icons: ^1.0.2
-  #firebase
+
+  # Firebase
   firebase_auth: ^4.10.0
   firebase_core: ^2.16.0
   cloud_firestore: ^4.9.2
   firebase_storage: ^11.2.7
   firebase_messaging: ^14.6.8
-  flutter_local_notifications: ^19.2.1    # Date and Time
+
+  # Notifications and Time
+  flutter_local_notifications: ^19.2.1
   timeago: ^3.5.0
 
+  # ✅ Network IP access
+  device_info_plus: ^11.4.0
+  network_info_plus: ^6.1.4
   
 dev_dependencies:
   flutter_test:

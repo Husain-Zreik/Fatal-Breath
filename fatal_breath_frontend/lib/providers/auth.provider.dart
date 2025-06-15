@@ -2,47 +2,48 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:fatal_breath_frontend/config/remote.config.dart';
 import 'package:fatal_breath_frontend/enums/request.methods.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
+
+Future<String> getDeviceName() async {
+  DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+  if (Platform.isAndroid) {
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    return androidInfo.model ?? 'Android Device';
+  } else if (Platform.isIOS) {
+    IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+    return iosInfo.utsname.machine ?? 'iOS Device';
+  }
+  return 'Unknown Device';
+}
 
 class AuthProvider with ChangeNotifier {
   int? userId;
   String? token;
   String? password;
 
-  int? get getUserId {
-    if (userId != null) {
-      return userId;
-    }
+  int? get getUserId => userId;
+  String? get getToken => token;
+  String? get getPassword => password;
 
-    return null;
-  }
-
-  String? get getToken {
-    if (token != null) {
-      return token;
-    }
-
-    return null;
-  }
-
-  String? get getPassword {
-    if (password != null) {
-      return password;
-    }
-
-    return null;
-  }
-
-  Future login(email, password1, context) async {
+  Future login(String email, String password1, BuildContext context) async {
     try {
+      String deviceName = await getDeviceName();
+      String? fcmToken = await FirebaseMessaging.instance.getToken();
+
+      // Prepare the login payload with device info and token
       final response = await sendRequest(
-          route: "/api/auth/login",
-          method: RequestMethods.POST,
-          load: {
-            "email": email,
-            "password": password1,
-          });
+        route: "/api/auth/login",
+        method: RequestMethods.POST,
+        load: {
+          "email": email,
+          "password": password1,
+          "device_name": deviceName,
+          "fcm_token": fcmToken ?? '',
+        },
+      );
 
       final prefs = await SharedPreferences.getInstance();
       await prefs.setInt("user_id", response['user']['id']);
@@ -117,6 +118,13 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future logout() async {
+    try {
+      await sendRequest(
+        method: RequestMethods.POST,
+        route: "/api/user/logout",
+      );
+    } catch (_) {}
+
     final prefs = await SharedPreferences.getInstance();
     prefs.clear();
     userId = null;
