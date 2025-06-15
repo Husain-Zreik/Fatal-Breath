@@ -82,12 +82,13 @@ class AuthController extends Controller
             'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
-        $credentials = $request->only('email', 'password');
 
+        $credentials = $request->only('email', 'password');
         $deviceName = $request->input('device_name');
         $deviceToken = $request->input('fcm_token');
+        $ip = $request->ip();
 
-        // Prepare custom claims only if both are present
+        // Custom claims
         $customClaims = [];
         if ($deviceName && $deviceToken) {
             $customClaims = [
@@ -110,16 +111,20 @@ class AuthController extends Controller
         $user = Auth::user();
         $user->token = $token;
 
-        // Save session only if both device_name and fcm_token are given
         if ($deviceName && $deviceToken) {
             $payload = JWTAuth::setToken($token)->getPayload();
             $sessionId = $payload->get('jti');
+
+            // Clean any prior session with same device + IP
+            $user->sessions()
+                ->where('device_token', $deviceToken)
+                ->delete();
 
             $user->sessions()->create([
                 'session_id' => $sessionId,
                 'device_name' => $deviceName,
                 'device_token' => $deviceToken,
-                'ip_address' => $request->ip(),
+                'ip_address' => $ip,
                 'user_agent' => $request->userAgent(),
                 'last_active_at' => now(),
             ]);
@@ -186,7 +191,6 @@ class AuthController extends Controller
             $deviceName = $oldPayload->get('device_name');
             $deviceToken = $oldPayload->get('device_token');
 
-            // Build new claims (keep same device info, new jti)
             $newClaims = [];
             if ($deviceName && $deviceToken) {
                 $newClaims = [
@@ -196,21 +200,26 @@ class AuthController extends Controller
                 ];
             }
 
-            // Refresh token with new claims
             $newToken = Auth::claims($newClaims)->refresh();
 
-            // Delete old session
             /** @var \App\Models\User $user */
-
             $user = Auth::user();
+            $user->token = $newToken;
+
+            // Remove old session
             if ($user && $oldSessionId) {
                 $user->sessions()->where('session_id', $oldSessionId)->delete();
             }
 
-            // Create new session
+            // Add new session
             if ($deviceName && $deviceToken) {
                 $newPayload = JWTAuth::setToken($newToken)->getPayload();
                 $newSessionId = $newPayload->get('jti');
+
+                // Remove any prior sessions for same device + IP
+                $user->sessions()
+                    ->where('device_token', $deviceToken)
+                    ->delete();
 
                 $user->sessions()->create([
                     'session_id' => $newSessionId,
@@ -221,8 +230,6 @@ class AuthController extends Controller
                     'last_active_at' => now(),
                 ]);
             }
-
-            $user->token = $newToken;
 
             return response()->json([
                 'status' => 'success',
