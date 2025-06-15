@@ -88,11 +88,14 @@ class SensorController extends Controller
             $users = $members->push($owner)->unique('id');
             Log::info('Users to notify compiled', ['user_ids' => $users->pluck('id')]);
 
+            $roomName = $room->name ?? 'Unknown Room';
+            $houseName = $room->house->name ?? 'Unknown House';
+
             $notification = [
                 'title' => 'CO Level Alert',
                 'body'  => $coLevel > 70
-                    ? "⚠️ DANGEROUS: CO Level is now {$coLevel}%"
-                    : "⚠️ SENSITIVE: CO Level crossed 40%, now {$coLevel}%",
+                    ? "🚨 DANGEROUS: CO level in {$roomName} at {$houseName} is now {$coLevel}%"
+                    : "⚠️ SENSITIVE: CO level in {$roomName} at {$houseName} crossed 40%, now {$coLevel}%",
             ];
 
             foreach ($users as $user) {
