@@ -88,7 +88,7 @@ class AuthController extends Controller
         $deviceToken = $request->input('fcm_token');
         $ip = $request->ip();
 
-        // Custom claims
+        // Optional custom claims
         $customClaims = [];
         if ($deviceName && $deviceToken) {
             $customClaims = [
@@ -102,8 +102,8 @@ class AuthController extends Controller
 
         if (!$token) {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Unauthorized',
+                'status' => 'fail',
+                'message' => 'Incorrect email or password.',
             ], 401);
         }
 
@@ -115,7 +115,7 @@ class AuthController extends Controller
             $payload = JWTAuth::setToken($token)->getPayload();
             $sessionId = $payload->get('jti');
 
-            // Clean any prior session with same device + IP
+            // Remove any existing session with same device token
             $user->sessions()
                 ->where('device_token', $deviceToken)
                 ->delete();
@@ -149,16 +149,17 @@ class AuthController extends Controller
             }
 
             $payload = JWTAuth::getPayload($token);
-            $sessionId = $payload->get('jti');
+            $sessionId = $payload->get('jti', null); // use null as default
 
-            // Delete the session from DB
             /** @var \App\Models\User $user */
             $user = Auth::user();
+
+            // If session ID and user exist, attempt to remove the session
             if ($user && $sessionId) {
                 $user->sessions()->where('session_id', $sessionId)->delete();
             }
 
-            JWTAuth::invalidate($token); // Invalidate token
+            JWTAuth::invalidate($token); // Always invalidate token
 
             return response()->json([
                 'status' => 'success',

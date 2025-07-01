@@ -18,10 +18,13 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
 
+    Route::delete('manager/houses/{house}/members/{user}', [ManagerController::class, 'removeMember']);
+
     Route::group(['prefix' => 'admin',  'middleware' => 'auth.admin'], function () {
         Route::post("/add-room", [RoomController::class, "createRoom"]);
         Route::post("/add-house", [HouseController::class, "createHouse"]);
         Route::get("/get-houses", [HouseController::class, "getAdminHouses"]);
+        Route::get("/members", [ManagerController::class, "getMembers"]);
         Route::post("/search", [SearchController::class, "searchUsers"]);
         Route::post('/process-request', [ManagerController::class, "processRequest"]);
         Route::post('/toggle-invitation', [ManagerController::class, "toggleInvitation"]);

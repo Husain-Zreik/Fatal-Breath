@@ -34,6 +34,18 @@ class User extends Authenticatable implements JWTSubject
         'password' => 'hashed',
     ];
 
+    public function members()
+    {
+        return User::where('id', '!=', $this->id)
+            ->whereHas('houses', function ($query) {
+                $query->whereIn('houses.owner_id', [$this->id]);
+            })
+            ->with(['houses' => function ($query) {
+                $query->where('owner_id', $this->id);
+            }])
+            ->get();
+    }
+
     public function sessions()
     {
         return $this->hasMany(Session::class);
