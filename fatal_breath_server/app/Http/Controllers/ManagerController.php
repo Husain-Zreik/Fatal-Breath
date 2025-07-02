@@ -4,13 +4,61 @@ namespace App\Http\Controllers;
 
 use App\Models\House;
 use App\Models\MembershipRequest;
+use App\Models\Room;
+use App\Models\Sensor;
 use App\Models\User;
 use App\Models\UserHouse;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ManagerController extends Controller
 {
+
+    public function overview(Request $request)
+    {
+        $managerId = auth()->id();
+
+        // Manager's houses
+        $houses = House::where('owner_id', $managerId)->withCount('rooms')->get();
+        $houseIds = $houses->pluck('id');
+
+        // Rooms in manager's houses
+        $rooms = Room::whereIn('house_id', $houseIds)->get();
+        $roomIds = $rooms->pluck('id');
+
+        // Sensors
+        $sensors = Sensor::whereIn('room_id', $roomIds)->get();
+        $totalSensors = $sensors->count();
+
+        // Sensor analysis
+        $unsafeSensors = $sensors->where('co_level', '>=', 70);
+        $mediumSensors = $sensors->whereBetween('co_level', [50, 69]);
+        $inactiveSensors = $sensors->where('updated_at', '<', now()->subMinutes(10))->count();
+
+        // Rooms with no sensors
+        $roomsWithSensors = $sensors->pluck('room_id')->unique();
+        $roomsWithoutSensorsCount = $roomIds->diff($roomsWithSensors)->count();
+
+        // Active members (from sessions)
+        $activeUserIds = UserHouse::whereIn('house_id', $houseIds)->pluck('user_id')->unique();
+        $activeMembersCount = \App\Models\Session::whereIn('user_id', $activeUserIds)
+            ->where('last_active_at', '>=', now()->subMinutes(10))
+            ->count();
+
+        return response()->json([
+            'houses' => $houses->count(),
+            'rooms' => $rooms->count(),
+            'unsafeRooms' => $unsafeSensors->count(),
+            'mediumRiskRooms' => $mediumSensors->count(),
+            'activeMembers' => $activeMembersCount,
+            'systemHealth' => [
+                'inactiveSensors' => $inactiveSensors,
+                'roomsWithoutSensors' => $roomsWithoutSensorsCount,
+            ],
+        ]);
+    }
+
     public function getMembers()
     {
         try {

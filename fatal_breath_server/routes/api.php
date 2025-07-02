@@ -21,6 +21,9 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
     Route::delete('manager/houses/{house}/members/{user}', [ManagerController::class, 'removeMember']);
 
     Route::group(['prefix' => 'admin',  'middleware' => 'auth.admin'], function () {
+        //dashboard
+        Route::get('/overview', [ManagerController::class, 'overview']);
+
         Route::post("/add-room", [RoomController::class, "createRoom"]);
         Route::post("/add-house", [HouseController::class, "createHouse"]);
         Route::get("/get-houses", [HouseController::class, "getAdminHouses"]);
