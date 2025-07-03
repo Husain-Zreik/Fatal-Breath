@@ -18,7 +18,6 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
 
-
     Route::group(['prefix' => 'admin',  'middleware' => 'auth.admin'], function () {
         //dashboard
         Route::get('/overview', [ManagerController::class, 'overview']);
@@ -27,10 +26,11 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
         Route::post("/add-house", [HouseController::class, "createHouse"]);
         Route::get("/get-houses", [HouseController::class, "getAdminHouses"]);
         Route::get("/members", [ManagerController::class, "getMembers"]);
-        Route::delete('/{house}/member/{user}', [ManagerController::class, 'removeMember']);
         Route::post("/search", [SearchController::class, "searchUsers"]);
         Route::post('/process-request', [ManagerController::class, "processRequest"]);
         Route::post('/toggle-invitation', [ManagerController::class, "toggleInvitation"]);
+        Route::get('/memberships', [ManagerController::class, "getMembershipRequests"]);
+        Route::delete('/{house}/member/{user}', [ManagerController::class, 'removeMember']);
         Route::delete('/house/{houseId}', [HouseController::class, "deleteHouse"]);
         Route::delete('/room/{roomId}', [RoomController::class, "deleteRoom"]);
     });
@@ -43,7 +43,6 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
     });
 
 
-    Route::delete('/remove-member/{houseId}/{userId}', [UserController::class, "removeMember"]);
     Route::get("/info", [UserController::class, "getUser"]);
     Route::post("/info/update", [UserController::class, "updateProfile"]);
     Route::post('/info/change-password', [UserController::class, 'changePassword']);

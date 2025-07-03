@@ -105,6 +105,23 @@ class ManagerController extends Controller
         ]);
     }
 
+    public function getMembershipRequests()
+    {
+        // Get all house IDs the authenticated manager owns
+        $managerId = auth()->id(); // Make sure middleware `auth:sanctum` is applied
+        $houseIds = House::where('owner_id', $managerId)->pluck('id');
+
+        // Fetch membership requests for those houses
+        $requests = MembershipRequest::with(['user:id,name,email,profile_image', 'house:id,name'])
+            ->whereIn('house_id', $houseIds)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json([
+            'requests' => $requests,
+        ]);
+    }
+
     public function processRequest(Request $request)
     {
         $userId = $request->input('user_id');
