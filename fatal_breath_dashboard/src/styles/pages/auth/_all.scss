@@ -1,0 +1,154 @@
+@use "../../variables" as variables;
+
+@forward "./login";
+@forward "./signup";
+
+.auth-page {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100vw;
+    height: 100vh;
+    padding: 2rem;
+    overflow: hidden;
+    background-color: variables.$primary;
+    // background: variables.$light-background-tertiary;
+
+    @media (max-width: variables.$breakpoint-md) {
+        flex-direction: column;
+        justify-content: center;
+        padding: 1.5rem 1rem;
+    }
+
+    canvas#particlesField {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .branding-section,
+    .form-section {
+        position: relative;
+        z-index: 2; // Keeps the UI above the smoke
+    }
+
+    .branding-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 3rem;
+
+        @media (max-width: variables.$breakpoint-md) {
+            padding: 2rem 1rem;
+            text-align: center;
+            align-items: center;
+            max-width: 100%;
+        }
+
+        .branding-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: variables.$dark-text;
+
+            @media (max-width: variables.$breakpoint-md) {
+                font-size: 2.25rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+        .branding-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: variables.$dark-text-secondary;
+
+            @media (max-width: variables.$breakpoint-md) {
+                font-size: 1.5rem;
+                margin-bottom: 0.75rem;
+            }
+
+            @media (max-width: variables.$breakpoint-sm) {
+                display: none;
+            }
+        }
+
+        .branding-text {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+            max-width: 80%;
+            color: variables.$dark-text-secondary;
+
+            @media (max-width: variables.$breakpoint-md) {
+                font-size: 1rem;
+                line-height: 1.4;
+                max-width: 100%;
+            }
+
+            @media (max-width: variables.$breakpoint-sm) {
+                display: none;
+            }
+        }
+    }
+
+    .form-section {
+        width: 100%;
+        max-width: 26.25rem;
+        padding: 2rem;
+        background: variables.$light-background;
+        border-radius: 0.75rem;
+        box-shadow:
+            0 0.5rem 1rem 0 variables.$light-background-secondary, // soft spread
+            0 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.1);
+
+        @media (max-width: variables.$breakpoint-md) {
+            padding: 1.5rem;
+            max-width: 100%;
+        }
+
+        @media (max-width: 480px) {
+            padding: 1rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: variables.$primary;
+
+            @media (max-width: variables.$breakpoint-md) {
+                font-size: 1.5rem;
+            }
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+
+            @media (max-width: variables.$breakpoint-md) {
+                font-size: 0.8rem;
+            }
+
+            a {
+                color: variables.$secondary;
+                text-decoration: none;
+                font-weight: 500;
+                transition: all 0.2s ease;
+                cursor: pointer;
+
+                &:hover {
+                    text-decoration: underline;
+                    color: variables.$primary;
+                }
+            }
+        }
+    }
+}

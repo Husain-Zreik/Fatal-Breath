@@ -1,0 +1,70 @@
+@use "../variables" as variables;
+@forward "./sidebar/managersidebar";
+
+.input-box {
+    position: relative;
+    margin: 1.25rem 0;
+
+    input {
+        width: 100%;
+        padding: 0.75rem 2.5rem 0.75rem 1rem;
+        border: 2px solid variables.$light-background-tertiary;
+        border-radius: 0.5rem;
+        outline: none;
+        transition: all 0.3s ease;
+
+        &:focus {
+            border-color: variables.$secondary;
+            box-shadow: 0 0 0 0.1875rem variables.$tertiary;
+        }
+    }
+
+    .icon {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: variables.$secondary;
+        pointer-events: none;
+        font-size: 1rem;
+    }
+}
+
+.button {
+    width: 100%;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, variables.$secondary, variables.$primary);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background: linear-gradient(135deg, variables.$primary, variables.$light-text-secondary);
+        transform: translateY(-0.125rem);
+        box-shadow: 0 0.25rem 0.75rem variables.$tertiary;
+    }
+
+    &:disabled {
+        background: variables.$light-background-tertiary;
+        cursor: not-allowed;
+        color: variables.$light-text-secondary;
+        box-shadow: none;
+    }
+
+    body.dark & {
+        background: variables.$dark-background-tertiary;
+
+        &:hover {
+            background: variables.$primary;
+            box-shadow: 0 0.25rem 0.75rem variables.$secondary;
+        }
+
+        &:disabled {
+            background: variables.$dark-background-secondary;
+            color: variables.$dark-text-secondary;
+        }
+    }
+}

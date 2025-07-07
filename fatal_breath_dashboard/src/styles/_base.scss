@@ -1,0 +1,59 @@
+@use "variables" as variables;
+
+// ============================
+// RESET DEFAULT STYLES
+// ============================
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// ============================
+// GLOBAL STYLES
+// ============================
+html {
+    // font-family: variables.$font-family !important;
+    font-size: variables.$font-size-base !important;
+    overflow: auto;
+    /* enable scrolling */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+
+
+    // Media queries for responsive font size adjustments
+    @media (max-width: variables.$breakpoint-md) {
+        font-size: variables.$font-size-md !important;
+    }
+
+    @media (max-width: variables.$breakpoint-sm) {
+        font-size: variables.$font-size-sm !important;
+    }
+}
+
+body {
+    font-family: variables.$font-family !important;
+    margin: 0;
+    height: 100vh;
+
+    // Dark mode styles
+    &.dark {
+        color: variables.$dark-text;
+        background-color: variables.$dark-background;
+    }
+
+    // Light mode styles
+    &.light {
+        color: variables.$light-text;
+        background-color: variables.$light-background;
+    }
+}
+
+// ============================
+// LINK STYLES
+// ============================
+a {
+    text-decoration: none;
+}

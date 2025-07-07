@@ -1,0 +1,56 @@
+@use './variables' as variables;
+
+// ==============================
+// TEXT COLOR UTILITIES
+// ==============================
+
+.text-danger {
+    color: variables.$danger !important;
+}
+
+.text-light-primary {
+    color: variables.$light-text !important;
+}
+
+.text-light-secondary {
+    color: variables.$light-text-secondary !important;
+}
+
+
+// ==============================
+// BACKGROUND COLOR UTILITIES
+// ==============================
+
+.bg-primary {
+    background-color: variables.$primary !important;
+    color: variables.$light-background !important; // white text on dark bg by default
+}
+
+.bg-secondary {
+    background-color: variables.$secondary !important;
+    color: variables.$light-background !important;
+}
+
+.bg-tertiary {
+    background-color: variables.$tertiary !important;
+    color: variables.$light-background !important;
+}
+
+.bg-danger-light {
+    background-color: variables.$danger-background !important;
+}
+
+.bg-light-primary {
+    background-color: variables.$light-background !important;
+    color: variables.$light-text !important;
+}
+
+.bg-light-secondary {
+    background-color: variables.$light-background-secondary !important;
+    color: variables.$light-text-secondary !important;
+}
+
+.bg-light-tertiary {
+    background-color: variables.$light-background-tertiary !important;
+    color: variables.$light-text-secondary !important;
+}

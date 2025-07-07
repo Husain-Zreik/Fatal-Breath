@@ -1,0 +1,236 @@
+@use "../../variables" as variables;
+
+.manager-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  .main-content {
+    margin-left: 15rem;
+    width: calc(100% - 15rem);
+    min-height: 100vh;
+    background-color: variables.$light-background-tertiary;
+    color: variables.$light-text;
+
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+
+    @media (max-width: 768px) {
+      margin-left: 0;
+      width: 100%;
+    }
+
+    .main-inner {
+      padding: 1.5rem;
+      width: 100%;
+      max-width: 64rem;
+      margin: 0 auto;
+      flex-grow: 1;
+    }
+  }
+
+  .manager-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: variables.$light-background;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+
+    .sidebar-toggle {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: variables.$light-text;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      margin-right: 1rem;
+      display: none;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      @media (max-width: 768px) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .navbar-profile {
+      display: flex;
+      align-items: center;
+      // flex-direction: column;
+      gap: 0.75rem;
+
+      @media (max-width: 769px) {
+        display: none;
+      }
+
+      span {
+        font-weight: 500;
+        color: variables.$light-text; // Ensure it stands out
+        font-size: 0.95rem;
+      }
+
+      img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid variables.$primary;
+      }
+
+      svg {
+        color: grey; // fallback icon color
+      }
+    }
+
+    .navbar-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+
+      .page-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: variables.$light-text;
+        margin: 0;
+        text-transform: capitalize;
+      }
+    }
+  }
+
+  .sidebar {
+    width: 15rem;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 1.25rem;
+    background-color: variables.$dark-background-secondary;
+    color: variables.$dark-text;
+    overflow: hidden;
+    z-index: 1000;
+    font-size: variables.$font-size-sm;
+    transform: translateX(0);
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: 768px) {
+      transform: translateX(-100%);
+
+      &.open {
+        transform: translateX(0);
+      }
+    }
+
+    h1.sidebar-logo {
+      font-size: 1.5rem;
+      padding-bottom: 1.4rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .sidebar-section {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-y: auto;
+    }
+
+    .sidebar-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+
+      .sidebar-group {
+        display: flex;
+        flex-direction: column;
+
+        h3 {
+          color: variables.$dark-text-secondary;
+          font-size: 0.875rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          margin-bottom: 0.5rem;
+          padding-left: 1.125rem;
+        }
+
+        a {
+          color: variables.$dark-text-secondary;
+          text-decoration: none;
+          margin: 0.25rem 0;
+          padding: 0.75rem 1.125rem;
+          border-radius: 0.75rem;
+          transition: all 0.3s;
+          display: flex;
+          align-items: center;
+          font-weight: 600;
+
+          .icon {
+            margin-right: 0.75rem;
+            font-size: 1.2rem;
+          }
+
+          &:hover,
+          &.active {
+            background-color: variables.$dark-background-tertiary;
+            color: variables.$dark-text;
+          }
+        }
+      }
+    }
+
+    .sidebar-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1rem;
+
+      a {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 1.125rem;
+        color: variables.$danger;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+
+        .icon {
+          margin-right: 0.75rem;
+        }
+
+        &:hover {
+          background-color: rgba(255, 0, 0, 0.1);
+        }
+      }
+    }
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+
+    @media (max-width: 768px) {
+      display: block;
+    }
+  }
+}

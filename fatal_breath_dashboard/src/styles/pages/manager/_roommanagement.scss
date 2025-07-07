@@ -1,0 +1,27 @@
+@use "../../variables" as variables;
+
+.room-view-container {
+  .add-room-button {
+    width: 220px;
+    font-size: variables.$font-size-base;
+    font-weight: 600;
+    background-color: variables.$primary;
+    border-color: variables.$primary;
+
+    &:hover {
+      background-color: variables.$secondary;
+      border-color: variables.$secondary;
+    }
+  }
+
+  .delete-icon {
+    color: #dc3545;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #e1293c;
+    }
+  }
+}

@@ -1,0 +1,84 @@
+@use "../../variables" as variables;
+
+.user-page-wrapper {
+  @media (max-width: variables.$breakpoint-md) {
+    padding: 15px;
+    margin-left: 0;
+  }
+
+  .user-header {
+    margin-bottom: 20px;
+
+    @media (max-width: variables.$breakpoint-md) {
+      .user-header .ant-row>div {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  .user-table-wrapper {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+
+    @media (max-width: variables.$breakpoint-md) {
+      padding: 10px;
+    }
+  }
+}
+
+.ant-table {
+  background-color: white;
+  border-radius: 0.625rem;
+  overflow-x: auto;
+
+  .ant-table-thead>tr>th {
+    background-color: variables.$primary;
+    color: white;
+    white-space: nowrap;
+    font-weight: 600;
+    border-bottom: 1px solid variables.$primary;
+    text-align: center;
+    font-size: 0.95rem;
+    padding: 0.75rem 1rem;
+    transition: background-color 0.3s ease;
+
+    &:focus,
+    &:active,
+    &.ant-table-cell-fix-left,
+    &.ant-table-cell-fix-right {
+      outline: none;
+      background-color: variables.$primary !important;
+    }
+
+    &:hover {
+      background-color: variables.$dark-background !important;
+      color: white;
+    }
+  }
+
+  .ant-table-tbody>tr>td {
+    background-color: variables.$light-background-secondary;
+    word-break: break-word;
+    text-align: center;
+    font-size: 0.925rem;
+    padding: 0.75rem 1rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .ant-table-tbody>tr:nth-child(odd)>td {
+    background-color: #e7effa;
+  }
+
+  .ant-table-tbody>tr:hover>td {
+    background-color: rgba(0, 39, 102, 0.05);
+  }
+
+  .ant-table-tbody>tr.ant-table-row-selected>td {
+    background-color: rgba(0, 39, 102, 0.15) !important;
+  }
+
+  .ant-table-cell:focus {
+    outline: none;
+  }
+}

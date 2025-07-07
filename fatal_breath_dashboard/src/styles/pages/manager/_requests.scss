@@ -1,0 +1,295 @@
+// .requests-wrapper {
+//     height: 100vh;
+//     display: flex;
+//     flex-direction: column;
+//     background: #f5f5f5;
+// }
+
+// .header-section {
+//     background: white;
+//     padding: 1.5rem 2rem;
+//     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+//     z-index: 10;
+// }
+
+// .header-section h1 {
+//     margin: 0;
+//     color: #2c3e50;
+//     font-weight: 700;
+//     font-size: 1.8rem;
+// }
+
+// .tabs-container {
+//     background: white;
+//     border-bottom: 1px solid #e9ecef;
+//     padding: 0 2rem;
+// }
+
+// .nav-tabs {
+//     border-bottom: none;
+//     gap: 1rem;
+// }
+
+// .nav-link {
+//     border: none;
+//     background: transparent;
+//     color: #6c757d;
+//     font-weight: 600;
+//     padding: 1rem 1.5rem;
+//     border-radius: 0;
+//     border-bottom: 3px solid transparent;
+//     transition: all 0.3s ease;
+//     position: relative;
+// }
+
+// .nav-link:hover {
+//     color: #1890ff;
+//     border-color: transparent;
+//     background: rgba(24, 144, 255, 0.1);
+// }
+
+// .nav-link.active {
+//     color: #1890ff;
+//     border-bottom-color: #1890ff;
+//     background: rgba(24, 144, 255, 0.1);
+// }
+
+// .tab-badge {
+//     background: #1890ff;
+//     color: white;
+//     padding: 0.25rem 0.6rem;
+//     border-radius: 12px;
+//     font-size: 0.75rem;
+//     font-weight: 500;
+//     margin-left: 0.5rem;
+// }
+
+// .content-area {
+//     flex: 1;
+//     padding: 2rem;
+//     overflow-y: auto;
+// }
+
+// .cards-grid {
+//     display: grid;
+//     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+//     gap: 1.5rem;
+//     max-width: 1400px;
+//     margin: 0 auto;
+// }
+
+// .request-card {
+//     background: white;
+//     border-radius: 8px;
+//     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+//     transition: all 0.3s ease;
+//     overflow: hidden;
+//     position: relative;
+//     cursor: pointer;
+// }
+
+// .request-card:hover {
+//     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+//     transform: translateY(-2px);
+// }
+
+// .card-header {
+//     position: relative;
+//     padding: 2rem 1.5rem 1.5rem;
+//     color: white;
+//     text-align: center;
+//     overflow: hidden;
+// }
+
+// .decorative-circle-large {
+//     position: absolute;
+//     width: 120px;
+//     height: 120px;
+//     border-radius: 50%;
+//     background: rgba(255, 255, 255, 0.1);
+//     top: -60px;
+//     right: -60px;
+// }
+
+// .decorative-circle-small {
+//     position: absolute;
+//     width: 80px;
+//     height: 80px;
+//     border-radius: 50%;
+//     background: rgba(255, 255, 255, 0.1);
+//     bottom: -40px;
+//     left: -40px;
+// }
+
+// .profile-container {
+//     position: relative;
+//     z-index: 2;
+//     margin-bottom: 1rem;
+// }
+
+// .profile-img {
+//     width: 60px;
+//     height: 60px;
+//     border-radius: 50%;
+//     object-fit: cover;
+//     border: 3px solid rgba(255, 255, 255, 0.3);
+//     margin: 0 auto;
+//     display: block;
+// }
+
+// .user-name {
+//     font-size: 1.2rem;
+//     font-weight: 600;
+//     margin: 0.5rem 0 0.25rem 0;
+//     color: white;
+//     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+// }
+
+// .user-email {
+//     font-size: 0.9rem;
+//     color: rgba(255, 255, 255, 0.9);
+//     margin: 0;
+// }
+
+// .card-content {
+//     padding: 1.5rem;
+// }
+
+// .house-info {
+//     display: flex;
+//     align-items: center;
+//     margin-bottom: 1rem;
+//     padding: 0.75rem;
+//     background: #f8f9fa;
+//     border-radius: 6px;
+//     color: #495057;
+// }
+
+// .house-icon {
+//     color: #1890ff;
+//     margin-right: 0.5rem;
+//     font-size: 1.1rem;
+// }
+
+// .house-name {
+//     font-weight: 600;
+//     margin: 0;
+// }
+
+// .date-info {
+//     display: flex;
+//     align-items: center;
+//     color: #6c757d;
+//     font-size: 0.9rem;
+//     margin-bottom: 1.5rem;
+// }
+
+// .date-icon {
+//     color: #6c757d;
+//     margin-right: 0.5rem;
+// }
+
+// .card-actions {
+//     display: flex;
+//     gap: 0.5rem;
+//     padding: 0;
+//     margin: 0;
+// }
+
+// .action-button {
+//     flex: 1;
+//     padding: 0.75rem 1rem;
+//     border: none;
+//     border-radius: 4px;
+//     font-weight: 500;
+//     font-size: 0.9rem;
+//     transition: all 0.3s ease;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     gap: 0.5rem;
+//     cursor: pointer;
+// }
+
+// .btn-accept {
+//     background: #52c41a;
+//     color: white;
+// }
+
+// .btn-accept:hover {
+//     background: #73d13d;
+//     transform: translateY(-1px);
+// }
+
+// .btn-decline {
+//     background: #ff4d4f;
+//     color: white;
+// }
+
+// .btn-decline:hover {
+//     background: #ff7875;
+//     transform: translateY(-1px);
+// }
+
+// .btn-cancel {
+//     background: #d9d9d9;
+//     color: #595959;
+// }
+
+// .btn-cancel:hover {
+//     background: #bfbfbf;
+//     transform: translateY(-1px);
+// }
+
+// .empty-state {
+//     text-align: center;
+//     padding: 4rem 2rem;
+//     color: #6c757d;
+//     max-width: 500px;
+//     margin: 0 auto;
+// }
+
+// .empty-state i {
+//     font-size: 4rem;
+//     margin-bottom: 1.5rem;
+//     color: #d9d9d9;
+// }
+
+// .empty-state h3 {
+//     color: #495057;
+//     margin-bottom: 1rem;
+// }
+
+// @media (max-width: 768px) {
+//     .cards-grid {
+//         grid-template-columns: 1fr;
+//         gap: 1rem;
+//     }
+
+//     .header-section {
+//         padding: 1rem;
+//     }
+
+//     .content-area {
+//         padding: 1rem;
+//     }
+
+//     .tabs-container {
+//         padding: 0 1rem;
+//     }
+
+//     .nav-link {
+//         padding: 0.75rem 1rem;
+//         font-size: 0.9rem;
+//     }
+// }
+
+// @media (max-width: 576px) {
+//     .card-actions {
+//         flex-direction: column;
+//     }
+
+//     .action-button {
+//         flex: none;
+//     }
+// }

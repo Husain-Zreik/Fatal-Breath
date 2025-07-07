@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+$font-family: "Poppins", system-ui, sans-serif;
+
+// ============================
+// MAIN COLORS (THEME BASE)
+// ============================
+$primary: #002766; // Deep royal blue
+$secondary: #165dbe; // Vivid sky blue
+$tertiary: #66aaff; // Light soft blue
+
+$danger: #dc3545; // Bright red for errors and warnings
+$danger-background: #FFE3E3; // Light red background for alerts
+
+// ============================
+// COLORS - LIGHT MODE
+// ============================
+$light-text: #000252;
+$light-text-secondary: #2c5aa0;
+
+$light-background: #ffffff; // Clean white
+$light-background-secondary: #f5f8fc; // Very light bluish-gray
+$light-background-tertiary: #d9e7fb; // Converted from rgba(22, 93, 190, 0.2) → subtle soft blue
+
+// ============================
+// COLORS - DARK MODE
+// ============================
+$dark-text: #f1f5ff; // Light for contrast
+$dark-text-secondary: #c7dafb;
+
+$dark-background: #0a0d1a; // Rich dark navy
+$dark-background-secondary: #12172f; // Slightly elevated panel
+$dark-background-tertiary: #23436e; // Converted from rgba(102, 170, 255, 0.08) to soft navy-blue
+
+// ============================
+// FONT AND SPACING SETTINGS
+// ============================
+
+$font-size-xl: 20px;
+$font-size-lg: 18px;
+$font-size-base: 16px;
+$font-size-md: 14px;
+$font-size-sm: 12px;
+$font-size-xs: 10px;
+
+// ============================
+// RESPONSIVE BREAKPOINTS
+// ============================
+
+$breakpoint-xs: 320px; // Extra small (Mobile)
+$breakpoint-sm: 576px; // Small (Mobile, Landscape, Small Tablets)
+$breakpoint-md: 768px; // Medium (Tablets)
+$breakpoint-base: 1024px; // Medium (Desktops, Laptops)
+$breakpoint-lg: 1200px; // Large (Desktops, Laptops)
+$breakpoint-xl: 1440px; // Extra Large (Large Desktops, Wide Screens)
+$breakpoint-xxl: 1800px; // Ultra Large (Ultra-wide Desktops)
+$breakpoint-4k: 2560px; // 4K Screens (Ultra-HD)
