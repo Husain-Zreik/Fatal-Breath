@@ -9,7 +9,6 @@ const AddHouseModal = ({ visible, onClose, onAddHouse }) => {
         form.resetFields();
     };
 
-    // reset form when modal closes
     useEffect(() => {
         if (!visible) {
             form.resetFields();
@@ -25,16 +24,49 @@ const AddHouseModal = ({ visible, onClose, onAddHouse }) => {
             centered
         >
             <Form layout="vertical" form={form} onFinish={handleFinish}>
-                <Form.Item name="name" label="House Name" rules={[{ required: true }]}>
-                    <Input placeholder="e.g. Sunset Estate" />
+                <Form.Item
+                    name="name"
+                    label="House Name"
+                    rules={[
+                        { required: true, message: "House name is required." },
+                        { max: 20, message: "Must be 20 characters or fewer." },
+                        {
+                            pattern: /^[A-Za-z0-9\s-]+$/,
+                            message: "Only letters, numbers, spaces, and hyphens are allowed.",
+                        },
+                    ]}
+                >
+                    <Input placeholder="e.g. Sunset" maxLength={20} />
                 </Form.Item>
 
-                <Form.Item name="country" label="Country" rules={[{ required: true }]}>
-                    <Input placeholder="e.g. Lebanon" />
+                <Form.Item
+                    name="country"
+                    label="Country"
+                    rules={[
+                        { required: true, message: "Country is required." },
+                        { max: 20, message: "Must be 20 characters or fewer." },
+                        {
+                            pattern: /^[A-Za-z\s]+$/,
+                            message: "Only letters and spaces are allowed.",
+                        },
+                    ]}
+                >
+                    <Input placeholder="e.g. Lebanon" maxLength={20} />
                 </Form.Item>
 
-                <Form.Item name="city" label="City" rules={[{ required: true }]}>
-                    <Input placeholder="e.g. Beirut" />
+                <Form.Item
+                    name="city"
+                    label="City"
+                    rules={[
+                        { required: true, message: "City is required." },
+                        { max: 20, message: "Must be 20 characters or fewer." },
+                        {
+                            pattern: /^[A-Za-z\s]+$/,
+                            message: "Only letters and spaces are allowed.",
+                        },
+                    ]}
+                >
+                    <Input placeholder="e.g. Beirut" maxLength={20} />
                 </Form.Item>
 
                 <Button type="primary" htmlType="submit" block>

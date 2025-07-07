@@ -20,10 +20,26 @@ const AddRoomModal = ({ visible, onClose, onSubmit }) => {
             centered
         >
             <Form layout="vertical" form={form} onFinish={handleFinish}>
-                <Form.Item name="name" label="Room Name" rules={[{ required: true }]}>
-                    <Input />
+                <Form.Item
+                    name="name"
+                    label="Room Name"
+                    rules={[
+                        { required: true, message: "Room name is required." },
+                        { max: 20, message: "Room name must be 20 characters or fewer." },
+                        {
+                            pattern: /^[A-Za-z0-9\s-]+$/,
+                            message: "Only letters, numbers, spaces, and hyphens are allowed.",
+                        },
+                    ]}
+                >
+                    <Input placeholder="e.g. Guest Room" maxLength={20} />
                 </Form.Item>
-                <Form.Item name="type" label="Room Type" rules={[{ required: true }]}>
+
+                <Form.Item
+                    name="type"
+                    label="Room Type"
+                    rules={[{ required: true, message: "Please select a room type." }]}
+                >
                     <Select placeholder="Select type">
                         <Select.Option value="Bedroom">Bedroom</Select.Option>
                         <Select.Option value="Livingroom">Living Room</Select.Option>
@@ -31,6 +47,7 @@ const AddRoomModal = ({ visible, onClose, onSubmit }) => {
                         <Select.Option value="Bathroom">Bathroom</Select.Option>
                     </Select>
                 </Form.Item>
+
                 <Button type="primary" htmlType="submit" block>
                     Add Room
                 </Button>

@@ -13,12 +13,65 @@ const SignUpForm = ({ onSwitch }) => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const validateRegistrationForm = ({ name, username, email, password }) => {
+    if (!name || !username || !email || !password) {
+      return { valid: false, message: "Please fill out all fields." };
+    }
+
+    if (name.length > 50) {
+      return { valid: false, message: "Full Name must be 50 characters or less." };
+    }
+
+    if (username.length > 30) {
+      return { valid: false, message: "Username must be 30 characters or less." };
+    }
+
+    if (/\s/.test(username)) {
+      return { valid: false, message: "Username must be a single word with no spaces." };
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return { valid: false, message: "Please enter a valid email address." };
+    }
+
+    if (email.length > 100) {
+      return { valid: false, message: "Email must be 100 characters or less." };
+    }
+
+    if (password.length < 6) {
+      return { valid: false, message: "Password must be at least 6 characters long." };
+    }
+
+    if (password.length > 100) {
+      return { valid: false, message: "Password must be 100 characters or less." };
+    }
+
+    return { valid: true };
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
 
+    const { valid, message } = validateRegistrationForm({
+      name,
+      username,
+      email,
+      password,
+    });
+
+    if (!valid) {
+      showAlert({
+        title: "Validation Error",
+        text: message,
+        icon: "warning",
+      });
+      return;
+    }
+
+    setLoading(true);
     try {
-      await RegisterUser(name, username, email, password, '1');
+      await RegisterUser(name, username, email, password, "1");
       navigate("/manager");
     } catch (error) {
       const errorMessage =
@@ -44,6 +97,7 @@ const SignUpForm = ({ onSwitch }) => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Full Name"
+          maxLength={50}
           required
         />
         <FaUser className="icon" />
@@ -55,6 +109,7 @@ const SignUpForm = ({ onSwitch }) => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Username"
+          maxLength={30}
           required
         />
         <FaUser className="icon" />
@@ -66,6 +121,7 @@ const SignUpForm = ({ onSwitch }) => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
+          maxLength={100}
           required
         />
         <FaEnvelope className="icon" />
@@ -77,6 +133,7 @@ const SignUpForm = ({ onSwitch }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
+          maxLength={100}
           required
         />
         <FaLock className="icon" />
@@ -89,7 +146,7 @@ const SignUpForm = ({ onSwitch }) => {
       <div className="link">
         <p>
           Already have an account?{" "}
-          <a onClick={onSwitch}>
+          <a onClick={onSwitch} style={{ cursor: "pointer" }}>
             Login
           </a>
         </p>
