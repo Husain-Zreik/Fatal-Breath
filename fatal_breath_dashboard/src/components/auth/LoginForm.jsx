@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { FaUser, FaLock } from "react-icons/fa";
+import { FaEnvelope, FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Login } from "../../root/api";
+import { showAlert } from "../../utils/Swal";
 
 function LoginForm({ onSwitch }) {
   const navigate = useNavigate();
@@ -16,10 +17,19 @@ function LoginForm({ onSwitch }) {
 
     try {
       await Login(username, password);
+
       navigate("/manager");
     } catch (error) {
-      console.log(error);
-      alert("Invalid username or password.");
+      const errorMessage =
+        error?.response?.data?.message
+        || error.message
+        || "Unexpected Error.";
+
+      showAlert({
+        title: "Login Failed",
+        text: errorMessage,
+        icon: "error",
+      });
     } finally {
       setLoading(false);
     }
@@ -32,13 +42,13 @@ function LoginForm({ onSwitch }) {
       <div className="input-box">
         <input
           id="username"
-          type="text"
+          type="email"
           value={username}
-          placeholder="Username"
+          placeholder="Email"
           onChange={(e) => setUsername(e.target.value)}
           required
         />
-        <FaUser className="icon" />
+        <FaEnvelope className="icon" />
       </div>
 
       <div className="input-box">

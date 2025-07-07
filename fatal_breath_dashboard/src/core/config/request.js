@@ -39,7 +39,11 @@ export const sendRequest = async ({
     return response.data;
   } catch (error) {
     // Handle unauthorized error
-    if (error.response && error.response.status === 401) {
+    if (
+      error.response &&
+      error.response.status === 401 &&
+      window.location.pathname !== "/auth"
+    ) {
       window.location.href = "/auth";
     }
     // Re-throw other errors

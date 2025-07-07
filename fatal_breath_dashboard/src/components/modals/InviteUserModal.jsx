@@ -13,7 +13,6 @@ const InviteUserModal = ({ visible, onClose, houseId }) => {
             return;
         }
 
-        console.log("Inviting:", selectedUser);
         await toggleInvitation(houseId, selectedUser.value);
         message.success(`Invitation sent to ${selectedUser.label}`);
         form.resetFields();

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaUser, FaLock, FaEnvelope } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { RegisterUser } from "../../root/api";
+import { showAlert } from "../../utils/Swal";
 
 const SignUpForm = ({ onSwitch }) => {
   const navigate = useNavigate();
@@ -18,10 +19,16 @@ const SignUpForm = ({ onSwitch }) => {
 
     try {
       await RegisterUser(name, username, email, password, '1');
-      navigate("/");
+      navigate("/manager");
     } catch (error) {
-      console.error("Registration Error:", error);
-      alert(error.message || "Registration failed.");
+      const errorMessage =
+        error?.response?.data?.message || "Unexpected Error.";
+
+      showAlert({
+        title: "Registration Failed",
+        text: errorMessage,
+        icon: "error",
+      });
     } finally {
       setLoading(false);
     }

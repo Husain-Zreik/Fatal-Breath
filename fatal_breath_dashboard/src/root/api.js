@@ -36,6 +36,10 @@ export const Login = async (email, password) => {
       },
     });
 
+    if (response.user.role === 0) {
+      throw new Error("Members are not allowed to access the dashboard.");
+    }
+
     localStorageAction("access_token", response.user.token);
     localStorageAction("user_data", response.user);
 
@@ -126,8 +130,6 @@ export const createRoom = async (name, house_id, type) => {
         type,
       },
     });
-
-    console.log("Room created:", response);
 
     return response.room;
   } catch (error) {

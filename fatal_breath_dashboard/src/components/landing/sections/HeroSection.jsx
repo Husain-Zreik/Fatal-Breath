@@ -1,4 +1,4 @@
-import Magnet from '../../external/Magnet/Magnet';
+import Magnet from '../../common/Magnet/Magnet';
 import SmokeBackground from '../../animations/SmokeBackground';
 
 const HeroSection = ({ onGetStarted }) => {
