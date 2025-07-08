@@ -3,7 +3,9 @@ import 'package:fatal_breath_frontend/enums/request.methods.dart';
 import 'package:fatal_breath_frontend/enums/local.types.dart';
 import 'package:dio/dio.dart';
 
-const String baseUrl = "http://192.168.1.11:8000";
+// const String baseUrl = "http://192.168.1.11:8000";
+// const String baseUrl = "http://142.93.100.2/api";
+const String baseUrl = "https://fatalbreath.duckdns.org/api";
 // const String baseUrl = "http://54.75.66.192";
 
 final options = BaseOptions(
