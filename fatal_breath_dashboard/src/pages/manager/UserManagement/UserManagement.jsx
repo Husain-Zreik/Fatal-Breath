@@ -6,6 +6,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { loadMembers, deleteMember } from "../../../root/api";
+import { baseImageURL } from "../../../core/config/request";
 
 const UserManagement = () => {
   const [members, setMembers] = useState([]);
@@ -64,13 +65,15 @@ const UserManagement = () => {
       key: "profile_image",
       dataIndex: "profile_image",
       className: "text-center",
-      render: (image) => (
-        <Avatar
-          src={image || undefined}
-          icon={!image && <UserOutlined />}
-          size={40}
-        />
-      ),
+      render: (image) => {
+        return (
+          <Avatar
+            src={image ? `${baseImageURL}${image}` : undefined}
+            icon={!image && <UserOutlined />}
+            size={40}
+          />
+        );
+      },
     },
     {
       title: "Full Name",

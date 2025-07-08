@@ -10,10 +10,10 @@ import {
     CommentOutlined,
 } from '@ant-design/icons';
 import {
-    Row, Col, Card, Button, Tooltip, Popconfirm, Typography, Skeleton, Pagination, message,
-    Space,
+    Row, Col, Card, Button, Tooltip, Popconfirm, Typography, Skeleton, Pagination, message
 } from 'antd';
 import { loadRequests, proccessRequest, toggleInvitation } from '../../../root/api';
+import { baseImageURL } from '../../../core/config/request';
 
 const { Text, Title } = Typography;
 const ITEMS_PER_PAGE = 6;
@@ -95,10 +95,15 @@ const RequestsPage = () => {
     };
 
     const getProfileImage = (user) => {
-        return user?.profile_image
-            ? user.profile_image
-            : `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || 'User')}&background=002766&color=fff&size=64`;
+        if (user?.profile_image) {
+            return `${baseImageURL}${user.profile_image}`;
+        }
+
+        return `https://ui-avatars.com/api/?name=${encodeURIComponent(
+            user?.name || "User"
+        )}&background=002766&color=fff&size=64`;
     };
+
 
     const formatDate = (date) =>
         new Date(date).toLocaleDateString('en-US', {

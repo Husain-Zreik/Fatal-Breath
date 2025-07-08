@@ -4,6 +4,7 @@ import { localStorageAction } from "./localstorage";
 // axios.defaults.baseURL = "http://127.0.0.1:8000/api";
 // axios.defaults.baseURL = "http://142.93.100.2/api/api";
 axios.defaults.baseURL = "https://fatalbreath.duckdns.org/api/api";
+export const baseImageURL = "https://fatalbreath.duckdns.org/api/storage/";
 
 export const sendRequest = async ({
   method = "GET",

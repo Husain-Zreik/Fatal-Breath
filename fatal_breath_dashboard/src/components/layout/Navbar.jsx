@@ -3,6 +3,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdClose } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import { localStorageAction } from "../../core/config/localstorage";
+import { baseImageURL } from "../../core/config/request";
 
 const Navbar = ({ isOpen, toggleSidebar }) => {
   const location = useLocation();
@@ -46,11 +47,14 @@ const Navbar = ({ isOpen, toggleSidebar }) => {
 
       <div className="navbar-profile">
         <span >{user?.name || "User"}</span>
-        {user?.avatar ? (
+
+        {user?.profile_image ? (
           <img
-            src={user.avatar}
+            src={`${baseImageURL}${user.profile_image}`}
             alt="Profile"
             className="rounded-circle"
+            width={36}
+            height={36}
           />
         ) : (
           <FaUserCircle size={36} className="text-muted" />

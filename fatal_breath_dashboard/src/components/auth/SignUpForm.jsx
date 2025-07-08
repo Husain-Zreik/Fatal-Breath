@@ -74,8 +74,18 @@ const SignUpForm = ({ onSwitch }) => {
       await RegisterUser(name, username, email, password, "1");
       navigate("/manager");
     } catch (error) {
-      const errorMessage =
+      // Default error message
+      let errorMessage =
         error?.response?.data?.message || "Unexpected Error.";
+
+      // Check for validation errors
+      const errors = error?.response?.data?.errors;
+      if (errors && typeof errors === "object") {
+        const detailedMessages = Object.values(errors)
+          .flat() // Flatten arrays
+          .join("\n"); // Join all messages with newline
+        errorMessage += `\n${detailedMessages}`;
+      }
 
       showAlert({
         title: "Registration Failed",
