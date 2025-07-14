@@ -96,7 +96,7 @@
 <!-- Prototyping -->
 <img src="./readme/titles/title3.svg" name="prototyping"/>
 
-> We designed Fatal Breath using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
+> We designed Fatal Breath using wireframes and mockups, iterating on the design until we reached the ideal layout, for easy navigation and a seamless user experience.
 
 <br>
 
